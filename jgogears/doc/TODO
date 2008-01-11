@@ -5,15 +5,13 @@ SGF Support
 * parse tt in SGF files
 * work out the differences between SGF 3 and 4
 * wider range of test inputs
+* find a better set of tests
 
-GTP Support
-* implement handicaping
-* implement introspection
-* implement undo
-* ascii board parsing
-
+BoardSupport
+* implement abstract KO detection
+* 3-4 different types of KO detection
 
 General
 * Decent ASCII board output
 * Better test coverage
-*  
+* GTP support
