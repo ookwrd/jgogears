@@ -1,0 +1,19 @@
+TODO
+====
+
+SGF Support
+* parse tt in SGF files
+* work out the differences between SGF 3 and 4
+* wider range of test inputs
+
+GTP Support
+* implement handicaping
+* implement introspection
+* implement undo
+* ascii board parsing
+
+
+General
+* Decent ASCII board output
+* Better test coverage
+*  
