@@ -8,7 +8,6 @@ import jgogears.GoGame;
 import jgogears.SGFGameTree;
 import jgogears.SGFParser;
 
-
 import junit.framework.TestCase;
 
 public class VertexLineariserTest extends TestCase {
@@ -55,10 +54,10 @@ public class VertexLineariserTest extends TestCase {
 					while (linear.hasNext()) {
 						Short s = linear.next();
 						assertTrue(s != null);
-						//System.out.print(" " + s + ", ");
+						// System.out.print(" " + s + ", ");
 					}
 				}
-				 //System.out.println();
+				// System.out.println();
 			}
 
 		}
