@@ -1,5 +1,24 @@
+// Parser for SGF files for playing GO
+// Copyright Stuart Yeates 2006-2008
+//
+// This file contains java 5 templates, so a modern version of 
+// javacc is required and a modern version of java to compile 
+// the output.
+
+// On windows the commands to running this file on the commandline 
+// looks like:
+//
+// cd "C:\Documents and Settings\stuart\workspace\sufgo\sufgo\SGF"
+// ..\..\..\..\javacc-4.0\bin\javacc SGF.jj
+// 
+// and on linux:
+//
+// syeates@syeates-laptop:~/workspace/mii/sufgo/SGF$ /usr/lib/jvm/java-1.5.0-sun/bin/java -classpath /home/syeates/Desktop/javacc-4.0/bin/lib/javacc.jar javacc SGF.jj
+//
 
 
+		*/
+		
 
 options {
   LOOKAHEAD = 1;
@@ -128,46 +147,7 @@ Vector<SGFGameTree> collection() :
  	{return result;	}
  }
  
-/**
 
-  Collection = GameTree { GameTree }
-  GameTree   = "(" Sequence { GameTree } ")"
-  Sequence   = Node { Node }
-  Node       = ";" { Property }
-  Property   = PropIdent PropValue { PropValue }
-  PropIdent  = UcLetter { UcLetter }
-  PropValue  = "[" CValueType "]"
-  CValueType = (ValueType | Compose)
-  ValueType  = (None | Number | Real | Double | Color | SimpleText |
-		Text | Point  | Move | Stone)
-
-
-'list of':    PropValue { PropValue }
-'elist of':   ((PropValue { PropValue }) | None)
-              In other words elist is list or "[]".
-
-		 UcLetter   = "A".."Z"
-  Digit      = "0".."9"
-  None       = ""
-
-  Number     = [("+"|"-")] Digit { Digit }
-  Real       = Number ["." Digit { Digit }]
-
-  Double     = ("1" | "2")
-  Color      = ("B" | "W")
-
-  SimpleText = { any character (handling see below) }
-  Text       = { any character (handling see below) }
-
-  Point      = game-specific
-  Move       = game-specific
-  Stone      = game-specific
-
-  Compose    = ValueType ":" ValueType
-  
-  List of point: list of (point | composition of point ":" point)
-  */
-		
 		
 		/**
 

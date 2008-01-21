@@ -1,14 +1,21 @@
 package jgogears;
 
+import jgogears.engine.ModelTest;
 import jgogears.engine.VertexLineariserTest;
+import jgogears.graph.GraphTest;
+import jgogears.graph.NodeTest;
+import jgogears.graph.PointTest;
+import jgogears.tsume.FastBoardTest;
+import jgogears.tsume.FasterBoardTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class AllTests {
+public class GlobalTests {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for jgogears");
-		// $JUnit-BEGIN$
+		TestSuite suite = new TestSuite("all tests in jgogears");
+		suite.addTestSuite(ModelTest.class);
+		suite.addTestSuite(VertexLineariserTest.class);
 		suite.addTestSuite(GoMoveTest.class);
 		suite.addTestSuite(SGFPropertyTest.class);
 		suite.addTestSuite(SGFNodeTest.class);
@@ -21,7 +28,9 @@ public class AllTests {
 		suite.addTestSuite(CopyOfRankTest.class);
 		suite.addTestSuite(GTPScoreTest.class);
 		suite.addTestSuite(GnuGoEngineTest2.class);
-		// $JUnit-END$
+
+		suite.addTestSuite(FastBoardTest.class);
+		suite.addTestSuite(FasterBoardTest.class);
 
 		return suite;
 	}

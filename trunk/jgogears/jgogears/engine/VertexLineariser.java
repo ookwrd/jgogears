@@ -4,16 +4,15 @@ import java.util.*;
 
 import jgogears.GoBoard;
 
-
 public class VertexLineariser implements Iterator<Short> {
 	// table of sequences
 	static private short[][][][][] cache = null;
 
 	// the SIZE of the board we've cached
 	static private final short BOARD_SIZE = 19;
- 
-    // the SIZE of the board we've cached
-    static private final short SIZE = 21;
+
+	// the SIZE of the board we've cached
+	static private final short SIZE = 21;
 
 	// arbitary offsets to break
 	static double ROW_OFFSET = -0.0100;
@@ -41,7 +40,7 @@ public class VertexLineariser implements Iterator<Short> {
 					for (short i = 0; i < SIZE; i++)
 						for (short j = 0; j < SIZE; j++) {
 							short a, b; // i and j map to a and b after
-										// transform
+							// transform
 							switch (sym) {
 							case 0:
 								a = i;
@@ -52,28 +51,28 @@ public class VertexLineariser implements Iterator<Short> {
 								b = i;
 								break;
 							case 2:
-								a = (short) (SIZE-1 - i);
+								a = (short) (SIZE - 1 - i);
 								b = j;
 								break;
 							case 3:
 								a = i;
-								b = (short) (SIZE-1 - j);
+								b = (short) (SIZE - 1 - j);
 								break;
 							case 4:
-								a = (short) (SIZE-1 - i);
-								b = (short) (SIZE-1 - j);
+								a = (short) (SIZE - 1 - i);
+								b = (short) (SIZE - 1 - j);
 								break;
 							case 5:
-								a = (short) (SIZE-1 - j);
+								a = (short) (SIZE - 1 - j);
 								b = i;
 								break;
 							case 6:
 								a = j;
-								b = (short) (SIZE-1 - i);
+								b = (short) (SIZE - 1 - i);
 								break;
 							case 7:
-								a = (short) (SIZE-1 - j);
-								b = (short) (SIZE-1 - i);
+								a = (short) (SIZE - 1 - j);
+								b = (short) (SIZE - 1 - i);
 								break;
 							default:
 								throw new Error();
@@ -86,7 +85,8 @@ public class VertexLineariser implements Iterator<Short> {
 							array.add(new Short(a));
 							array.add(new Short(b));
 
-							//System.out.println(" (" + i + "," + j + "," + a + "," + b + "), ");
+							// System.out.println(" (" + i + "," + j + "," + a +
+							// "," + b + "), ");
 							values.put(new Double(d), array);
 						}
 					// System.out.println();
@@ -103,10 +103,13 @@ public class VertexLineariser implements Iterator<Short> {
 						// columnsequence[i] = thisone[1];
 						cache[0][sym][row][column][i] = thisone[0];
 						cache[1][sym][row][column][i] = thisone[1];
-						// System.out.println(" [" + cache[0][sym][row][column][i] + "," +
-						//		 cache[1][sym][row][column][i] + "], ");
+						// System.out.println(" [" +
+						// cache[0][sym][row][column][i] + "," +
+						// cache[1][sym][row][column][i] + "], ");
 					}
-					if (values.size() > 0) throw new Error("values should be empty but was " + values.size());
+					if (values.size() > 0)
+						throw new Error("values should be empty but was "
+								+ values.size());
 				}
 			}
 		// System.out.println();
@@ -157,8 +160,8 @@ public class VertexLineariser implements Iterator<Short> {
 	public Short next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
-		//System.err.println("next() " + sym + " " + row + " " + column + "  "
-		//		+ offset);
+		// System.err.println("next() " + sym + " " + row + " " + column + " "
+		// + offset);
 		int c = board.getColour(cache[0][sym][row][column][offset],
 				cache[1][sym][row][column][offset]);
 		offset++;

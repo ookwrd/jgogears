@@ -3,26 +3,16 @@ package jgogears.SGF;
 
 public interface SGFConstants {
 
-  int EOF = 0;
-  int SEMI = 5;
-  int OPENR = 6;
-  int CLOSER = 7;
-  int NAME = 8;
-  int VALUE = 9;
+	int EOF = 0;
+	int SEMI = 5;
+	int OPENR = 6;
+	int CLOSER = 7;
+	int NAME = 8;
+	int VALUE = 9;
 
-  int DEFAULT = 0;
+	int DEFAULT = 0;
 
-  String[] tokenImage = {
-    "<EOF>",
-    "\" \"",
-    "\"\\t\"",
-    "\"\\n\"",
-    "\"\\r\"",
-    "\";\"",
-    "\"(\"",
-    "\")\"",
-    "<NAME>",
-    "<VALUE>",
-  };
+	String[] tokenImage = { "<EOF>", "\" \"", "\"\\t\"", "\"\\n\"", "\"\\r\"",
+			"\";\"", "\"(\"", "\")\"", "<NAME>", "<VALUE>", };
 
 }
