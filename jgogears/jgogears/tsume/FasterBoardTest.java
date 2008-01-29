@@ -272,20 +272,18 @@ public class FasterBoardTest extends TestCase {
 
 				} else {
 					System.err.println("\"" + filename + "\" is a directory");
-					if (!file.getName().contains(".svn")){
-					String[] children = file.list();
-					for (int i = 0; i < children.length; i++) {
-						// System.err.println("pushing \"" + children[i] +
-						// "\"");
-						files.push(filename + "/" + children[i]);
-					}
+					if (!file.getName().contains(".svn")) {
+						String[] children = file.list();
+						for (int i = 0; i < children.length; i++) {
+							// System.err.println("pushing \"" + children[i] +
+							// "\"");
+							files.push(filename + "/" + children[i]);
+						}
 					}
 				}
 			}
 		}
 
 	}
-
-
 
 }
