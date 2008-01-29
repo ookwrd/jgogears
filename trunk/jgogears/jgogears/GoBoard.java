@@ -129,7 +129,7 @@ public class GoBoard implements BoardInterface {
 						+ " ");
 		if (CHECK)
 			if (column >= this.getSize())
-				throw new Error("Bad board size " + column + "/"
+				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) " + column + "/"
 						+ this.getSize() + " ");
 
 		board[row][column] = colour;

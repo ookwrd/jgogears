@@ -1,21 +1,22 @@
 package jgogears.tsume;
 
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import jgogears.GoBoard;
 import jgogears.GoGame;
 import jgogears.GoMove;
 
 public class CachingKoRule extends KoRule {
-	
+
 	private KoRule rule;
-	
-	public CachingKoRule(KoRule rule){
+
+	public CachingKoRule(KoRule rule) {
 		this.rule = rule;
 	}
 
 	@Override
-	public Iterator<GoMove> captures(GoGame game, GoBoard Board, GoMove move) {
+	public TreeSet<Vertex> captures(GoGame game, GoBoard Board, GoMove move) {
 		return rule.captures(game, Board, move);
 	}
 
@@ -30,13 +31,17 @@ public class CachingKoRule extends KoRule {
 	}
 
 	@Override
-	public boolean leavesKo(GoGame game, GoBoard Board, GoMove move) {
+	public TreeSet<Vertex> leavesKo(GoGame game, GoBoard Board, GoMove move) {
 		return rule.leavesKo(game, Board, move);
 	}
 
 	@Override
 	public boolean moveIsLegal(GoGame game, GoBoard Board, GoMove move) {
 		return rule.moveIsLegal(game, Board, move);
+	}
+	
+	public TreeSet<Vertex> getLiberties(short rowb, short columnb, GoBoard board){
+		return rule.getLiberties(rowb, columnb, board);
 	}
 
 }

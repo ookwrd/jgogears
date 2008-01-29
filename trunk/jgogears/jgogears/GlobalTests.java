@@ -6,7 +6,7 @@ import jgogears.graph.GraphTest;
 import jgogears.graph.NodeTest;
 import jgogears.graph.PointTest;
 import jgogears.tsume.FastBoardTest;
-import jgogears.tsume.FasterBoardTest;
+import jgogears.tsume.*;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -31,6 +31,7 @@ public class GlobalTests {
 
 		suite.addTestSuite(FastBoardTest.class);
 		suite.addTestSuite(FasterBoardTest.class);
+		suite.addTestSuite(NoKoRuleTest.class);
 
 		return suite;
 	}
