@@ -13,15 +13,16 @@ import jgogears.GoMove;
  * @author Stuart
  * 
  */
-public class NoKoRule extends KoRule {
+final public class NoKoRule extends KoRule {
 
-	final static boolean DEBUG = true;
+	final static boolean DEBUG = false;
+	final static TreeSet<Vertex> EMPTY = new TreeSet<Vertex>();
 
 	TreeSet<Vertex> getString(int rowb, int columnb, GoBoard board) {
 		return this.getString((short) rowb, (short) columnb, board);
 	}
 
-	TreeSet<Vertex> getString(short rowb, short columnb, GoBoard board) {
+	public TreeSet<Vertex> getString(short rowb, short columnb, GoBoard board) {
 		TreeSet<Vertex> string = new TreeSet<Vertex>();
 		short colour = (short) board.getColour(rowb, columnb);
 		if (colour == GoBoard.VERTEX_OFF_BOARD)
@@ -111,6 +112,29 @@ public class NoKoRule extends KoRule {
 		return liberties;
 	}
 
+	public TreeSet<Vertex> captureshelper(GoBoard board, GoMove move,int row, int column) {
+		if (DEBUG && EMPTY.size() != 0)
+			throw new Error("EMPTY not empty");
+		short colour = move.getColour();
+		short acolour = (short) board.getColour(row, column);
+		if (acolour == GoBoard.VERTEX_EMPTY ||acolour == GoBoard.VERTEX_KO){
+			if (DEBUG) System.err.println("captures == empty");
+			return EMPTY;
+		}
+		if ((colour == GoBoard.VERTEX_BLACK && acolour == GoBoard.VERTEX_WHITE) ||  
+				(colour == GoBoard.VERTEX_WHITE && acolour == GoBoard.VERTEX_BLACK)) {
+			int libs = this.countLiberties(row, column, board);
+			if (libs == 1){
+				TreeSet<Vertex> string = this.getString(row, column, board);
+				if (DEBUG) System.err.println("captures == single liberty! capture! " + libs + " " + string);
+				return string;
+			} else {
+				if (DEBUG) System.err.println("captures == multiple liberties");
+			}
+		} 
+		if (DEBUG) System.err.println("captures == ? " + colour + " " + acolour);
+		return EMPTY;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -118,10 +142,28 @@ public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> captures(GoGame game, GoBoard Board, GoMove move) {
+	public TreeSet<Vertex> captures(GoGame game, GoBoard board, GoMove move) {
+		if (board == null)
+			throw new Error();
+		if (move == null)
+			throw new Error();
+		if (!move.getPlay())
+			return new TreeSet<Vertex>();
 
-		// TODO Auto-generated method stub
-		return null;
+		short row = move.getRow();
+		short column = move.getColumn();
+		short colour = move.getColour();
+
+		if (colour != GoBoard.VERTEX_BLACK && colour != GoBoard.VERTEX_WHITE)
+			throw new Error();
+		TreeSet<Vertex> captures = new TreeSet<Vertex>();
+		
+		captures.addAll(this.captureshelper(board, move, row+1, column));
+		captures.addAll(this.captureshelper(board, move, row-1, column));
+		captures.addAll(this.captureshelper(board, move, row, column+1));
+		captures.addAll(this.captureshelper(board, move, row, column-1));
+
+		return captures;
 	}
 
 	/*
@@ -151,9 +193,9 @@ public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> leavesKo(GoGame game, GoBoard Board, GoMove move) {
-		// TODO Auto-generated method stub
-		return null;
+	public TreeSet<Vertex> leavesKo(GoGame game, GoBoard board, GoMove move) {
+		// TODO write test cases for this method
+		return new TreeSet<Vertex>();
 	}
 
 	/*
@@ -163,9 +205,71 @@ public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public boolean moveIsLegal(GoGame game, GoBoard Board, GoMove move) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean moveIsLegal(GoGame game, GoBoard board, GoMove move) {
+		if (board == null)
+			throw new Error();
+		if (move == null)
+			throw new Error();
+		if (move.getPass())
+			return true;
+		if (move.getResign())
+			return true;
+		if (!move.getPlay())
+			throw new Error("Internal error, bad move");
+
+		short row = move.getRow();
+		short column = move.getColumn();
+		short colour = move.getColour();
+		
+		if (board.getColour(row, column) != GoBoard.VERTEX_EMPTY){
+			System.err.println("illegal move, not empty");
+			return false;
+		}
+
+		if (colour != GoBoard.VERTEX_BLACK && colour != GoBoard.VERTEX_WHITE)
+			throw new Error();
+		int liberties = 0;
+//TODO
+		//liberties.addAll(this.legelsfrompos(row, column, colour, board));
+	
+		return liberties > 0;
+	}
+
+	/**
+	 * Helper for moveIsLegal
+	 * 
+	 * @param row
+	 *            the row of the position that is a potential liberty
+	 * @param column
+	 *            the column of the position that is a potential liberty
+	 * @param colour
+	 *            the colour of the stone we want to use these liberties for
+	 * @param board
+	 * @return the number of liberties through this position
+	 */
+	TreeSet<Vertex> legelsfrompos(int row, int column, short colour, GoBoard board) {
+		return this.legelsfrompos((short)row, (short)column, colour, board);
+	}
+		/**
+		 * Helper for moveIsLegal
+		 * 
+		 * @param row
+		 *            the row of the position that is a potential liberty
+		 * @param column
+		 *            the column of the position that is a potential liberty
+		 * @param colour
+		 *            the colour of the stone we want to use these liberties for
+		 * @param board
+		 * @return the number of liberties through this position
+		 */
+	TreeSet<Vertex> legelsfrompos(short row, short column, short colour, GoBoard board) {
+		TreeSet<Vertex> liberties = new TreeSet<Vertex>();
+		short acolour = (short) board.getColour(row, column);
+		if (acolour == colour) {
+			liberties.addAll(this.getLiberties(row, column, board));
+			if (DEBUG) System.err.println("position == same");
+		}
+		return liberties;
 	}
 
 }

@@ -274,5 +274,125 @@ public class NoKoRuleTest extends TestCase {
 		libs = rule.getLiberties(3, 4, board);
 		assertTrue(libs.size() == 6);
 	}
+	public void testCornerPlays() {
+		System.err.println();
+		System.err.println();
+		
+		NoKoRule rule = new NoKoRule();
+		short size = 7;
+		GoGame game = new GoGame(19);
+		GoBoard board = new GoBoard(size);
+		GoMove move = new GoMove(0, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(1, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		
+		move = new GoMove(0, 0, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 0);
+		board = board.newBoard(move);
 
+		move = new GoMove(1, 0, GoBoard.VERTEX_BLACK);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.countLiberties(0, 0, board)==1);
+		assertTrue("" + rule.captures(game, board, move).size() + "/" + 1, rule.captures(game, board, move).size()== 1);
+		board = board.newBoard(move);
+		
+		System.err.println(board);
+
+		move = new GoMove(2, 0, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 0);
+		board = board.newBoard(move);
+
+		move = new GoMove(2, 1, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 0);
+		board = board.newBoard(move);
+
+		move = new GoMove(0, 2, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 0);
+		board = board.newBoard(move);
+
+		move = new GoMove(1, 2, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 0);
+		board = board.newBoard(move);
+
+		System.err.println(board);
+
+		move = new GoMove(0, 0, GoBoard.VERTEX_WHITE);
+		assertTrue(rule.moveIsLegal(game, board, move));
+		assertTrue(rule.captures(game, board, move).size()== 3);
+		board = board.newBoard(move);
+	}
+	public void testCenterPlays() {
+		
+		NoKoRule rule = new NoKoRule();
+		short size = 7;
+		GoBoard board = new GoBoard(size);
+		GoMove move = new GoMove(0, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(1, 0, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(1, 2, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		
+		//System.err.println(board);
+		move = new GoMove(1, 1, GoBoard.VERTEX_WHITE);
+		assertFalse(rule.moveIsLegal(null, board, move));
+
+	}
+	public void testCenterPlaysII() {
+		
+		NoKoRule rule = new NoKoRule();
+		short size = 7;
+		GoBoard board = new GoBoard(size);
+		GoMove move = new GoMove(1, 2, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 3, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(3, 2, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		
+		//System.err.println(board);
+		move = new GoMove(2, 2, GoBoard.VERTEX_WHITE);
+		assertFalse(rule.moveIsLegal(null, board, move));
+
+	}
+	public void testCenterPlaysIII() {
+		
+		NoKoRule rule = new NoKoRule();
+		short size = 7;
+		GoBoard board = new GoBoard(size);
+		GoMove move = new GoMove(1, 2, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 1, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 3, GoBoard.VERTEX_BLACK);
+		board = board.newBoard(move);
+		move = new GoMove(2, 2, GoBoard.VERTEX_WHITE);
+		//System.err.println(board);
+		assertTrue(rule.moveIsLegal(null, board, move));
+		board = board.newBoard(move);
+		
+		move = new GoMove(3, 2, GoBoard.VERTEX_BLACK);
+		assertTrue(rule.moveIsLegal(null, board, move));
+		assertTrue(rule.captures(null, board, move).size()== 1);
+		board = board.newBoard(move);
+
+		move = new GoMove(2, 2, GoBoard.VERTEX_WHITE);
+		assertFalse(rule.moveIsLegal(null, board, move));
+		move = new GoMove(2, 2, GoBoard.VERTEX_BLACK);
+		assertTrue(rule.moveIsLegal(null, board, move));
+
+		//System.err.println(board);
+
+	}
+	
 }

@@ -34,7 +34,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract boolean moveIsLegal(GoGame game, GoBoard Board, GoMove move);
+	public abstract boolean moveIsLegal(GoGame game, GoBoard board, GoMove move);
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> captures(GoGame game, GoBoard Board,
+	public abstract TreeSet<Vertex> captures(GoGame game, GoBoard board,
 			GoMove move);
 
 	/**
@@ -53,7 +53,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> leavesKo(GoGame game, GoBoard Board,
+	public abstract TreeSet<Vertex> leavesKo(GoGame game, GoBoard board,
 			GoMove move);
 
 	/**
@@ -97,6 +97,21 @@ public abstract class KoRule {
 	 * @param board
 	 * @return
 	 */
-	abstract public TreeSet<Vertex> getLiberties(short rowb, short columnb, GoBoard board);
+	abstract public TreeSet<Vertex> getLiberties(short rowb, short columnb,
+			GoBoard board);
+
+	TreeSet<Vertex> getString(int row, int column, GoBoard board) {
+		return this.getString((short) row, (short) column, board);
+	}
+
+	/**
+	 * Helper function to get a string containing this position
+	 * 
+	 * @param row
+	 * @param column
+	 * @param board
+	 * @return
+	 */
+	abstract public TreeSet<Vertex> getString(short row, short column, GoBoard board);
 
 }
