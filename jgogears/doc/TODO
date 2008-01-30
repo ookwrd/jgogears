@@ -21,6 +21,7 @@ General
 * GTP support
 * SGF saving (validation use SGFC)
 * tests for ko rules
+* generate and quality-check the javadoc
 
 Speed improvements, test and improve:
 * attribute parsing
