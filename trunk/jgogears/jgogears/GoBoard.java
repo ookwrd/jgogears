@@ -2,7 +2,7 @@ package jgogears;
 
 import java.util.*;
 
-import jgogears.graph.*;
+import jgogears.tsume.*;
 
 /**
  * GoBoard represents the state of a Go board at a particular point in time.
@@ -28,10 +28,9 @@ public class GoBoard implements BoardInterface {
 	 */
 	private short[][] board = null;
 
-	private Graph graph = null;
-
 	static boolean DEBUG = false;
 	static boolean CHECK = true;
+	private KoRule rule = new NoKoRule();
 
 	/**
 	 * initialise the board, creating it and setting it empty.
@@ -65,6 +64,31 @@ public class GoBoard implements BoardInterface {
 		this.size = (short) size;
 		init();
 	}
+	/**
+	 * Default constructor
+	 */
+	public GoBoard(KoRule rule) {
+		this.rule = rule;
+		init();
+	}
+
+	/**
+	 * constructor of specially sized boards
+	 */
+	public GoBoard(short size,KoRule rule) {
+		this.size = size;
+		this.rule = rule;
+		init();
+	}
+
+	/**
+	 * constructor of specially sized boards
+	 */
+	public GoBoard(int size, KoRule rule) {
+		this.size = (short) size;
+		this.rule = rule;
+		init();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -74,7 +98,14 @@ public class GoBoard implements BoardInterface {
 	public short getSize() {
 		return size;
 	}
-
+/**
+ * 
+ * @return
+ */
+	public KoRule getKoRule(){
+		return rule;
+	}
+	
 	/*
 	 * @see jgogears.BoardInterface#getColour
 	 */
@@ -108,10 +139,16 @@ public class GoBoard implements BoardInterface {
 		} else if (move.getPass()) {
 			// do nothing, since GoBoard doesn't know whose turn it is
 		} else {
-
+			// place the stone	
 			result.setColour(move.getRow(), move.getColumn(), move.getColour());
-
-			// TODO remove captures
+			
+			// take the captures
+			TreeSet<Vertex> captures = rule.captures(null, this, move);
+			Iterator<Vertex> i = captures.iterator();
+			while (i.hasNext()){
+				Vertex v = i.next();
+				result.setColour(v.getRow(), v.getColumn(), GoBoard.VERTEX_EMPTY);
+			}
 		}
 
 		return result;
@@ -157,8 +194,14 @@ public class GoBoard implements BoardInterface {
 			rowoff = move.getRow();
 			coloff = move.getColumn();
 		}
-
+		// do the header
+		buf.append("   ");
 		for (int i = 0; i < size; i++) {
+			buf.append(i);
+		}
+		buf.append("\n");
+		for (int i = 0; i < size; i++) {
+			buf.append(" ").append(i).append(" ");
 			for (int j = 0; j < size; j++) {
 				if (i == rowoff && j == coloff) {
 					buf.append("&");
@@ -184,17 +227,6 @@ public class GoBoard implements BoardInterface {
 		}
 		buf.append("\n");
 		return buf.toString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see jgogears.BoardInterface#getGraph()
-	 */
-	public Graph getGraph() {
-		if (graph == null)
-			graph = new Graph(this);
-		return graph;
 	}
 
 }

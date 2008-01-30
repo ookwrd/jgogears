@@ -39,9 +39,13 @@ public class CachingKoRule extends KoRule {
 	public boolean moveIsLegal(GoGame game, GoBoard Board, GoMove move) {
 		return rule.moveIsLegal(game, Board, move);
 	}
-	
-	public TreeSet<Vertex> getLiberties(short rowb, short columnb, GoBoard board){
+
+	public TreeSet<Vertex> getLiberties(short rowb, short columnb, GoBoard board) {
 		return rule.getLiberties(rowb, columnb, board);
+	}
+
+	public TreeSet<Vertex> getString(short row, short column, GoBoard board) {
+		return rule.getString(row, column, board);
 	}
 
 }

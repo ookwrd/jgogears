@@ -33,7 +33,14 @@ public final class GoGame {
 	/**
 	 * default constractor
 	 */
-	private GoGame() {
+	public GoGame() {
+	}
+
+	/**
+	 * default constractor
+	 */
+	public GoGame(int size) {
+		this.size = (short)size;
 	}
 
 	/**
