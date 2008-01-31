@@ -48,7 +48,7 @@ public final class Model {
 	}
 
 	public void train(GoGame game) {
-		Iterator<GoBoard> boards = game.getBoards();
+		Iterator<Board> boards = game.getBoards();
 		if (boards == null)
 			throw new Error();
 		Iterator<GoMove> moves = game.getMoves();
@@ -61,7 +61,7 @@ public final class Model {
 
 		while (boards.hasNext() && moves.hasNext()) {
 			movecounter++;
-			GoBoard board = boards.next();
+			Board board = boards.next();
 			if (board == null)
 				throw new Error();
 			GoMove move = moves.next();
@@ -72,7 +72,7 @@ public final class Model {
 			if (DEBUG)
 				System.out.println("about to train on: " + move);
 			int colour = move.getColour();
-			boolean isBlack = colour == BoardInterface.VERTEX_BLACK;
+			boolean isBlack = colour == BoardI.VERTEX_BLACK;
 			float str = (float) (isBlack ? strengthB : strengthW);
 
 			// mark the remaining points as not worth playing
@@ -104,7 +104,7 @@ public final class Model {
 		while (linear.hasNext()) {
 			Short colour = linear.next();
 			switch (colour) {
-			case BoardInterface.VERTEX_BLACK:
+			case BoardI.VERTEX_BLACK:
 				if (current.black == null)
 					if (played)
 						current.black = new Node(strength);
@@ -112,7 +112,7 @@ public final class Model {
 						return;
 				current = current.black;
 				break;
-			case BoardInterface.VERTEX_WHITE:
+			case BoardI.VERTEX_WHITE:
 				if (current.white == null)
 					if (played)
 						current.white = new Node(strength);
@@ -120,7 +120,7 @@ public final class Model {
 						return;
 				current = current.white;
 				break;
-			case BoardInterface.VERTEX_OFF_BOARD:
+			case BoardI.VERTEX_OFF_BOARD:
 				if (current.off == null)
 					if (played)
 						current.off = new Node(strength);
@@ -128,8 +128,8 @@ public final class Model {
 						return;
 				current = current.off;
 				break;
-			case BoardInterface.VERTEX_EMPTY:
-			case BoardInterface.VERTEX_KO:
+			case BoardI.VERTEX_EMPTY:
+			case BoardI.VERTEX_KO:
 				if (current.empty == null)
 					if (played)
 						current.empty = new Node(strength);
@@ -165,7 +165,7 @@ public final class Model {
 			return b;
 	}
 
-	public float[][] getScores(GoBoard board, short colour) {
+	public float[][] getScores(Board board, short colour) {
 		float[][] result = new float[board.getSize()][board.getSize()];
 		for (short i = 0; i < board.getSize(); i++)
 			for (short j = 0; j < board.getSize(); j++) {
@@ -178,7 +178,7 @@ public final class Model {
 		return result;
 	}
 
-	public float getScore(GoBoard board, short colour, short row, short column,
+	public float getScore(Board board, short colour, short row, short column,
 			short sym) {
 		VertexLineariser linear = new VertexLineariser(board, row, column, sym);
 		if (!linear.hasNext())
@@ -194,26 +194,26 @@ public final class Model {
 			counter++;
 			Short c = linear.next();
 			switch (c) {
-			case BoardInterface.VERTEX_BLACK:
+			case BoardI.VERTEX_BLACK:
 				if (current.black == null)
 					return result;
 				else
 					current = current.black;
 				break;
-			case BoardInterface.VERTEX_WHITE:
+			case BoardI.VERTEX_WHITE:
 				if (current.white == null)
 					return result;
 				else
 					current = current.white;
 				break;
-			case BoardInterface.VERTEX_OFF_BOARD:
+			case BoardI.VERTEX_OFF_BOARD:
 				if (current.off == null)
 					return result;
 				else
 					current = current.off;
 				break;
-			case BoardInterface.VERTEX_KO:
-			case BoardInterface.VERTEX_EMPTY:
+			case BoardI.VERTEX_KO:
+			case BoardI.VERTEX_EMPTY:
 				if (current.empty == null)
 					return result;
 				else

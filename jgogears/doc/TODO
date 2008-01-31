@@ -8,7 +8,6 @@ SGF Support
 * find a better set of tests
 
 BoardSupport
-* implement abstract KO detection
 * 3-4 different types of KO detection
 * finish CachingKoRule
 
@@ -18,7 +17,7 @@ General
   * direct
   * cut and paste
 * Better test coverage
-* GTP support
+* improve GTP support
 * SGF saving (validation use SGFC)
 * tests for ko rules
 * generate and quality-check the javadoc
@@ -28,6 +27,7 @@ Speed improvements, test and improve:
 * game structure creation
 
 
-
+DONE
+* implement abstract KO detection 
 
 

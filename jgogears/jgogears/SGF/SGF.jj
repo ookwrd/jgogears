@@ -41,9 +41,9 @@ options {
 }
 
 PARSER_BEGIN(SGF)
- package sufgo.SGF;
+ package jgogears.SGF;
  import java.util.*;
- import sufgo.*;
+ import jgogears.*;
 
 public class SGF {
  
@@ -69,8 +69,6 @@ TOKEN :
 | <VALUE:   "[" ( ( ( "\\" [" "-"~"] ) | ~[ "]", "\\" ]  ) *  ) "]"  >
 //| <VALUE:   "[" ( [" "-"\\", "^"-"~"]  ) * "]" >
 }
-
-
 
 Vector<SGFGameTree> collection() :
  { 
@@ -147,8 +145,6 @@ Vector<SGFGameTree> collection() :
  	{return result;	}
  }
  
-
-		
 		/**
 
 This file contains java 5 templates, so a modern version of javacc is required

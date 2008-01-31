@@ -34,7 +34,7 @@ public final class Node implements Comparable<Node> {
 
 	}
 
-	protected short colour = BoardInterface.VERTEX_EMPTY;
+	protected short colour = BoardI.VERTEX_EMPTY;
 	protected TreeSet<Connection> connections = new TreeSet<Connection>();
 	protected TreeSet<Vector<Short>> vertexes = new TreeSet<Vector<Short>>(
 			new VComparer());
@@ -152,8 +152,8 @@ public final class Node implements Comparable<Node> {
 				node = connection.getSecond();
 			else
 				node = connection.getFirst();
-			if (node.getColour() == BoardInterface.VERTEX_EMPTY
-					|| node.getColour() == BoardInterface.VERTEX_KO)
+			if (node.getColour() == BoardI.VERTEX_EMPTY
+					|| node.getColour() == BoardI.VERTEX_KO)
 				libs.add(connection);
 			if (node.getColour() == this.getColour())
 				throw new Error("Internal error in Node.getLiberties "

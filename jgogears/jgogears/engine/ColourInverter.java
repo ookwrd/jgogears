@@ -2,12 +2,12 @@ package jgogears.engine;
 
 import java.util.Iterator;
 
-import jgogears.BoardInterface;
+import jgogears.BoardI;
 
 /**
  * A simple wrapper class that inverts the colour of
  * 
- * @see jgogears.GoBoard
+ * @see jgogears.Board
  * @see java.util.Iterator
  * @author stuart
  */
@@ -26,14 +26,14 @@ public final class ColourInverter implements Iterator<Short> {
 	public Short next() {
 		int s = iterator.next();
 		switch (s) {
-		case BoardInterface.VERTEX_EMPTY:
-			return BoardInterface.VERTEX_EMPTY;
-		case BoardInterface.VERTEX_KO:
-			return BoardInterface.VERTEX_KO;
-		case BoardInterface.VERTEX_BLACK:
-			return BoardInterface.VERTEX_WHITE;
-		case BoardInterface.VERTEX_WHITE:
-			return BoardInterface.VERTEX_BLACK;
+		case BoardI.VERTEX_EMPTY:
+			return BoardI.VERTEX_EMPTY;
+		case BoardI.VERTEX_KO:
+			return BoardI.VERTEX_KO;
+		case BoardI.VERTEX_BLACK:
+			return BoardI.VERTEX_WHITE;
+		case BoardI.VERTEX_WHITE:
+			return BoardI.VERTEX_BLACK;
 		default:
 			throw new Error();
 		}

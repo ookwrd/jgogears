@@ -13,7 +13,7 @@ import jgogears.*;
  */
 public final class Graph implements Cloneable {
 	protected Vector<Node> nodes = new Vector<Node>();
-	protected BoardInterface board = null;
+	protected BoardI board = null;
 
 	protected Node[][] grid = null;
 
@@ -102,7 +102,7 @@ public final class Graph implements Cloneable {
 		return buf.toString();
 	}
 
-	public Graph(GoBoard board) {
+	public Graph(Board board) {
 		if (DEBUG)
 			System.err.print(".");
 
@@ -198,11 +198,11 @@ public final class Graph implements Cloneable {
 		return (short) nodes.size();
 	}
 
-	public BoardInterface getBoard() {
+	public BoardI getBoard() {
 		return board;
 	}
 
-	public void setBoard(BoardInterface board) {
+	public void setBoard(BoardI board) {
 		this.board = board;
 	}
 

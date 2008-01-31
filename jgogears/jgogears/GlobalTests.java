@@ -5,7 +5,6 @@ import jgogears.engine.VertexLineariserTest;
 import jgogears.graph.GraphTest;
 import jgogears.graph.NodeTest;
 import jgogears.graph.PointTest;
-import jgogears.tsume.*;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
