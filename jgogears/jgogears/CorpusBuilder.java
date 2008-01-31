@@ -84,11 +84,11 @@ public class CorpusBuilder {
 			return false;
 		if (goGame.isBranched())
 			return false;
-		Iterator moves = goGame.getMoves();
+		Iterator<GoMove> moves = goGame.getMoves();
 
 		GnuGoEngine engine = new GnuGoEngine();
 		while (moves.hasNext()) {
-			GoMove move = (GoMove) moves.next();
+			GoMove move =  moves.next();
 			// System.err.println(move);
 			engine.play(move);
 		}

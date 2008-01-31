@@ -7,7 +7,7 @@ public class GoMoveTest extends TestCase {
 
 	public void testGTPConstructor() throws ParseException {
 		assertTrue(new GoMove("w ReSiGn").getResign() == true);
-		assertTrue(new GoMove("w resign").getColour() == BoardInterface.VERTEX_WHITE);
+		assertTrue(new GoMove("w resign").getColour() == BoardI.VERTEX_WHITE);
 		assertNotNull(new GoMove("w PASS"));
 		assertNotNull(new GoMove("w pass"));
 		assertTrue(new GoMove("w b2").getColumn() == 1);
@@ -15,13 +15,13 @@ public class GoMoveTest extends TestCase {
 
 		assertTrue(new GoMove("white t19").getRow() == 18);
 		assertTrue(new GoMove("white t19").getColumn() == 18);
-		assertTrue(new GoMove("white t19").getColour() == BoardInterface.VERTEX_WHITE);
+		assertTrue(new GoMove("white t19").getColour() == BoardI.VERTEX_WHITE);
 		assertTrue(new GoMove("white t19").getResign() == false);
 		assertTrue(new GoMove("white t19").getPass() == false);
 
 		assertTrue(new GoMove("black t19").getRow() == 18);
 		assertTrue(new GoMove("black t19").getColumn() == 18);
-		assertTrue(new GoMove("black t19").getColour() == BoardInterface.VERTEX_BLACK);
+		assertTrue(new GoMove("black t19").getColour() == BoardI.VERTEX_BLACK);
 		assertTrue(new GoMove("black t19").getResign() == false);
 		assertTrue(new GoMove("black t19").getPass() == false);
 
@@ -29,7 +29,7 @@ public class GoMoveTest extends TestCase {
 				"black q10").getRow() == 15);
 		assertTrue(("" + new GoMove("black q10").getColumn()), new GoMove(
 				"black q10").getColumn() == 9);
-		assertTrue(new GoMove("black q10").getColour() == BoardInterface.VERTEX_BLACK);
+		assertTrue(new GoMove("black q10").getColour() == BoardI.VERTEX_BLACK);
 		assertTrue(new GoMove("black q10").getResign() == false);
 		assertTrue(new GoMove("black q10").getPass() == false);
 
@@ -46,18 +46,18 @@ public class GoMoveTest extends TestCase {
 	public void testStringConversions() throws ParseException {
 		for (int i = 0; i < 25; i++) {
 			for (int j = 0; j < 25; j++) {
-				GoMove move = new GoMove(i, j, BoardInterface.VERTEX_WHITE);
+				GoMove move = new GoMove(i, j, BoardI.VERTEX_WHITE);
 				assertNotNull(move);
 				assertTrue("" + i + " " + j, move.getRow() == i);
 				assertTrue("" + i + " " + j, move.getColumn() == j);
-				assertTrue(move.getColour() == BoardInterface.VERTEX_WHITE);
+				assertTrue(move.getColour() == BoardI.VERTEX_WHITE);
 				GoMove move2 = new GoMove(move.toString());
 				assertNotNull(move2);
 				assertTrue("" + i + " " + j + " " + move + " " + move2, move2
 						.getRow() == i);
 				assertTrue("" + i + " " + j + " " + move + " " + move2, move2
 						.getColumn() == j);
-				assertTrue(move2.getColour() == BoardInterface.VERTEX_WHITE);
+				assertTrue(move2.getColour() == BoardI.VERTEX_WHITE);
 			}
 		}
 	}
@@ -66,10 +66,10 @@ public class GoMoveTest extends TestCase {
 	 * Test method
 	 */
 	public void testToString() throws ParseException {
-		System.err.println(new GoMove(0, 0, BoardInterface.VERTEX_WHITE));
-		assertTrue(new GoMove(0, 0, BoardInterface.VERTEX_WHITE).toString()
+		System.err.println(new GoMove(0, 0, BoardI.VERTEX_WHITE));
+		assertTrue(new GoMove(0, 0, BoardI.VERTEX_WHITE).toString()
 				.compareTo("white a1") == 0);
-		assertTrue(new GoMove(18, 18, BoardInterface.VERTEX_WHITE).toString()
+		assertTrue(new GoMove(18, 18, BoardI.VERTEX_WHITE).toString()
 				.compareTo("white t19") == 0);
 	}
 

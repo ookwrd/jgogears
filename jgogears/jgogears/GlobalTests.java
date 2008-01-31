@@ -5,7 +5,6 @@ import jgogears.engine.VertexLineariserTest;
 import jgogears.graph.GraphTest;
 import jgogears.graph.NodeTest;
 import jgogears.graph.PointTest;
-import jgogears.tsume.FastBoardTest;
 import jgogears.tsume.*;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,7 +22,7 @@ public class GlobalTests {
 		suite.addTestSuite(RankTest.class);
 		suite.addTestSuite(GTPParserUtilsTest.class);
 		suite.addTestSuite(GnuGoEngineTest.class);
-		suite.addTestSuite(GoBoardTest.class);
+		suite.addTestSuite(BoardTest.class);
 		suite.addTestSuite(SGFGameTest.class);
 		suite.addTestSuite(CopyOfRankTest.class);
 		suite.addTestSuite(GTPScoreTest.class);

@@ -49,5 +49,5 @@ public interface GTPStatelessInterface {
 
 	GoMove regGenMove(short colour);
 
-	BoardInterface showBoard();
+	BoardI showBoard();
 }

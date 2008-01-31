@@ -8,7 +8,7 @@ public class SGFProperty {
 
 	public String toString() {
 		String result = getIdentifier();
-		Iterator i = getValues().iterator();
+		Iterator<String> i = getValues().iterator();
 		while (i.hasNext()) {
 			result = result + i.next();
 		}

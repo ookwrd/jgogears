@@ -366,7 +366,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	}
 
-	public BoardInterface showBoard() {
+	public BoardI showBoard() {
 		this.write(GTPConstants.SHOWBOARD + "\n\n");
 		String result = this.readAll();
 		if (DEBUG)
