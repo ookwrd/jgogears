@@ -2,9 +2,6 @@ package jgogears;
 
 import jgogears.engine.ModelTest;
 import jgogears.engine.VertexLineariserTest;
-import jgogears.graph.GraphTest;
-import jgogears.graph.NodeTest;
-import jgogears.graph.PointTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
