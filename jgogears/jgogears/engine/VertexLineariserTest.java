@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import jgogears.Board;
-import jgogears.GoGame;
+import jgogears.Game;
 import jgogears.SGFGameTree;
 import jgogears.SGFParser;
 
@@ -37,10 +37,10 @@ public class VertexLineariserTest extends TestCase {
 			assertTrue(tree.toString() != null);
 			assertTrue(tree.toString().length() > 0);
 
-			GoGame goGame = new GoGame(tree);
-			assertTrue(goGame != null);
+			Game game = new Game(tree);
+			assertTrue(game != null);
 
-			Iterator<Board> iterator = goGame.getBoards();
+			Iterator<Board> iterator = game.getBoards();
 			assertTrue(iterator != null);
 
 			Board board = null;

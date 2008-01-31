@@ -185,11 +185,11 @@ public class FastBoardTest extends TestCase {
 
 	public void testLoadSimpleGnugo() throws IOException {
 
-		GoGame goGame = GoGame.loadFromFile(new File(
+		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoMove> i = goGame.getMoves();
+		Iterator<GoMove> i = game.getMoves();
 		GoMove move = null;
-		BoardI board = new FastBoard(goGame.getSize());
+		BoardI board = new FastBoard(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
 			assertNotNull(move);
@@ -211,10 +211,10 @@ public class FastBoardTest extends TestCase {
 					// System.err.println("\"" + filename + "\" is not a
 					// directory, parsing as an SGF file");
 
-					GoGame goGame = GoGame.loadFromFile(file);
-					Iterator<GoMove> i = goGame.getMoves();
+					Game game = Game.loadFromFile(file);
+					Iterator<GoMove> i = game.getMoves();
 					GoMove move = null;
-					BoardI board = new FastBoard(goGame.getSize());
+					BoardI board = new FastBoard(game.getSize());
 					// System.err.println("board size is: \"" + goGame.getSize()
 					// + "\"");
 					while (i.hasNext()) {

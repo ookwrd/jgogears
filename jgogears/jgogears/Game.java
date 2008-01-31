@@ -8,7 +8,7 @@ import java.util.*;
  * 
  * @author syeates
  */
-public final class GoGame {
+public final class Game {
 
 	protected short size = 0;
 
@@ -33,13 +33,13 @@ public final class GoGame {
 	/**
 	 * default constractor
 	 */
-	public GoGame() {
+	public Game() {
 	}
 
 	/**
 	 * default constractor
 	 */
-	public GoGame(int size) {
+	public Game(int size) {
 		this.size = (short)size;
 	}
 
@@ -48,7 +48,7 @@ public final class GoGame {
 	 * 
 	 * @param gameTree
 	 */
-	public GoGame(SGFGameTree gameTree) {
+	public Game(SGFGameTree gameTree) {
 		gameTree.init(this);
 		// System.err.println("\"" + this.blackPlayer + "\" (" + this.blackRank
 		// + ") vs" + "\"" +
@@ -63,11 +63,11 @@ public final class GoGame {
 		return size;
 	}
 
-	public static GoGame loadFromFilename(String filename) throws IOException {
+	public static Game loadFromFilename(String filename) throws IOException {
 		return loadFromFile(new File(filename));
 	}
 
-	public static GoGame loadFromFile(File file) throws IOException {
+	public static Game loadFromFile(File file) throws IOException {
 		try {
 
 			return SGFGameTree.loadFromFile(file);

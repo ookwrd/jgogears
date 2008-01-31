@@ -287,7 +287,7 @@ public class NoKoRuleTest extends TestCase {
 		
 		NoKoRule rule = new NoKoRule();
 		short size = 7;
-		GoGame game = new GoGame(19);
+		Game game = new Game(19);
 		Board board = new Board(size);
 		GoMove move = new GoMove(0, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -460,7 +460,7 @@ public class NoKoRuleTest extends TestCase {
 					// directory, parsing as an SGF file");
 					filecount++;
 
-					GoGame game = GoGame.loadFromFile(file);
+					Game game = Game.loadFromFile(file);
 					Board board = new Board(game.getSize());
 					System.err.println(filename);
 

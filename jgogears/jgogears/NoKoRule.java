@@ -140,7 +140,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> captures(GoGame game, BoardI board, GoMove move) {
+	public TreeSet<Vertex> captures(Game game, BoardI board, GoMove move) {
 		if (board == null)
 			throw new Error();
 		if (move == null)
@@ -191,7 +191,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> leavesKo(GoGame game, BoardI board, GoMove move) {
+	public TreeSet<Vertex> leavesKo(Game game, BoardI board, GoMove move) {
 		// TODO write test cases for this method
 		return new TreeSet<Vertex>();
 	}
@@ -203,7 +203,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public boolean moveIsLegal(GoGame game, BoardI board, GoMove move) {
+	public boolean moveIsLegal(Game game, BoardI board, GoMove move) {
 		if (board == null)
 			throw new Error();
 		if (move == null)

@@ -110,8 +110,8 @@ public class GraphTest extends TestCase {
 
 	public void testGraphc() throws IOException {
 
-		GoGame goGame = GoGame.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<Board> i = goGame.getBoards();
+		Game game = Game.loadFromFile(new File("sgf/testing/seki.sgf"));
+		Iterator<Board> i = game.getBoards();
 		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {

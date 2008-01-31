@@ -24,14 +24,14 @@ public class ModelTest extends TestCase {
 		System.err.println(Model.getRandom());
 	}
 
-	public GoGame loadTestGame() {
+	public Game loadTestGame() {
 		try {
 			FileReader reader = new FileReader(
 					"sgf/testing/2007-01-12- BamboField- tokabe.sgf");
 			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
 			SGFGameTree tree = parser.gameTree();
-			GoGame goGame = new GoGame(tree);
-			return goGame;
+			Game game = new Game(tree);
+			return game;
 		} catch (Exception e) {
 			System.err.println(e);
 			;
@@ -86,10 +86,10 @@ public class ModelTest extends TestCase {
 					// System.err.println("\"" + filename + "\" is not a
 					// directory, parsing as an SGF file");
 
-					GoGame goGame = GoGame.loadFromFile(file);
-					if (goGame.getSize() == 19) {
+					Game game = Game.loadFromFile(file);
+					if (game.getSize() == 19) {
 						filecount++;
-						model.train(goGame);
+						model.train(game);
 
 						Date after = new Date();
 						System.err.println("loaded " + filecount

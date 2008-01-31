@@ -1,6 +1,7 @@
 package jgogears;
 
 import jgogears.*;
+import java.util.*;
 
 public interface GTPStatelessInterface {
 	/** get the protocol version */
@@ -14,7 +15,7 @@ public interface GTPStatelessInterface {
 
 	boolean getKnownCommand(String command);
 
-	String[] getListCommands();
+	TreeSet<String> getListCommands();
 
 	boolean quit();
 
@@ -26,11 +27,11 @@ public interface GTPStatelessInterface {
 
 	boolean setKomi(double komi);
 
-	GoMove[] fixedHandicap(short handicap);
+	TreeSet<Vertex> fixedHandicap(short handicap);
 
-	GoMove[] placeFreeHandicap(short handicap);
+	TreeSet<Vertex> placeFreeHandicap(short handicap);
 
-	boolean placeFreeHandicap(jgogears.GoMove[] stones);
+	boolean placeFreeHandicap(TreeSet<Vertex> stones);
 
 	boolean play(GoMove move);
 
@@ -43,7 +44,7 @@ public interface GTPStatelessInterface {
 
 	boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones);
 
-	GoMove[] finalStatusList(String status);
+	TreeSet<Vertex> finalStatusList(String status);
 
 	boolean loadsgf(String filename, int moveNumber);
 

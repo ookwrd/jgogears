@@ -47,7 +47,7 @@ public final class Model {
 		return count;
 	}
 
-	public void train(GoGame game) {
+	public void train(Game game) {
 		Iterator<Board> boards = game.getBoards();
 		if (boards == null)
 			throw new Error();

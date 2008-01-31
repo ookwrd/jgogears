@@ -14,7 +14,7 @@ public class CachingKoRule extends KoRule {
 	}
 
 	@Override
-	public TreeSet<Vertex> captures(GoGame game, BoardI Board, GoMove move) {
+	public TreeSet<Vertex> captures(Game game, BoardI Board, GoMove move) {
 		return rule.captures(game, Board, move);
 	}
 
@@ -29,12 +29,12 @@ public class CachingKoRule extends KoRule {
 	}
 
 	@Override
-	public TreeSet<Vertex> leavesKo(GoGame game, BoardI Board, GoMove move) {
+	public TreeSet<Vertex> leavesKo(Game game, BoardI Board, GoMove move) {
 		return rule.leavesKo(game, Board, move);
 	}
 
 	@Override
-	public boolean moveIsLegal(GoGame game, BoardI Board, GoMove move) {
+	public boolean moveIsLegal(Game game, BoardI Board, GoMove move) {
 		return rule.moveIsLegal(game, Board, move);
 	}
 

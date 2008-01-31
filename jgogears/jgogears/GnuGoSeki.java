@@ -11,16 +11,16 @@ public class GnuGoSeki {
 
 	static public boolean testForSeki(File file) throws IOException {
 
-		GoGame goGame = GoGame.loadFromFile(file);
-		if (goGame == null) {
+		Game game = Game.loadFromFile(file);
+		if (game == null) {
 			System.err.println("failed to load \"" + file + "\"");
 			return false;
 		}
-		if (!goGame.getScore().getScored() || goGame.getSize() != 19)
+		if (!game.getScore().getScored() || game.getSize() != 19)
 			return false;
-		if (goGame.isBranched())
+		if (game.isBranched())
 			return false;
-		Iterator<GoMove> moves = goGame.getMoves();
+		Iterator<GoMove> moves = game.getMoves();
 
 		GnuGoEngine engine = new GnuGoEngine();
 		while (moves.hasNext()) {
@@ -31,12 +31,12 @@ public class GnuGoSeki {
 		// engine.showBoard();
 		// engine.getFinalScore();
 		Date before = new Date();
-		GoMove[] stonesInSeki = engine.finalStatusList("seki");
+		TreeSet<Vertex> stonesInSeki = engine.finalStatusList("seki");
 		Date after = new Date();
 		System.err.println("\"" + file + "\" time = \""
 				+ (after.getTime() - before.getTime()) + "\" result = \""
-				+ goGame.getScore() + "\"");
-		if (stonesInSeki != null && stonesInSeki.length != 0) {
+				+ game.getScore() + "\"");
+		if (stonesInSeki != null && stonesInSeki.size() != 0) {
 			System.err.println("\"" + file + "\" stonesInSeki = \""
 					+ stonesInSeki + "\"");
 			return true;
