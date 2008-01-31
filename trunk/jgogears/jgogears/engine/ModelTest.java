@@ -48,7 +48,7 @@ public class ModelTest extends TestCase {
 		model.train(this.loadTestGame());
 		System.out.println(" model size =  "
 				+ model.countNodes(model.getRoot()));
-		GoBoard board = new GoBoard();
+		Board board = new Board();
 		board = board.newBoard(new GoMove("white b2"));
 		board = board.newBoard(new GoMove("black k4"));
 		board = board.newBoard(new GoMove("white c3"));
@@ -56,7 +56,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new GoMove("white d4"));
 		board = board.newBoard(new GoMove("black h4"));
 		board = board.newBoard(new GoMove("white n4"));
-		float[][] r = model.getScores(board, BoardInterface.VERTEX_BLACK);
+		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
@@ -115,7 +115,7 @@ public class ModelTest extends TestCase {
 		System.err.println("loaded " + filecount + " files with " + movecount
 				+ " moves in " + (after.getTime() - before.getTime())
 				+ " milliseconds");
-		GoBoard board = new GoBoard();
+		Board board = new Board();
 		board = board.newBoard(new GoMove("white b2"));
 		board = board.newBoard(new GoMove("black k4"));
 		board = board.newBoard(new GoMove("white c3"));
@@ -123,7 +123,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new GoMove("white d4"));
 		board = board.newBoard(new GoMove("black h4"));
 		board = board.newBoard(new GoMove("white n4"));
-		float[][] r = model.getScores(board, BoardInterface.VERTEX_BLACK);
+		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {

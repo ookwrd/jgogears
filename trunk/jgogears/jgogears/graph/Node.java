@@ -10,7 +10,7 @@ public final class Node implements Comparable<Node> {
 	protected TreeSet<Point> liberties = null;
 
 	public Node(short colour) {
-		if (colour == BoardInterface.VERTEX_OFF_BOARD)
+		if (colour == BoardI.VERTEX_OFF_BOARD)
 			throw new Error("Point off board");
 		this.colour = colour;
 		this.points = new TreeSet<Point>();
@@ -49,9 +49,9 @@ public final class Node implements Comparable<Node> {
 	}
 
 	protected int calcLiberties(Graph graph) {
-		short libertyColour = this.getColour() == BoardInterface.VERTEX_BLACK ? BoardInterface.VERTEX_BLACK
-				: BoardInterface.VERTEX_WHITE;
-		GoBoard board = graph.getBoard();
+		short libertyColour = this.getColour() == BoardI.VERTEX_BLACK ? BoardI.VERTEX_BLACK
+				: BoardI.VERTEX_WHITE;
+		Board board = graph.getBoard();
 		if (points.size() == 0)
 			throw new Error();
 		Iterator<Point> points = this.points.iterator();

@@ -2,8 +2,6 @@ package jgogears;
 
 import java.util.*;
 
-import jgogears.tsume.*;
-
 /**
  * GoBoard represents the state of a Go board at a particular point in time.
  * 

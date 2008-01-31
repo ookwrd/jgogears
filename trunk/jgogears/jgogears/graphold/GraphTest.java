@@ -10,14 +10,14 @@ import junit.framework.TestCase;
 public class GraphTest extends TestCase {
 
 	public void testSevenBySeven() {
-		GoBoard board = new GoBoard(7);
+		Board board = new Board(7);
 		assertNotNull(board);
 		Graph g = new Graph(board);
 		assertNotNull(g);
 	}
 
 	public void testSevenBySevenMerge() {
-		GoBoard board = new GoBoard(7);
+		Board board = new Board(7);
 		assertNotNull(board);
 		Graph g = new Graph(board);
 		assertNotNull(g);
@@ -27,8 +27,8 @@ public class GraphTest extends TestCase {
 	public void testLoadSeki() throws IOException {
 
 		GoGame goGame = GoGame.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<GoBoard> i = goGame.getBoards();
-		GoBoard board = null;
+		Iterator<Board> i = goGame.getBoards();
+		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();
@@ -50,7 +50,7 @@ public class GraphTest extends TestCase {
 				"sgf/testing/simpleGnuGo.sgf"));
 		Iterator<GoMove> i = goGame.getMoves();
 		GoMove move = null;
-		BoardInterface board = new GoBoard(goGame.getSize());
+		BoardI board = new Board(goGame.getSize());
 		while (i.hasNext()) {
 			move = i.next();
 			assertNotNull(move);
@@ -72,8 +72,8 @@ public class GraphTest extends TestCase {
 		// fail();
 		GoGame goGame = GoGame.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoBoard> i = goGame.getBoards();
-		GoBoard board = null;
+		Iterator<Board> i = goGame.getBoards();
+		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();
@@ -90,7 +90,7 @@ public class GraphTest extends TestCase {
 	}
 
 	public void checkAllVertexesPresentOnlyOnce(Graph g) {
-		BoardInterface board = g.board;
+		BoardI board = g.board;
 		short size = board.getSize();
 		for (short i = 0; i < size; i++) {
 			for (short j = 0; j < size; j++) {
@@ -134,7 +134,7 @@ public class GraphTest extends TestCase {
 					GoGame goGame = GoGame.loadFromFile(file);
 					Iterator<GoMove> i = goGame.getMoves();
 					GoMove move = null;
-					BoardInterface board = new GoBoard(goGame.getSize());
+					BoardI board = new Board(goGame.getSize());
 					int m = 0;
 					// System.err.println("board size is: \"" + goGame.getSize()
 					// + "\"");

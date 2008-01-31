@@ -6,41 +6,41 @@ import junit.framework.TestCase;
 public class NodeTest extends TestCase {
 
 	public void testNodeTestb() {
-		Node node = new Node(BoardInterface.VERTEX_BLACK);
+		Node node = new Node(BoardI.VERTEX_BLACK);
 		assertNotNull(node);
-		assertTrue(node.getColour() == BoardInterface.VERTEX_BLACK);
+		assertTrue(node.getColour() == BoardI.VERTEX_BLACK);
 		assertNotNull(node.getPoints());
 		assertTrue(node.getPoints().size() == 0);
 	}
 
 	public void testNodeTestk() {
-		Node node = new Node(BoardInterface.VERTEX_KO);
+		Node node = new Node(BoardI.VERTEX_KO);
 		assertNotNull(node);
-		assertTrue(node.getColour() == BoardInterface.VERTEX_KO);
+		assertTrue(node.getColour() == BoardI.VERTEX_KO);
 		assertNotNull(node.getPoints());
 		assertTrue(node.getPoints().size() == 0);
 	}
 
 	public void testNodeTestw() {
-		Node node = new Node(BoardInterface.VERTEX_WHITE);
+		Node node = new Node(BoardI.VERTEX_WHITE);
 		assertNotNull(node);
-		assertTrue(node.getColour() == BoardInterface.VERTEX_WHITE);
+		assertTrue(node.getColour() == BoardI.VERTEX_WHITE);
 		assertNotNull(node.getPoints());
 		assertTrue(node.getPoints().size() == 0);
 	}
 
 	public void testnodeteste() {
-		Node node = new Node(BoardInterface.VERTEX_EMPTY);
+		Node node = new Node(BoardI.VERTEX_EMPTY);
 		assertNotNull(node);
-		assertTrue(node.getColour() == BoardInterface.VERTEX_EMPTY);
+		assertTrue(node.getColour() == BoardI.VERTEX_EMPTY);
 		assertNotNull(node.getPoints());
 		assertTrue(node.getPoints().size() == 0);
 	}
 
 	public void testnodetestbl() {
-		Node node = new Node(BoardInterface.VERTEX_BLACK);
+		Node node = new Node(BoardI.VERTEX_BLACK);
 		assertNotNull(node);
-		assertTrue(node.getColour() == BoardInterface.VERTEX_BLACK);
+		assertTrue(node.getColour() == BoardI.VERTEX_BLACK);
 		assertNotNull(node.getPoints());
 		assertTrue(node.getPoints().size() == 0);
 

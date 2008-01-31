@@ -13,7 +13,7 @@ public class GraphTest extends TestCase {
 	static final boolean DEBUG = false;
 
 	public void testGrapha7() {
-		GoBoard board = new GoBoard(7);
+		Board board = new Board(7);
 		assertNotNull(board);
 		assertTrue(board.getSize() == 7);
 		Graph graph = new Graph(board);
@@ -21,7 +21,7 @@ public class GraphTest extends TestCase {
 	}
 
 	public void testGrapha9() {
-		GoBoard board = new GoBoard(9);
+		Board board = new Board(9);
 		assertNotNull(board);
 		assertTrue(board.getSize() == 9);
 		Graph graph = new Graph(board);
@@ -29,7 +29,7 @@ public class GraphTest extends TestCase {
 	}
 
 	public void testGrapha13() {
-		GoBoard board = new GoBoard(13);
+		Board board = new Board(13);
 		assertNotNull(board);
 		assertTrue(board.getSize() == 13);
 		Graph graph = new Graph(board);
@@ -37,7 +37,7 @@ public class GraphTest extends TestCase {
 	}
 
 	public void testGrapha19() {
-		GoBoard board = new GoBoard(19);
+		Board board = new Board(19);
 		assertNotNull(board);
 		assertTrue(board.getSize() == 19);
 		Graph graph = new Graph(board);
@@ -45,7 +45,7 @@ public class GraphTest extends TestCase {
 	}
 
 	public void testGrapha23() {
-		GoBoard board = new GoBoard(23);
+		Board board = new Board(23);
 		assertNotNull(board);
 		assertTrue(board.getSize() == 23);
 		Graph graph = new Graph(board);
@@ -55,7 +55,7 @@ public class GraphTest extends TestCase {
 	public void testGraphloop() {
 		for (int i = 1; i < 101; i++) {
 			Date before = new Date();
-			GoBoard board = new GoBoard(i);
+			Board board = new Board(i);
 			Graph graph = new Graph(board);
 			Date after = new Date();
 
@@ -111,8 +111,8 @@ public class GraphTest extends TestCase {
 	public void testGraphc() throws IOException {
 
 		GoGame goGame = GoGame.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<GoBoard> i = goGame.getBoards();
-		GoBoard board = null;
+		Iterator<Board> i = goGame.getBoards();
+		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();
