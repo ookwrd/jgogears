@@ -10,7 +10,7 @@ public class SGFGameTree {
 	/**
 	 * 
 	 */
-	protected void init(GoGame game) {
+	protected void init(Game game) {
 		if (game == null)
 			throw new Error("null GoGame in SGFGameTree.init");
 		// get the moves on the main branch
@@ -123,13 +123,13 @@ public class SGFGameTree {
 		}
 	}
 
-	public static GoGame loadFromFile(File file) {
+	public static Game loadFromFile(File file) {
 		try {
 			// speed up file reading. BufferedReader doesn't help
 			Reader reader = new FileReader(file);
 			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
 			SGFGameTree tree = parser.gameTree();
-			GoGame result = new GoGame(tree);
+			Game result = new Game(tree);
 			return result;
 		} catch (IOException e) {
 			System.err.println(e);

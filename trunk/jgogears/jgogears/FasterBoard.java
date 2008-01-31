@@ -4,7 +4,7 @@ import java.util.*;
 
 import jgogears.*;
 
-public class FasterBoard implements BoardI {
+public class FasterBoard extends BoardI {
 	
 	private boolean DEBUG = true;
 

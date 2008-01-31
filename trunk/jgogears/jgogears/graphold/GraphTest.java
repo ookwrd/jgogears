@@ -26,8 +26,8 @@ public class GraphTest extends TestCase {
 
 	public void testLoadSeki() throws IOException {
 
-		GoGame goGame = GoGame.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<Board> i = goGame.getBoards();
+		Game game = Game.loadFromFile(new File("sgf/testing/seki.sgf"));
+		Iterator<Board> i = game.getBoards();
 		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {
@@ -46,11 +46,11 @@ public class GraphTest extends TestCase {
 
 	public void testLoadSimpleGnugoLegality() throws IOException {
 
-		GoGame goGame = GoGame.loadFromFile(new File(
+		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoMove> i = goGame.getMoves();
+		Iterator<GoMove> i = game.getMoves();
 		GoMove move = null;
-		BoardI board = new Board(goGame.getSize());
+		BoardI board = new Board(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
 			assertNotNull(move);
@@ -70,9 +70,9 @@ public class GraphTest extends TestCase {
 	public void testLoadSimpleGnugoLong() throws IOException {
 
 		// fail();
-		GoGame goGame = GoGame.loadFromFile(new File(
+		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<Board> i = goGame.getBoards();
+		Iterator<Board> i = game.getBoards();
 		Board board = null;
 		Graph g = null;
 		while (i.hasNext()) {
@@ -131,10 +131,10 @@ public class GraphTest extends TestCase {
 					// System.err.println("\"" + filename + "\" is not a
 					// directory, parsing as an SGF file");
 
-					GoGame goGame = GoGame.loadFromFile(file);
-					Iterator<GoMove> i = goGame.getMoves();
+					Game game = Game.loadFromFile(file);
+					Iterator<GoMove> i = game.getMoves();
 					GoMove move = null;
-					BoardI board = new Board(goGame.getSize());
+					BoardI board = new Board(game.getSize());
 					int m = 0;
 					// System.err.println("board size is: \"" + goGame.getSize()
 					// + "\"");

@@ -75,28 +75,6 @@ public final class GoMove {
 	}
 
 	/**
-	 * parse the colour of a move
-	 * 
-	 * @param colourString
-	 * @return the colour as a short
-	 */
-	public static short parseColour(String colourString) {
-
-		if (colourString.compareTo("w") == 0) {
-			return BoardI.VERTEX_WHITE;
-		} else if (colourString.compareTo("white") == 0) {
-			return BoardI.VERTEX_WHITE;
-		} else if (colourString.compareTo("b") == 0) {
-			return BoardI.VERTEX_BLACK;
-		} else if (colourString.compareTo("black") == 0) {
-			return BoardI.VERTEX_BLACK;
-		} else {
-			throw new IllegalArgumentException("trying to parse (1) \""
-					+ colourString + "\" as a colour");
-		}
-	}
-
-	/**
 	 * create a GoMove from a GTP move string
 	 * 
 	 * @param move
@@ -113,7 +91,7 @@ public final class GoMove {
 			throw new IllegalArgumentException("Bad argument to GoMove(" + move
 					+ ")");
 		String colourString = move.substring(0, space);
-		this.colour = GoMove.parseColour(colourString);
+		this.colour = Board.parseColour(colourString);
 		String vertexString = move.substring(space + 1, move.length());
 		parseVertex(vertexString);
 	}

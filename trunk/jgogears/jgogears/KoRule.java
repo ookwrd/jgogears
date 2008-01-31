@@ -34,7 +34,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract boolean moveIsLegal(GoGame game, BoardI board, GoMove move);
+	public abstract boolean moveIsLegal(Game game, BoardI board, GoMove move);
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> captures(GoGame game, BoardI board,
+	public abstract TreeSet<Vertex> captures(Game game, BoardI board,
 			GoMove move);
 
 	/**
@@ -53,7 +53,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> leavesKo(GoGame game, BoardI board,
+	public abstract TreeSet<Vertex> leavesKo(Game game, BoardI board,
 			GoMove move);
 
 	/**

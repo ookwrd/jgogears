@@ -64,14 +64,16 @@ public class GTPParserUtils {
 		return s;
 	}
 
-	static GoMove[] parseVertexList(String s) {
+	static TreeSet<Vertex> parseVertexList(String s) {
 		s = stripIntro(s);
-		Stack<GoMove> vert = new Stack<GoMove>();
+		TreeSet<Vertex> vert = new TreeSet<Vertex>();
 		if (s != null && s.length() != 0) {
 
 			do {
 				// System.err.println("parseVertexList(\"" + s + "\")");
 				GoMove move = new GoMove();
+				short row = -1;
+				short column = -1;
 				while (s.indexOf(' ') == 1 || s.indexOf(' ') == 0) {
 					s = s.substring(1);
 				}
@@ -83,9 +85,10 @@ public class GTPParserUtils {
 					s = "";
 				}
 				vert.add(move);
+				Vertex v = new Vertex();
 			} while (s.length() > 0);
 		}
-		return vert.toArray(new GoMove[vert.size()]);
+		return vert;
 	}
 
 }

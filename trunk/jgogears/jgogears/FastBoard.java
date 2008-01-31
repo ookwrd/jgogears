@@ -4,7 +4,7 @@ import java.util.*;
 
 import jgogears.*;
 
-public class FastBoard implements BoardI {
+public class FastBoard  extends BoardI {
 
 	private BitSet bits = null;
 	private short size = 19;

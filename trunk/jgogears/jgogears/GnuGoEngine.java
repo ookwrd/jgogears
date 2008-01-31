@@ -1,6 +1,7 @@
 package jgogears;
 
 import java.io.*;
+import java.util.TreeSet;
 
 /**
  * 
@@ -157,22 +158,21 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		return false;
 	}
 
-	public GoMove[] finalStatusList(String status) {
+	public TreeSet<Vertex> finalStatusList(String status) {
 		this.write(GTPConstants.FINALSTATUSLIST + " " + status + "\n\n");
 		String s = this.read();
-		GoMove[] v = GTPParserUtils.parseVertexList(s);
+		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
 		if (DEBUG)
 			System.err.println(s);
 		if (DEBUG)
-			for (int i = 0; i < v.length; i++)
-				System.err.println(v[i]);
+				System.err.println(v);
 		return v;
 	}
 
-	public GoMove[] fixedHandicap(short handicap) {
+	public TreeSet<Vertex> fixedHandicap(short handicap) {
 		this.write(GTPConstants.FIXEDHANDICAP + " " + handicap + "\n\n");
 		String s = this.read();
-		GoMove[] v = GTPParserUtils.parseVertexList(s);
+		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
 		if (DEBUG)
 			System.err.println(s);
 		if (DEBUG)
@@ -212,7 +212,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		throw new Error();
 	}
 
-	public String[] getListCommands() {
+	public TreeSet<String> getListCommands() {
 		// TODO Auto-generated method stub
 		throw new Error();
 	}
@@ -239,7 +239,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	}
 
-	public boolean placeFreeHandicap(GoMove[] stones) {
+	public boolean placeFreeHandicap(TreeSet<Vertex> stones) {
 		this.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + stones.toString()
 				+ "\n\n");
 		String s = this.read();
@@ -252,13 +252,13 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	}
 
-	public GoMove[] placeFreeHandicap(short handicap) {
+	public TreeSet<Vertex> placeFreeHandicap(short handicap) {
 		// TODO write tests for this
 		this
 				.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + handicap
 						+ "\n\n");
 		String s = this.read();
-		GoMove[] v = GTPParserUtils.parseVertexList(s);
+		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
 		if (DEBUG)
 			System.err.println(s);
 		if (DEBUG)

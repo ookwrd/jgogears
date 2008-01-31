@@ -1,9 +1,7 @@
 package jgogears;
 
-import java.util.Iterator;
+import java.util.*;
 import java.io.*;
-
-import jgogears.*;
 
 import junit.framework.TestCase;
 
@@ -35,11 +33,11 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testFinalStatusList() {
 		try {
 
-			GoGame goGame = GoGame
+			Game game = Game
 					.loadFromFile(new File("sgf/testing/seki.sgf"));
-			assertNotNull(goGame);
+			assertNotNull(game);
 
-			Iterator<GoMove> moves = goGame.getMoves();
+			Iterator<GoMove> moves = game.getMoves();
 			assertNotNull(moves);
 			GnuGoEngine engine = new GnuGoEngine();
 			while (moves.hasNext()) {
@@ -48,11 +46,11 @@ public class GnuGoEngineTest2 extends TestCase {
 				engine.play(move);
 			}
 			engine.initialise();
-			GoMove[] alive = engine.finalStatusList("alive");
+			TreeSet<Vertex> alive = engine.finalStatusList("alive");
 			assertNotNull(alive);
-			GoMove[] dead = engine.finalStatusList("dead");
+			TreeSet<Vertex> dead = engine.finalStatusList("dead");
 			assertNotNull(dead);
-			GoMove[] seki = engine.finalStatusList("seki");
+			TreeSet<Vertex> seki = engine.finalStatusList("seki");
 			assertNotNull(seki);
 			engine.quit();
 		} catch (Throwable t) {
@@ -67,12 +65,9 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			for (short i = 2; i < 10; i++) {
 				engine.setBoardSize((short) 19);
-				GoMove[] moves = engine.fixedHandicap(i);
+				TreeSet<Vertex> moves = engine.fixedHandicap(i);
 				assertNotNull(moves);
-				assertTrue(moves.length == i);
-				for (int j = 0; i < moves.length; i++)
-					assertNotNull(moves[j]);
-				assertTrue(i == moves.length);
+				assertTrue(moves.size() == i);
 			}
 			engine.quit();
 		} catch (Throwable t) {
@@ -225,8 +220,8 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			engine.setBoardSize((short) 19);
 			engine.clearBoard();
-			GoMove[] moves = engine.placeFreeHandicap((short) 9);
-			assertTrue(moves.length == 9);
+			TreeSet<Vertex> moves = engine.placeFreeHandicap((short) 9);
+			assertTrue(moves.size() == 9);
 			engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -242,24 +237,24 @@ public class GnuGoEngineTest2 extends TestCase {
 				engine.initialise();
 				engine.setBoardSize((short) 19);
 				engine.clearBoard();
-				GoMove[] moves = engine.placeFreeHandicap(i);
-				assertTrue(moves.length == i);
+				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				assertTrue(moves.size() == i);
 				engine.quit();
 			}
 			for (short i = 2; i < 20; i++) {
 				engine.initialise();
 				engine.setBoardSize((short) 13);
 				engine.clearBoard();
-				GoMove[] moves = engine.placeFreeHandicap(i);
-				assertTrue(moves.length == i);
+				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				assertTrue(moves.size() == i);
 				engine.quit();
 			}
 			for (short i = 2; i < 10; i++) {
 				engine.initialise();
 				engine.setBoardSize((short) 9);
 				engine.clearBoard();
-				GoMove[] moves = engine.placeFreeHandicap(i);
-				assertTrue(moves.length == i);
+				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				assertTrue(moves.size() == i);
 				engine.quit();
 			}
 		} catch (Throwable t) {

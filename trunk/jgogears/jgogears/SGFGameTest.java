@@ -18,9 +18,9 @@ public class SGFGameTest extends TestCase {
 			assertNotNull(parser);
 			SGFGameTree tree = parser.gameTree();
 			assertNotNull(tree);
-			GoGame goGame = new GoGame(tree);
-			assertNotNull(goGame);
-			Iterator<GoMove> moves = goGame.getMoves();
+			Game game = new Game(tree);
+			assertNotNull(game);
+			Iterator<GoMove> moves = game.getMoves();
 			assertNotNull(moves);
 			assertTrue(moves.hasNext());
 			while (moves.hasNext()) {
@@ -52,14 +52,14 @@ public class SGFGameTest extends TestCase {
 		StringReader reader = new StringReader(example);
 		jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
 
-		GoGame goGame = new GoGame(parser.gameTree());
+		Game game = new Game(parser.gameTree());
 
-		Iterator<GoMove> iterator = goGame.getMoves();
+		Iterator<GoMove> iterator = game.getMoves();
 		while (iterator.hasNext()) {
 			iterator.next();
 			// System.out.println(iterator.next());
 		}
-		Iterator<Board> iterator2 = goGame.getBoards();
+		Iterator<Board> iterator2 = game.getBoards();
 		while (iterator.hasNext()) {
 			iterator2.next();
 			// System.out.println(iterator.next());

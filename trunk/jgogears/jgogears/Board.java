@@ -10,7 +10,7 @@ import java.util.*;
  * 
  * @author stuart
  */
-public class Board implements BoardI {
+public class Board extends BoardI {
 
 	/**
 	 * The size of this board (defaults to DEFAULT_BOARD_SIZE or 19
