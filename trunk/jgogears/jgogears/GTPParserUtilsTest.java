@@ -24,7 +24,7 @@ public class GTPParserUtilsTest extends TestCase {
 	public final void testShowBoard() {
 		try {
 			engine.initialise();
-			BoardInterface board = engine.showBoard();
+			BoardI board = engine.showBoard();
 			//TODO
 			engine.quit();
 		} catch (Throwable t) {
@@ -39,9 +39,9 @@ public class GTPParserUtilsTest extends TestCase {
 			engine.initialise();
 			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 20);
 			assertTrue(b);
-			GoMove move = engine.genMove(BoardInterface.VERTEX_BLACK);
+			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
-			BoardInterface board = engine.showBoard();
+			BoardI board = engine.showBoard();
 			System.err
 					.println("testLoadsgf:: the following board should have moves on it:");
 			System.err.println(board);

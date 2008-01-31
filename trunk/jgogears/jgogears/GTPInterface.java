@@ -50,6 +50,6 @@ public interface GTPInterface {
 
 	GoMove regGenMove(int colour, GTPState state);
 
-	BoardInterface showBoard(GTPState state);
+	BoardI showBoard(GTPState state);
 
 }

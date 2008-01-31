@@ -18,7 +18,7 @@ public final class GoMove {
 
 	private boolean resign = false;
 
-	private short colour = BoardInterface.VERTEX_KO;
+	private short colour = BoardI.VERTEX_KO;
 
 	/**
 	 * create a GoMove
@@ -83,13 +83,13 @@ public final class GoMove {
 	public static short parseColour(String colourString) {
 
 		if (colourString.compareTo("w") == 0) {
-			return BoardInterface.VERTEX_WHITE;
+			return BoardI.VERTEX_WHITE;
 		} else if (colourString.compareTo("white") == 0) {
-			return BoardInterface.VERTEX_WHITE;
+			return BoardI.VERTEX_WHITE;
 		} else if (colourString.compareTo("b") == 0) {
-			return BoardInterface.VERTEX_BLACK;
+			return BoardI.VERTEX_BLACK;
 		} else if (colourString.compareTo("black") == 0) {
-			return BoardInterface.VERTEX_BLACK;
+			return BoardI.VERTEX_BLACK;
 		} else {
 			throw new IllegalArgumentException("trying to parse (1) \""
 					+ colourString + "\" as a colour");
@@ -105,7 +105,7 @@ public final class GoMove {
 	public GoMove(String move) throws IllegalArgumentException {
 		// System.err.println("GoMove::GoMove(\"" + move + "\"");
 
-		this.colour = BoardInterface.VERTEX_EMPTY;
+		this.colour = BoardI.VERTEX_EMPTY;
 		move = move.toLowerCase();
 
 		int space = move.indexOf(" ");
@@ -126,7 +126,7 @@ public final class GoMove {
 	 */
 	public static GoMove createVertex(String v) {
 		GoMove result = new GoMove();
-		result.setColour(BoardInterface.VERTEX_EMPTY);
+		result.setColour(BoardI.VERTEX_EMPTY);
 		result.parseVertex(v);
 		return result;
 	}
@@ -139,7 +139,7 @@ public final class GoMove {
 	 */
 	public static GoMove createHandicapStone(String v) {
 		GoMove result = new GoMove();
-		result.setColour(BoardInterface.VERTEX_BLACK);
+		result.setColour(BoardI.VERTEX_BLACK);
 		result.parseVertex(v);
 		return result;
 	}
@@ -329,16 +329,16 @@ public final class GoMove {
 		// find the colour of the move
 		String colourS = "";
 		switch (colour) {
-		case BoardInterface.VERTEX_WHITE:
+		case BoardI.VERTEX_WHITE:
 			colourS = "white";
 			break;
-		case BoardInterface.VERTEX_BLACK:
+		case BoardI.VERTEX_BLACK:
 			colourS = "black";
 			break;
-		case BoardInterface.VERTEX_KO:
+		case BoardI.VERTEX_KO:
 			colourS = "k";
 			break;
-		case BoardInterface.VERTEX_EMPTY:
+		case BoardI.VERTEX_EMPTY:
 			colourS = "";
 			break;
 		default:

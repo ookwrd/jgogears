@@ -28,7 +28,7 @@ public final class GoGame {
 	private String extraTime = "";
 	private String PC = "";
 	private LinkedList<GoMove> movelist = new LinkedList<GoMove>();
-	private LinkedList<GoBoard> boardlist = new LinkedList<GoBoard>();
+	private LinkedList<Board> boardlist = new LinkedList<Board>();
 
 	/**
 	 * default constractor
@@ -81,12 +81,12 @@ public final class GoGame {
 		return this.movelist.iterator();
 	}
 
-	public Iterator<GoBoard> getBoards() {
+	public Iterator<Board> getBoards() {
 		if (this.boardlist != null) {
 
 			Iterator<GoMove> moves = getMoves();
-			boardlist = new LinkedList<GoBoard>();
-			GoBoard board = new GoBoard(size);
+			boardlist = new LinkedList<Board>();
+			Board board = new Board(size);
 			boardlist.add(board);
 			while (moves.hasNext()) {
 				GoMove move = moves.next();

@@ -39,11 +39,11 @@ public class GnuGoEngineTest2 extends TestCase {
 					.loadFromFile(new File("sgf/testing/seki.sgf"));
 			assertNotNull(goGame);
 
-			Iterator moves = goGame.getMoves();
+			Iterator<GoMove> moves = goGame.getMoves();
 			assertNotNull(moves);
 			GnuGoEngine engine = new GnuGoEngine();
 			while (moves.hasNext()) {
-				GoMove move = (GoMove) moves.next();
+				GoMove move =  moves.next();
 				// System.err.println(move);
 				engine.play(move);
 			}
@@ -87,7 +87,7 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			engine.setBoardSize((short) 19);
 			engine.clearBoard();
-			GoMove move = engine.genMove(BoardInterface.VERTEX_BLACK);
+			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
 			if (DEBUG)
 				System.err.println(move);
 			engine.quit();
@@ -191,9 +191,9 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 20);
 			assertTrue(b);
-			GoMove move = engine.genMove(BoardInterface.VERTEX_BLACK);
+			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
-			BoardInterface board = engine.showBoard();
+			BoardI board = engine.showBoard();
 			System.err
 					.println("testLoadsgf:: the following board should have moves on it:");
 			System.err.println(board);
@@ -297,7 +297,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testRegGenMove() {
 		try {
 			engine.initialise();
-			GoMove move = engine.regGenMove(BoardInterface.VERTEX_BLACK);
+			GoMove move = engine.regGenMove(BoardI.VERTEX_BLACK);
 			System.err.println(move);
 			engine.quit();
 		} catch (Throwable t) {
@@ -337,7 +337,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testSetTimeLeft() {
 		try {
 			engine.initialise();
-			engine.setTimeLeft(BoardInterface.VERTEX_BLACK, 1.0, 1.0);
+			engine.setTimeLeft(BoardI.VERTEX_BLACK, 1.0, 1.0);
 			engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -361,7 +361,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testShowBoard() {
 		try {
 			engine.initialise();
-			BoardInterface board = engine.showBoard();
+			BoardI board = engine.showBoard();
 			// TODO
 			engine.quit();
 		} catch (Throwable t) {

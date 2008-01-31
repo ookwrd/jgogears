@@ -11,7 +11,7 @@ import jgogears.*;
 public class GTPState {
 
 	protected short boardsize = -1;
-	protected GoBoard board = null;
+	protected Board board = null;
 	protected int whiteCapturedCount = Integer.MIN_VALUE;
 	protected int blackCapturedCount = Integer.MIN_VALUE;
 	protected double komi = Double.MIN_VALUE;
@@ -48,7 +48,7 @@ public class GTPState {
 		// TODO
 		this.whiteCapturedCount = 0;
 		this.blackCapturedCount = 0;
-		this.board = new GoBoard((short) this.getBoardsize());
+		this.board = new Board((short) this.getBoardsize());
 		playedMoves = new java.util.Vector<GoMove>();
 	}
 
@@ -73,11 +73,11 @@ public class GTPState {
 		this.blackCapturedCount = blackCapturedCount;
 	}
 
-	public GoBoard getBoard() {
+	public Board getBoard() {
 		return board;
 	}
 
-	public void setBoard(GoBoard board) {
+	public void setBoard(Board board) {
 		this.board = board;
 	}
 

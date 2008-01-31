@@ -1,6 +1,5 @@
 package jgogears;
 
-import jgogears.engine.VertexLineariserTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -8,21 +7,23 @@ public class AllTests {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for jgogears");
-		// $JUnit-BEGIN$
-		suite.addTestSuite(GoMoveTest.class);
-		suite.addTestSuite(SGFPropertyTest.class);
-		suite.addTestSuite(SGFNodeTest.class);
-		suite.addTestSuite(SGFParserTest.class);
-		suite.addTestSuite(RankTest.class);
+		//$JUnit-BEGIN$
 		suite.addTestSuite(GTPParserUtilsTest.class);
-		suite.addTestSuite(GnuGoEngineTest.class);
-		suite.addTestSuite(GoBoardTest.class);
-		suite.addTestSuite(SGFGameTest.class);
-		suite.addTestSuite(CopyOfRankTest.class);
+		suite.addTestSuite(NoKoRuleTest.class);
 		suite.addTestSuite(GTPScoreTest.class);
+		suite.addTestSuite(SGFGameTest.class);
+		suite.addTestSuite(GnuGoEngineTest.class);
 		suite.addTestSuite(GnuGoEngineTest2.class);
-		// $JUnit-END$
-
+		suite.addTestSuite(CopyOfRankTest.class);
+		suite.addTestSuite(RankTest.class);
+		suite.addTestSuite(SGFNodeTest.class);
+		suite.addTestSuite(FasterBoardTest.class);
+		suite.addTestSuite(SGFPropertyTest.class);
+		suite.addTestSuite(BoardTest.class);
+		suite.addTestSuite(SGFParserTest.class);
+		suite.addTestSuite(GoMoveTest.class);
+		suite.addTestSuite(FastBoardTest.class);
+		//$JUnit-END$
 		return suite;
 	}
 

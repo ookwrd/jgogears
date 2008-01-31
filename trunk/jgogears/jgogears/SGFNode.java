@@ -10,7 +10,7 @@ public class SGFNode {
 
 	public String toString() {
 		String result = ";";
-		Iterator i = properties.iterator();
+		Iterator<SGFProperty> i = properties.iterator();
 		while (i.hasNext()) {
 			result = result + i.next();
 		}
@@ -255,9 +255,9 @@ public class SGFNode {
 		GoMove move = new GoMove();
 
 		if (prop.getIdentifier().compareToIgnoreCase("B") == 0) {
-			move.setColour(BoardInterface.VERTEX_BLACK);
+			move.setColour(BoardI.VERTEX_BLACK);
 		} else if (prop.getIdentifier().compareToIgnoreCase("W") == 0) {
-			move.setColour(BoardInterface.VERTEX_WHITE);
+			move.setColour(BoardI.VERTEX_WHITE);
 		} else {
 			return null;
 		}

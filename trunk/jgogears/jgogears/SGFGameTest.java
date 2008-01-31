@@ -54,14 +54,14 @@ public class SGFGameTest extends TestCase {
 
 		GoGame goGame = new GoGame(parser.gameTree());
 
-		Iterator iterator = goGame.getMoves();
+		Iterator<GoMove> iterator = goGame.getMoves();
 		while (iterator.hasNext()) {
 			iterator.next();
 			// System.out.println(iterator.next());
 		}
-		iterator = goGame.getBoards();
+		Iterator<Board> iterator2 = goGame.getBoards();
 		while (iterator.hasNext()) {
-			iterator.next();
+			iterator2.next();
 			// System.out.println(iterator.next());
 		}
 
