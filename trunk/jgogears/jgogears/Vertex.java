@@ -1,40 +1,74 @@
 package jgogears;
 
 import java.util.*;
-
+/**
+ * A class representing a vertex on the board. There is 
+ * no representation of colour or the occupancy of the vertex.
+ * @author Stuart
+ *
+ */
 public final class Vertex extends Vector<Short> implements Comparable {
-
-	public Vertex() {
-		this.add((short) -1);
-		this.add((short) -1);
-	}
-
+/**
+ * Preferred constuctor
+ * @param row
+ * @param column
+ */
 	public Vertex(short row, short column) {
 		this.add(row);
 		this.add(column);
 	}
-
+/**
+ * Short cut constructor with ints rather than shorts
+ * @param row
+ * @param column
+ */
 	public Vertex(int row, int column) {
 		this.add((short) row);
 		this.add((short) column);
 	}
-
+/** 
+ * Get the row of this vertex
+ * @return the row of this vertex
+ */
 	public short getRow() {
+		if (this.size() > 0)
 		return this.elementAt(0);
+		else return Short.MIN_VALUE;
 	}
-
-	public short getColumn() {
+/**
+ * Get the column of this vertex
+ * @return the column of this vertex
+ */
+	public short getColumn(){
+		if (this.size() > 1)
 		return this.elementAt(1);
+		else return Short.MIN_VALUE;
 	}
-
-	public void setRow(int row) {
-		//TOD
+/**
+ * Set the row of this vertex
+ * @param row
+ */
+	private void setRow(int row) {
+		short column = this.getColumn();
+		this.clear();		
+		this.add((short) row);
+		this.add((short) column);
 	}
-
-	public void setColumn(int row) {
-		 //TODO
+/**
+ * set the column of this vertex
+ * @param column
+ */
+	private void setColumn(int column) {
+		short row =  this.getRow();
+		this.clear();
+		this.add((short) row);
+		this.add((short) column);
 	}
-
+/**
+ * equality operator to ensure that two different vertex 
+ * objects representing the same vertex are recognised 
+ * as being equal
+ */
 	public boolean equals(Object o) {
 		if (this == null && o == null)
 			return true;
@@ -53,7 +87,10 @@ public final class Vertex extends Vector<Short> implements Comparable {
 			return false;
 		}
 	}
-
+/**
+ * Comparison operator to ensure that (in)equality operators work
+ * as expected
+ */
 	public int compareTo(Object o) {
 		if (this == null && o == null)
 			return 0;
@@ -83,7 +120,7 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	
 
 	/**
-	 * Parse a vertex into this move
+	 * Constuctor based on a string 
 	 * 
 	 * @param vertexString
 	 */
@@ -179,7 +216,7 @@ public final class Vertex extends Vector<Short> implements Comparable {
 			} else
 				throw new IllegalArgumentException("trying to parse (4) \""
 						+ vertexString + "\", \"" + vertexString + "\"");
+			System.err.println(this);
 		}
-		// System.err.println(this);
 
 	}

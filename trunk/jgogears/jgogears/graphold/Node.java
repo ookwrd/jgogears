@@ -48,7 +48,7 @@ public final class Node implements Comparable<Node> {
 
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		buf.append("[").append(GoMove.colourString(colour)).append(",");
+		buf.append("[").append(Move.colourString(colour)).append(",");
 		buf.append("{").append(connections.size()).append("}");
 		buf.append("{").append(vertexes.size()).append("}");
 		Iterator<Vector<Short>> i = vertexes.iterator();

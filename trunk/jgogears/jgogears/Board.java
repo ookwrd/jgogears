@@ -28,7 +28,7 @@ public class Board extends BoardI {
 
 	static boolean DEBUG = false;
 	static boolean CHECK = true;
-	private KoRule rule = new NoKoRule();
+	private RuleSet rule = new NoKoRuleSet();
 
 	/**
 	 * initialise the board, creating it and setting it empty.
@@ -65,7 +65,7 @@ public class Board extends BoardI {
 	/**
 	 * Default constructor
 	 */
-	public Board(KoRule rule) {
+	public Board(RuleSet rule) {
 		this.rule = rule;
 		init();
 	}
@@ -73,7 +73,7 @@ public class Board extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public Board(short size,KoRule rule) {
+	public Board(short size,RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 		init();
@@ -82,7 +82,7 @@ public class Board extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public Board(int size, KoRule rule) {
+	public Board(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.rule = rule;
 		init();
@@ -100,7 +100,7 @@ public class Board extends BoardI {
  * 
  * @return
  */
-	public KoRule getKoRule(){
+	public RuleSet getKoRule(){
 		return rule;
 	}
 	
@@ -120,7 +120,7 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#newBoard(jgogears.GoMove)
 	 */
-	public Board newBoard(GoMove move) {
+	public Board newBoard(Move move) {
 		if (DEBUG)
 			System.out.println("creating a new board using:" + move);
 		Board result = new Board(this.size);
@@ -159,11 +159,11 @@ public class Board extends BoardI {
 
 		int result = getColour(row, column);
 		if (CHECK)
-			if (row >= this.getSize())
+			if (row >= this.getSize() || row < 0)
 				throw new Error("Bad board size " + row + "/" + this.getSize()
 						+ " ");
 		if (CHECK)
-			if (column >= this.getSize())
+			if (column >= this.getSize()|| column < 0)
 				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) " + column + "/"
 						+ this.getSize() + " ");
 
@@ -185,7 +185,7 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#toString(jgogears.GoMove)
 	 */
-	public String toString(GoMove move) {
+	public String toString(Move move) {
 		StringBuffer buf = new StringBuffer();
 		int rowoff = -1, coloff = -1;
 		if (move != null) {

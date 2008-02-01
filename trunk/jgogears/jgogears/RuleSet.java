@@ -11,7 +11,7 @@ import java.util.*;
  * @author Stuart
  * 
  */
-public abstract class KoRule {
+public abstract class RuleSet {
 	/**
 	 * Get the name of this Ko rule
 	 * 
@@ -34,7 +34,7 @@ public abstract class KoRule {
 	 * @param move
 	 * @return
 	 */
-	public abstract boolean moveIsLegal(Game game, BoardI board, GoMove move);
+	public abstract boolean moveIsLegal(Game game, BoardI board, Move move);
 
 	/**
 	 * 
@@ -44,7 +44,7 @@ public abstract class KoRule {
 	 * @return
 	 */
 	public abstract TreeSet<Vertex> captures(Game game, BoardI board,
-			GoMove move);
+			Move move);
 
 	/**
 	 * 
@@ -54,7 +54,7 @@ public abstract class KoRule {
 	 * @return
 	 */
 	public abstract TreeSet<Vertex> leavesKo(Game game, BoardI board,
-			GoMove move);
+			Move move);
 
 	/**
 	 * 

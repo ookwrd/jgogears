@@ -48,8 +48,8 @@ public class GraphTest extends TestCase {
 
 		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoMove> i = game.getMoves();
-		GoMove move = null;
+		Iterator<Move> i = game.getMoves();
+		Move move = null;
 		BoardI board = new Board(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
@@ -132,8 +132,8 @@ public class GraphTest extends TestCase {
 					// directory, parsing as an SGF file");
 
 					Game game = Game.loadFromFile(file);
-					Iterator<GoMove> i = game.getMoves();
-					GoMove move = null;
+					Iterator<Move> i = game.getMoves();
+					Move move = null;
 					BoardI board = new Board(game.getSize());
 					int m = 0;
 					// System.err.println("board size is: \"" + goGame.getSize()

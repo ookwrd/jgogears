@@ -20,7 +20,7 @@ public class GlobalTests {
 		TestSuite suite = new TestSuite("all tests in project");
 		suite.addTestSuite(ModelTest.class);
 		suite.addTestSuite(VertexLineariserTest.class);
-		suite.addTestSuite(GoMoveTest.class);
+		suite.addTestSuite(MoveTest.class);
 		suite.addTestSuite(SGFPropertyTest.class);
 		suite.addTestSuite(SGFNodeTest.class);
 		suite.addTestSuite(SGFParserTest.class);
@@ -34,7 +34,7 @@ public class GlobalTests {
 		suite.addTestSuite(GnuGoEngineTest2.class);
 		suite.addTestSuite(FastBoardTest.class);
 		suite.addTestSuite(FasterBoardTest.class);
-		suite.addTestSuite(NoKoRuleTest.class);
+		suite.addTestSuite(NoKoRuleSetTest.class);
 
 		return suite;
 	}

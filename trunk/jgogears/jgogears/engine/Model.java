@@ -51,7 +51,7 @@ public final class Model {
 		Iterator<Board> boards = game.getBoards();
 		if (boards == null)
 			throw new Error();
-		Iterator<GoMove> moves = game.getMoves();
+		Iterator<Move> moves = game.getMoves();
 		if (moves == null)
 			throw new Error();
 		int movecounter = 1;
@@ -64,7 +64,7 @@ public final class Model {
 			Board board = boards.next();
 			if (board == null)
 				throw new Error();
-			GoMove move = moves.next();
+			Move move = moves.next();
 			if (move == null)
 				throw new Error();
 			if (DEBUG)

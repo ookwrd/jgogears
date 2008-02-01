@@ -239,20 +239,20 @@ public class SGFNode {
 		}
 	}
 
-	public GoMove getMove() {
+	public Move getMove() {
 		Iterator<SGFProperty> iterator = this.properties.iterator();
 		while (iterator.hasNext()) {
-			GoMove move = this.getMove(iterator.next());
+			Move move = this.getMove(iterator.next());
 			if (move != null)
 				return move;
 		}
 		return null;
 	}
 
-	public GoMove getMove(SGFProperty prop) {
+	public Move getMove(SGFProperty prop) {
 		if (prop == null)
 			return null;
-		GoMove move = new GoMove();
+		Move move = new Move();
 
 		if (prop.getIdentifier().compareToIgnoreCase("B") == 0) {
 			move.setColour(BoardI.VERTEX_BLACK);
@@ -270,7 +270,7 @@ public class SGFNode {
 		move.setColumn(columnFromMoveString(value.toLowerCase()));
 		// check for [tt] pass
 		if (move.getRow() == 19 && move.getColumn() == 19) {
-			GoMove newmove = new GoMove();
+			Move newmove = new Move();
 			newmove.setPass(true);
 			newmove.setColour(move.getColour());
 			if (DEBUG)

@@ -36,7 +36,7 @@ public class BoardTest extends TestCase {
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				GoMove move = new GoMove(i, j, Board.VERTEX_BLACK);
+				Move move = new Move(i, j, Board.VERTEX_BLACK);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == Board.VERTEX_BLACK);
 
@@ -46,7 +46,7 @@ public class BoardTest extends TestCase {
 							assertTrue(board.getColour(l, m) == Board.VERTEX_EMPTY);
 					}
 				}
-				move = new GoMove(i, j, Board.VERTEX_EMPTY);
+				move = new Move(i, j, Board.VERTEX_EMPTY);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == Board.VERTEX_EMPTY);
 
@@ -56,7 +56,7 @@ public class BoardTest extends TestCase {
 							assertTrue(board.getColour(i, j) == Board.VERTEX_EMPTY);
 					}
 				}
-				move = new GoMove(i, j, Board.VERTEX_WHITE);
+				move = new Move(i, j, Board.VERTEX_WHITE);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == Board.VERTEX_WHITE);
 
@@ -66,7 +66,7 @@ public class BoardTest extends TestCase {
 							assertTrue(board.getColour(l, m) == Board.VERTEX_EMPTY);
 					}
 				}
-				move = new GoMove(i, j, Board.VERTEX_KO);
+				move = new Move(i, j, Board.VERTEX_KO);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == Board.VERTEX_KO);
 
@@ -76,7 +76,7 @@ public class BoardTest extends TestCase {
 							assertTrue(board.getColour(l, m) == Board.VERTEX_EMPTY);
 					}
 				}
-				move = new GoMove(i, j, Board.VERTEX_EMPTY);
+				move = new Move(i, j, Board.VERTEX_EMPTY);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == Board.VERTEX_EMPTY);
 
@@ -93,7 +93,7 @@ public class BoardTest extends TestCase {
 	public void testToString() {
 		BoardI working = new Board((short) 19);
 		assertNotNull(working);
-		working = working.newBoard(new GoMove("B q10"));
+		working = working.newBoard(new Move("B q10"));
 		// System.out.println(working);
 	}
 
@@ -101,8 +101,8 @@ public class BoardTest extends TestCase {
 
 		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoMove> i = game.getMoves();
-		GoMove move = null;
+		Iterator<Move> i = game.getMoves();
+		Move move = null;
 		BoardI board = new Board(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
@@ -126,8 +126,8 @@ public class BoardTest extends TestCase {
 					// directory, parsing as an SGF file");
 
 					Game game = Game.loadFromFile(file);
-					Iterator<GoMove> i = game.getMoves();
-					GoMove move = null;
+					Iterator<Move> i = game.getMoves();
+					Move move = null;
 					BoardI board = new Board(game.getSize());
 					// System.err.println("board size is: \"" + goGame.getSize()
 					// + "\"");

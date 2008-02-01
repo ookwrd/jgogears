@@ -1,7 +1,7 @@
 package jgogears;
 
 import jgogears.Board;
-import jgogears.GoMove;
+import jgogears.Move;
 
 public abstract class SkeletonEngine implements GTPInterface {
 
@@ -9,16 +9,16 @@ public abstract class SkeletonEngine implements GTPInterface {
 		super();
 	}
 
-	public GoMove[] fixedHandicap(int handicap, GTPState state) {
-		GoMove[] stones = GTPHandicaps.fixedHandicap(handicap);
+	public Move[] fixedHandicap(int handicap, GTPState state) {
+		Move[] stones = GTPHandicaps.fixedHandicap(handicap);
 		for (int i = 0; i < stones.length; i++) {
 			state.playMove(stones[i]);
 		}
 		return stones;
 	}
 
-	public GoMove genMove(short colour, GTPState state) {
-		GoMove result = regGenMove(colour, state);
+	public Move genMove(short colour, GTPState state) {
+		Move result = regGenMove(colour, state);
 		state.playMove(result);
 		return result;
 	}
@@ -42,21 +42,21 @@ public abstract class SkeletonEngine implements GTPInterface {
 
 	}
 
-	public GoMove[] placeFreeHandicap(int handicap, GTPState state) {
-		GoMove[] stones = GTPHandicaps.freeHandicap(handicap);
+	public Move[] placeFreeHandicap(int handicap, GTPState state) {
+		Move[] stones = GTPHandicaps.freeHandicap(handicap);
 		for (int i = 0; i < stones.length; i++) {
 			state.playMove(stones[i]);
 		}
 		return stones;
 	}
 
-	public void placeFreeHandicap(GoMove[] stones, GTPState state) {
+	public void placeFreeHandicap(Move[] stones, GTPState state) {
 		for (int i = 0; i < stones.length; i++) {
 			state.playMove(stones[i]);
 		}
 	}
 
-	public void play(GoMove move, GTPState state) {
+	public void play(Move move, GTPState state) {
 		state.playMove(move);
 	}
 

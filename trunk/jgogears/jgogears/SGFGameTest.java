@@ -20,11 +20,11 @@ public class SGFGameTest extends TestCase {
 			assertNotNull(tree);
 			Game game = new Game(tree);
 			assertNotNull(game);
-			Iterator<GoMove> moves = game.getMoves();
+			Iterator<Move> moves = game.getMoves();
 			assertNotNull(moves);
 			assertTrue(moves.hasNext());
 			while (moves.hasNext()) {
-				GoMove move = moves.next();
+				Move move = moves.next();
 				assertNotNull(move);
 				System.err.print(move);
 
@@ -54,7 +54,7 @@ public class SGFGameTest extends TestCase {
 
 		Game game = new Game(parser.gameTree());
 
-		Iterator<GoMove> iterator = game.getMoves();
+		Iterator<Move> iterator = game.getMoves();
 		while (iterator.hasNext()) {
 			iterator.next();
 			// System.out.println(iterator.next());

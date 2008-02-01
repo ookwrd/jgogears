@@ -33,9 +33,9 @@ public interface GTPStatelessInterface {
 
 	boolean placeFreeHandicap(TreeSet<Vertex> stones);
 
-	boolean play(GoMove move);
+	boolean play(Move move);
 
-	GoMove genMove(short colour);
+	Move genMove(short colour);
 
 	boolean undo();
 
@@ -48,7 +48,7 @@ public interface GTPStatelessInterface {
 
 	boolean loadsgf(String filename, int moveNumber);
 
-	GoMove regGenMove(short colour);
+	Move regGenMove(short colour);
 
 	BoardI showBoard();
 }

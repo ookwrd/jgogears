@@ -5,16 +5,16 @@ import java.util.TreeSet;
 
 import jgogears.*;
 
-public class CachingKoRule extends KoRule {
+public class CachingKoRule extends RuleSet {
 
-	private KoRule rule;
+	private RuleSet rule;
 
-	public CachingKoRule(KoRule rule) {
+	public CachingKoRule(RuleSet rule) {
 		this.rule = rule;
 	}
 
 	@Override
-	public TreeSet<Vertex> captures(Game game, BoardI Board, GoMove move) {
+	public TreeSet<Vertex> captures(Game game, BoardI Board, Move move) {
 		return rule.captures(game, Board, move);
 	}
 
@@ -29,12 +29,12 @@ public class CachingKoRule extends KoRule {
 	}
 
 	@Override
-	public TreeSet<Vertex> leavesKo(Game game, BoardI Board, GoMove move) {
+	public TreeSet<Vertex> leavesKo(Game game, BoardI Board, Move move) {
 		return rule.leavesKo(game, Board, move);
 	}
 
 	@Override
-	public boolean moveIsLegal(Game game, BoardI Board, GoMove move) {
+	public boolean moveIsLegal(Game game, BoardI Board, Move move) {
 		return rule.moveIsLegal(game, Board, move);
 	}
 

@@ -53,7 +53,7 @@ public abstract class BoardI {
 	/**
 	 * create a new board based on the current board plus a move
 	 */
-	public abstract BoardI newBoard(GoMove move);
+	public abstract BoardI newBoard(Move move);
 
 	/**
 	 * get the colour of a vertex

@@ -20,11 +20,11 @@ public class GnuGoSeki {
 			return false;
 		if (game.isBranched())
 			return false;
-		Iterator<GoMove> moves = game.getMoves();
+		Iterator<Move> moves = game.getMoves();
 
 		GnuGoEngine engine = new GnuGoEngine();
 		while (moves.hasNext()) {
-			GoMove move =  moves.next();
+			Move move =  moves.next();
 			// System.err.println(move);
 			engine.play(move);
 		}

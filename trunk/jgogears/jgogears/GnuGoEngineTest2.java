@@ -37,11 +37,11 @@ public class GnuGoEngineTest2 extends TestCase {
 					.loadFromFile(new File("sgf/testing/seki.sgf"));
 			assertNotNull(game);
 
-			Iterator<GoMove> moves = game.getMoves();
+			Iterator<Move> moves = game.getMoves();
 			assertNotNull(moves);
 			GnuGoEngine engine = new GnuGoEngine();
 			while (moves.hasNext()) {
-				GoMove move =  moves.next();
+				Move move =  moves.next();
 				// System.err.println(move);
 				engine.play(move);
 			}
@@ -82,7 +82,7 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			engine.setBoardSize((short) 19);
 			engine.clearBoard();
-			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
+			Move move = engine.genMove(BoardI.VERTEX_BLACK);
 			if (DEBUG)
 				System.err.println(move);
 			engine.quit();
@@ -186,7 +186,7 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 20);
 			assertTrue(b);
-			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
+			Move move = engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
 			BoardI board = engine.showBoard();
 			System.err
@@ -269,7 +269,7 @@ public class GnuGoEngineTest2 extends TestCase {
 			engine.initialise();
 			engine.setBoardSize((short) 19);
 			engine.clearBoard();
-			engine.play(new GoMove("white c3"));
+			engine.play(new Move("white c3"));
 			engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -292,7 +292,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testRegGenMove() {
 		try {
 			engine.initialise();
-			GoMove move = engine.regGenMove(BoardI.VERTEX_BLACK);
+			Move move = engine.regGenMove(BoardI.VERTEX_BLACK);
 			System.err.println(move);
 			engine.quit();
 		} catch (Throwable t) {

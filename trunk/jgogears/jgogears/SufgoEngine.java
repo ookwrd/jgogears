@@ -13,7 +13,7 @@ public class SufgoEngine extends SkeletonEngine {
 
 	}
 
-	public GoMove[] finalStatusList(String status, GTPState state) {
+	public Move[] finalStatusList(String status, GTPState state) {
 		// TODO Auto-generated method stub
 		throw new Error("not implemented");
 	}
@@ -31,7 +31,7 @@ public class SufgoEngine extends SkeletonEngine {
 		return null;
 	}
 
-	public GoMove regGenMove(int colour, GTPState state) {
+	public Move regGenMove(int colour, GTPState state) {
 		Board board = state.getBoard();
 		short size = board.getSize();
 
