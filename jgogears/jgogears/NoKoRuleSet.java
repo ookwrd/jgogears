@@ -11,7 +11,7 @@ import jgogears.*;
  * @author Stuart
  * 
  */
-final public class NoKoRule extends KoRule {
+final public class NoKoRuleSet extends RuleSet {
 
 	final static boolean DEBUG = false;
 	final static TreeSet<Vertex> EMPTY = new TreeSet<Vertex>();
@@ -110,7 +110,7 @@ final public class NoKoRule extends KoRule {
 		return liberties;
 	}
 
-	public TreeSet<Vertex> captureshelper(BoardI board, GoMove move,int row, int column) {
+	public TreeSet<Vertex> captureshelper(BoardI board, Move move,int row, int column) {
 		if (DEBUG && EMPTY.size() != 0)
 			throw new Error("EMPTY not empty");
 		short colour = move.getColour();
@@ -140,7 +140,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> captures(Game game, BoardI board, GoMove move) {
+	public TreeSet<Vertex> captures(Game game, BoardI board, Move move) {
 		if (board == null)
 			throw new Error();
 		if (move == null)
@@ -191,7 +191,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public TreeSet<Vertex> leavesKo(Game game, BoardI board, GoMove move) {
+	public TreeSet<Vertex> leavesKo(Game game, BoardI board, Move move) {
 		// TODO write test cases for this method
 		return new TreeSet<Vertex>();
 	}
@@ -203,7 +203,7 @@ final public class NoKoRule extends KoRule {
 	 *      jgogears.GoMove)
 	 */
 	@Override
-	public boolean moveIsLegal(Game game, BoardI board, GoMove move) {
+	public boolean moveIsLegal(Game game, BoardI board, Move move) {
 		if (board == null)
 			throw new Error();
 		if (move == null)

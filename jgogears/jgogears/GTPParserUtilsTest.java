@@ -39,7 +39,7 @@ public class GTPParserUtilsTest extends TestCase {
 			engine.initialise();
 			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 20);
 			assertTrue(b);
-			GoMove move = engine.genMove(BoardI.VERTEX_BLACK);
+			Move move = engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
 			BoardI board = engine.showBoard();
 			System.err

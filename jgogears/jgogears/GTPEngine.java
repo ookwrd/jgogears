@@ -92,14 +92,14 @@ public class GTPEngine implements Runnable {
 			writer.write("" + version);
 			return true;
 		} else if (compare(command, GTPConstants.PLAY)) {
-			GoMove move = new GoMove(command.substring(GTPConstants.PLAY
+			Move move = new Move(command.substring(GTPConstants.PLAY
 					.length() + 1));
 			engine.play(move, state);
 			return true;
 		} else if (compare(command, GTPConstants.GENMOVE)) {
 			short colour = BoardI.parseColour(command
 					.substring(GTPConstants.PLAY.length() + 1));
-			GoMove move = engine.genMove(colour, state);
+			Move move = engine.genMove(colour, state);
 			writer.write(move.toVertexString());
 			return true;
 		} else if (compare(command, GTPConstants.UNDO)) {
@@ -117,7 +117,7 @@ public class GTPEngine implements Runnable {
 		} else if (compare(command, GTPConstants.REGGENMOVE)) {
 			short colour = BoardI.parseColour(command
 					.substring(GTPConstants.PLAY.length() + 1));
-			GoMove move = engine.regGenMove(colour, state);
+			Move move = engine.regGenMove(colour, state);
 			writer.write(move.toVertexString());
 			return true;
 		} else

@@ -10,7 +10,7 @@ public class FasterBoard extends BoardI {
 
 	private BitSet bits = new BitSet();
 	private short size = 19;
-	private KoRule rule = new NoKoRule();
+	private RuleSet rule = new NoKoRuleSet();
 
 	
 	final static short OFFSET_EMPTY = 0;
@@ -29,14 +29,14 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Default constructor
 	 */
-	public FasterBoard(KoRule rule) {
+	public FasterBoard(RuleSet rule) {
 		this.rule = rule;
 	}
 
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FasterBoard(short size,KoRule rule) {
+	public FasterBoard(short size,RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 	}
@@ -44,12 +44,12 @@ public class FasterBoard extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FasterBoard(int size, KoRule rule) {
+	public FasterBoard(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.rule = rule;
 	}
 
-	public BoardI newBoard(GoMove move) {
+	public BoardI newBoard(Move move) {
 		FasterBoard result = new FasterBoard(this.size);
 		result.bits.or(this.bits);
 

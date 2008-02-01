@@ -8,7 +8,7 @@ package jgogears;
  * @author syeates
  */
 
-public final class GoMove {
+public final class Move {
 
 	private short row = Short.MIN_VALUE;
 
@@ -30,7 +30,7 @@ public final class GoMove {
 	 * @param colour
 	 *            the colour of the move
 	 */
-	public GoMove(short row, short column, short colour) {
+	public Move(short row, short column, short colour) {
 		this.row = row;
 		this.column = column;
 		this.colour = colour;
@@ -46,7 +46,7 @@ public final class GoMove {
 	 * @param colour
 	 *            the colour of the move
 	 */
-	public GoMove(int row, int column, int colour) {
+	public Move(int row, int column, int colour) {
 		this.row = (short) row;
 		this.column = (short) column;
 		this.colour = (short) colour;
@@ -62,7 +62,7 @@ public final class GoMove {
 	 * @param colour
 	 *            the colour of the move
 	 */
-	public GoMove(short row, short column, int colour) {
+	public Move(short row, short column, int colour) {
 		this.row = row;
 		this.column = column;
 		this.colour = (short) colour;
@@ -71,7 +71,7 @@ public final class GoMove {
 	/**
 	 * create an empty GoMove
 	 */
-	public GoMove() {
+	public Move() {
 	}
 
 	/**
@@ -80,10 +80,10 @@ public final class GoMove {
 	 * @param move
 	 *            the string to parse
 	 */
-	public GoMove(String move) throws IllegalArgumentException {
+	public Move(String move) throws IllegalArgumentException {
 		// System.err.println("GoMove::GoMove(\"" + move + "\"");
 
-		this.colour = BoardI.VERTEX_EMPTY;
+	
 		move = move.toLowerCase();
 
 		int space = move.indexOf(" ");
@@ -93,9 +93,15 @@ public final class GoMove {
 		String colourString = move.substring(0, space);
 		this.colour = BoardI.parseColour(colourString);
 		String vertexString = move.substring(space + 1, move.length());
+		if (vertexString.contains("resign")){
+			this.resign = true;
+		}else if (vertexString.contains("pass")){
+			this.pass = true;
+		}else {
 		Vertex v = new Vertex(vertexString);
 		setRow(v.getRow());
 		setColumn(v.getColumn());
+		}
 	}
 
 	/**
@@ -104,12 +110,9 @@ public final class GoMove {
 	 * @param v
 	 * @return the stone as a move
 	 */
-	public static GoMove createHandicapStone(String s) {
-		GoMove result = new GoMove();
-		result.setColour(BoardI.VERTEX_BLACK);
-		Vertex v = new Vertex(s);
-		result.setRow(v.getRow());
-		result.setColumn(v.getColumn());
+	public static Move createHandicapStone(String s) {
+			Vertex v = new Vertex(s);
+			Move result = new Move(v.getRow(),v.getColumn(), BoardI.VERTEX_BLACK);
 		return result;
 	}
 
@@ -333,7 +336,7 @@ public final class GoMove {
 	 * @param colour
 	 *            the colour to set
 	 */
-	public GoMove setColour(short colour) {
+	public Move setColour(short colour) {
 		this.colour = colour;
 		return this;
 	}
@@ -342,7 +345,7 @@ public final class GoMove {
 	 * @param column
 	 *            the column to set
 	 */
-	public GoMove setColumn(short column) {
+	public Move setColumn(short column) {
 		this.column = column;
 		return this;
 	}
@@ -351,7 +354,7 @@ public final class GoMove {
 	 * @param pass
 	 *            the pass to set
 	 */
-	public GoMove setPass(boolean pass) {
+	public Move setPass(boolean pass) {
 		this.pass = pass;
 		return this;
 	}
@@ -360,7 +363,7 @@ public final class GoMove {
 	 * @param resign
 	 *            the resign to set
 	 */
-	public GoMove setResign(boolean resign) {
+	public Move setResign(boolean resign) {
 		this.resign = resign;
 		return this;
 	}
@@ -369,7 +372,7 @@ public final class GoMove {
 	 * @param row
 	 *            the row to set
 	 */
-	public GoMove setRow(short row) {
+	public Move setRow(short row) {
 		this.row = row;
 		return this;
 	}

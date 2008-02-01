@@ -18,7 +18,7 @@ public class GTPState {
 	protected double mainTime = Double.MIN_VALUE;
 	protected double byoYomiTime = Double.MIN_VALUE;
 	protected double byoYomiStones = Double.MIN_VALUE;
-	protected java.util.Vector<GoMove> playedMoves = new java.util.Vector<GoMove>();
+	protected java.util.Vector<Move> playedMoves = new java.util.Vector<Move>();
 
 	/**
 	 * returns true if we're in a playable state or throws an error.
@@ -49,10 +49,10 @@ public class GTPState {
 		this.whiteCapturedCount = 0;
 		this.blackCapturedCount = 0;
 		this.board = new Board((short) this.getBoardsize());
-		playedMoves = new java.util.Vector<GoMove>();
+		playedMoves = new java.util.Vector<Move>();
 	}
 
-	public void playMove(GoMove move) {
+	public void playMove(Move move) {
 		this.playedMoves.add(move);
 		if (move.getPass())
 			return;
@@ -61,8 +61,8 @@ public class GTPState {
 		this.board = this.board.newBoard(move);
 	}
 
-	public java.util.Vector<GoMove> getMoves() {
-		return new java.util.Vector<GoMove>(this.playedMoves);
+	public java.util.Vector<Move> getMoves() {
+		return new java.util.Vector<Move>(this.playedMoves);
 	}
 
 	public int getBlackCapturedCount() {

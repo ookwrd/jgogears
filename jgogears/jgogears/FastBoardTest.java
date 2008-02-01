@@ -15,7 +15,7 @@ public class FastBoardTest extends TestCase {
 	public void testToString() {
 		BoardI working = new FastBoard((short) 19);
 		assertNotNull(working);
-		working = working.newBoard(new GoMove("B q10"));
+		working = working.newBoard(new Move("B q10"));
 		System.out.println(working);
 	}
 
@@ -112,7 +112,7 @@ public class FastBoardTest extends TestCase {
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				GoMove move = new GoMove(i, j, FastBoard.VERTEX_BLACK);
+				Move move = new Move(i, j, FastBoard.VERTEX_BLACK);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == FastBoard.VERTEX_BLACK);
 
@@ -135,7 +135,7 @@ public class FastBoardTest extends TestCase {
 						}
 					}
 				}
-				move = new GoMove(i, j, FastBoard.VERTEX_EMPTY);
+				move = new Move(i, j, FastBoard.VERTEX_EMPTY);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == FastBoard.VERTEX_EMPTY);
 
@@ -146,7 +146,7 @@ public class FastBoardTest extends TestCase {
 						}
 					}
 				}
-				move = new GoMove(i, j, FastBoard.VERTEX_WHITE);
+				move = new Move(i, j, FastBoard.VERTEX_WHITE);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == FastBoard.VERTEX_WHITE);
 
@@ -157,7 +157,7 @@ public class FastBoardTest extends TestCase {
 						}
 					}
 				}
-				move = new GoMove(i, j, FastBoard.VERTEX_KO);
+				move = new Move(i, j, FastBoard.VERTEX_KO);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == FastBoard.VERTEX_KO);
 
@@ -168,7 +168,7 @@ public class FastBoardTest extends TestCase {
 						}
 					}
 				}
-				move = new GoMove(i, j, FastBoard.VERTEX_EMPTY);
+				move = new Move(i, j, FastBoard.VERTEX_EMPTY);
 				board = board.newBoard(move);
 				assertTrue(board.getColour(i, j) == FastBoard.VERTEX_EMPTY);
 
@@ -187,8 +187,8 @@ public class FastBoardTest extends TestCase {
 
 		Game game = Game.loadFromFile(new File(
 				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<GoMove> i = game.getMoves();
-		GoMove move = null;
+		Iterator<Move> i = game.getMoves();
+		Move move = null;
 		BoardI board = new FastBoard(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
@@ -212,8 +212,8 @@ public class FastBoardTest extends TestCase {
 					// directory, parsing as an SGF file");
 
 					Game game = Game.loadFromFile(file);
-					Iterator<GoMove> i = game.getMoves();
-					GoMove move = null;
+					Iterator<Move> i = game.getMoves();
+					Move move = null;
 					BoardI board = new FastBoard(game.getSize());
 					// System.err.println("board size is: \"" + goGame.getSize()
 					// + "\"");

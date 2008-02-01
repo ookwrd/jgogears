@@ -27,7 +27,7 @@ public final class Game {
 	private String maintime = "";
 	private String extraTime = "";
 	private String PC = "";
-	private LinkedList<GoMove> movelist = new LinkedList<GoMove>();
+	private LinkedList<Move> movelist = new LinkedList<Move>();
 	private LinkedList<Board> boardlist = new LinkedList<Board>();
 
 	/**
@@ -77,19 +77,19 @@ public final class Game {
 		}
 	}
 
-	public Iterator<GoMove> getMoves() {
+	public Iterator<Move> getMoves() {
 		return this.movelist.iterator();
 	}
 
 	public Iterator<Board> getBoards() {
 		if (this.boardlist != null) {
 
-			Iterator<GoMove> moves = getMoves();
+			Iterator<Move> moves = getMoves();
 			boardlist = new LinkedList<Board>();
 			Board board = new Board(size);
 			boardlist.add(board);
 			while (moves.hasNext()) {
-				GoMove move = moves.next();
+				Move move = moves.next();
 				board = board.newBoard(move);
 				boardlist.add(board);
 			}
@@ -125,11 +125,11 @@ public final class Game {
 		return whitePlayer;
 	}
 
-	public void setMoveList(LinkedList<GoMove> moves) {
+	public void setMoveList(LinkedList<Move> moves) {
 		this.movelist = moves;
 	}
 
-	public LinkedList<GoMove> getMoveList() {
+	public LinkedList<Move> getMoveList() {
 		return this.movelist;
 	}
 
@@ -149,11 +149,11 @@ public final class Game {
 		return commentCount;
 	}
 
-	public LinkedList<GoMove> getMovelist() {
+	public LinkedList<Move> getMovelist() {
 		return movelist;
 	}
 
-	public void setMovelist(LinkedList<GoMove> movelist) {
+	public void setMovelist(LinkedList<Move> movelist) {
 		this.movelist = movelist;
 	}
 

@@ -26,15 +26,15 @@ public interface GTPInterface {
 
 	void setKomi(double komi, GTPState state);
 
-	GoMove[] fixedHandicap(int handicap, GTPState state);
+	Move[] fixedHandicap(int handicap, GTPState state);
 
-	GoMove[] placeFreeHandicap(int handicap, GTPState state);
+	Move[] placeFreeHandicap(int handicap, GTPState state);
 
-	void placeFreeHandicap(jgogears.GoMove[] stones, GTPState state);
+	void placeFreeHandicap(jgogears.Move[] stones, GTPState state);
 
-	void play(GoMove move, GTPState state);
+	void play(Move move, GTPState state);
 
-	GoMove genMove(short colour, GTPState state);
+	Move genMove(short colour, GTPState state);
 
 	boolean undo(GTPState state);
 
@@ -44,11 +44,11 @@ public interface GTPInterface {
 	void setTimeLeft(int colour, double byoYomiTime, double byoYomiStones,
 			GTPState state);
 
-	GoMove[] finalStatusList(String status, GTPState state);
+	Move[] finalStatusList(String status, GTPState state);
 
 	void loadsgf(String filename, int moveNumber, GTPState state);
 
-	GoMove regGenMove(int colour, GTPState state);
+	Move regGenMove(int colour, GTPState state);
 
 	BoardI showBoard(GTPState state);
 

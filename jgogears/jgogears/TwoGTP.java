@@ -14,7 +14,7 @@ public class TwoGTP {
 
 		while (passes < 4) {
 			if (blackNext) {
-				GoMove move = black.genMove(BoardI.VERTEX_BLACK);
+				Move move = black.genMove(BoardI.VERTEX_BLACK);
 				assert (move != null);
 				white.play(move);
 				if (move.getPass())
@@ -23,7 +23,7 @@ public class TwoGTP {
 					passes = 0;
 				blackNext = false;
 			} else {
-				GoMove move = white.genMove(BoardI.VERTEX_WHITE);
+				Move move = white.genMove(BoardI.VERTEX_WHITE);
 				assert (move != null);
 				black.play(move);
 				if (move.getPass())

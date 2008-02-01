@@ -19,7 +19,7 @@ public class SGFGameTree {
 			i.next();
 		while (i.hasNext()) {
 			SGFNode node = i.next();
-			GoMove move = node.getMove();
+			Move move = node.getMove();
 			if (move != null)
 				game.getMoveList().add(move);
 		}

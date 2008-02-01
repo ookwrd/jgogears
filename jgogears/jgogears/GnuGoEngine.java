@@ -180,13 +180,13 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		return v;
 	}
 
-	public GoMove genMove(short colour) {
-		this.write(GTPConstants.GENMOVE + " " + GoMove.colourString(colour)
+	public Move genMove(short colour) {
+		this.write(GTPConstants.GENMOVE + " " + Move.colourString(colour)
 				+ "\n\n");
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
 		Vertex v = new Vertex(s);
-		GoMove move = new GoMove(v.getRow(),v.getColumn(),colour);
+		Move move = new Move(v.getRow(),v.getColumn(),colour);
 		return move;
 	}
 
@@ -266,7 +266,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		return v;
 	}
 
-	public boolean play(GoMove move) {
+	public boolean play(Move move) {
 		this.write(GTPConstants.PLAY + " " + move + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
@@ -307,7 +307,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	}
 
-	public GoMove regGenMove(short colour) {
+	public Move regGenMove(short colour) {
 		return genMove(colour);
 	}
 
@@ -339,7 +339,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	public boolean setTimeLeft(short colour, double byoYomiTime,
 			double byoYomiStones) {
-		this.write(GTPConstants.TIMELEFT + " " + GoMove.colourString(colour)
+		this.write(GTPConstants.TIMELEFT + " " + Move.colourString(colour)
 				+ " " + ((int) byoYomiTime) + " " + ((int) byoYomiStones)
 				+ "\n\n");
 		String s = this.read();

@@ -49,13 +49,13 @@ public class ModelTest extends TestCase {
 		System.out.println(" model size =  "
 				+ model.countNodes(model.getRoot()));
 		Board board = new Board();
-		board = board.newBoard(new GoMove("white b2"));
-		board = board.newBoard(new GoMove("black k4"));
-		board = board.newBoard(new GoMove("white c3"));
-		board = board.newBoard(new GoMove("black g4"));
-		board = board.newBoard(new GoMove("white d4"));
-		board = board.newBoard(new GoMove("black h4"));
-		board = board.newBoard(new GoMove("white n4"));
+		board = board.newBoard(new Move("white b2"));
+		board = board.newBoard(new Move("black k4"));
+		board = board.newBoard(new Move("white c3"));
+		board = board.newBoard(new Move("black g4"));
+		board = board.newBoard(new Move("white d4"));
+		board = board.newBoard(new Move("black h4"));
+		board = board.newBoard(new Move("white n4"));
 		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {
@@ -116,13 +116,13 @@ public class ModelTest extends TestCase {
 				+ " moves in " + (after.getTime() - before.getTime())
 				+ " milliseconds");
 		Board board = new Board();
-		board = board.newBoard(new GoMove("white b2"));
-		board = board.newBoard(new GoMove("black k4"));
-		board = board.newBoard(new GoMove("white c3"));
-		board = board.newBoard(new GoMove("black g4"));
-		board = board.newBoard(new GoMove("white d4"));
-		board = board.newBoard(new GoMove("black h4"));
-		board = board.newBoard(new GoMove("white n4"));
+		board = board.newBoard(new Move("white b2"));
+		board = board.newBoard(new Move("black k4"));
+		board = board.newBoard(new Move("white c3"));
+		board = board.newBoard(new Move("black g4"));
+		board = board.newBoard(new Move("white d4"));
+		board = board.newBoard(new Move("black h4"));
+		board = board.newBoard(new Move("white n4"));
 		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {

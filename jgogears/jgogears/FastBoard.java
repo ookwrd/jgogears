@@ -9,7 +9,7 @@ public class FastBoard  extends BoardI {
 	private BitSet bits = null;
 	private short size = 19;
 	
-	private KoRule rule = new NoKoRule();
+	private RuleSet rule = new NoKoRuleSet();
 
 	private static BitSet empty = null;
 
@@ -43,14 +43,14 @@ public class FastBoard  extends BoardI {
 	/**
 	 * Default constructor
 	 */
-	public FastBoard(KoRule rule) {
+	public FastBoard(RuleSet rule) {
 		this.rule = rule;
 	}
 
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FastBoard(short size,KoRule rule) {
+	public FastBoard(short size,RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 	}
@@ -58,12 +58,12 @@ public class FastBoard  extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FastBoard(int size, KoRule rule) {
+	public FastBoard(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.rule = rule;
 	}
 
-	public BoardI newBoard(GoMove move) {
+	public BoardI newBoard(Move move) {
 		FastBoard result = new FastBoard(this.size);
 		result.bits.or(this.bits);
 
