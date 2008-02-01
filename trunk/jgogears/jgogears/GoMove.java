@@ -91,22 +91,11 @@ public final class GoMove {
 			throw new IllegalArgumentException("Bad argument to GoMove(" + move
 					+ ")");
 		String colourString = move.substring(0, space);
-		this.colour = Board.parseColour(colourString);
+		this.colour = BoardI.parseColour(colourString);
 		String vertexString = move.substring(space + 1, move.length());
-		parseVertex(vertexString);
-	}
-
-	/**
-	 * create an empty vertex from a string
-	 * 
-	 * @param v
-	 * @return the vertex
-	 */
-	public static GoMove createVertex(String v) {
-		GoMove result = new GoMove();
-		result.setColour(BoardI.VERTEX_EMPTY);
-		result.parseVertex(v);
-		return result;
+		Vertex v = new Vertex(vertexString);
+		setRow(v.getRow());
+		setColumn(v.getColumn());
 	}
 
 	/**
@@ -115,136 +104,15 @@ public final class GoMove {
 	 * @param v
 	 * @return the stone as a move
 	 */
-	public static GoMove createHandicapStone(String v) {
+	public static GoMove createHandicapStone(String s) {
 		GoMove result = new GoMove();
 		result.setColour(BoardI.VERTEX_BLACK);
-		result.parseVertex(v);
+		Vertex v = new Vertex(s);
+		result.setRow(v.getRow());
+		result.setColumn(v.getColumn());
 		return result;
 	}
 
-	/**
-	 * Parse a vertex into this move
-	 * 
-	 * @param vertexString
-	 */
-	void parseVertex(String vertexString) {
-		// System.err.println("parseVertex(\"" + vertexString + "\")");
-		vertexString = vertexString.toLowerCase();
-		if (vertexString.compareTo("pass") == 0) {
-			this.pass = true;
-		} else if (vertexString.compareTo("resign") == 0) {
-			this.resign = true;
-		} else { // it's a vertex on the board
-			switch (vertexString.charAt(0)) {
-			case 'a':
-				this.row = 0;
-				break;
-			case 'b':
-				this.row = 1;
-				break;
-			case 'c':
-				this.row = 2;
-				break;
-			case 'd':
-				this.row = 3;
-				break;
-			case 'e':
-				this.row = 4;
-				break;
-			case 'f':
-				this.row = 5;
-				break;
-			case 'g':
-				this.row = 6;
-				break;
-			case 'h':
-				this.row = 7;
-				break;
-			case 'j':
-				this.row = 8;
-				break;
-			case 'k':
-				this.row = 9;
-				break;
-			case 'l':
-				this.row = 10;
-				break;
-			case 'm':
-				this.row = 11;
-				break;
-			case 'n':
-				this.row = 12;
-				break;
-			case 'o':
-				this.row = 13;
-				break;
-			case 'p':
-				this.row = 14;
-				break;
-			case 'q':
-				this.row = 15;
-				break;
-			case 'r':
-				this.row = 16;
-				break;
-			case 's':
-				this.row = 17;
-				break;
-			case 't':
-				this.row = 18;
-				break;
-			case 'u':
-				this.row = 19;
-				break;
-			case 'v':
-				this.row = 20;
-				break;
-			case 'w':
-				this.row = 21;
-				break;
-			case 'x':
-				this.row = 22;
-				break;
-			case 'y':
-				this.row = 23;
-				break;
-			case 'z':
-				this.row = 24;
-				break;
-			default:
-				throw new IllegalArgumentException("trying to parse (3) \""
-						+ vertexString + "\"");
-
-			}
-			if (vertexString.length() == 2) {
-				this.column = (short) (vertexString.charAt(1) - '1');
-			} else if (vertexString.length() == 3) {
-				this.column = (short) (((vertexString.charAt(1) - '0') * 10) + (vertexString
-						.charAt(2) - '1'));
-			} else
-				throw new IllegalArgumentException("trying to parse (4) \""
-						+ vertexString + "\", \"" + vertexString + "\"");
-		}
-		// System.err.println(this);
-
-	}
-
-	/**
-	 * get the row of this move.
-	 * 
-	 * @throws Error
-	 *             if this is a resignation move
-	 * @throws Error
-	 *             if this is a pass move
-	 * @return the row
-	 */
-	public short getRow() {
-		if (resign)
-			throw new Error();
-		if (pass)
-			throw new Error();
-		return row;
-	}
 
 	/**
 	 * return the colour of this move
@@ -270,6 +138,23 @@ public final class GoMove {
 		if (pass)
 			throw new Error();
 		return column;
+	}
+
+	/**
+	 * get the row of this column.
+	 * 
+	 * @throws Error
+	 *             if this is a resignation move
+	 * @throws Error
+	 *             if this is a pass move
+	 * @return the column
+	 */
+	public short getRow() {
+		if (resign)
+			throw new Error();
+		if (pass)
+			throw new Error();
+		return row;
 	}
 
 	/**

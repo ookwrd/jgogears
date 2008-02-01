@@ -72,7 +72,7 @@ public abstract class BoardI {
 	 * @param colourString
 	 * @return the colour as a short
 	 */
-	public short parseColour(String colourString) {
+	public static short parseColour(String colourString) {
 
 		if (colourString.compareTo("w") == 0) {
 			return BoardI.VERTEX_WHITE;
