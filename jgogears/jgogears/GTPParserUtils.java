@@ -71,21 +71,21 @@ public class GTPParserUtils {
 
 			do {
 				// System.err.println("parseVertexList(\"" + s + "\")");
-				GoMove move = new GoMove();
+				Vertex v = null;
 				short row = -1;
 				short column = -1;
 				while (s.indexOf(' ') == 1 || s.indexOf(' ') == 0) {
 					s = s.substring(1);
 				}
 				if (s.indexOf(' ') != -1) {
-					move.parseVertex(s.substring(0, s.indexOf(' ')));
+					v = new Vertex(s.substring(0, s.indexOf(' ')));
 					s = s.substring(s.indexOf(' '));
 				} else {
-					move.parseVertex(s);
+					v = new Vertex(s);
 					s = "";
 				}
-				vert.add(move);
-				Vertex v = new Vertex();
+
+				vert.add(v);
 			} while (s.length() > 0);
 		}
 		return vert;

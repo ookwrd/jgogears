@@ -185,8 +185,8 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 				+ "\n\n");
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
-		GoMove move = GoMove.createVertex(s);
-		move.setColour(colour);
+		Vertex v = new Vertex(s);
+		GoMove move = new GoMove(v.getRow(),v.getColumn(),colour);
 		return move;
 	}
 

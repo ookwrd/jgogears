@@ -97,7 +97,7 @@ public class GTPEngine implements Runnable {
 			engine.play(move, state);
 			return true;
 		} else if (compare(command, GTPConstants.GENMOVE)) {
-			short colour = GoMove.parseColour(command
+			short colour = BoardI.parseColour(command
 					.substring(GTPConstants.PLAY.length() + 1));
 			GoMove move = engine.genMove(colour, state);
 			writer.write(move.toVertexString());
@@ -115,7 +115,7 @@ public class GTPEngine implements Runnable {
 			System.err.println("clearing board");
 			throw new Error("don't know how to handle the command:" + command);
 		} else if (compare(command, GTPConstants.REGGENMOVE)) {
-			short colour = GoMove.parseColour(command
+			short colour = BoardI.parseColour(command
 					.substring(GTPConstants.PLAY.length() + 1));
 			GoMove move = engine.regGenMove(colour, state);
 			writer.write(move.toVertexString());
