@@ -87,7 +87,7 @@ public abstract class BoardI {
 		}
 	}
 
-	public final static boolean DEFAULT_ZOBRIST = false;
+	public final static boolean DEFAULT_ZOBRIST = true;
 	protected Zobrist zobrist = null;
 
 	public BoardI(boolean zobrist) {

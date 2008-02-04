@@ -10,6 +10,40 @@ import jgogears.graph.Graph;
 import junit.framework.TestCase;
 
 public class BoardTest extends TestCase {
+	public void testColours(){
+		assertTrue(BoardI.VERTEX_BLACK ==BoardI.VERTEX_BLACK);
+		assertTrue(BoardI.VERTEX_BLACK !=BoardI.VERTEX_WHITE);
+		assertTrue(BoardI.VERTEX_BLACK !=BoardI.VERTEX_EMPTY);
+		assertTrue(BoardI.VERTEX_BLACK !=BoardI.VERTEX_KO);
+		assertTrue(BoardI.VERTEX_BLACK !=BoardI.VERTEX_OFF_BOARD);
+		
+		assertTrue(BoardI.VERTEX_WHITE !=BoardI.VERTEX_BLACK);
+		assertTrue(BoardI.VERTEX_WHITE ==BoardI.VERTEX_WHITE);
+		assertTrue(BoardI.VERTEX_WHITE !=BoardI.VERTEX_EMPTY);
+		assertTrue(BoardI.VERTEX_WHITE !=BoardI.VERTEX_KO);
+		assertTrue(BoardI.VERTEX_WHITE !=BoardI.VERTEX_OFF_BOARD);
+		
+		assertTrue(BoardI.VERTEX_EMPTY !=BoardI.VERTEX_BLACK);
+		assertTrue(BoardI.VERTEX_EMPTY !=BoardI.VERTEX_WHITE);
+		assertTrue(BoardI.VERTEX_EMPTY ==BoardI.VERTEX_EMPTY);
+		assertTrue(BoardI.VERTEX_EMPTY !=BoardI.VERTEX_OFF_BOARD);
+		
+		assertTrue(BoardI.VERTEX_KO !=BoardI.VERTEX_BLACK);
+		assertTrue(BoardI.VERTEX_KO !=BoardI.VERTEX_WHITE);
+		assertTrue(BoardI.VERTEX_KO !=BoardI.VERTEX_EMPTY);
+		assertTrue(BoardI.VERTEX_KO ==BoardI.VERTEX_KO);
+		assertTrue(BoardI.VERTEX_KO !=BoardI.VERTEX_OFF_BOARD);
+		
+		
+		assertTrue(BoardI.VERTEX_OFF_BOARD !=BoardI.VERTEX_BLACK);
+		assertTrue(BoardI.VERTEX_OFF_BOARD !=BoardI.VERTEX_WHITE);
+		assertTrue(BoardI.VERTEX_OFF_BOARD !=BoardI.VERTEX_EMPTY);
+		assertTrue(BoardI.VERTEX_OFF_BOARD !=BoardI.VERTEX_KO);
+		assertTrue(BoardI.VERTEX_OFF_BOARD ==BoardI.VERTEX_OFF_BOARD);
+		
+
+	}
+	
 	public void testAllSizes() {
 		testAllVertexesN(3);
 		testAllVertexesN(6);

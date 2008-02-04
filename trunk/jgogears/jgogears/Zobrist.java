@@ -1,6 +1,13 @@
 package jgogears;
 
 import java.util.*;
+/**
+ * Class representing a Zobrist hash, a binary hash of the current board state.
+ * 
+ * TODO add proper references
+ * @author Stuart
+ *
+ */
 
 public class Zobrist extends BitSet {
 	public static final short MAX_BOARD_SIZE = 25;
@@ -15,7 +22,7 @@ public class Zobrist extends BitSet {
 		if (!initialised) {
 			initialised = true;
 			grid = new BitSet[MAX_BOARD_SIZE][MAX_BOARD_SIZE][MAX_COLOUR];
-			Random random = new Random();
+			Random random = new Random(new Date().getTime());
 			for (int i = 0; i < MAX_BOARD_SIZE; i++)
 				for (int j = 0; j < MAX_BOARD_SIZE; j++)
 					for (int k = 0; k < MAX_COLOUR; k++) {
