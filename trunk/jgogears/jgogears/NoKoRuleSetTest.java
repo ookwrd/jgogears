@@ -11,8 +11,8 @@ import jgogears.*;
 import jgogears.engine.Model;
 
 public class NoKoRuleSetTest extends TestCase {
-	
-	static final boolean DEBUG= true;
+
+	static final boolean DEBUG = true;
 
 	public void testinherits() {
 		NoKoRuleSet rule = new NoKoRuleSet();
@@ -64,7 +64,7 @@ public class NoKoRuleSetTest extends TestCase {
 			for (short j = 0; j < size; j++)
 				for (short k = 0; k < size; k++)
 					for (short l = 0; l < size; l++) {
-						Board board = new Board(size);
+						BoardI board = new Board(size);
 						assertNotNull(board);
 						Move move = new Move(k, l, Board.VERTEX_BLACK);
 						assertNotNull(move);
@@ -96,7 +96,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(1, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -116,7 +116,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(1, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -136,7 +136,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(1, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -156,7 +156,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(1, 0, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -190,7 +190,7 @@ public class NoKoRuleSetTest extends TestCase {
 
 		for (short k = 0; k < size; k++)
 			for (short l = 0; l < size; l++) {
-				Board board = new Board(size);
+				BoardI board = new Board(size);
 				assertNotNull(board);
 				Move move = new Move(k, l, Board.VERTEX_BLACK);
 				assertNotNull(move);
@@ -228,7 +228,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(1, 0, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -255,7 +255,7 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		assertNotNull(board);
 		Move move = new Move(3, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
@@ -281,64 +281,67 @@ public class NoKoRuleSetTest extends TestCase {
 		libs = rule.getLiberties(3, 4, board);
 		assertTrue(libs.size() == 6);
 	}
+
 	public void testCornerPlays() {
-		//System.err.println();
-		//System.err.println();
-		
+		// System.err.println();
+		// System.err.println();
+
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 		Game game = new Game(19);
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		Move move = new Move(0, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
 		move = new Move(1, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
-		
+
 		move = new Move(0, 0, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 0);
+		assertTrue(rule.captures(game, board, move).size() == 0);
 		board = board.newBoard(move);
 
 		move = new Move(1, 0, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.countLiberties(0, 0, board)==1);
-		assertTrue("" + rule.captures(game, board, move).size() + "/" + 1, rule.captures(game, board, move).size()== 1);
+		assertTrue(rule.countLiberties(0, 0, board) == 1);
+		assertTrue("" + rule.captures(game, board, move).size() + "/" + 1, rule
+				.captures(game, board, move).size() == 1);
 		board = board.newBoard(move);
-		
-		//System.err.println(board);
+
+		// System.err.println(board);
 
 		move = new Move(2, 0, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 0);
+		assertTrue(rule.captures(game, board, move).size() == 0);
 		board = board.newBoard(move);
 
 		move = new Move(2, 1, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 0);
+		assertTrue(rule.captures(game, board, move).size() == 0);
 		board = board.newBoard(move);
 
 		move = new Move(0, 2, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 0);
+		assertTrue(rule.captures(game, board, move).size() == 0);
 		board = board.newBoard(move);
 
 		move = new Move(1, 2, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 0);
+		assertTrue(rule.captures(game, board, move).size() == 0);
 		board = board.newBoard(move);
 
-		//System.err.println(board);
+		// System.err.println(board);
 
 		move = new Move(0, 0, Board.VERTEX_WHITE);
 		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size()== 3);
+		assertTrue(rule.captures(game, board, move).size() == 3);
 		board = board.newBoard(move);
 	}
+
 	public void testCenterPlays() {
-		
+
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		Move move = new Move(0, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
 		move = new Move(1, 0, Board.VERTEX_BLACK);
@@ -347,17 +350,18 @@ public class NoKoRuleSetTest extends TestCase {
 		board = board.newBoard(move);
 		move = new Move(2, 1, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
-		
-		//System.err.println(board);
+
+		// System.err.println(board);
 		move = new Move(1, 1, Board.VERTEX_WHITE);
 		assertFalse(rule.moveIsLegal(null, board, move));
 
 	}
+
 	public void testCenterPlaysII() {
-		
+
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		Move move = new Move(1, 2, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
 		move = new Move(2, 1, Board.VERTEX_BLACK);
@@ -366,17 +370,18 @@ public class NoKoRuleSetTest extends TestCase {
 		board = board.newBoard(move);
 		move = new Move(3, 2, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
-		
-		//System.err.println(board);
+
+		// System.err.println(board);
 		move = new Move(2, 2, Board.VERTEX_WHITE);
 		assertFalse(rule.moveIsLegal(null, board, move));
 
 	}
+
 	public void testCenterPlaysIII() {
-		
+
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
-		Board board = new Board(size);
+		BoardI board = new Board(size);
 		Move move = new Move(1, 2, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
 		move = new Move(2, 1, Board.VERTEX_BLACK);
@@ -384,13 +389,13 @@ public class NoKoRuleSetTest extends TestCase {
 		move = new Move(2, 3, Board.VERTEX_BLACK);
 		board = board.newBoard(move);
 		move = new Move(2, 2, Board.VERTEX_WHITE);
-		//System.err.println(board);
+		// System.err.println(board);
 		assertTrue(rule.moveIsLegal(null, board, move));
 		board = board.newBoard(move);
-		
+
 		move = new Move(3, 2, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 1);
+		assertTrue(rule.captures(null, board, move).size() == 1);
 		board = board.newBoard(move);
 
 		move = new Move(2, 2, Board.VERTEX_WHITE);
@@ -398,47 +403,51 @@ public class NoKoRuleSetTest extends TestCase {
 		move = new Move(2, 2, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
 
-		//System.err.println(board);
+		// System.err.println(board);
 	}
-	
+
 	public void testCenterPlaysIIII() {
-		
+
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
-		Board board = new Board(size);
-		
+		BoardI board = new Board(size);
+
 		Move move = new Move(3, 3, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 0);
+		assertTrue(rule.captures(null, board, move).size() == 0);
 		board = board.newBoard(move);
-		assertTrue("" + rule.countLiberties(3, 3, board), rule.countLiberties(3, 3, board) == 4);
-		
+		assertTrue("" + rule.countLiberties(3, 3, board), rule.countLiberties(
+				3, 3, board) == 4);
+
 		move = new Move(2, 3, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 0);
+		assertTrue(rule.captures(null, board, move).size() == 0);
 		board = board.newBoard(move);
-		assertTrue("" + rule.countLiberties(2, 3, board), rule.countLiberties(3, 3, board) == 6);
-		
+		assertTrue("" + rule.countLiberties(2, 3, board), rule.countLiberties(
+				3, 3, board) == 6);
+
 		move = new Move(4, 3, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 0);
+		assertTrue(rule.captures(null, board, move).size() == 0);
 		board = board.newBoard(move);
-		assertTrue("" + rule.countLiberties(4, 3, board), rule.countLiberties(3, 3, board) == 8);
-		
+		assertTrue("" + rule.countLiberties(4, 3, board), rule.countLiberties(
+				3, 3, board) == 8);
+
 		move = new Move(3, 2, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 0);
+		assertTrue(rule.captures(null, board, move).size() == 0);
 		board = board.newBoard(move);
-		assertTrue("" + rule.countLiberties(3, 2, board), rule.countLiberties(3, 3, board) == 8);
-		
+		assertTrue("" + rule.countLiberties(3, 2, board), rule.countLiberties(
+				3, 3, board) == 8);
+
 		move = new Move(3, 4, Board.VERTEX_BLACK);
 		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size()== 0);
+		assertTrue(rule.captures(null, board, move).size() == 0);
 		board = board.newBoard(move);
-		assertTrue("" + rule.countLiberties(3, 4, board), rule.countLiberties(3, 3, board) == 8);
-		
+		assertTrue("" + rule.countLiberties(3, 4, board), rule.countLiberties(
+				3, 3, board) == 8);
+
 	}
-	
 
 	public void testLoadAllSGFfiles() throws IOException {
 		Stack<String> files = new Stack<String>();
@@ -461,20 +470,19 @@ public class NoKoRuleSetTest extends TestCase {
 					filecount++;
 
 					Game game = Game.loadFromFile(file);
-					Board board = new Board(game.getSize());
+					BoardI board = new Board(game.getSize());
 					System.err.println(filename);
 
 					Iterator<Move> i = game.getMovelist().iterator();
-					while (i.hasNext()){
+					while (i.hasNext()) {
 						Move move = i.next();
-						if (!rule.moveIsLegal(game, board, move)){
+						if (!rule.moveIsLegal(game, board, move)) {
 							System.err.println(move);
 							System.err.println(board);
 							assertTrue(false);
 						}
 						board = board.newBoard(move);
 					}
-					
 
 				} else {
 					String[] children = file.list();

@@ -43,8 +43,7 @@ public abstract class RuleSet {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> captures(Game game, BoardI board,
-			Move move);
+	public abstract TreeSet<Vertex> captures(Game game, BoardI board, Move move);
 
 	/**
 	 * 
@@ -53,8 +52,7 @@ public abstract class RuleSet {
 	 * @param move
 	 * @return
 	 */
-	public abstract TreeSet<Vertex> leavesKo(Game game, BoardI board,
-			Move move);
+	public abstract TreeSet<Vertex> leavesKo(Game game, BoardI board, Move move);
 
 	/**
 	 * 
@@ -112,6 +110,7 @@ public abstract class RuleSet {
 	 * @param board
 	 * @return
 	 */
-	abstract public TreeSet<Vertex> getString(short row, short column, BoardI board);
+	abstract public TreeSet<Vertex> getString(short row, short column,
+			BoardI board);
 
 }

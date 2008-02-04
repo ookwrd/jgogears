@@ -48,7 +48,7 @@ public class ModelTest extends TestCase {
 		model.train(this.loadTestGame());
 		System.out.println(" model size =  "
 				+ model.countNodes(model.getRoot()));
-		Board board = new Board();
+		BoardI board = new Board();
 		board = board.newBoard(new Move("white b2"));
 		board = board.newBoard(new Move("black k4"));
 		board = board.newBoard(new Move("white c3"));
@@ -115,7 +115,7 @@ public class ModelTest extends TestCase {
 		System.err.println("loaded " + filecount + " files with " + movecount
 				+ " moves in " + (after.getTime() - before.getTime())
 				+ " milliseconds");
-		Board board = new Board();
+		BoardI board = new Board();
 		board = board.newBoard(new Move("white b2"));
 		board = board.newBoard(new Move("black k4"));
 		board = board.newBoard(new Move("white c3"));

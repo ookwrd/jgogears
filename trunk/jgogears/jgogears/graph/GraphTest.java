@@ -111,8 +111,8 @@ public class GraphTest extends TestCase {
 	public void testGraphc() throws IOException {
 
 		Game game = Game.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<Board> i = game.getBoards();
-		Board board = null;
+		Iterator<BoardI> i = game.getBoards();
+		BoardI board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();

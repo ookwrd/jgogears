@@ -48,7 +48,7 @@ public final class Model {
 	}
 
 	public void train(Game game) {
-		Iterator<Board> boards = game.getBoards();
+		Iterator<BoardI> boards = game.getBoards();
 		if (boards == null)
 			throw new Error();
 		Iterator<Move> moves = game.getMoves();
@@ -61,7 +61,7 @@ public final class Model {
 
 		while (boards.hasNext() && moves.hasNext()) {
 			movecounter++;
-			Board board = boards.next();
+			BoardI board = boards.next();
 			if (board == null)
 				throw new Error();
 			Move move = moves.next();
@@ -165,7 +165,7 @@ public final class Model {
 			return b;
 	}
 
-	public float[][] getScores(Board board, short colour) {
+	public float[][] getScores(BoardI board, short colour) {
 		float[][] result = new float[board.getSize()][board.getSize()];
 		for (short i = 0; i < board.getSize(); i++)
 			for (short j = 0; j < board.getSize(); j++) {
@@ -178,7 +178,7 @@ public final class Model {
 		return result;
 	}
 
-	public float getScore(Board board, short colour, short row, short column,
+	public float getScore(BoardI board, short colour, short row, short column,
 			short sym) {
 		VertexLineariser linear = new VertexLineariser(board, row, column, sym);
 		if (!linear.hasNext())

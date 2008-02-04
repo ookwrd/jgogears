@@ -3,7 +3,7 @@ package jgogears.engine;
 import java.io.*;
 import java.util.*;
 
-import jgogears.Board;
+import jgogears.BoardI;
 import jgogears.Game;
 import jgogears.SGFGameTree;
 import jgogears.SGFParser;
@@ -40,10 +40,10 @@ public class VertexLineariserTest extends TestCase {
 			Game game = new Game(tree);
 			assertTrue(game != null);
 
-			Iterator<Board> iterator = game.getBoards();
+			Iterator<BoardI> iterator = game.getBoards();
 			assertTrue(iterator != null);
 
-			Board board = null;
+			BoardI board = null;
 			while (iterator.hasNext()) {
 				board = iterator.next();
 				assertTrue(board != null);

@@ -42,14 +42,14 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		File exec = new File(this.executablea);
 		if (!exec.exists() || !exec.canExecute()) {
 			if (DEBUG)
-			System.err.println(exec.toString() + " exists: " + exec.exists()
-					+ " exec: " + exec.canExecute());
+				System.err.println(exec.toString() + " exists: "
+						+ exec.exists() + " exec: " + exec.canExecute());
 			exec = new File(this.executableb);
 			executable = this.executableb;
 			if (!exec.exists() || !exec.canExecute()) {
 				if (DEBUG)
-				System.err.println(exec.toString() + " exists: "
-						+ exec.exists() + " exec: " + exec.canExecute());
+					System.err.println(exec.toString() + " exists: "
+							+ exec.exists() + " exec: " + exec.canExecute());
 				throw new java.io.IOException(
 						"Files don't exist or cannot be executed: \""
 								+ this.executablea + "\", \""
@@ -165,7 +165,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		if (DEBUG)
 			System.err.println(s);
 		if (DEBUG)
-				System.err.println(v);
+			System.err.println(v);
 		return v;
 	}
 
@@ -186,7 +186,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
 		Vertex v = new Vertex(s);
-		Move move = new Move(v.getRow(),v.getColumn(),colour);
+		Move move = new Move(v.getRow(), v.getColumn(), colour);
 		return move;
 	}
 

@@ -27,8 +27,8 @@ public class GraphTest extends TestCase {
 	public void testLoadSeki() throws IOException {
 
 		Game game = Game.loadFromFile(new File("sgf/testing/seki.sgf"));
-		Iterator<Board> i = game.getBoards();
-		Board board = null;
+		Iterator<BoardI> i = game.getBoards();
+		BoardI board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();
@@ -46,8 +46,7 @@ public class GraphTest extends TestCase {
 
 	public void testLoadSimpleGnugoLegality() throws IOException {
 
-		Game game = Game.loadFromFile(new File(
-				"sgf/testing/simpleGnuGo.sgf"));
+		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
 		Iterator<Move> i = game.getMoves();
 		Move move = null;
 		BoardI board = new Board(game.getSize());
@@ -70,10 +69,9 @@ public class GraphTest extends TestCase {
 	public void testLoadSimpleGnugoLong() throws IOException {
 
 		// fail();
-		Game game = Game.loadFromFile(new File(
-				"sgf/testing/simpleGnuGo.sgf"));
-		Iterator<Board> i = game.getBoards();
-		Board board = null;
+		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
+		Iterator<BoardI> i = game.getBoards();
+		BoardI board = null;
 		Graph g = null;
 		while (i.hasNext()) {
 			board = i.next();

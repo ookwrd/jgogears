@@ -92,8 +92,8 @@ public class GTPEngine implements Runnable {
 			writer.write("" + version);
 			return true;
 		} else if (compare(command, GTPConstants.PLAY)) {
-			Move move = new Move(command.substring(GTPConstants.PLAY
-					.length() + 1));
+			Move move = new Move(command
+					.substring(GTPConstants.PLAY.length() + 1));
 			engine.play(move, state);
 			return true;
 		} else if (compare(command, GTPConstants.GENMOVE)) {

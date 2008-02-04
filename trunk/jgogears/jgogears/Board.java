@@ -62,6 +62,7 @@ public class Board extends BoardI {
 		this.size = (short) size;
 		init();
 	}
+
 	/**
 	 * Default constructor
 	 */
@@ -73,7 +74,7 @@ public class Board extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public Board(short size,RuleSet rule) {
+	public Board(short size, RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 		init();
@@ -96,14 +97,15 @@ public class Board extends BoardI {
 	public short getSize() {
 		return size;
 	}
-/**
- * 
- * @return
- */
-	public RuleSet getKoRule(){
+
+	/**
+	 * 
+	 * @return
+	 */
+	public RuleSet getKoRule() {
 		return rule;
 	}
-	
+
 	/*
 	 * @see jgogears.BoardInterface#getColour
 	 */
@@ -120,10 +122,10 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#newBoard(jgogears.GoMove)
 	 */
-	public Board newBoard(Move move) {
+	public BoardI newBoard(Move move) {
 		if (DEBUG)
 			System.out.println("creating a new board using:" + move);
-		Board result = new Board(this.size);
+		Board result = new Board(this.getSize(), this.getKoRule());
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)
 				if (result.board[i][j] != VERTEX_KO)
@@ -137,15 +139,21 @@ public class Board extends BoardI {
 		} else if (move.getPass()) {
 			// do nothing, since GoBoard doesn't know whose turn it is
 		} else {
-			// place the stone	
+			// place the stone
 			result.setColour(move.getRow(), move.getColumn(), move.getColour());
-			
+			if (this.zobrist != null)
+				result.setZobrist(new Zobrist(this.zobrist, move.getRow(), move
+						.getColumn(), Board.VERTEX_EMPTY));
+
 			// take the captures
 			TreeSet<Vertex> captures = rule.captures(null, this, move);
 			Iterator<Vertex> i = captures.iterator();
-			while (i.hasNext()){
+			while (i.hasNext()) {
 				Vertex v = i.next();
 				result.setColour(v.getRow(), v.getColumn(), Board.VERTEX_EMPTY);
+				if (this.zobrist != null)
+					result.setZobrist(new Zobrist(result.getZobrist(), v
+							.getRow(), v.getColumn(), Board.VERTEX_EMPTY));
 			}
 		}
 
@@ -163,9 +171,10 @@ public class Board extends BoardI {
 				throw new Error("Bad board size " + row + "/" + this.getSize()
 						+ " ");
 		if (CHECK)
-			if (column >= this.getSize()|| column < 0)
-				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) " + column + "/"
-						+ this.getSize() + " ");
+			if (column >= this.getSize() || column < 0)
+				throw new Error(
+						"Bad board size or play off the edge of the board (remember we're zero indexed) "
+								+ column + "/" + this.getSize() + " ");
 
 		board[row][column] = colour;
 		return result;

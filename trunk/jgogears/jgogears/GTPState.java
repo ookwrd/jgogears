@@ -11,7 +11,7 @@ import jgogears.*;
 public class GTPState {
 
 	protected short boardsize = -1;
-	protected Board board = null;
+	protected BoardI board = null;
 	protected int whiteCapturedCount = Integer.MIN_VALUE;
 	protected int blackCapturedCount = Integer.MIN_VALUE;
 	protected double komi = Double.MIN_VALUE;
@@ -73,7 +73,7 @@ public class GTPState {
 		this.blackCapturedCount = blackCapturedCount;
 	}
 
-	public Board getBoard() {
+	public BoardI getBoard() {
 		return board;
 	}
 

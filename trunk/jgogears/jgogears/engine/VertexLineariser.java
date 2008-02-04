@@ -2,7 +2,7 @@ package jgogears.engine;
 
 import java.util.*;
 
-import jgogears.Board;
+import jgogears.BoardI;
 
 public class VertexLineariser implements Iterator<Short> {
 	// table of sequences
@@ -118,7 +118,7 @@ public class VertexLineariser implements Iterator<Short> {
 
 	protected int offset = 0;
 
-	protected Board board = null;
+	protected BoardI board = null;
 
 	short row = -2;
 
@@ -126,7 +126,7 @@ public class VertexLineariser implements Iterator<Short> {
 
 	short sym = -2;
 
-	public VertexLineariser(Board board, short row, short column, short sym) {
+	public VertexLineariser(BoardI board, short row, short column, short sym) {
 		this.board = board;
 		this.row = row;
 		this.column = column;

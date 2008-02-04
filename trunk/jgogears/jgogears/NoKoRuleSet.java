@@ -110,29 +110,36 @@ final public class NoKoRuleSet extends RuleSet {
 		return liberties;
 	}
 
-	public TreeSet<Vertex> captureshelper(BoardI board, Move move,int row, int column) {
+	public TreeSet<Vertex> captureshelper(BoardI board, Move move, int row,
+			int column) {
 		if (DEBUG && EMPTY.size() != 0)
 			throw new Error("EMPTY not empty");
 		short colour = move.getColour();
 		short acolour = (short) board.getColour(row, column);
-		if (acolour == Board.VERTEX_EMPTY ||acolour == Board.VERTEX_KO){
-			if (DEBUG) System.err.println("captures == empty");
+		if (acolour == Board.VERTEX_EMPTY || acolour == Board.VERTEX_KO) {
+			if (DEBUG)
+				System.err.println("captures == empty");
 			return EMPTY;
 		}
-		if ((colour == Board.VERTEX_BLACK && acolour == Board.VERTEX_WHITE) ||  
-				(colour == Board.VERTEX_WHITE && acolour == Board.VERTEX_BLACK)) {
+		if ((colour == Board.VERTEX_BLACK && acolour == Board.VERTEX_WHITE)
+				|| (colour == Board.VERTEX_WHITE && acolour == Board.VERTEX_BLACK)) {
 			int libs = this.countLiberties(row, column, board);
-			if (libs == 1){
+			if (libs == 1) {
 				TreeSet<Vertex> string = this.getString(row, column, board);
-				if (DEBUG) System.err.println("captures == single liberty! capture! " + libs + " " + string);
+				if (DEBUG)
+					System.err.println("captures == single liberty! capture! "
+							+ libs + " " + string);
 				return string;
 			} else {
-				if (DEBUG) System.err.println("captures == multiple liberties");
+				if (DEBUG)
+					System.err.println("captures == multiple liberties");
 			}
-		} 
-		if (DEBUG) System.err.println("captures == ? " + colour + " " + acolour);
+		}
+		if (DEBUG)
+			System.err.println("captures == ? " + colour + " " + acolour);
 		return EMPTY;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -153,13 +160,13 @@ final public class NoKoRuleSet extends RuleSet {
 		short colour = move.getColour();
 
 		TreeSet<Vertex> captures = new TreeSet<Vertex>();
-		
+
 		// there can only be captures when placing a stone
 		if (colour != Board.VERTEX_BLACK || colour != Board.VERTEX_WHITE) {
-		captures.addAll(this.captureshelper(board, move, row+1, column));
-		captures.addAll(this.captureshelper(board, move, row-1, column));
-		captures.addAll(this.captureshelper(board, move, row, column+1));
-		captures.addAll(this.captureshelper(board, move, row, column-1));
+			captures.addAll(this.captureshelper(board, move, row + 1, column));
+			captures.addAll(this.captureshelper(board, move, row - 1, column));
+			captures.addAll(this.captureshelper(board, move, row, column + 1));
+			captures.addAll(this.captureshelper(board, move, row, column - 1));
 		}
 		return captures;
 	}
@@ -218,28 +225,28 @@ final public class NoKoRuleSet extends RuleSet {
 		short row = move.getRow();
 		short column = move.getColumn();
 		short colour = move.getColour();
-		
-		if (board.getColour(row, column) != Board.VERTEX_EMPTY){
+
+		if (board.getColour(row, column) != Board.VERTEX_EMPTY) {
 			System.err.println("illegal move, not empty");
 			return false;
 		}
 
 		if (colour != Board.VERTEX_BLACK && colour != Board.VERTEX_WHITE)
 			throw new Error();
-		TreeSet<Vertex> liberties =new TreeSet<Vertex>();
-		
-		liberties.addAll(this.legelsfrompos(row+1, column, colour, board));
-		liberties.addAll(this.legelsfrompos(row-1, column, colour, board));
-		liberties.addAll(this.legelsfrompos(row, column+1, colour, board));
-		liberties.addAll(this.legelsfrompos(row, column-1, colour, board));
-		
+		TreeSet<Vertex> liberties = new TreeSet<Vertex>();
+
+		liberties.addAll(this.legelsfrompos(row + 1, column, colour, board));
+		liberties.addAll(this.legelsfrompos(row - 1, column, colour, board));
+		liberties.addAll(this.legelsfrompos(row, column + 1, colour, board));
+		liberties.addAll(this.legelsfrompos(row, column - 1, colour, board));
+
 		liberties.addAll(this.captures(game, board, move));
-					
-		if( liberties.size() > 0) return true;
-		
-		
+
+		if (liberties.size() > 0)
+			return true;
+
 		return false;
-		
+
 	}
 
 	/**
@@ -254,30 +261,34 @@ final public class NoKoRuleSet extends RuleSet {
 	 * @param board
 	 * @return the number of liberties through this position
 	 */
-	TreeSet<Vertex> legelsfrompos(int row, int column, short colour, BoardI board) {
-		return this.legelsfrompos((short)row, (short)column, colour, board);
+	TreeSet<Vertex> legelsfrompos(int row, int column, short colour,
+			BoardI board) {
+		return this.legelsfrompos((short) row, (short) column, colour, board);
 	}
-		/**
-		 * Helper for moveIsLegal
-		 * 
-		 * @param row
-		 *            the row of the position that is a potential liberty
-		 * @param column
-		 *            the column of the position that is a potential liberty
-		 * @param colour
-		 *            the colour of the stone we want to use these liberties for
-		 * @param board
-		 * @return the number of liberties through this position
-		 */
-	TreeSet<Vertex> legelsfrompos(short row, short column, short colour, BoardI board) {
+
+	/**
+	 * Helper for moveIsLegal
+	 * 
+	 * @param row
+	 *            the row of the position that is a potential liberty
+	 * @param column
+	 *            the column of the position that is a potential liberty
+	 * @param colour
+	 *            the colour of the stone we want to use these liberties for
+	 * @param board
+	 * @return the number of liberties through this position
+	 */
+	TreeSet<Vertex> legelsfrompos(short row, short column, short colour,
+			BoardI board) {
 		TreeSet<Vertex> liberties = new TreeSet<Vertex>();
 		short acolour = (short) board.getColour(row, column);
 		if (acolour == colour) {
 			liberties.addAll(this.getLiberties(row, column, board));
-			if (DEBUG) System.err.println("position == same");
+			if (DEBUG)
+				System.err.println("position == same");
 		}
-		if (acolour == Board.VERTEX_EMPTY ||acolour == Board.VERTEX_EMPTY)
-			liberties.add(new Vertex(row,column));
+		if (acolour == Board.VERTEX_EMPTY || acolour == Board.VERTEX_EMPTY)
+			liberties.add(new Vertex(row, column));
 		return liberties;
 	}
 }
