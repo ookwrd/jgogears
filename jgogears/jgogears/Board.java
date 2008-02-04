@@ -43,6 +43,14 @@ public class Board extends BoardI {
 	/**
 	 * Default constructor
 	 */
+	public Board(boolean zobrist) {
+		super(zobrist);
+		init();
+	}
+
+	/**
+	 * Default constructor
+	 */
 	public Board() {
 		init();
 	}
