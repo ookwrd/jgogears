@@ -88,7 +88,7 @@ public class CorpusBuilder {
 
 		GnuGoEngine engine = new GnuGoEngine();
 		while (moves.hasNext()) {
-			Move move =  moves.next();
+			Move move = moves.next();
 			// System.err.println(move);
 			engine.play(move);
 		}

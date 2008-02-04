@@ -25,7 +25,7 @@ public class GTPParserUtilsTest extends TestCase {
 		try {
 			engine.initialise();
 			BoardI board = engine.showBoard();
-			//TODO
+			// TODO
 			engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);

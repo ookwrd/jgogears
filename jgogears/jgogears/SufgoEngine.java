@@ -32,7 +32,7 @@ public class SufgoEngine extends SkeletonEngine {
 	}
 
 	public Move regGenMove(int colour, GTPState state) {
-		Board board = state.getBoard();
+		BoardI board = state.getBoard();
 		short size = board.getSize();
 
 		Short[][] values = new Short[size][size];

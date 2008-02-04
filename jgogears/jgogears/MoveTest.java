@@ -25,8 +25,8 @@ public class MoveTest extends TestCase {
 		assertTrue(new Move("black t19").getResign() == false);
 		assertTrue(new Move("black t19").getPass() == false);
 
-		assertTrue(("" + new Move("black q10").getRow()), new Move(
-				"black q10").getRow() == 15);
+		assertTrue(("" + new Move("black q10").getRow()), new Move("black q10")
+				.getRow() == 15);
 		assertTrue(("" + new Move("black q10").getColumn()), new Move(
 				"black q10").getColumn() == 9);
 		assertTrue(new Move("black q10").getColour() == BoardI.VERTEX_BLACK);
@@ -67,10 +67,10 @@ public class MoveTest extends TestCase {
 	 */
 	public void testToString() throws ParseException {
 		System.err.println(new Move(0, 0, BoardI.VERTEX_WHITE));
-		assertTrue(new Move(0, 0, BoardI.VERTEX_WHITE).toString()
-				.compareTo("white a1") == 0);
-		assertTrue(new Move(18, 18, BoardI.VERTEX_WHITE).toString()
-				.compareTo("white t19") == 0);
+		assertTrue(new Move(0, 0, BoardI.VERTEX_WHITE).toString().compareTo(
+				"white a1") == 0);
+		assertTrue(new Move(18, 18, BoardI.VERTEX_WHITE).toString().compareTo(
+				"white t19") == 0);
 	}
 
 	/*

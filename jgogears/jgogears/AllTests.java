@@ -7,7 +7,7 @@ public class AllTests {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for jgogears");
-		//$JUnit-BEGIN$
+		// $JUnit-BEGIN$
 		suite.addTestSuite(GTPParserUtilsTest.class);
 		suite.addTestSuite(GTPScoreTest.class);
 		suite.addTestSuite(SGFGameTest.class);
@@ -23,7 +23,7 @@ public class AllTests {
 		suite.addTestSuite(SGFParserTest.class);
 		suite.addTestSuite(MoveTest.class);
 		suite.addTestSuite(FastBoardTest.class);
-		//$JUnit-END$
+		// $JUnit-END$
 		return suite;
 	}
 

@@ -83,7 +83,6 @@ public final class Move {
 	public Move(String move) throws IllegalArgumentException {
 		// System.err.println("GoMove::GoMove(\"" + move + "\"");
 
-	
 		move = move.toLowerCase();
 
 		int space = move.indexOf(" ");
@@ -93,14 +92,14 @@ public final class Move {
 		String colourString = move.substring(0, space);
 		this.colour = BoardI.parseColour(colourString);
 		String vertexString = move.substring(space + 1, move.length());
-		if (vertexString.contains("resign")){
+		if (vertexString.contains("resign")) {
 			this.resign = true;
-		}else if (vertexString.contains("pass")){
+		} else if (vertexString.contains("pass")) {
 			this.pass = true;
-		}else {
-		Vertex v = new Vertex(vertexString);
-		setRow(v.getRow());
-		setColumn(v.getColumn());
+		} else {
+			Vertex v = new Vertex(vertexString);
+			setRow(v.getRow());
+			setColumn(v.getColumn());
 		}
 	}
 
@@ -111,11 +110,10 @@ public final class Move {
 	 * @return the stone as a move
 	 */
 	public static Move createHandicapStone(String s) {
-			Vertex v = new Vertex(s);
-			Move result = new Move(v.getRow(),v.getColumn(), BoardI.VERTEX_BLACK);
+		Vertex v = new Vertex(s);
+		Move result = new Move(v.getRow(), v.getColumn(), BoardI.VERTEX_BLACK);
 		return result;
 	}
-
 
 	/**
 	 * return the colour of this move

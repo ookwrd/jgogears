@@ -28,7 +28,7 @@ public final class Game {
 	private String extraTime = "";
 	private String PC = "";
 	private LinkedList<Move> movelist = new LinkedList<Move>();
-	private LinkedList<Board> boardlist = new LinkedList<Board>();
+	private LinkedList<BoardI> boardlist = new LinkedList<BoardI>();
 
 	/**
 	 * default constractor
@@ -40,7 +40,7 @@ public final class Game {
 	 * default constractor
 	 */
 	public Game(int size) {
-		this.size = (short)size;
+		this.size = (short) size;
 	}
 
 	/**
@@ -81,12 +81,12 @@ public final class Game {
 		return this.movelist.iterator();
 	}
 
-	public Iterator<Board> getBoards() {
+	public Iterator<BoardI> getBoards() {
 		if (this.boardlist != null) {
 
 			Iterator<Move> moves = getMoves();
-			boardlist = new LinkedList<Board>();
-			Board board = new Board(size);
+			boardlist = new LinkedList<BoardI>();
+			BoardI board = new Board(size);
 			boardlist.add(board);
 			while (moves.hasNext()) {
 				Move move = moves.next();

@@ -9,10 +9,10 @@ public class Graph {
 	protected final TreeSet<Node> nodeset;
 	protected final Node[][] nodegrid;
 	protected final Point[][] pointgrid;
-	protected final Board board;
+	protected final BoardI board;
 	protected final static boolean DEBUG = false;
 
-	public Graph(Board board) {
+	public Graph(BoardI board) {
 		final int size = board.getSize();
 		this.board = board;
 		this.nodegrid = new Node[size][size];
@@ -97,7 +97,7 @@ public class Graph {
 		return result;
 	}
 
-	public Board getBoard() {
+	public BoardI getBoard() {
 		return board;
 	}
 

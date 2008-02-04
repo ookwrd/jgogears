@@ -51,7 +51,7 @@ public final class Node implements Comparable<Node> {
 	protected int calcLiberties(Graph graph) {
 		short libertyColour = this.getColour() == BoardI.VERTEX_BLACK ? BoardI.VERTEX_BLACK
 				: BoardI.VERTEX_WHITE;
-		Board board = graph.getBoard();
+		BoardI board = graph.getBoard();
 		if (points.size() == 0)
 			throw new Error();
 		Iterator<Point> points = this.points.iterator();

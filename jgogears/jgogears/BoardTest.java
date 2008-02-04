@@ -99,8 +99,7 @@ public class BoardTest extends TestCase {
 
 	public void testLoadSimpleGnugo() throws IOException {
 
-		Game game = Game.loadFromFile(new File(
-				"sgf/testing/simpleGnuGo.sgf"));
+		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
 		Iterator<Move> i = game.getMoves();
 		Move move = null;
 		BoardI board = new Board(game.getSize());

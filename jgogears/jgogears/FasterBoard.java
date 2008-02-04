@@ -5,14 +5,13 @@ import java.util.*;
 import jgogears.*;
 
 public class FasterBoard extends BoardI {
-	
+
 	private boolean DEBUG = true;
 
 	private BitSet bits = new BitSet();
 	private short size = 19;
 	private RuleSet rule = new NoKoRuleSet();
 
-	
 	final static short OFFSET_EMPTY = 0;
 	final static short OFFSET_COLOUR = 1;
 
@@ -26,6 +25,7 @@ public class FasterBoard extends BoardI {
 
 	public FasterBoard() {
 	}
+
 	/**
 	 * Default constructor
 	 */
@@ -36,7 +36,7 @@ public class FasterBoard extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FasterBoard(short size,RuleSet rule) {
+	public FasterBoard(short size, RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 	}
@@ -66,7 +66,7 @@ public class FasterBoard extends BoardI {
 			// take the captures
 			TreeSet<Vertex> captures = rule.captures(null, this, move);
 			Iterator<Vertex> i = captures.iterator();
-			while (i.hasNext()){
+			while (i.hasNext()) {
 				Vertex v = i.next();
 				result.setColour(v.getRow(), v.getColumn(), Board.VERTEX_EMPTY);
 			}
@@ -88,7 +88,7 @@ public class FasterBoard extends BoardI {
 	 * @see jgogears.BoardInterface#
 	 */
 	private int setColour(int row, int column, short colour) {
-		if (row < 0 || column < 0 || row >= size || column >= size){
+		if (row < 0 || column < 0 || row >= size || column >= size) {
 			if (DEBUG)
 				System.err.println("attempt to set a colour off-board");
 			return VERTEX_OFF_BOARD;

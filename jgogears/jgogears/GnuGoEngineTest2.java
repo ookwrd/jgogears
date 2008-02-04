@@ -33,15 +33,14 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testFinalStatusList() {
 		try {
 
-			Game game = Game
-					.loadFromFile(new File("sgf/testing/seki.sgf"));
+			Game game = Game.loadFromFile(new File("sgf/testing/seki.sgf"));
 			assertNotNull(game);
 
 			Iterator<Move> moves = game.getMoves();
 			assertNotNull(moves);
 			GnuGoEngine engine = new GnuGoEngine();
 			while (moves.hasNext()) {
-				Move move =  moves.next();
+				Move move = moves.next();
 				// System.err.println(move);
 				engine.play(move);
 			}

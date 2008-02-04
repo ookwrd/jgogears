@@ -4,11 +4,11 @@ import java.util.*;
 
 import jgogears.*;
 
-public class FastBoard  extends BoardI {
+public class FastBoard extends BoardI {
 
 	private BitSet bits = null;
 	private short size = 19;
-	
+
 	private RuleSet rule = new NoKoRuleSet();
 
 	private static BitSet empty = null;
@@ -40,6 +40,7 @@ public class FastBoard  extends BoardI {
 		bits = new BitSet();
 		bits.or(empty);
 	}
+
 	/**
 	 * Default constructor
 	 */
@@ -50,7 +51,7 @@ public class FastBoard  extends BoardI {
 	/**
 	 * constructor of specially sized boards
 	 */
-	public FastBoard(short size,RuleSet rule) {
+	public FastBoard(short size, RuleSet rule) {
 		this.size = size;
 		this.rule = rule;
 	}
@@ -79,7 +80,7 @@ public class FastBoard  extends BoardI {
 			// take the captures
 			TreeSet<Vertex> captures = rule.captures(null, this, move);
 			Iterator<Vertex> i = captures.iterator();
-			while (i.hasNext()){
+			while (i.hasNext()) {
 				Vertex v = i.next();
 				result.setColour(v.getRow(), v.getColumn(), Board.VERTEX_EMPTY);
 			}

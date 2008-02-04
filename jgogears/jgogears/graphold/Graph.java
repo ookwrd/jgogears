@@ -102,7 +102,7 @@ public final class Graph implements Cloneable {
 		return buf.toString();
 	}
 
-	public Graph(Board board) {
+	public Graph(BoardI board) {
 		if (DEBUG)
 			System.err.print(".");
 
