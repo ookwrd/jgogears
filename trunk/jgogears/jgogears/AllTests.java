@@ -1,9 +1,18 @@
 package jgogears;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import junit.framework.*;
 
+/**
+ * Package-wide test collection
+ * 
+ * @author syeates
+ */
 public class AllTests {
+	/**
+	 * Package-wide test collection
+	 * 
+	 * @author syeates
+	 */
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for jgogears");

@@ -1,19 +1,40 @@
 package jgogears;
 
-import java.io.StringReader;
-
-import junit.framework.TestCase;
-import java.util.*;
 import java.io.*;
+import java.util.Iterator;
 
 import jgogears.SGF.ParseException;
+import junit.framework.TestCase;
 
 public class SGFGameTest extends TestCase {
 
+	/*
+	 * Test method for 'jgogears.Sufgo.isTrue(boolean)'
+	 */
+	public void testIsVerbose() throws ParseException {
+
+		String example = SGFParser.EXAMPLEB;
+		StringReader reader = new StringReader(example);
+		jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
+
+		Game game = new Game(parser.gameTree());
+
+		Iterator<Move> iterator = game.getMoves();
+		while (iterator.hasNext()) {
+			iterator.next();
+			// System.out.println(iterator.next());
+		}
+		Iterator<BoardI> iterator2 = game.getBoards();
+		while (iterator.hasNext()) {
+			iterator2.next();
+			// System.out.println(iterator.next());
+		}
+
+	}
+
 	public void testLoad() throws IOException {
 		try {
-			FileReader reader = new FileReader(
-					"sgf/testing/2007-01-12- BamboField- tokabe.sgf");
+			FileReader reader = new FileReader("sgf/testing/2007-01-12- BamboField- tokabe.sgf");
 			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
 			assertNotNull(parser);
 			SGFGameTree tree = parser.gameTree();
@@ -39,30 +60,6 @@ public class SGFGameTest extends TestCase {
 			System.err.println(e);
 			e.printStackTrace();
 			fail("throw an error");
-		}
-
-	}
-
-	/*
-	 * Test method for 'jgogears.Sufgo.isTrue(boolean)'
-	 */
-	public void testIsVerbose() throws ParseException {
-
-		String example = SGFParser.EXAMPLEB;
-		StringReader reader = new StringReader(example);
-		jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
-
-		Game game = new Game(parser.gameTree());
-
-		Iterator<Move> iterator = game.getMoves();
-		while (iterator.hasNext()) {
-			iterator.next();
-			// System.out.println(iterator.next());
-		}
-		Iterator<BoardI> iterator2 = game.getBoards();
-		while (iterator.hasNext()) {
-			iterator2.next();
-			// System.out.println(iterator.next());
 		}
 
 	}

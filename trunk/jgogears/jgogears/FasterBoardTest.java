@@ -1,131 +1,31 @@
 package jgogears;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Stack;
-
-import jgogears.*;
-import jgogears.graph.Graph;
+import java.io.*;
+import java.util.*;
 
 import junit.framework.TestCase;
 
 public class FasterBoardTest extends TestCase {
 
-	public void testToString() {
-		BoardI working = new FasterBoard((short) 19);
-		assertNotNull(working);
-		working = working.newBoard(new Move("B q10"));
-		System.out.println(working);
-	}
-
-	public void testSize3() {
-		testAllVertexesN(3);
-	}
-
-	public void testSize4() {
-		testAllVertexesN(4);
-	}
-
-	public void testSize5() {
-		testAllVertexesN(5);
-	}
-
-	public void testSize6() {
-		testAllVertexesN(6);
-	}
-
-	public void testSize7() {
-		testAllVertexesN(7);
-	}
-
-	public void testSize8() {
-		testAllVertexesN(8);
-	}
-
-	public void testSize9() {
-		testAllVertexesN(9);
-	}
-
-	public void testSize10() {
-		testAllVertexesN(10);
-	}
-
-	public void testSize11() {
-		testAllVertexesN(11);
-	}
-
-	public void testSize12() {
-		testAllVertexesN(12);
-	}
-
-	public void testSize13() {
-		testAllVertexesN(13);
-	}
-
-	public void testSize14() {
-		testAllVertexesN(14);
-	}
-
-	public void testSize16() {
-		testAllVertexesN(16);
-	}
-
-	public void testSize17() {
-		testAllVertexesN(17);
-	}
-
-	public void testSize18() {
-		testAllVertexesN(18);
-	}
-
-	public void testSize19() {
-		testAllVertexesN(19);
-	}
-
-	public void testSize20() {
-		testAllVertexesN(20);
-	}
-
-	public void testSize21() {
-		testAllVertexesN(21);
-	}
-
-	public void testSize22() {
-		testAllVertexesN(22);
-	}
-
-	public void testSize23() {
-		testAllVertexesN(23);
-	}
-
-	public void testSize24() {
-		testAllVertexesN(24);
-	}
-
-	public void testSize25() {
-		testAllVertexesN(25);
-	}
-
 	public void testAllSizes() {
-		testAllVertexesN(3);
-		testAllVertexesN(6);
-		testAllVertexesN(7);
-		testAllVertexesN(8);
-		testAllVertexesN(9);
-		testAllVertexesN(10);
-		testAllVertexesN(11);
-		testAllVertexesN(12);
-		testAllVertexesN(13);
-		testAllVertexesN(14);
-		testAllVertexesN(15);
-		testAllVertexesN(16);
-		testAllVertexesN(17);
-		testAllVertexesN(18);
-		testAllVertexesN(19);
-		testAllVertexesN(20);
-		testAllVertexesN(21);
-		testAllVertexesN(22);
+		this.testAllVertexesN(3);
+		this.testAllVertexesN(6);
+		this.testAllVertexesN(7);
+		this.testAllVertexesN(8);
+		this.testAllVertexesN(9);
+		this.testAllVertexesN(10);
+		this.testAllVertexesN(11);
+		this.testAllVertexesN(12);
+		this.testAllVertexesN(13);
+		this.testAllVertexesN(14);
+		this.testAllVertexesN(15);
+		this.testAllVertexesN(16);
+		this.testAllVertexesN(17);
+		this.testAllVertexesN(18);
+		this.testAllVertexesN(19);
+		this.testAllVertexesN(20);
+		this.testAllVertexesN(21);
+		this.testAllVertexesN(22);
 	}
 
 	public void testAllVertexesN(int size) {
@@ -133,107 +33,74 @@ public class FasterBoardTest extends TestCase {
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				Move move = new Move(i, j, FasterBoard.VERTEX_BLACK);
+				Move move = new Move(i, j, BoardI.VERTEX_BLACK);
 				board = board.newBoard(move);
-				assertTrue("" + size + "," + i + "," + j + ","
-						+ board.getColour(i, j) + ","
-						+ FasterBoard.VERTEX_BLACK,
-						board.getColour(i, j) == FasterBoard.VERTEX_BLACK);
+				assertTrue("" + size + "," + i + "," + j + "," + board.getColour(i, j) + "," + BoardI.VERTEX_BLACK,
+						board.getColour(i, j) == BoardI.VERTEX_BLACK);
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if (l != i && m != j) {
+						if ((l != i) && (m != j)) {
 
-							assertTrue(
-									"" + size + "," + i + "," + j + "," + l
-											+ "," + m + ","
-											+ board.getColour(l, m) + ","
-											+ FasterBoard.VERTEX_EMPTY,
-									board.getColour(l, m) == FasterBoard.VERTEX_EMPTY);
-							assertTrue(board.getColour(l, m) == FastBoard.VERTEX_EMPTY);
-							assertTrue(FastBoard.VERTEX_EMPTY == FastBoard.VERTEX_EMPTY);
-							assertTrue(board.getColour(l, m) == board
-									.getColour(l, m));
-							assertTrue(board.getColour(l, m) == FastBoard.VERTEX_EMPTY);
+							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
+									+ "," + BoardI.VERTEX_EMPTY, board.getColour(l, m) == BoardI.VERTEX_EMPTY);
+							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
+							assertTrue(BoardI.VERTEX_EMPTY == BoardI.VERTEX_EMPTY);
+							assertTrue(board.getColour(l, m) == board.getColour(l, m));
+							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
 				}
-				move = new Move(i, j, FasterBoard.VERTEX_EMPTY);
+				move = new Move(i, j, BoardI.VERTEX_EMPTY);
 				board = board.newBoard(move);
-				assertTrue(board.getColour(i, j) == FasterBoard.VERTEX_EMPTY);
+				assertTrue(board.getColour(i, j) == BoardI.VERTEX_EMPTY);
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if (l != i && m != j) {
-							assertTrue(
-									"" + size + "," + i + "," + j + "," + l
-											+ "," + m + ","
-											+ board.getColour(l, m) + ",",
-									board.getColour(i, j) == FasterBoard.VERTEX_EMPTY);
+						if ((l != i) && (m != j)) {
+							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
+									+ ",", board.getColour(i, j) == BoardI.VERTEX_EMPTY);
 						}
 					}
 				}
-				move = new Move(i, j, FasterBoard.VERTEX_WHITE);
+				move = new Move(i, j, BoardI.VERTEX_WHITE);
 				board = board.newBoard(move);
-				assertTrue(board.getColour(i, j) == FasterBoard.VERTEX_WHITE);
+				assertTrue(board.getColour(i, j) == BoardI.VERTEX_WHITE);
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if (l != i && m != j) {
-							assertTrue(
-									"" + size + "," + i + "," + j + "," + l
-											+ "," + m + ","
-											+ board.getColour(l, m) + ",",
-									board.getColour(l, m) == FasterBoard.VERTEX_EMPTY);
+						if ((l != i) && (m != j)) {
+							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
+									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
 				}
-				move = new Move(i, j, FasterBoard.VERTEX_KO);
+				move = new Move(i, j, BoardI.VERTEX_KO);
 				board = board.newBoard(move);
-				assertTrue(board.getColour(i, j) == FasterBoard.VERTEX_KO);
+				assertTrue(board.getColour(i, j) == BoardI.VERTEX_KO);
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if (l != i && m != j) {
-							assertTrue(
-									"" + size + "," + i + "," + j + "," + l
-											+ "," + m + ","
-											+ board.getColour(l, m) + ",",
-									board.getColour(l, m) == FasterBoard.VERTEX_EMPTY);
+						if ((l != i) && (m != j)) {
+							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
+									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
 				}
-				move = new Move(i, j, FasterBoard.VERTEX_EMPTY);
+				move = new Move(i, j, BoardI.VERTEX_EMPTY);
 				board = board.newBoard(move);
-				assertTrue(board.getColour(i, j) == FasterBoard.VERTEX_EMPTY);
+				assertTrue(board.getColour(i, j) == BoardI.VERTEX_EMPTY);
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if (l != i && m != j) {
-							assertTrue(
-									"" + size + "," + i + "," + j + "," + l
-											+ "," + m + ","
-											+ board.getColour(l, m) + ",",
-									board.getColour(l, m) == FasterBoard.VERTEX_EMPTY);
+						if ((l != i) && (m != j)) {
+							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
+									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
 				}
 			}
 		}
-	}
-
-	public void testLoadSimpleGnugo() throws IOException {
-
-		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
-		Iterator<Move> i = game.getMoves();
-		Move move = null;
-		BoardI board = new FasterBoard(game.getSize());
-		while (i.hasNext()) {
-			move = i.next();
-			assertNotNull(move);
-			board = board.newBoard(move);
-		}
-		// System.err.println(g);
 	}
 
 	public void testLoadAllSGFfiles() throws IOException {
@@ -283,6 +150,115 @@ public class FasterBoardTest extends TestCase {
 			}
 		}
 
+	}
+
+	public void testLoadSimpleGnugo() throws IOException {
+
+		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
+		Iterator<Move> i = game.getMoves();
+		Move move = null;
+		BoardI board = new FasterBoard(game.getSize());
+		while (i.hasNext()) {
+			move = i.next();
+			assertNotNull(move);
+			board = board.newBoard(move);
+		}
+		// System.err.println(g);
+	}
+
+	public void testSize10() {
+		this.testAllVertexesN(10);
+	}
+
+	public void testSize11() {
+		this.testAllVertexesN(11);
+	}
+
+	public void testSize12() {
+		this.testAllVertexesN(12);
+	}
+
+	public void testSize13() {
+		this.testAllVertexesN(13);
+	}
+
+	public void testSize14() {
+		this.testAllVertexesN(14);
+	}
+
+	public void testSize16() {
+		this.testAllVertexesN(16);
+	}
+
+	public void testSize17() {
+		this.testAllVertexesN(17);
+	}
+
+	public void testSize18() {
+		this.testAllVertexesN(18);
+	}
+
+	public void testSize19() {
+		this.testAllVertexesN(19);
+	}
+
+	public void testSize20() {
+		this.testAllVertexesN(20);
+	}
+
+	public void testSize21() {
+		this.testAllVertexesN(21);
+	}
+
+	public void testSize22() {
+		this.testAllVertexesN(22);
+	}
+
+	public void testSize23() {
+		this.testAllVertexesN(23);
+	}
+
+	public void testSize24() {
+		this.testAllVertexesN(24);
+	}
+
+	public void testSize25() {
+		this.testAllVertexesN(25);
+	}
+
+	public void testSize3() {
+		this.testAllVertexesN(3);
+	}
+
+	public void testSize4() {
+		this.testAllVertexesN(4);
+	}
+
+	public void testSize5() {
+		this.testAllVertexesN(5);
+	}
+
+	public void testSize6() {
+		this.testAllVertexesN(6);
+	}
+
+	public void testSize7() {
+		this.testAllVertexesN(7);
+	}
+
+	public void testSize8() {
+		this.testAllVertexesN(8);
+	}
+
+	public void testSize9() {
+		this.testAllVertexesN(9);
+	}
+
+	public void testToString() {
+		BoardI working = new FasterBoard((short) 19);
+		assertNotNull(working);
+		working = working.newBoard(new Move("B q10"));
+		System.out.println(working);
 	}
 
 }

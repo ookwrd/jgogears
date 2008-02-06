@@ -1,13 +1,10 @@
 package jgogears;
 
 /**
- * Class representing dan / kyu ranks. 30kyu to 1kyu and 1dan to 20dan.
- * 
- * Classes are represented internally as a double. Rank parsing and formatting
- * are only supported for whole numbers.
+ * Class representing dan / kyu ranks. 30kyu to 1kyu and 1dan to 20dan. Classes are represented internally as a double.
+ * Rank parsing and formatting are only supported for whole numbers.
  * 
  * @author syeates
- * 
  */
 
 public final class Rank {
@@ -23,63 +20,22 @@ public final class Rank {
 	final static double MAX_RATING = 1;
 	final static double MIN_RATING = 0;
 
-	private double rank = 25;
-
-	static boolean checkRating(double rating) {
-		if (TESTING)
-			if (rating > MAX_RATING || rating < MIN_RATING)
-				throw new Error("bad rating " + rating);
-		return true;
-	}
-
 	static boolean checkRank(double ranking) {
 		if (TESTING)
-			if (ranking > MAX_RATING || ranking < MIN_RATING)
+			if ((ranking > MAX_RATING) || (ranking < MIN_RATING))
 				throw new Error("bad ranking " + ranking);
 		return true;
 	}
 
-	public double getRating() {
+	static boolean checkRating(double rating) {
 		if (TESTING)
-			checkRank(rank);
-		System.err.println(MAX_RANK + " " + MIN_RANK + " " + rank);
-		double result = (MIN_RANK - rank) / (MIN_RANK - MAX_RANK);
-		if (TESTING)
-			checkRating(result);
-		return result;
-	}
-
-	public double getRank() {
-		if (TESTING)
-			checkRank(rank);
-		return rank;
-	}
-
-	public void setRank(double rank) {
-		this.rank = rank;
-	}
-
-	public Rank(String r) {
-		this.rank = convert(r);
-		if (TESTING)
-			checkRank(rank);
-	}
-
-	public Rank(double r) {
-		if (TESTING)
-			checkRank(rank);
-		this.rank = r;
-		if (TESTING)
-			checkRank(rank);
-	}
-
-	public Rank() {
-		if (TESTING)
-			checkRank(rank);
+			if ((rating > MAX_RATING) || (rating < MIN_RATING))
+				throw new Error("bad rating " + rating);
+		return true;
 	}
 
 	public static int convert(String r) {
-		if (r == null || r.length() < 2)
+		if ((r == null) || (r.length() < 2))
 			return (int) BEGINNER.getRank();
 		r = r.toLowerCase();
 		int offset = 0;
@@ -105,14 +61,56 @@ public final class Rank {
 			throw new Error(r);
 	}
 
+	private double rank = 25;
+
+	public Rank() {
+		if (TESTING)
+			checkRank(this.rank);
+	}
+
+	public Rank(double r) {
+		if (TESTING)
+			checkRank(this.rank);
+		this.rank = r;
+		if (TESTING)
+			checkRank(this.rank);
+	}
+
+	public Rank(String r) {
+		this.rank = convert(r);
+		if (TESTING)
+			checkRank(this.rank);
+	}
+
+	public double getRank() {
+		if (TESTING)
+			checkRank(this.rank);
+		return this.rank;
+	}
+
+	public double getRating() {
+		if (TESTING)
+			checkRank(this.rank);
+		System.err.println(MAX_RANK + " " + MIN_RANK + " " + this.rank);
+		double result = (MIN_RANK - this.rank) / (MIN_RANK - MAX_RANK);
+		if (TESTING)
+			checkRating(result);
+		return result;
+	}
+
+	public void setRank(double rank) {
+		this.rank = rank;
+	}
+
+	@Override
 	public String toString() {
 		if (TESTING)
-			checkRank(rank);
+			checkRank(this.rank);
 		StringBuffer result = new StringBuffer(10);
-		if (rank <= 100)
-			result.append((int) (-rank + 100 + 1)).append("dan");
+		if (this.rank <= 100)
+			result.append((int) (-this.rank + 100 + 1)).append("dan");
 		else
-			result.append((int) (rank - 100)).append("kyu");
+			result.append((int) (this.rank - 100)).append("kyu");
 		return result.toString();
 	}
 

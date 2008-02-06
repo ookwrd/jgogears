@@ -1,19 +1,12 @@
 package jgogears;
 
 /**
- * A class representing a go score, as represented by SGF and GTP (GTP defines
- * scores in terms of the SGF standard).
- * 
- * A score is either (a) a win to {black|white} with a margin, by time, by
- * resignation or by forfiet (b) a win to niether (a draw or void) or (c)
- * unknown.
- * 
- * Unknown scores are also used returned by go engines and systems which cannot
- * score games, even if the score is obvious.
- * 
- * The margin of a sore should not be taken to represent the gap in skill
- * between the two players, since a player who is loosing even slightly may make
- * increasingly risky moves in an attempt to force an error.
+ * A class representing a go score, as represented by SGF and GTP (GTP defines scores in terms of the SGF standard). A
+ * score is either (a) a win to {black|white} with a margin, by time, by resignation or by forfiet (b) a win to niether
+ * (a draw or void) or (c) unknown. Unknown scores are also used returned by go engines and systems which cannot score
+ * games, even if the score is obvious. The margin of a sore should not be taken to represent the gap in skill between
+ * the two players, since a player who is loosing even slightly may make increasingly risky moves in an attempt to force
+ * an error.
  * 
  * @author syeates
  */
@@ -33,89 +26,64 @@ public final class GTPScore {
 
 	public boolean DEBUG = false;
 
-	public boolean getWhiteWin() {
-		return !this.neitherWin && this.whiteWin;
+	public GTPScore(String s) {
+		this.init(s);
+	};
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new GTPScore(this.toString());
+	};
+
+	@Override
+	public boolean equals(Object arg0) {
+		return this.toString().equalsIgnoreCase(arg0.toString());
 	};
 
 	public boolean getBlackWin() {
 		return !this.neitherWin && !this.whiteWin;
 	};
 
-	public boolean getResign() {
-		return this.resign;
-	};
-
-	public boolean getTime() {
-		return this.time;
+	public boolean getDraw() {
+		return this.margin == 0.0;
 	};
 
 	public boolean getForfeit() {
 		return this.forfeit;
 	};
 
-	public boolean getDraw() {
-		return this.margin == 0.0;
+	public double getMargin() {
+		return this.margin;
 	};
 
-	public boolean getVoid() {
-		return _void;
-	};
-
-	public boolean getUnknown() {
-		return this.unknown;
+	public boolean getResign() {
+		return this.resign;
 	};
 
 	public boolean getScored() {
 		return this.scored;
 	};
 
-	public double getMargin() {
-		return this.margin;
+	public boolean getTime() {
+		return this.time;
 	};
 
-	public String toString() {
-		if (this.neitherWin)
-			if (this.margin == 0.0)
-				return "0";
-			else if (this._void)
-				return "void";
-			else
-				return "?";
-		else // there's a winner
-		if (this.whiteWin) { // white wins
-			if (resign)
-				return "w+r";
-			else if (time)
-				return "w+t";
-			else if (forfeit)
-				return "w+f";
-			else if (margin == Double.MAX_VALUE)
-				return "w+";
-			else
-				return "w+" + margin;
-		} else { // black wins
-			if (resign)
-				return "b+r";
-			else if (time)
-				return "b+t";
-			else if (forfeit)
-				return "b+f";
-			else if (margin == Double.MAX_VALUE)
-				return "b+";
-			else
-				return "b+" + margin;
-		}
+	public boolean getUnknown() {
+		return this.unknown;
 	}
 
-	public GTPScore(String s) {
-		init(s);
+	public boolean getVoid() {
+		return this._void;
+	}
+
+	public boolean getWhiteWin() {
+		return !this.neitherWin && this.whiteWin;
 	}
 
 	public boolean init(String s) {
 		String original = s;
 		if (s.length() == 0) {
-			System.err
-					.println("cannot initialise a score from a zero length string");
+			System.err.println("cannot initialise a score from a zero length string");
 			return false;
 		}
 		try {
@@ -127,7 +95,7 @@ public final class GTPScore {
 			} else if (s.contains("b+r")) {
 				this.whiteWin = false;
 				this.resign = true;
-			} else if (s.compareTo("0") == 0 || s.compareTo("draw") == 0) {
+			} else if ((s.compareTo("0") == 0) || (s.compareTo("draw") == 0)) {
 				this.whiteWin = false;
 				this.neitherWin = true;
 				this.margin = 0.0;
@@ -164,8 +132,7 @@ public final class GTPScore {
 					this.whiteWin = false;
 					break;
 				default:
-					throw new IllegalArgumentException(
-							"Badly formed GTP Score \"" + this.value + "\"");
+					throw new IllegalArgumentException("Badly formed GTP Score \"" + this.value + "\"");
 				}
 				if (s.length() == 2)
 					this.margin = Double.MAX_VALUE;
@@ -175,16 +142,15 @@ public final class GTPScore {
 					this.margin = Double.parseDouble(number);
 				}
 			}
-			if (DEBUG)
-				System.err.println("Generated a GTPScore of \"" + this
-						+ "\" from  \"" + this.value + "\"");
+			if (this.DEBUG)
+				System.err.println("Generated a GTPScore of \"" + this + "\" from  \"" + this.value + "\"");
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			if (DEBUG)
+			if (this.DEBUG)
 				System.err.println("Problem with \"" + original + "\"");
 			if (original.length() > 2) {
 				try {
-					init(s.substring(2, original.length()));
+					this.init(s.substring(2, original.length()));
 				} catch (IllegalArgumentException e2) {
 					e2.printStackTrace();
 					throw e;
@@ -195,12 +161,39 @@ public final class GTPScore {
 		return true;
 	}
 
-	protected Object clone() throws CloneNotSupportedException {
-		return new GTPScore(this.toString());
-	}
-
-	public boolean equals(Object arg0) {
-		return this.toString().equalsIgnoreCase(arg0.toString());
+	@Override
+	public String toString() {
+		if (this.neitherWin)
+			if (this.margin == 0.0)
+				return "0";
+			else if (this._void)
+				return "void";
+			else
+				return "?";
+		else // there's a winner
+		if (this.whiteWin) { // white wins
+			if (this.resign)
+				return "w+r";
+			else if (this.time)
+				return "w+t";
+			else if (this.forfeit)
+				return "w+f";
+			else if (this.margin == Double.MAX_VALUE)
+				return "w+";
+			else
+				return "w+" + this.margin;
+		} else { // black wins
+			if (this.resign)
+				return "b+r";
+			else if (this.time)
+				return "b+t";
+			else if (this.forfeit)
+				return "b+f";
+			else if (this.margin == Double.MAX_VALUE)
+				return "b+";
+			else
+				return "b+" + this.margin;
+		}
 	}
 
 }

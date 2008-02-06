@@ -4,15 +4,18 @@ import java.io.*;
 import java.util.TreeSet;
 
 /**
- * 
  * An engine wrapping an instance of the GnuGo computer-go player.
  * 
  * @author syeates
  */
 public final class GnuGoEngine implements GTPStatelessInterface {
 
-	private String executablea = "/usr/games/gnugo";
-	private String executableb = "G:/gnugo-mingw-36.exe";
+	public static final int SMALL_PAUSE = 3;
+	public static final int LARGE_PAUSE = 33;
+
+	private final String executablea = "/usr/games/gnugo";
+
+	private final String executableb = "H:/gnugo-mingw-36.exe";
 
 	private String args = "--mode gtp --level 1";
 
@@ -25,121 +28,16 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 	private BufferedReader errreader = null;
 
 	private Process process = null;
-
 	public boolean DEBUG = false;
 
-	public static final int SMALL_PAUSE = 3;
-	public static final int LARGE_PAUSE = 33;
-
 	public GnuGoEngine() throws IOException {
-		initialise();
-	}
-
-	public synchronized boolean initialise() throws IOException {
-		if (this.initialised)
-			return true;
-		String executable = this.executablea;
-		File exec = new File(this.executablea);
-		if (!exec.exists() || !exec.canExecute()) {
-			if (DEBUG)
-				System.err.println(exec.toString() + " exists: "
-						+ exec.exists() + " exec: " + exec.canExecute());
-			exec = new File(this.executableb);
-			executable = this.executableb;
-			if (!exec.exists() || !exec.canExecute()) {
-				if (DEBUG)
-					System.err.println(exec.toString() + " exists: "
-							+ exec.exists() + " exec: " + exec.canExecute());
-				throw new java.io.IOException(
-						"Files don't exist or cannot be executed: \""
-								+ this.executablea + "\", \""
-								+ this.executableb);
-			}
-		}
-
-		try {
-			String command = executable + " " + this.args;
-			this.process = java.lang.Runtime.getRuntime().exec(command);
-			this.reader = new java.io.BufferedReader(new InputStreamReader(
-					process.getInputStream()));
-			this.errreader = new java.io.BufferedReader(new InputStreamReader(
-					process.getErrorStream()));
-			this.writer = new OutputStreamWriter(process.getOutputStream());
-			this.initialised = true;
-
-			this.check();
-			Thread.sleep(LARGE_PAUSE);
-			return true;
-		} catch (Throwable t) {
-			t.printStackTrace();
-			System.err.println(t);
-			return false;
-		}
-	}
-
-	protected synchronized void write(String s) {
-		try {
-			writer.write(s);
-			writer.flush();
-			if (DEBUG)
-				System.err.println("GnuGo Process Input:\"" + s + "\"");
-
-			this.check();
-		} catch (Throwable t) {
-			t.printStackTrace();
-			System.err.println(t);
-		}
-	}
-
-	protected synchronized String read() {
-		String s = "";
-		String result = "";
-		try {
-			Thread.sleep(SMALL_PAUSE);
-			while (s != null && s.compareTo("") == 0) {
-				s = reader.readLine();
-			}
-			if (s == null)
-				s = "";
-			result = GTPParserUtils.stripIntro(s);
-
-			if (DEBUG)
-				System.err.println("GnuGo Process Output:\"" + s + "\" ==> \""
-						+ result + "\"");
-
-			this.check();
-		} catch (Throwable t) {
-			t.printStackTrace();
-			System.err.println(t);
-		}
-		return result;
-	}
-
-	protected synchronized String readAll() {
-		String s = "";
-		try {
-			Thread.sleep(SMALL_PAUSE);
-			s = reader.readLine();
-			while (reader.ready()) {
-				Thread.yield();
-				s = s + "\n" + reader.readLine();
-			}
-			if (DEBUG)
-				System.err.println("GnuGo Process Output:\"" + s + "\"");
-
-			this.check();
-		} catch (Throwable t) {
-			t.printStackTrace();
-			System.err.println(t);
-		}
-		return s;
+		this.initialise();
 	}
 
 	protected synchronized void check() {
 		try {
 			while (this.errreader.ready()) {
-				System.err.print("GnuGo Process Error:\""
-						+ this.errreader.readLine() + "\"");
+				System.err.print("GnuGo Process Error:\"" + this.errreader.readLine() + "\"");
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -153,7 +51,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 	}
@@ -162,9 +60,9 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		this.write(GTPConstants.FINALSTATUSLIST + " " + status + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(v);
 		return v;
 	}
@@ -173,21 +71,24 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		this.write(GTPConstants.FIXEDHANDICAP + " " + handicap + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(v);
 		return v;
 	}
 
 	public Move genMove(short colour) {
-		this.write(GTPConstants.GENMOVE + " " + Move.colourString(colour)
-				+ "\n\n");
+		this.write(GTPConstants.GENMOVE + " " + Move.colourString(colour) + "\n\n");
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
 		Vertex v = new Vertex(s);
 		Move move = new Move(v.getRow(), v.getColumn(), colour);
 		return move;
+	}
+
+	public String getArgs() {
+		return this.args;
 	}
 
 	public String getEngineName() {
@@ -198,6 +99,10 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 	public String getEngineVersion() {
 		this.write(GTPConstants.VERSION + "\n\n");
 		return this.read();
+	}
+
+	public BufferedReader getErrreader() {
+		return this.errreader;
 	}
 
 	public GTPScore getFinalScore() {
@@ -217,36 +122,70 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		throw new Error();
 	}
 
+	public Process getProcess() {
+		return this.process;
+	}
+
 	public int getProtocolVersion() {
 		this.write(GTPConstants.PROTOCOLVERSION + " \n\n");
 		String result = this.read();
 		return Integer.parseInt(result);
 	}
 
+	public BufferedReader getReader() {
+		return this.reader;
+	}
+
+	public Writer getWriter() {
+		return this.writer;
+	}
+
+	public synchronized boolean initialise() throws IOException {
+		if (this.initialised)
+			return true;
+		String executable = this.executablea;
+		File exec = new File(this.executablea);
+		if (!exec.exists() || !exec.canExecute()) {
+			if (this.DEBUG)
+				System.err.println(exec.toString() + " exists: " + exec.exists() + " exec: " + exec.canExecute());
+			exec = new File(this.executableb);
+			executable = this.executableb;
+			if (!exec.exists() || !exec.canExecute()) {
+				if (this.DEBUG)
+					System.err.println(exec.toString() + " exists: " + exec.exists() + " exec: " + exec.canExecute());
+				throw new java.io.IOException("Files don't exist or cannot be executed: \"" + this.executablea
+						+ "\", \"" + this.executableb);
+			}
+		}
+
+		try {
+			String command = executable + " " + this.args;
+			this.process = java.lang.Runtime.getRuntime().exec(command);
+			this.reader = new java.io.BufferedReader(new InputStreamReader(this.process.getInputStream()));
+			this.errreader = new java.io.BufferedReader(new InputStreamReader(this.process.getErrorStream()));
+			this.writer = new OutputStreamWriter(this.process.getOutputStream());
+			this.initialised = true;
+
+			this.check();
+			Thread.sleep(LARGE_PAUSE);
+			return true;
+		} catch (Throwable t) {
+			t.printStackTrace();
+			System.err.println(t);
+			return false;
+		}
+	}
+
 	public boolean loadsgf(String filename, int moveNumber) {
 		if (moveNumber > 0)
-			this.write(GTPConstants.LOADSGF + " " + filename + " " + moveNumber
-					+ "\n\n");
+			this.write(GTPConstants.LOADSGF + " " + filename + " " + moveNumber + "\n\n");
 		else
 			this.write(GTPConstants.LOADSGF + " " + filename + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
-			System.err.println("clearBoard:" + s);
-		return false;
-
-	}
-
-	public boolean placeFreeHandicap(TreeSet<Vertex> stones) {
-		this.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + stones.toString()
-				+ "\n\n");
-		String s = this.read();
-		Error e = GTPParserUtils.getError(s);
-		if (null == e)
-			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
@@ -254,16 +193,26 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	public TreeSet<Vertex> placeFreeHandicap(short handicap) {
 		// TODO write tests for this
-		this
-				.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + handicap
-						+ "\n\n");
+		this.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + handicap + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(v);
 		return v;
+	}
+
+	public boolean placeFreeHandicap(TreeSet<Vertex> stones) {
+		this.write(GTPConstants.PLACEFREEHANDHANDICAP + " " + stones.toString() + "\n\n");
+		String s = this.read();
+		Error e = GTPParserUtils.getError(s);
+		if (null == e)
+			return true;
+		if (this.DEBUG)
+			System.err.println("clearBoard:" + s);
+		return false;
+
 	}
 
 	public boolean play(Move move) {
@@ -272,7 +221,7 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
@@ -283,19 +232,19 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 			try {
 				// handle the remote end
 				this.write(GTPConstants.QUIT + "\n\n");
-				writer.flush();
+				this.writer.flush();
 
 				// handle the local end
-				check();
+				this.check();
 				this.initialised = false;
-				reader.close();
-				reader = null;
-				errreader.close();
-				errreader = null;
-				writer.close();
-				writer = null;
-				process.destroy();
-				process = null;
+				this.reader.close();
+				this.reader = null;
+				this.errreader.close();
+				this.errreader = null;
+				this.writer.close();
+				this.writer = null;
+				this.process.destroy();
+				this.process = null;
 
 			} catch (Throwable t) {
 				t.printStackTrace();
@@ -307,22 +256,73 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 
 	}
 
+	protected synchronized String read() {
+		String s = "";
+		String result = "";
+		try {
+			Thread.sleep(SMALL_PAUSE);
+			while ((s != null) && (s.compareTo("") == 0)) {
+				s = this.reader.readLine();
+			}
+			if (s == null)
+				s = "";
+			result = GTPParserUtils.stripIntro(s);
+
+			if (this.DEBUG)
+				System.err.println("GnuGo Process Output:\"" + s + "\" ==> \"" + result + "\"");
+
+			this.check();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			System.err.println(t);
+		}
+		return result;
+	}
+
+	protected synchronized String readAll() {
+		String s = "";
+		try {
+			Thread.sleep(SMALL_PAUSE);
+			s = this.reader.readLine();
+			while (this.reader.ready()) {
+				Thread.yield();
+				s = s + "\n" + this.reader.readLine();
+			}
+			if (this.DEBUG)
+				System.err.println("GnuGo Process Output:\"" + s + "\"");
+
+			this.check();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			System.err.println(t);
+		}
+		return s;
+	}
+
 	public Move regGenMove(short colour) {
-		return genMove(colour);
+		return this.genMove(colour);
+	}
+
+	public void setArgs(String args) {
+		this.args = args;
 	}
 
 	public boolean setBoardSize(short size) {
 		this.write(GTPConstants.BOARDSIZE + " " + size + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
+	}
+
+	public void setErrreader(BufferedReader errreader) {
+		this.errreader = errreader;
 	}
 
 	public boolean setKomi(double komi) {
@@ -331,45 +331,54 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
 	}
 
-	public boolean setTimeLeft(short colour, double byoYomiTime,
-			double byoYomiStones) {
-		this.write(GTPConstants.TIMELEFT + " " + Move.colourString(colour)
-				+ " " + ((int) byoYomiTime) + " " + ((int) byoYomiStones)
-				+ "\n\n");
+	public void setProcess(Process process) {
+		this.process = process;
+	}
+
+	public void setReader(BufferedReader reader) {
+		this.reader = reader;
+	}
+
+	public boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones) {
+		this.write(GTPConstants.TIMELEFT + " " + Move.colourString(colour) + " " + ((int) byoYomiTime) + " "
+				+ ((int) byoYomiStones) + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
 	}
 
-	public boolean setTimeSettings(double mainTime, double byoYomiTime,
-			double byoYomiStones) {
-		this.write(GTPConstants.TIMESETTINGS + " " + ((int) mainTime) + " "
-				+ ((int) byoYomiTime) + " " + ((int) byoYomiStones) + "\n\n");
+	public boolean setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones) {
+		this.write(GTPConstants.TIMESETTINGS + " " + ((int) mainTime) + " " + ((int) byoYomiTime) + " "
+				+ ((int) byoYomiStones) + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("clearBoard:" + s);
 		return false;
 
+	}
+
+	public void setWriter(Writer writer) {
+		this.writer = writer;
 	}
 
 	public BoardI showBoard() {
 		this.write(GTPConstants.SHOWBOARD + "\n\n");
 		String result = this.readAll();
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println(result);
 		// TODO
 		return null;
@@ -385,44 +394,18 @@ public final class GnuGoEngine implements GTPStatelessInterface {
 		}
 	}
 
-	public String getArgs() {
-		return args;
-	}
+	protected synchronized void write(String s) {
+		try {
+			this.writer.write(s);
+			this.writer.flush();
+			if (this.DEBUG)
+				System.err.println("GnuGo Process Input:\"" + s + "\"");
 
-	public void setArgs(String args) {
-		this.args = args;
-	}
-
-	public BufferedReader getErrreader() {
-		return errreader;
-	}
-
-	public void setErrreader(BufferedReader errreader) {
-		this.errreader = errreader;
-	}
-
-	public Process getProcess() {
-		return process;
-	}
-
-	public void setProcess(Process process) {
-		this.process = process;
-	}
-
-	public BufferedReader getReader() {
-		return reader;
-	}
-
-	public void setReader(BufferedReader reader) {
-		this.reader = reader;
-	}
-
-	public Writer getWriter() {
-		return writer;
-	}
-
-	public void setWriter(Writer writer) {
-		this.writer = writer;
+			this.check();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			System.err.println(t);
+		}
 	}
 
 }

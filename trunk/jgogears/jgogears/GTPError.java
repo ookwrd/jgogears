@@ -1,13 +1,16 @@
 package jgogears;
 
 /**
- * A class of errors representing errors that have been recieved over the GTP
- * command interface.
+ * A class of errors representing errors that have been recieved over the GTP command interface.
  * 
  * @author syeates
- * 
  */
 public class GTPError extends Error {
+
+	/**
+	 * TODO
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public GTPError() {
 		// TODO Auto-generated constructor stub

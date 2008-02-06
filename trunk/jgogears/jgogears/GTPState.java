@@ -1,12 +1,9 @@
 package jgogears;
 
-import jgogears.*;
-
 /**
  * Class representing the state of a GTP game
  * 
  * @author syeates
- * 
  */
 public class GTPState {
 
@@ -32,7 +29,7 @@ public class GTPState {
 			throw new Error("Illegal GTPState state");
 		if (this.blackCapturedCount < 0)
 			throw new Error("Illegal GTPState state");
-		if (this.komi < 10000 && this.komi > 10000)
+		if ((this.komi < 10000) && (this.komi > 10000))
 			throw new Error("Illegal GTPState state");
 		if (this.mainTime < 0)
 			throw new Error("Illegal GTPState state");
@@ -49,7 +46,43 @@ public class GTPState {
 		this.whiteCapturedCount = 0;
 		this.blackCapturedCount = 0;
 		this.board = new Board((short) this.getBoardsize());
-		playedMoves = new java.util.Vector<Move>();
+		this.playedMoves = new java.util.Vector<Move>();
+	}
+
+	public int getBlackCapturedCount() {
+		return this.blackCapturedCount;
+	}
+
+	public BoardI getBoard() {
+		return this.board;
+	}
+
+	public int getBoardsize() {
+		return this.boardsize;
+	}
+
+	public double getByoYomiStones() {
+		return this.byoYomiStones;
+	}
+
+	public double getByoYomiTime() {
+		return this.byoYomiTime;
+	}
+
+	public double getKomi() {
+		return this.komi;
+	}
+
+	public double getMainTime() {
+		return this.mainTime;
+	}
+
+	public java.util.Vector<Move> getMoves() {
+		return new java.util.Vector<Move>(this.playedMoves);
+	}
+
+	public int getWhiteCapturedCount() {
+		return this.whiteCapturedCount;
 	}
 
 	public void playMove(Move move) {
@@ -61,68 +94,32 @@ public class GTPState {
 		this.board = this.board.newBoard(move);
 	}
 
-	public java.util.Vector<Move> getMoves() {
-		return new java.util.Vector<Move>(this.playedMoves);
-	}
-
-	public int getBlackCapturedCount() {
-		return blackCapturedCount;
-	}
-
 	public void setBlackCapturedCount(int blackCapturedCount) {
 		this.blackCapturedCount = blackCapturedCount;
-	}
-
-	public BoardI getBoard() {
-		return board;
 	}
 
 	public void setBoard(Board board) {
 		this.board = board;
 	}
 
-	public int getBoardsize() {
-		return boardsize;
-	}
-
 	public void setBoardsize(short boardsize) {
 		this.boardsize = boardsize;
-	}
-
-	public double getByoYomiStones() {
-		return byoYomiStones;
 	}
 
 	public void setByoYomiStones(double byoTomiStones) {
 		this.byoYomiStones = byoTomiStones;
 	}
 
-	public double getByoYomiTime() {
-		return byoYomiTime;
-	}
-
 	public void setByoYomiTime(double byoYomiTime) {
 		this.byoYomiTime = byoYomiTime;
-	}
-
-	public double getKomi() {
-		return komi;
 	}
 
 	public void setKomi(double komi) {
 		this.komi = komi;
 	}
 
-	public double getMainTime() {
-		return mainTime;
-	}
-
 	public void setMainTime(double mainTime) {
 		this.mainTime = mainTime;
-	}
-
-	public int getWhiteCapturedCount() {
-		return whiteCapturedCount;
 	}
 
 	public void setWhiteCapturedCount(int whiteCapturedCount) {

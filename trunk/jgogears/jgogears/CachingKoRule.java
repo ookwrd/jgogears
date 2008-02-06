@@ -1,49 +1,61 @@
 package jgogears;
 
-import java.util.Iterator;
 import java.util.TreeSet;
 
-import jgogears.*;
-
+/**
+ * A RuleSet that caches the results to speed things up
+ * 
+ * @author syeates
+ */
 public class CachingKoRule extends RuleSet {
+	/**
+	 * the inner ruleset
+	 */
+	private final RuleSet rule;
 
-	private RuleSet rule;
-
+	/**
+	 * The constructor, passing in the inner rule whose results are cached
+	 * 
+	 * @param rule
+	 *            the inner rule whose results are cached
+	 */
 	public CachingKoRule(RuleSet rule) {
 		this.rule = rule;
 	}
 
 	@Override
 	public TreeSet<Vertex> captures(Game game, BoardI Board, Move move) {
-		return rule.captures(game, Board, move);
+		return this.rule.captures(game, Board, move);
 	}
 
 	@Override
 	public String getDescription() {
-		return rule.getDescription() + "+ caching";
+		return this.rule.getDescription() + "+ caching";
+	}
+
+	@Override
+	public TreeSet<Vertex> getLiberties(short rowb, short columnb, BoardI board) {
+		return this.rule.getLiberties(rowb, columnb, board);
 	}
 
 	@Override
 	public String getName() {
-		return rule.getName() + "+ caching";
+		return this.rule.getName() + "+ caching";
+	}
+
+	@Override
+	public TreeSet<Vertex> getString(short row, short column, BoardI board) {
+		return this.rule.getString(row, column, board);
 	}
 
 	@Override
 	public TreeSet<Vertex> leavesKo(Game game, BoardI Board, Move move) {
-		return rule.leavesKo(game, Board, move);
+		return this.rule.leavesKo(game, Board, move);
 	}
 
 	@Override
 	public boolean moveIsLegal(Game game, BoardI Board, Move move) {
-		return rule.moveIsLegal(game, Board, move);
-	}
-
-	public TreeSet<Vertex> getLiberties(short rowb, short columnb, BoardI board) {
-		return rule.getLiberties(rowb, columnb, board);
-	}
-
-	public TreeSet<Vertex> getString(short row, short column, BoardI board) {
-		return rule.getString(row, column, board);
+		return this.rule.moveIsLegal(game, Board, move);
 	}
 
 }

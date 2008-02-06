@@ -1,12 +1,20 @@
 package jgogears;
 
-import jgogears.Board;
-import jgogears.Move;
-
+/**
+ * A skeleton GTP player
+ * TODO
+ * @author syeates
+ *
+ */
 public abstract class SkeletonEngine implements GTPInterface {
 
 	public SkeletonEngine() {
 		super();
+	}
+
+	public void clearBoard(GTPState state) {
+		System.err.println("clearing board");
+		state.clearBoard();
 	}
 
 	public Move[] fixedHandicap(int handicap, GTPState state) {
@@ -18,7 +26,7 @@ public abstract class SkeletonEngine implements GTPInterface {
 	}
 
 	public Move genMove(short colour, GTPState state) {
-		Move result = regGenMove(colour, state);
+		Move result = this.regGenMove(colour, state);
 		state.playMove(result);
 		return result;
 	}
@@ -69,23 +77,16 @@ public abstract class SkeletonEngine implements GTPInterface {
 		state.setBoardsize(size);
 	}
 
-	public void clearBoard(GTPState state) {
-		System.err.println("clearing board");
-		state.clearBoard();
-	}
-
 	public void setKomi(double komi, GTPState state) {
 		state.setKomi(komi);
 	}
 
-	public void setTimeLeft(int colour, double byoYomiTime,
-			double byoYomiStones, GTPState state) {
+	public void setTimeLeft(int colour, double byoYomiTime, double byoYomiStones, GTPState state) {
 		state.setByoYomiStones(byoYomiStones);
 		state.setByoYomiTime(byoYomiTime);
 	}
 
-	public void setTimeSettings(double mainTime, double byoYomiTime,
-			double byoYomiStones, GTPState state) {
+	public void setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones, GTPState state) {
 		state.setByoYomiStones(byoYomiStones);
 		state.setByoYomiTime(byoYomiTime);
 		state.setMainTime(mainTime);

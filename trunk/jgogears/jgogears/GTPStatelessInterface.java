@@ -1,11 +1,15 @@
 package jgogears;
 
-import jgogears.*;
-import java.util.*;
+import java.util.TreeSet;
 
 public interface GTPStatelessInterface {
-	/** get the protocol version */
-	int getProtocolVersion();
+	boolean clearBoard();
+
+	TreeSet<Vertex> finalStatusList(String status);
+
+	TreeSet<Vertex> fixedHandicap(short handicap);
+
+	Move genMove(short colour);
 
 	/** get the name of the engine */
 	String getEngineName();
@@ -13,21 +17,16 @@ public interface GTPStatelessInterface {
 	/** get the version of the engine */
 	String getEngineVersion();
 
+	GTPScore getFinalScore();
+
 	boolean getKnownCommand(String command);
 
 	TreeSet<String> getListCommands();
 
-	boolean quit();
+	/** get the protocol version */
+	int getProtocolVersion();
 
-	GTPScore getFinalScore();
-
-	boolean setBoardSize(short size);
-
-	boolean clearBoard();
-
-	boolean setKomi(double komi);
-
-	TreeSet<Vertex> fixedHandicap(short handicap);
+	boolean loadsgf(String filename, int moveNumber);
 
 	TreeSet<Vertex> placeFreeHandicap(short handicap);
 
@@ -35,20 +34,19 @@ public interface GTPStatelessInterface {
 
 	boolean play(Move move);
 
-	Move genMove(short colour);
-
-	boolean undo();
-
-	boolean setTimeSettings(double mainTime, double byoYomiTime,
-			double byoYomiStones);
-
-	boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones);
-
-	TreeSet<Vertex> finalStatusList(String status);
-
-	boolean loadsgf(String filename, int moveNumber);
+	boolean quit();
 
 	Move regGenMove(short colour);
 
+	boolean setBoardSize(short size);
+
+	boolean setKomi(double komi);
+
+	boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones);
+
+	boolean setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones);
+
 	BoardI showBoard();
+
+	boolean undo();
 }

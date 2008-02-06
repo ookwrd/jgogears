@@ -1,21 +1,21 @@
 package jgogears;
 
-import jgogears.engine.ModelTest;
-import jgogears.engine.VertexLineariserTest;
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import jgogears.engine.*;
+import junit.framework.*;
 
 /**
- * Manually created test suite of all useful tests in the project, across all
- * packages.
- * 
- * The default test suite for the project.
+ * Manually created test suite of all useful tests in the project, across all packages. The default test suite for the
+ * project.
  * 
  * @author Stuart
- * 
  */
 
 public class GlobalTests {
+	/**
+	 * test collection
+	 * 
+	 * @author syeates
+	 */
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("all tests in project");

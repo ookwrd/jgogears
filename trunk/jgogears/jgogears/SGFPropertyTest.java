@@ -1,7 +1,7 @@
 package jgogears;
 
-//import java.io.StringReader;
-//import java.util.Iterator;
+// import java.io.StringReader;
+// import java.util.Iterator;
 
 import junit.framework.TestCase;
 

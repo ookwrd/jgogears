@@ -3,7 +3,6 @@ package jgogears;
 import junit.framework.TestCase;
 
 /**
- * 
  * @author syeates
  * @see GnuGoEngine
  * @see junit.framework.TestCase
