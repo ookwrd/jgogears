@@ -1,6 +1,5 @@
 package jgogears.engine;
 
-import java.io.*;
 import java.util.*;
 
 import jgogears.*;

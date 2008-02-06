@@ -1,7 +1,7 @@
 package jgogears;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 import junit.framework.TestCase;
 
@@ -11,22 +11,24 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	GnuGoEngine engine = null;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		engine = new GnuGoEngine();
-		engine.initialise();
+		this.engine = new GnuGoEngine();
+		this.engine.initialise();
 	}
 
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		if (engine != null)
-			engine.quit();
+		if (this.engine != null)
+			this.engine.quit();
 	}
 
 	public final void testClearBoard() throws IOException {
-		engine.initialise();
-		boolean r = engine.clearBoard();
-		engine.quit();
+		this.engine.initialise();
+		boolean r = this.engine.clearBoard();
+		this.engine.quit();
 		assertTrue(r);
 	}
 
@@ -61,14 +63,14 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testFixedHandicap() {
 		try {
-			engine.initialise();
+			this.engine.initialise();
 			for (short i = 2; i < 10; i++) {
-				engine.setBoardSize((short) 19);
-				TreeSet<Vertex> moves = engine.fixedHandicap(i);
+				this.engine.setBoardSize((short) 19);
+				TreeSet<Vertex> moves = this.engine.fixedHandicap(i);
 				assertNotNull(moves);
 				assertTrue(moves.size() == i);
 			}
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -78,13 +80,13 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGenMove() {
 		try {
-			engine.initialise();
-			engine.setBoardSize((short) 19);
-			engine.clearBoard();
-			Move move = engine.genMove(BoardI.VERTEX_BLACK);
-			if (DEBUG)
+			this.engine.initialise();
+			this.engine.setBoardSize((short) 19);
+			this.engine.clearBoard();
+			Move move = this.engine.genMove(BoardI.VERTEX_BLACK);
+			if (this.DEBUG)
 				System.err.println(move);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -95,11 +97,11 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetEngineName() {
 		try {
-			engine.initialise();
-			String s = engine.getEngineName();
-			if (DEBUG)
+			this.engine.initialise();
+			String s = this.engine.getEngineName();
+			if (this.DEBUG)
 				System.err.println(s);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -109,10 +111,10 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetEngineVersion() {
 		try {
-			engine.initialise();
-			String s = engine.getEngineVersion();
+			this.engine.initialise();
+			String s = this.engine.getEngineVersion();
 			System.err.println(s);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -122,14 +124,14 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetFinalScore() {
 		try {
-			engine.initialise();
-			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 0);
+			this.engine.initialise();
+			Boolean b = this.engine.loadsgf("sgf/testing/seki.sgf", 0);
 			assertTrue(b);
 
-			GTPScore score = engine.getFinalScore();
+			GTPScore score = this.engine.getFinalScore();
 			assertNotNull(score);
 			// TODO
-			engine.quit();
+			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -140,9 +142,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetKnownCommand() {
 		try {
-			engine.initialise();
-			engine.clearBoard();
-			engine.quit();
+			this.engine.initialise();
+			this.engine.clearBoard();
+			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -153,9 +155,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetListCommands() {
 		try {
-			engine.initialise();
-			engine.clearBoard();
-			engine.quit();
+			this.engine.initialise();
+			this.engine.clearBoard();
+			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -167,11 +169,11 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testGetProtocolVersion() {
 		try {
-			engine.initialise();
-			int v = engine.getProtocolVersion();
+			this.engine.initialise();
+			int v = this.engine.getProtocolVersion();
 			assertTrue(v > 0);
 			assertTrue(v < 3);
-			engine.quit();
+			this.engine.quit();
 
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -182,16 +184,15 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testLoadsgf() {
 		try {
-			engine.initialise();
-			Boolean b = engine.loadsgf("sgf/testing/seki.sgf", 20);
+			this.engine.initialise();
+			Boolean b = this.engine.loadsgf("sgf/testing/seki.sgf", 20);
 			assertTrue(b);
-			Move move = engine.genMove(BoardI.VERTEX_BLACK);
+			Move move = this.engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
-			BoardI board = engine.showBoard();
-			System.err
-					.println("testLoadsgf:: the following board should have moves on it:");
+			BoardI board = this.engine.showBoard();
+			System.err.println("testLoadsgf:: the following board should have moves on it:");
 			System.err.println(board);
-			engine.quit();
+			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -202,9 +203,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testPlaceFreeHandicapGoMoveArray() {
 		try {
-			engine.initialise();
-			engine.clearBoard();
-			engine.quit();
+			this.engine.initialise();
+			this.engine.clearBoard();
+			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -216,12 +217,12 @@ public class GnuGoEngineTest2 extends TestCase {
 	public final void testPlaceFreeHandicapInt() {
 
 		try {
-			engine.initialise();
-			engine.setBoardSize((short) 19);
-			engine.clearBoard();
-			TreeSet<Vertex> moves = engine.placeFreeHandicap((short) 9);
+			this.engine.initialise();
+			this.engine.setBoardSize((short) 19);
+			this.engine.clearBoard();
+			TreeSet<Vertex> moves = this.engine.placeFreeHandicap((short) 9);
 			assertTrue(moves.size() == 9);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -233,28 +234,28 @@ public class GnuGoEngineTest2 extends TestCase {
 
 		try {
 			for (short i = 2; i < 50; i++) {
-				engine.initialise();
-				engine.setBoardSize((short) 19);
-				engine.clearBoard();
-				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				this.engine.initialise();
+				this.engine.setBoardSize((short) 19);
+				this.engine.clearBoard();
+				TreeSet<Vertex> moves = this.engine.placeFreeHandicap(i);
 				assertTrue(moves.size() == i);
-				engine.quit();
+				this.engine.quit();
 			}
 			for (short i = 2; i < 20; i++) {
-				engine.initialise();
-				engine.setBoardSize((short) 13);
-				engine.clearBoard();
-				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				this.engine.initialise();
+				this.engine.setBoardSize((short) 13);
+				this.engine.clearBoard();
+				TreeSet<Vertex> moves = this.engine.placeFreeHandicap(i);
 				assertTrue(moves.size() == i);
-				engine.quit();
+				this.engine.quit();
 			}
 			for (short i = 2; i < 10; i++) {
-				engine.initialise();
-				engine.setBoardSize((short) 9);
-				engine.clearBoard();
-				TreeSet<Vertex> moves = engine.placeFreeHandicap(i);
+				this.engine.initialise();
+				this.engine.setBoardSize((short) 9);
+				this.engine.clearBoard();
+				TreeSet<Vertex> moves = this.engine.placeFreeHandicap(i);
 				assertTrue(moves.size() == i);
-				engine.quit();
+				this.engine.quit();
 			}
 		} catch (Throwable t) {
 			System.err.println(t);
@@ -265,11 +266,11 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testPlay() {
 		try {
-			engine.initialise();
-			engine.setBoardSize((short) 19);
-			engine.clearBoard();
-			engine.play(new Move("white c3"));
-			engine.quit();
+			this.engine.initialise();
+			this.engine.setBoardSize((short) 19);
+			this.engine.clearBoard();
+			this.engine.play(new Move("white c3"));
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -279,8 +280,8 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testQuit() {
 		try {
-			engine.initialise();
-			engine.quit();
+			this.engine.initialise();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -290,10 +291,10 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testRegGenMove() {
 		try {
-			engine.initialise();
-			Move move = engine.regGenMove(BoardI.VERTEX_BLACK);
+			this.engine.initialise();
+			Move move = this.engine.regGenMove(BoardI.VERTEX_BLACK);
 			System.err.println(move);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -303,12 +304,12 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testSetBoardSize() {
 		try {
-			engine.initialise();
-			boolean result = engine.setBoardSize((short) 19);
+			this.engine.initialise();
+			boolean result = this.engine.setBoardSize((short) 19);
 			assertTrue(result);
-			result = engine.setBoardSize((short) 9);
+			result = this.engine.setBoardSize((short) 9);
 			assertTrue(result);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -318,9 +319,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testSetKomi() {
 		try {
-			engine.initialise();
-			engine.setKomi(7.0);
-			engine.quit();
+			this.engine.initialise();
+			this.engine.setKomi(7.0);
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -330,9 +331,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testSetTimeLeft() {
 		try {
-			engine.initialise();
-			engine.setTimeLeft(BoardI.VERTEX_BLACK, 1.0, 1.0);
-			engine.quit();
+			this.engine.initialise();
+			this.engine.setTimeLeft(BoardI.VERTEX_BLACK, 1.0, 1.0);
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -342,9 +343,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testSetTimeSettings() {
 		try {
-			engine.initialise();
-			engine.setTimeSettings(1.0, 1.0, 1.0);
-			engine.quit();
+			this.engine.initialise();
+			this.engine.setTimeSettings(1.0, 1.0, 1.0);
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -354,10 +355,10 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testShowBoard() {
 		try {
-			engine.initialise();
-			BoardI board = engine.showBoard();
+			this.engine.initialise();
+			BoardI board = this.engine.showBoard();
 			// TODO
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();
@@ -367,10 +368,10 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	public final void testUndo() {
 		try {
-			engine.initialise();
-			boolean result = engine.undo();
+			this.engine.initialise();
+			boolean result = this.engine.undo();
 			assertFalse(result);
-			engine.quit();
+			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);
 			t.printStackTrace();

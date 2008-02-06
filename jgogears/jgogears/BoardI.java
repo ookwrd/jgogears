@@ -1,14 +1,10 @@
 package jgogears;
 
-import jgogears.graph.Graph;
-
 /**
- * Abstract interface to a goban. Knows about the size of the board, which
- * stones are where, and about colours. Knows nothing of the history of the
- * board or whose turn it is to play.
+ * Abstract interface to a goban. Knows about the size of the board, which stones are where, and about colours. Knows
+ * nothing of the history of the board or whose turn it is to play.
  * 
  * @author Stuart
- * 
  */
 public abstract class BoardI {
 
@@ -33,7 +29,7 @@ public abstract class BoardI {
 	 */
 	public static final short VERTEX_BLACK = 2;
 	/**
-	 * A vretex with a white stone
+	 * A vertex with a white stone
 	 */
 	public static final short VERTEX_WHITE = 1;
 	/**
@@ -44,26 +40,10 @@ public abstract class BoardI {
 	 * The MINIMUM value for a vertex colour
 	 */
 	public static final short VERTEX_MIN = 0;
-
 	/**
-	 * get the size of this board
+	 * 
 	 */
-	public abstract short getSize();
-
-	/**
-	 * create a new board based on the current board plus a move
-	 */
-	public abstract BoardI newBoard(Move move);
-
-	/**
-	 * get the colour of a vertex
-	 */
-	public abstract int getColour(int row, int column);
-
-	// /**
-	// * get the colour of a vertex
-	// */
-	// public abstract int setColour(int row, int column, short colour) ;
+	public final static boolean DEFAULT_ZOBRIST = true;
 
 	/**
 	 * parse the colour of a move
@@ -82,27 +62,57 @@ public abstract class BoardI {
 		} else if (colourString.compareTo("black") == 0) {
 			return BoardI.VERTEX_BLACK;
 		} else {
-			throw new IllegalArgumentException("trying to parse (1) \""
-					+ colourString + "\" as a colour");
+			throw new IllegalArgumentException("trying to parse (1) \"" + colourString + "\" as a colour");
 		}
 	}
 
-	public final static boolean DEFAULT_ZOBRIST = true;
+	/**
+	 * 
+	 */
 	protected Zobrist zobrist = null;
 
-	public BoardI(boolean zobrist) {
-		this.zobrist = new Zobrist();
-	}
+	// /**
+	// * get the colour of a vertex
+	// */
+	// public abstract int setColour(int row, int column, short colour) ;
 
 	public BoardI() {
 		if (DEFAULT_ZOBRIST)
 			this.zobrist = new Zobrist();
 	}
 
+	/**
+	 * @param zobrist
+	 */
+	public BoardI(boolean zobrist) {
+		this.zobrist = new Zobrist();
+	}
+
+	/**
+	 * get the colour of a vertex
+	 */
+	public abstract int getColour(int row, int column);
+
+	/**
+	 * get the size of this board
+	 */
+	public abstract short getSize();
+
+	/**
+	 * @return
+	 */
 	public Zobrist getZobrist() {
 		return this.zobrist;
 	}
 
+	/**
+	 * create a new board based on the current board plus a move
+	 */
+	public abstract BoardI newBoard(Move move);
+
+	/**
+	 * @param zobrist
+	 */
 	protected void setZobrist(Zobrist zobrist) {
 		this.zobrist = zobrist;
 	}

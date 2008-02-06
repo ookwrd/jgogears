@@ -3,14 +3,16 @@ package jgogears;
 import java.util.*;
 
 /**
- * GoBoard represents the state of a Go board at a particular point in time.
- * 
- * It does NOT represent the number of prisoners, the number (or order) of
- * previous moves or whose turn it is too play.
+ * GoBoard represents the state of a Go board at a particular point in time. It does NOT represent the number of
+ * prisoners, the number (or order) of previous moves or whose turn it is too play.
  * 
  * @author stuart
  */
 public class Board extends BoardI {
+
+	static boolean DEBUG = false;
+
+	static boolean CHECK = true;
 
 	/**
 	 * The size of this board (defaults to DEFAULT_BOARD_SIZE or 19
@@ -18,26 +20,19 @@ public class Board extends BoardI {
 	 * @see #DEFAULT_BOARD_SIZE
 	 */
 	private short size = DEFAULT_BOARD_SIZE;
-
 	/**
 	 * The actual board, of size size
 	 * 
 	 * @see #size
 	 */
 	private short[][] board = null;
-
-	static boolean DEBUG = false;
-	static boolean CHECK = true;
 	private RuleSet rule = new NoKoRuleSet();
 
 	/**
-	 * initialise the board, creating it and setting it empty.
+	 * Default constructor
 	 */
-	protected void init() {
-		board = new short[size][size];
-		for (int i = 0; i < size; i++)
-			for (int j = 0; j < size; j++)
-				board[i][j] = VERTEX_EMPTY;
+	public Board() {
+		this.init();
 	}
 
 	/**
@@ -45,22 +40,7 @@ public class Board extends BoardI {
 	 */
 	public Board(boolean zobrist) {
 		super(zobrist);
-		init();
-	}
-
-	/**
-	 * Default constructor
-	 */
-	public Board() {
-		init();
-	}
-
-	/**
-	 * constructor of specially sized boards
-	 */
-	public Board(short size) {
-		this.size = size;
-		init();
+		this.init();
 	}
 
 	/**
@@ -68,24 +48,7 @@ public class Board extends BoardI {
 	 */
 	public Board(int size) {
 		this.size = (short) size;
-		init();
-	}
-
-	/**
-	 * Default constructor
-	 */
-	public Board(RuleSet rule) {
-		this.rule = rule;
-		init();
-	}
-
-	/**
-	 * constructor of specially sized boards
-	 */
-	public Board(short size, RuleSet rule) {
-		this.size = size;
-		this.rule = rule;
-		init();
+		this.init();
 	}
 
 	/**
@@ -94,7 +57,48 @@ public class Board extends BoardI {
 	public Board(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.rule = rule;
-		init();
+		this.init();
+	}
+
+	/**
+	 * Default constructor
+	 */
+	public Board(RuleSet rule) {
+		this.rule = rule;
+		this.init();
+	}
+
+	public Board(short size) {
+		this.size = size;
+		this.init();
+	}
+
+	/**
+	 * constructor of specially sized boards
+	 */
+	public Board(short size, RuleSet rule) {
+		this.size = size;
+		this.rule = rule;
+		this.init();
+	}
+
+	/*
+	 * @see jgogears.BoardInterface#getColour
+	 */
+	@Override
+	public int getColour(int row, int column) {
+		// System.err.println("getColour() " + " " + row + " " + column + " " +
+		// size);
+		if ((row < 0) || (column < 0) || (row >= this.size) || (column >= this.size))
+			return VERTEX_OFF_BOARD;
+		return this.board[row][column];
+	}
+
+	/**
+	 * @return
+	 */
+	public RuleSet getKoRule() {
+		return this.rule;
 	}
 
 	/*
@@ -102,27 +106,19 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#getSize()
 	 */
+	@Override
 	public short getSize() {
-		return size;
+		return this.size;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * initialise the board, creating it and setting it empty.
 	 */
-	public RuleSet getKoRule() {
-		return rule;
-	}
-
-	/*
-	 * @see jgogears.BoardInterface#getColour
-	 */
-	public int getColour(int row, int column) {
-		// System.err.println("getColour() " + " " + row + " " + column + " " +
-		// size);
-		if (row < 0 || column < 0 || row >= size || column >= size)
-			return VERTEX_OFF_BOARD;
-		return board[row][column];
+	protected void init() {
+		this.board = new short[this.size][this.size];
+		for (int i = 0; i < this.size; i++)
+			for (int j = 0; j < this.size; j++)
+				this.board[i][j] = VERTEX_EMPTY;
 	}
 
 	/*
@@ -130,12 +126,13 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#newBoard(jgogears.GoMove)
 	 */
+	@Override
 	public BoardI newBoard(Move move) {
 		if (DEBUG)
 			System.out.println("creating a new board using:" + move);
 		Board result = new Board(this.getSize(), this.getKoRule());
-		for (int i = 0; i < size; i++)
-			for (int j = 0; j < size; j++)
+		for (int i = 0; i < this.size; i++)
+			for (int j = 0; j < this.size; j++)
 				if (result.board[i][j] != VERTEX_KO)
 					result.board[i][j] = this.board[i][j];
 				else
@@ -150,18 +147,16 @@ public class Board extends BoardI {
 			// place the stone
 			result.setColour(move.getRow(), move.getColumn(), move.getColour());
 			if (this.zobrist != null)
-				result.setZobrist(new Zobrist(this.zobrist, move.getRow(), move
-						.getColumn(), Board.VERTEX_EMPTY));
+				result.setZobrist(new Zobrist(this.zobrist, move.getRow(), move.getColumn(), BoardI.VERTEX_EMPTY));
 
 			// take the captures
-			TreeSet<Vertex> captures = rule.captures(null, this, move);
+			TreeSet<Vertex> captures = this.rule.captures(null, this, move);
 			Iterator<Vertex> i = captures.iterator();
 			while (i.hasNext()) {
 				Vertex v = i.next();
-				result.setColour(v.getRow(), v.getColumn(), Board.VERTEX_EMPTY);
+				result.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY);
 				if (this.zobrist != null)
-					result.setZobrist(new Zobrist(result.getZobrist(), v
-							.getRow(), v.getColumn(), Board.VERTEX_EMPTY));
+					result.setZobrist(new Zobrist(result.getZobrist(), v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY));
 			}
 		}
 
@@ -173,18 +168,16 @@ public class Board extends BoardI {
 	 */
 	public int setColour(int row, int column, short colour) {
 
-		int result = getColour(row, column);
+		int result = this.getColour(row, column);
 		if (CHECK)
-			if (row >= this.getSize() || row < 0)
-				throw new Error("Bad board size " + row + "/" + this.getSize()
-						+ " ");
+			if ((row >= this.getSize()) || (row < 0))
+				throw new Error("Bad board size " + row + "/" + this.getSize() + " ");
 		if (CHECK)
-			if (column >= this.getSize() || column < 0)
-				throw new Error(
-						"Bad board size or play off the edge of the board (remember we're zero indexed) "
-								+ column + "/" + this.getSize() + " ");
+			if ((column >= this.getSize()) || (column < 0))
+				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) "
+						+ column + "/" + this.getSize() + " ");
 
-		board[row][column] = colour;
+		this.board[row][column] = colour;
 		return result;
 	}
 
@@ -193,8 +186,9 @@ public class Board extends BoardI {
 	 * 
 	 * @see jgogears.BoardInterface#toString()
 	 */
+	@Override
 	public String toString() {
-		return toString(null);
+		return this.toString(null);
 	}
 
 	/*
@@ -211,14 +205,14 @@ public class Board extends BoardI {
 		}
 		// do the header
 		buf.append("   ");
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < this.size; i++) {
 			buf.append(i);
 		}
 		buf.append("\n");
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < this.size; i++) {
 			buf.append(" ").append(i).append(" ");
-			for (int j = 0; j < size; j++) {
-				if (i == rowoff && j == coloff) {
+			for (int j = 0; j < this.size; j++) {
+				if ((i == rowoff) && (j == coloff)) {
 					buf.append("&");
 				}
 				switch (this.board[i][j]) {

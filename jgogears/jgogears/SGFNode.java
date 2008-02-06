@@ -4,29 +4,7 @@ import java.util.*;
 
 public class SGFNode {
 
-	boolean DEBUG = false;
-
-	public Vector<SGFProperty> properties = new Vector<SGFProperty>();
-
-	public String toString() {
-		String result = ";";
-		Iterator<SGFProperty> i = properties.iterator();
-		while (i.hasNext()) {
-			result = result + i.next();
-		}
-		return result;
-	}
-
-	public SGFProperty firstProperty() {
-		Iterator<SGFProperty> props = properties.iterator();
-		if (props.hasNext())
-			return props.next();
-		else
-			return null;
-	}
-
 	/**
-	 * 
 	 * @param move
 	 * @return the column of the move
 	 */
@@ -90,72 +68,7 @@ public class SGFNode {
 	}
 
 	/**
-	 * 
-	 * @param move
-	 * @return the row of the move
-	 */
-	public static short rowFromMoveString(String move) {
-		switch (move.charAt(2)) {
-		case 'a':
-			return 0;
-		case 'b':
-			return 1;
-		case 'c':
-			return 2;
-		case 'd':
-			return 3;
-		case 'e':
-			return 4;
-		case 'f':
-			return 5;
-		case 'g':
-			return 6;
-		case 'h':
-			return 7;
-		case 'i':
-			return 8;
-		case 'j':
-			return 9;
-		case 'k':
-			return 10;
-		case 'l':
-			return 11;
-		case 'm':
-			return 12;
-		case 'n':
-			return 13;
-		case 'o':
-			return 14;
-		case 'p':
-			return 15;
-		case 'q':
-			return 16;
-		case 'r':
-			return 17;
-		case 's':
-			return 18;
-		case 't':
-			return 19;
-		case 'u':
-			return 20;
-		case 'v':
-			return 21;
-		case 'w':
-			return 22;
-		case 'x':
-			return 23;
-		case 'y':
-			return 24;
-		case 'z':
-			return 25;
-		default:
-			throw new Error(move + " " + move.charAt(2));
-		}
-	}
-
-	/**
-	 * Extract the row (second value) from tokens in the range of: [a1]:[t19]
-	 * missing the i
+	 * Extract the row (second value) from tokens in the range of: [a1]:[t19] missing the i
 	 * 
 	 * @param move
 	 * @return the column
@@ -239,6 +152,81 @@ public class SGFNode {
 		}
 	}
 
+	/**
+	 * @param move
+	 * @return the row of the move
+	 */
+	public static short rowFromMoveString(String move) {
+		switch (move.charAt(2)) {
+		case 'a':
+			return 0;
+		case 'b':
+			return 1;
+		case 'c':
+			return 2;
+		case 'd':
+			return 3;
+		case 'e':
+			return 4;
+		case 'f':
+			return 5;
+		case 'g':
+			return 6;
+		case 'h':
+			return 7;
+		case 'i':
+			return 8;
+		case 'j':
+			return 9;
+		case 'k':
+			return 10;
+		case 'l':
+			return 11;
+		case 'm':
+			return 12;
+		case 'n':
+			return 13;
+		case 'o':
+			return 14;
+		case 'p':
+			return 15;
+		case 'q':
+			return 16;
+		case 'r':
+			return 17;
+		case 's':
+			return 18;
+		case 't':
+			return 19;
+		case 'u':
+			return 20;
+		case 'v':
+			return 21;
+		case 'w':
+			return 22;
+		case 'x':
+			return 23;
+		case 'y':
+			return 24;
+		case 'z':
+			return 25;
+		default:
+			throw new Error(move + " " + move.charAt(2));
+		}
+	}
+
+	boolean DEBUG = false;
+
+	public Vector<SGFProperty> properties = new Vector<SGFProperty>();
+
+	public SGFProperty firstProperty() {
+		Iterator<SGFProperty> props = this.properties.iterator();
+		if (props.hasNext())
+			return props.next();
+		else
+			return null;
+	}
+
 	public Move getMove() {
 		Iterator<SGFProperty> iterator = this.properties.iterator();
 		while (iterator.hasNext()) {
@@ -269,16 +257,26 @@ public class SGFNode {
 		move.setRow(rowFromMoveString(value.toLowerCase()));
 		move.setColumn(columnFromMoveString(value.toLowerCase()));
 		// check for [tt] pass
-		if (move.getRow() == 19 && move.getColumn() == 19) {
+		if ((move.getRow() == 19) && (move.getColumn() == 19)) {
 			Move newmove = new Move();
 			newmove.setPass(true);
 			newmove.setColour(move.getColour());
-			if (DEBUG)
+			if (this.DEBUG)
 				System.err.println("converted \"" + this + "\"  to pass");
 			move = newmove;
 		}
 		return move;
 
+	}
+
+	@Override
+	public String toString() {
+		String result = ";";
+		Iterator<SGFProperty> i = this.properties.iterator();
+		while (i.hasNext()) {
+			result = result + i.next();
+		}
+		return result;
 	}
 
 }

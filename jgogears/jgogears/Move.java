@@ -1,14 +1,50 @@
 package jgogears;
 
 /**
- * A move. A colour and either a vertex, a pass or a resign.
- * 
- * Also used for handicap stones.
+ * A move. A colour and either a vertex, a pass or a resign. Also used for handicap stones.
  * 
  * @author syeates
  */
 
 public final class Move {
+
+	/**
+	 * @param colour
+	 * @return the colour as a string
+	 */
+	public static String colourString(int colour) {
+		// find the colour of the move
+		String colourS = "";
+		switch (colour) {
+		case BoardI.VERTEX_WHITE:
+			colourS = "white";
+			break;
+		case BoardI.VERTEX_BLACK:
+			colourS = "black";
+			break;
+		case BoardI.VERTEX_KO:
+			colourS = "k";
+			break;
+		case BoardI.VERTEX_EMPTY:
+			colourS = "";
+			break;
+		default:
+			throw new java.lang.InternalError();
+		}
+		return colourS;
+	}
+
+	/**
+	 * Create a handicap stone from a string
+	 * 
+	 * @param v
+	 * @return the stone as a move
+	 */
+	public static Move createHandicapStone(String s) {
+		Vertex v = new Vertex(s);
+		Move result = new Move(v.getRow(), v.getColumn(), BoardI.VERTEX_BLACK);
+		return result;
+	}
 
 	private short row = Short.MIN_VALUE;
 
@@ -21,19 +57,9 @@ public final class Move {
 	private short colour = BoardI.VERTEX_KO;
 
 	/**
-	 * create a GoMove
-	 * 
-	 * @param row
-	 *            the row of the move
-	 * @param column
-	 *            the column of the move
-	 * @param colour
-	 *            the colour of the move
+	 * create an empty GoMove
 	 */
-	public Move(short row, short column, short colour) {
-		this.row = row;
-		this.column = column;
-		this.colour = colour;
+	public Move() {
 	}
 
 	/**
@@ -69,9 +95,19 @@ public final class Move {
 	}
 
 	/**
-	 * create an empty GoMove
+	 * create a GoMove
+	 * 
+	 * @param row
+	 *            the row of the move
+	 * @param column
+	 *            the column of the move
+	 * @param colour
+	 *            the colour of the move
 	 */
-	public Move() {
+	public Move(short row, short column, short colour) {
+		this.row = row;
+		this.column = column;
+		this.colour = colour;
 	}
 
 	/**
@@ -87,8 +123,7 @@ public final class Move {
 
 		int space = move.indexOf(" ");
 		if (space < 0)
-			throw new IllegalArgumentException("Bad argument to GoMove(" + move
-					+ ")");
+			throw new IllegalArgumentException("Bad argument to GoMove(" + move + ")");
 		String colourString = move.substring(0, space);
 		this.colour = BoardI.parseColour(colourString);
 		String vertexString = move.substring(space + 1, move.length());
@@ -98,21 +133,9 @@ public final class Move {
 			this.pass = true;
 		} else {
 			Vertex v = new Vertex(vertexString);
-			setRow(v.getRow());
-			setColumn(v.getColumn());
+			this.setRow(v.getRow());
+			this.setColumn(v.getColumn());
 		}
-	}
-
-	/**
-	 * Create a handicap stone from a string
-	 * 
-	 * @param v
-	 * @return the stone as a move
-	 */
-	public static Move createHandicapStone(String s) {
-		Vertex v = new Vertex(s);
-		Move result = new Move(v.getRow(), v.getColumn(), BoardI.VERTEX_BLACK);
-		return result;
 	}
 
 	/**
@@ -121,7 +144,7 @@ public final class Move {
 	 * @return the colour
 	 */
 	public short getColour() {
-		return colour;
+		return this.colour;
 	}
 
 	/**
@@ -134,11 +157,38 @@ public final class Move {
 	 * @return the column
 	 */
 	public short getColumn() {
-		if (resign)
+		if (this.resign)
 			throw new Error();
-		if (pass)
+		if (this.pass)
 			throw new Error();
-		return column;
+		return this.column;
+	}
+
+	/**
+	 * @return true if this move is a pass
+	 */
+	public boolean getPass() {
+		return this.pass;
+	}
+
+	/**
+	 * return true if this is a plying move (not a pass or resign)
+	 * 
+	 * @return whether this is a play
+	 */
+	public boolean getPlay() {
+		if (this.pass)
+			return false;
+		if (this.resign)
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return true if this is a resignation
+	 */
+	public boolean getResign() {
+		return this.resign;
 	}
 
 	/**
@@ -151,97 +201,14 @@ public final class Move {
 	 * @return the column
 	 */
 	public short getRow() {
-		if (resign)
+		if (this.resign)
 			throw new Error();
-		if (pass)
+		if (this.pass)
 			throw new Error();
-		return row;
+		return this.row;
 	}
 
 	/**
-	 * @return true if this move is a pass
-	 */
-	public boolean getPass() {
-		return pass;
-	}
-
-	/**
-	 * @return true if this is a resignation
-	 */
-	public boolean getResign() {
-		return resign;
-	}
-
-	/**
-	 * return true if this is a plying move (not a pass or resign)
-	 * 
-	 * @return whether this is a play
-	 */
-	public boolean getPlay() {
-		if (pass)
-			return false;
-		if (resign)
-			return false;
-		return true;
-	}
-
-	/**
-	 * @param colour
-	 * @return the colour as a string
-	 */
-	public static String colourString(int colour) {
-		// find the colour of the move
-		String colourS = "";
-		switch (colour) {
-		case BoardI.VERTEX_WHITE:
-			colourS = "white";
-			break;
-		case BoardI.VERTEX_BLACK:
-			colourS = "black";
-			break;
-		case BoardI.VERTEX_KO:
-			colourS = "k";
-			break;
-		case BoardI.VERTEX_EMPTY:
-			colourS = "";
-			break;
-		default:
-			throw new java.lang.InternalError();
-		}
-		return colourS;
-	}
-
-	/**
-	 * @return this vertex as a string
-	 */
-	public String toVertexString() {
-		// catch the booleans
-		if (pass) {
-			return "pass";
-		}
-		if (resign) {
-			return "resign";
-		}
-		return numberToCharacter(row) + ("" + (column + 1));
-	}
-
-	public String toStringGTP() {
-
-		// find the colour of the move
-		String colourS = colourString(this.colour);
-
-		// calculate the position
-		String vertexS = toVertexString();
-
-		return colourS + " " + vertexS;
-	}
-
-	public String toString() {
-		return toStringGTP();
-	}
-
-	/**
-	 * 
 	 * @param s
 	 *            an alphabetic label from a traditional goban
 	 * @return the corresponding (zero-indexed) integer
@@ -373,6 +340,36 @@ public final class Move {
 	public Move setRow(short row) {
 		this.row = row;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return this.toStringGTP();
+	}
+
+	public String toStringGTP() {
+
+		// find the colour of the move
+		String colourS = colourString(this.colour);
+
+		// calculate the position
+		String vertexS = this.toVertexString();
+
+		return colourS + " " + vertexS;
+	}
+
+	/**
+	 * @return this vertex as a string
+	 */
+	public String toVertexString() {
+		// catch the booleans
+		if (this.pass) {
+			return "pass";
+		}
+		if (this.resign) {
+			return "resign";
+		}
+		return this.numberToCharacter(this.row) + ("" + (this.column + 1));
 	}
 
 }

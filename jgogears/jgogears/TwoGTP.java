@@ -1,46 +1,20 @@
 package jgogears;
 
-import jgogears.*;
-import java.io.*;
+import java.io.IOException;
+/**
+ * An incomplete clone of the TwoGTP program included in the GnuGo distribution. It runs a go game between a pair of GTP-capiable players
+ * 
+ * TODO finish this implementation
+ * @author syeates
+ *
+ */
 
 public class TwoGTP {
-
-	private GTPStatelessInterface black = null;
-	private GTPStatelessInterface white = null;
-
-	public boolean playOutGame() {
-		int passes = 0;
-		boolean blackNext = true;
-
-		while (passes < 4) {
-			if (blackNext) {
-				Move move = black.genMove(BoardI.VERTEX_BLACK);
-				assert (move != null);
-				white.play(move);
-				if (move.getPass())
-					passes++;
-				else
-					passes = 0;
-				blackNext = false;
-			} else {
-				Move move = white.genMove(BoardI.VERTEX_WHITE);
-				assert (move != null);
-				black.play(move);
-				if (move.getPass())
-					passes++;
-				else
-					passes = 0;
-				blackNext = true;
-			}
-
-		}
-		System.err.println(black.getFinalScore());
-		System.err.println(white.getFinalScore());
-		System.err.println(black.showBoard());
-		System.err.println(white.showBoard());
-
-		return true;
-	}
+	/**
+	 * Play two GTP-compatible players against each other
+	 * @param args
+	 * @throws IOException
+	 */
 
 	public static void main(String[] args) throws IOException {
 		TwoGTP twoGTP = new TwoGTP();
@@ -49,21 +23,52 @@ public class TwoGTP {
 		twoGTP.playOutGame();
 
 	}
+/**
+ * The black player
+ */
+	private GTPStatelessInterface black = null;
+/**
+ * The white player
+ */
+	private GTPStatelessInterface white = null;
+	/**
+	 * Run the game. Assumes that the black and white players have already been set up.
+	 * @return
+	 */
 
-	public GTPStatelessInterface getBlack() {
-		return black;
-	}
+	public boolean playOutGame() {
+		int passes = 0;
+		boolean blackNext = true;
+		//TODO check the black and white players have been set up
 
-	public void setBlack(GTPStatelessInterface black) {
-		this.black = black;
-	}
+		while (passes < 4) {
+			if (blackNext) {
+				Move move = this.black.genMove(BoardI.VERTEX_BLACK);
+				assert (move != null);
+				this.white.play(move);
+				if (move.getPass())
+					passes++;
+				else
+					passes = 0;
+				blackNext = false;
+			} else {
+				Move move = this.white.genMove(BoardI.VERTEX_WHITE);
+				assert (move != null);
+				this.black.play(move);
+				if (move.getPass())
+					passes++;
+				else
+					passes = 0;
+				blackNext = true;
+			}
 
-	public GTPStatelessInterface getWhite() {
-		return white;
-	}
+		}
+		System.err.println(this.black.getFinalScore());
+		System.err.println(this.white.getFinalScore());
+		System.err.println(this.black.showBoard());
+		System.err.println(this.white.showBoard());
 
-	public void setWhite(GTPStatelessInterface white) {
-		this.white = white;
+		return true;
 	}
 
 }

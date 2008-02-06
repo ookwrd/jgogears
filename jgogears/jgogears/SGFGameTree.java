@@ -7,6 +7,33 @@ import jgogears.SGF.ParseException;
 
 public class SGFGameTree {
 
+	public static Game loadFromFile(File file) {
+		try {
+			// speed up file reading. BufferedReader doesn't help
+			Reader reader = new FileReader(file);
+			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
+			SGFGameTree tree = parser.gameTree();
+			Game result = new Game(tree);
+			return result;
+		} catch (IOException e) {
+			System.err.println(e);
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			System.err.println(e);
+			e.printStackTrace();
+			return null;
+		} catch (Throwable e) {
+			System.err.println(e);
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public SGFSequence sequence = null;
+
+	public Vector<SGFGameTree> gameTrees = new Vector<SGFGameTree>();
+
 	/**
 	 * 
 	 */
@@ -33,8 +60,8 @@ public class SGFGameTree {
 			Iterator<SGFProperty> iterator = node.properties.iterator();
 			while (iterator.hasNext()) {
 				SGFProperty prop = iterator.next();
-				if (prop.getIdentifier().compareToIgnoreCase("B") == 0
-						|| prop.getIdentifier().compareToIgnoreCase("W") == 0)
+				if ((prop.getIdentifier().compareToIgnoreCase("B") == 0)
+						|| (prop.getIdentifier().compareToIgnoreCase("W") == 0))
 					movec++;
 				if (prop.getIdentifier().compareToIgnoreCase("C") == 0)
 					game.setCommentCount(game.getCommentCount() + 1);
@@ -51,17 +78,15 @@ public class SGFGameTree {
 			if (prop.getIdentifier().compareToIgnoreCase("FF") == 0) {
 				String s = prop.firstStripped();
 				int value = Integer.parseInt(s);
-				if (value != 4 && value != 3)
-					throw new Error(
-							"wrong version of SGF, we only handle versions 3 and 4");
+				if ((value != 4) && (value != 3))
+					throw new Error("wrong version of SGF, we only handle versions 3 and 4");
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("GM") == 0) {
 				String s = prop.firstStripped();
 				int value = Integer.parseInt(s);
 				if (value != 1)
-					throw new Error(
-							"This is not a Go GoGame, it is some other kind of game");
+					throw new Error("This is not a Go GoGame, it is some other kind of game");
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("SZ") == 0) {
@@ -123,36 +148,11 @@ public class SGFGameTree {
 		}
 	}
 
-	public static Game loadFromFile(File file) {
-		try {
-			// speed up file reading. BufferedReader doesn't help
-			Reader reader = new FileReader(file);
-			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
-			SGFGameTree tree = parser.gameTree();
-			Game result = new Game(tree);
-			return result;
-		} catch (IOException e) {
-			System.err.println(e);
-			e.printStackTrace();
-			return null;
-		} catch (ParseException e) {
-			System.err.println(e);
-			e.printStackTrace();
-			return null;
-		} catch (Throwable e) {
-			System.err.println(e);
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public SGFSequence sequence = null;
-	public Vector<SGFGameTree> gameTrees = new Vector<SGFGameTree>();
-
+	@Override
 	public String toString() {
 		String result = "(";
-		result = result + sequence;
-		Iterator<SGFGameTree> i = gameTrees.iterator();
+		result = result + this.sequence;
+		Iterator<SGFGameTree> i = this.gameTrees.iterator();
 		while (i.hasNext()) {
 			result = result + i.next().toString();
 		}
