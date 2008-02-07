@@ -2,81 +2,97 @@ package jgogears;
 
 import java.util.*;
 
+// TODO: Auto-generated Javadoc
 /**
- * A better bitset-based board implementation
+ * A better bitset-based board implementation.
  * 
  * @author syeates
  */
 public class FasterBoard extends BoardI {
-	/**
-	 * the bit number for empty
-	 */
+	
+	/** the bit number for empty. */
 	final static short OFFSET_EMPTY = 0;
-	/**
-	 * the bit number for colour / ko
-	 */
+	
+	/** the bit number for colour / ko. */
 	final static short OFFSET_COLOUR = 1;
-	/**
-	 * verbose debugging info
-	 */
+	
+	/** verbose debugging info. */
 	private final boolean DEBUG = true;
-	/**
-	 * the underlying bitset holding the data
-	 */
+	
+	/** the underlying bitset holding the data. */
 	private final BitSet bits = new BitSet();
-	/**
-	 * the size of the board
-	 */
-	private short size = 19;
-	/**
-	 * the ruleset
-	 */
-	private RuleSet rule = new NoKoRuleSet();
 
 	/**
-	 * Create a new board
+	 * Create a new board.
 	 */
 	public FasterBoard() {
 	}
+	/**
+	 * create a new board based on the current board plus a move.
+	 * 
+	 * @param move the move
+	 * 
+	 * @return the new board 
+	 */
+	public final FasterBoard newBoard( Move move) {
+		return new FasterBoard(this,move);
+	}
 
 	/**
-	 * Create a new board
+	 * create a new board based on the current board plus a move.
 	 * 
-	 * @param size
-	 *            the size of the board
+	 * @param board the move
+	 * @param move the move
+	 * 
+	 * @return the new board 
+	 */
+	public FasterBoard(FasterBoard board , Move move) {
+		this.size = board.getSize();
+		copydata(board,move);
+	}
+
+	/**
+	 * Create a new board.
+	 * 
+	 * @param size the size of the board
 	 */
 	public FasterBoard(int size) {
 		this.size = (short) size;
 	}
+	
+	/**
+	 * Create a new board.
+	 * 
+	 * @param zobrist true if using zorbist hashing
+	 */
+	public FasterBoard(boolean zobrist) {
+		super(zobrist);
+	}
 
 	/**
-	 * Create a new board
+	 * Create a new board.
 	 * 
-	 * @param size
-	 *            the size of the board
-	 * @param rule
-	 *            the ruleset to use
+	 * @param size the size of the board
+	 * @param rule the ruleset to use
 	 */
 	public FasterBoard(int size, RuleSet rule) {
 		this.size = (short) size;
-		this.rule = rule;
+		this.ruleSet = rule;
 	}
 
 	/**
-	 * Create a new board
+	 * Create a new board.
 	 * 
-	 * @param rule
-	 *            the ruleset to use
+	 * @param rule the ruleset to use
 	 */
 	public FasterBoard(RuleSet rule) {
-		this.rule = rule;
+		this.ruleSet = rule;
 	}
 
 	/**
-	 * Create a new board
+	 * Create a new board.
 	 * 
-	 * @param size
-	 *            the size of the board
+	 * @param size the size of the board
 	 */
 
 	public FasterBoard(short size) {
@@ -84,23 +100,21 @@ public class FasterBoard extends BoardI {
 	}
 
 	/**
-	 * Create a new board
+	 * Create a new board.
 	 * 
-	 * @param size
-	 *            the size of the board
-	 * @param rule
-	 *            the ruleset to use
+	 * @param size the size of the board
+	 * @param rule the ruleset to use
 	 */
 	public FasterBoard(short size, RuleSet rule) {
 		this.size = size;
-		this.rule = rule;
+		this.ruleSet = rule;
 	}
 
-	/*
-	 * @see jgogears.BoardInterface#
+	/* (non-Javadoc)
+	 * @see jgogears.BoardI#getColour(int, int)
 	 */
 	@Override
-	public int getColour(int row, int column) {
+	public short getColour(int row, int column) {
 		if ((row < 0) || (row >= this.size))
 			return VERTEX_OFF_BOARD;
 		if ((column < 0) || (column >= this.size))
@@ -120,10 +134,26 @@ public class FasterBoard extends BoardI {
 			return VERTEX_EMPTY;
 	}
 
+	/**
+	 * Gets the colour off set.
+	 * 
+	 * @param row the row
+	 * @param column the column
+	 * 
+	 * @return the colour offset
+	 */
 	int getColourOffSet(int row, int column) {
 		return OFFSET_COLOUR * this.size * this.size + (row * this.size) + (column);
 	}
 
+	/**
+	 * Gets the empty off set.
+	 * 
+	 * @param row the row
+	 * @param column the column
+	 * 
+	 * @return the empty offset
+	 */
 	int getEmptyOffSet(int row, int column) {
 		return OFFSET_EMPTY * this.size * this.size + (row * this.size) + (column);
 	}
@@ -138,46 +168,23 @@ public class FasterBoard extends BoardI {
 		return this.size;
 	}
 
-	@Override
-	public BoardI newBoard(Move move) {
-		FasterBoard result = new FasterBoard(this.size);
-		result.bits.or(this.bits);
 
-		if (move == null)
-			return result;
-		if (move.getResign()) {
-			// do nothing
-		} else if (move.getPass()) {
-			// do nothing, since GoBoard doesn't know whose turn it is
-		} else {
-
-			result.setColour(move.getRow(), move.getColumn(), move.getColour());
-
-			// take the captures
-			TreeSet<Vertex> captures = this.rule.captures(null, this, move);
-			Iterator<Vertex> i = captures.iterator();
-			while (i.hasNext()) {
-				Vertex v = i.next();
-				result.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY);
-			}
-
-		}
-
-		return result;
-	}
-
-	/*
-	 * @see jgogears.BoardInterface#
+	/**
+	 * Sets the colour.
+	 * 
+	 * @param row the row
+	 * @param column the column
+	 * @param colour the colour
+	 * 
 	 */
-	private int setColour(int row, int column, short colour) {
+	public  void  setColour(int row, int column, short colour) {
 		if ((row < 0) || (column < 0) || (row >= this.size) || (column >= this.size)) {
 			if (this.DEBUG)
 				System.err.println("attempt to set a colour off-board");
-			return VERTEX_OFF_BOARD;
+			throw new Error();
 		}
 		int emptyB = this.getEmptyOffSet(row, column);
 		int colourB = this.getColourOffSet(row, column);
-		int result = this.getColour(row, column);
 
 		switch (colour) {
 		case VERTEX_EMPTY:
@@ -200,7 +207,6 @@ public class FasterBoard extends BoardI {
 			throw new Error();
 		}
 
-		return result;
-	}
+}
 
 }

@@ -5,8 +5,14 @@ import java.util.*;
 
 import junit.framework.TestCase;
 
+/**
+ * The Class FasterBoardTest.
+ */
 public class FasterBoardTest extends TestCase {
 
+	/**
+	 * Test all sizes.
+	 */
 	public void testAllSizes() {
 		this.testAllVertexesN(3);
 		this.testAllVertexesN(6);
@@ -28,6 +34,11 @@ public class FasterBoardTest extends TestCase {
 		this.testAllVertexesN(22);
 	}
 
+	/**
+	 * Test all vertexes n.
+	 * 
+	 * @param size the size
+	 */
 	public void testAllVertexesN(int size) {
 		BoardI board = new FasterBoard(size);
 
@@ -103,6 +114,11 @@ public class FasterBoardTest extends TestCase {
 		}
 	}
 
+	/**
+	 * Test load all sg ffiles.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void testLoadAllSGFfiles() throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
@@ -152,6 +168,11 @@ public class FasterBoardTest extends TestCase {
 
 	}
 
+	/**
+	 * Test load simple gnugo.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void testLoadSimpleGnugo() throws IOException {
 
 		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
@@ -166,94 +187,9 @@ public class FasterBoardTest extends TestCase {
 		// System.err.println(g);
 	}
 
-	public void testSize10() {
-		this.testAllVertexesN(10);
-	}
-
-	public void testSize11() {
-		this.testAllVertexesN(11);
-	}
-
-	public void testSize12() {
-		this.testAllVertexesN(12);
-	}
-
-	public void testSize13() {
-		this.testAllVertexesN(13);
-	}
-
-	public void testSize14() {
-		this.testAllVertexesN(14);
-	}
-
-	public void testSize16() {
-		this.testAllVertexesN(16);
-	}
-
-	public void testSize17() {
-		this.testAllVertexesN(17);
-	}
-
-	public void testSize18() {
-		this.testAllVertexesN(18);
-	}
-
-	public void testSize19() {
-		this.testAllVertexesN(19);
-	}
-
-	public void testSize20() {
-		this.testAllVertexesN(20);
-	}
-
-	public void testSize21() {
-		this.testAllVertexesN(21);
-	}
-
-	public void testSize22() {
-		this.testAllVertexesN(22);
-	}
-
-	public void testSize23() {
-		this.testAllVertexesN(23);
-	}
-
-	public void testSize24() {
-		this.testAllVertexesN(24);
-	}
-
-	public void testSize25() {
-		this.testAllVertexesN(25);
-	}
-
-	public void testSize3() {
-		this.testAllVertexesN(3);
-	}
-
-	public void testSize4() {
-		this.testAllVertexesN(4);
-	}
-
-	public void testSize5() {
-		this.testAllVertexesN(5);
-	}
-
-	public void testSize6() {
-		this.testAllVertexesN(6);
-	}
-
-	public void testSize7() {
-		this.testAllVertexesN(7);
-	}
-
-	public void testSize8() {
-		this.testAllVertexesN(8);
-	}
-
-	public void testSize9() {
-		this.testAllVertexesN(9);
-	}
-
+	/**
+	 * Test to string.
+	 */
 	public void testToString() {
 		BoardI working = new FasterBoard((short) 19);
 		assertNotNull(working);

@@ -2,6 +2,7 @@ package jgogears;
 
 import java.util.*;
 
+
 /**
  * GoBoard represents the state of a Go board at a particular point in time. It does NOT represent the number of
  * prisoners, the number (or order) of previous moves or whose turn it is too play.
@@ -10,33 +11,27 @@ import java.util.*;
  */
 public class Board extends BoardI {
 
+	/** verbose debugging */
 	static boolean DEBUG = false;
 
+	/** bounds checking */
 	static boolean CHECK = true;
 
-	/**
-	 * The size of this board (defaults to DEFAULT_BOARD_SIZE or 19
-	 * 
-	 * @see #DEFAULT_BOARD_SIZE
-	 */
-	private short size = DEFAULT_BOARD_SIZE;
-	/**
-	 * The actual board, of size size
-	 * 
-	 * @see #size
-	 */
+	/** The actual board, of size size. */
 	private short[][] board = null;
-	private RuleSet rule = new NoKoRuleSet();
+	
 
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 */
 	public Board() {
 		this.init();
 	}
 
 	/**
-	 * Default constructor
+	 * Default constructor.
+	 * 
+	 * @param zobrist the zobrist
 	 */
 	public Board(boolean zobrist) {
 		super(zobrist);
@@ -44,7 +39,9 @@ public class Board extends BoardI {
 	}
 
 	/**
-	 * constructor of specially sized boards
+	 * constructor of specially sized boards.
+	 * 
+	 * @param size the size
 	 */
 	public Board(int size) {
 		this.size = (short) size;
@@ -52,41 +49,76 @@ public class Board extends BoardI {
 	}
 
 	/**
-	 * constructor of specially sized boards
+	 * constructor of specially sized boards.
+	 * 
+	 * @param size the size
+	 * @param rule the rule
 	 */
 	public Board(int size, RuleSet rule) {
 		this.size = (short) size;
-		this.rule = rule;
+		this.ruleSet = rule;
+		this.init();
+	}
+	/**
+	 * create a new board based on the current board plus a move.
+	 * 
+	 * @param move the move
+	 * 
+	 * @return the new board 
+	 */
+	public final Board newBoard( Move move) {
+		return new Board(this,move);
+	}
+	
+	/**
+	 * create a new board based on the current board plus a move.
+	 * 
+	 * @param board the move
+	 * @param move the move
+	 * 
+	 * @return the new board 
+	 */
+	public Board(Board board , Move move) {
+		this.size = board.getSize();
+		init();
+		copydata(board,move);
+	}
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param rule the rule
+	 */
+	public Board(RuleSet rule) {
+		this.ruleSet = rule;
 		this.init();
 	}
 
 	/**
-	 * Default constructor
+	 * Instantiates a new board.
+	 * 
+	 * @param size the size
 	 */
-	public Board(RuleSet rule) {
-		this.rule = rule;
-		this.init();
-	}
-
 	public Board(short size) {
 		this.size = size;
 		this.init();
 	}
 
 	/**
-	 * constructor of specially sized boards
+	 * constructor of specially sized boards.
+	 * 
+	 * @param size the size
+	 * @param rule the rule
 	 */
 	public Board(short size, RuleSet rule) {
 		this.size = size;
-		this.rule = rule;
+		this.ruleSet = rule;
 		this.init();
 	}
 
-	/*
-	 * @see jgogears.BoardInterface#getColour
-	 */
+
 	@Override
-	public int getColour(int row, int column) {
+	public short getColour(int row, int column) {
 		// System.err.println("getColour() " + " " + row + " " + column + " " +
 		// size);
 		if ((row < 0) || (column < 0) || (row >= this.size) || (column >= this.size))
@@ -94,12 +126,6 @@ public class Board extends BoardI {
 		return this.board[row][column];
 	}
 
-	/**
-	 * @return
-	 */
-	public RuleSet getKoRule() {
-		return this.rule;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -121,64 +147,27 @@ public class Board extends BoardI {
 				this.board[i][j] = VERTEX_EMPTY;
 	}
 
-	/*
-	 * (non-Javadoc)
+
+	/**
+	 * Sets the colour of a vertex
 	 * 
-	 * @see jgogears.BoardInterface#newBoard(jgogears.GoMove)
+	 * @param row the row
+	 * @param column the column
+	 * @param colour the colour
+	 * 
+	 * @return the previous colour
 	 */
-	@Override
-	public BoardI newBoard(Move move) {
-		if (DEBUG)
-			System.out.println("creating a new board using:" + move);
-		Board result = new Board(this.getSize(), this.getKoRule());
-		for (int i = 0; i < this.size; i++)
-			for (int j = 0; j < this.size; j++)
-				if (result.board[i][j] != VERTEX_KO)
-					result.board[i][j] = this.board[i][j];
-				else
-					result.board[i][j] = VERTEX_EMPTY;
-		if (move == null)
-			return result;
-		if (move.getResign()) {
-			// do nothing
-		} else if (move.getPass()) {
-			// do nothing, since GoBoard doesn't know whose turn it is
-		} else {
-			// place the stone
-			result.setColour(move.getRow(), move.getColumn(), move.getColour());
-			if (this.zobrist != null)
-				result.setZobrist(new Zobrist(this.zobrist, move.getRow(), move.getColumn(), BoardI.VERTEX_EMPTY));
+	public void setColour(int row, int column, short colour) {
 
-			// take the captures
-			TreeSet<Vertex> captures = this.rule.captures(null, this, move);
-			Iterator<Vertex> i = captures.iterator();
-			while (i.hasNext()) {
-				Vertex v = i.next();
-				result.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY);
-				if (this.zobrist != null)
-					result.setZobrist(new Zobrist(result.getZobrist(), v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY));
-			}
-		}
-
-		return result;
-	}
-
-	/*
-	 * @see jgogears.BoardInterface#
-	 */
-	public int setColour(int row, int column, short colour) {
-
-		int result = this.getColour(row, column);
-		if (CHECK)
-			if ((row >= this.getSize()) || (row < 0))
-				throw new Error("Bad board size " + row + "/" + this.getSize() + " ");
-		if (CHECK)
-			if ((column >= this.getSize()) || (column < 0))
-				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) "
-						+ column + "/" + this.getSize() + " ");
+//		if (CHECK)
+//			if ((row >= this.getSize()) || (row < 0))
+//				throw new Error("Bad board size " + row + "/" + this.getSize() + " ");
+//		if (CHECK)
+//			if ((column >= this.getSize()) || (column < 0))
+//				throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) "
+//						+ column + "/" + this.getSize() + " ");
 
 		this.board[row][column] = colour;
-		return result;
 	}
 
 	/*
@@ -191,11 +180,7 @@ public class Board extends BoardI {
 		return this.toString(null);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see jgogears.BoardInterface#toString(jgogears.GoMove)
-	 */
+
 	public String toString(Move move) {
 		StringBuffer buf = new StringBuffer();
 		int rowoff = -1, coloff = -1;

@@ -6,11 +6,14 @@ import java.util.*;
 import junit.framework.TestCase;
 
 /**
+ * The Class BoardTest.
+ * 
  * @author Stuart
  */
 public class BoardTest extends TestCase {
+	
 	/**
-	 * 
+	 * Test all sizes.
 	 */
 	public void testAllSizes() {
 		this.testAllVertexesN(3);
@@ -34,7 +37,9 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
-	 * @param size
+	 * Test all vertexes n.
+	 * 
+	 * @param size the size
 	 */
 	public void testAllVertexesN(int size) {
 		BoardI board = new Board(size);
@@ -95,6 +100,9 @@ public class BoardTest extends TestCase {
 		}
 	}
 
+	/**
+	 * Test colours.
+	 */
 	public void testColours() {
 		assertTrue(BoardI.VERTEX_BLACK == BoardI.VERTEX_BLACK);
 		assertTrue(BoardI.VERTEX_BLACK != BoardI.VERTEX_WHITE);
@@ -128,9 +136,9 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
-	 * TODO
+	 * TODO.
 	 * 
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void testLoadAllSGFfiles() throws IOException {
 		Stack<String> files = new Stack<String>();
@@ -181,7 +189,9 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
-	 * @throws IOException
+	 * Test load simple gnugo.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void testLoadSimpleGnugo() throws IOException {
 
@@ -198,7 +208,7 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
-	 * 
+	 * Test to string.
 	 */
 	public void testToString() {
 		BoardI working = new Board((short) 19);
