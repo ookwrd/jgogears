@@ -2,10 +2,18 @@ package jgogears;
 
 import java.util.*;
 
+
+/**
+ * The Class SGFSequence.
+ */
 public class SGFSequence extends Vector<SGFNode> {
 
+	/** The Constant serialVersionUID. */
 	static final long serialVersionUID = 1;
 
+	/* (non-Javadoc)
+	 * @see java.util.Vector#toString()
+	 */
 	@Override
 	public String toString() {
 		Iterator<SGFNode> i = this.iterator();

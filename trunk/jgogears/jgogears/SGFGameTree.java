@@ -5,8 +5,19 @@ import java.util.*;
 
 import jgogears.SGF.ParseException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SGFGameTree.
+ */
 public class SGFGameTree {
 
+	/**
+	 * Load from file.
+	 * 
+	 * @param file the file
+	 * 
+	 * @return the game
+	 */
 	public static Game loadFromFile(File file) {
 		try {
 			// speed up file reading. BufferedReader doesn't help
@@ -30,12 +41,16 @@ public class SGFGameTree {
 		}
 	}
 
+	/** The sequence. */
 	public SGFSequence sequence = null;
 
+	/** The game trees. */
 	public Vector<SGFGameTree> gameTrees = new Vector<SGFGameTree>();
 
 	/**
+	 * Inits the.
 	 * 
+	 * @param game the game
 	 */
 	protected void init(Game game) {
 		if (game == null)
@@ -48,7 +63,7 @@ public class SGFGameTree {
 			SGFNode node = i.next();
 			Move move = node.getMove();
 			if (move != null)
-				game.getMoveList().add(move);
+				game.getMovelist().add(move);
 		}
 
 		i = this.sequence.iterator();
@@ -112,12 +127,14 @@ public class SGFGameTree {
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("BR") == 0) {
 				String s = prop.firstStripped();
-				game.setBlackRank(s);
+				// TODO
+				//game.getBlackRank(s)
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("WR") == 0) {
 				String s = prop.firstStripped();
-				game.setWhiteRank(s);
+				//TODO
+				//game.setWhiteRank(s);
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("DT") == 0) {
@@ -148,6 +165,9 @@ public class SGFGameTree {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		String result = "(";

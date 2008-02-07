@@ -2,11 +2,17 @@ package jgogears;
 
 import java.util.*;
 
+
+/**
+ * The Class SGFProperty.
+ */
 public class SGFProperty {
+	
 	/**
 	 * String all square brackets from a string. DOES NOT LEAVE escaped squre bracekets!
 	 * 
-	 * @param s
+	 * @param s the s
+	 * 
 	 * @return the new string
 	 */
 	protected static String stripSquareBrackets(String s) {
@@ -15,35 +21,52 @@ public class SGFProperty {
 		return s.replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
+	/** The identifier. */
 	private String identifier = null;
 
+	/** The values. */
 	private Vector<String> values = new Vector<String>();
 
+	/**
+	 * get the first value
+	 * 
+	 * @return  the first value
+	 */
 	public String first() {
 		return this.getValues().firstElement();
 	}
 
+	/**
+	 * get the first value (stripped)
+	 * 
+	 * @return  the first value (stripped)
+	 */
 	public String firstStripped() {
 		return stripSquareBrackets(this.first());
 	}
 
 	/**
-	 * @return the propIdent
+	 * Gets the identifier.
+	 * 
+	 * @return the identifier
 	 */
 	public String getIdentifier() {
 		return this.identifier;
 	}
 
 	/**
-	 * @return the propvalues
+	 * Gets the values.
+	 * 
+	 * @return the values
 	 */
 	public Vector<String> getValues() {
 		return this.values;
 	}
 
 	/**
-	 * @param propIdent
-	 *            the propIdent to set
+	 * Sets the identifier.
+	 * 
+	 * @param propIdent the identifier
 	 */
 	public void setIdentifier(String propIdent) {
 		if (this.identifier != null)
@@ -52,8 +75,9 @@ public class SGFProperty {
 	}
 
 	/**
-	 * @param propvalues
-	 *            the propvalues to set
+	 * Sets the values.
+	 * 
+	 * @param propvalues the values to set
 	 */
 	public void setValues(Vector<String> propvalues) {
 		if (this.values != null)
@@ -61,10 +85,18 @@ public class SGFProperty {
 		this.values = propvalues;
 	}
 
+	/**
+	 * The value of this property, stripped of brackets
+	 * 
+	 * @return the value, stripped
+	 */
 	public String stripped() {
 		return stripSquareBrackets(this.toString());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		String result = this.getIdentifier();

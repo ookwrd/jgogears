@@ -1,14 +1,20 @@
 package jgogears;
 
-// import java.io.StringReader;
-// import java.util.Iterator;
+
 
 import junit.framework.TestCase;
 
+
+/**
+ * The Class SGFPropertyTest.
+ */
 public class SGFPropertyTest extends TestCase {
 
-	/*
-	 * Test method for 'jgogears.SGFNode.columnFromMoveString(String)'
+	
+	/**
+	 * Test strip.
+	 * 
+	 * @throws Exception the exception
 	 */
 	public void testStrip() throws Exception {
 		String a1 = "[19]";

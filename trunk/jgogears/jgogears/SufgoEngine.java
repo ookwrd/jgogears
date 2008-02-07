@@ -3,51 +3,74 @@ package jgogears;
 import java.util.Iterator;
 
 import jgogears.engine.*;
+
 /**
+ * TODO.
  * 
- * TODO
  * @author syeates
- *
  */
 public class SufgoEngine extends SkeletonEngine {
 
+	/** The model. */
 	Model model = null;
 
 	/**
-	 * 
-	 * TODO
+	 * TODO.
 	 */
 	public SufgoEngine() {
 
 	}
+
 /**
- *  TODO
+ * TODO.
+ * 
+ * @param status the status
+ * @param state the state
+ * 
+ * @return the move[]
  */
 	public Move[] finalStatusList(String status, GTPState state) {
 		// TODO Auto-generated method stub
 		throw new Error("not implemented");
 	}
+
 /**
- *  TODO
+ * TODO.
+ * 
+ * @return the engine name
  */
 	public String getEngineName() {
 		return "SufgoEngine";
 	}
+
 /**
- *  TODO
+ * TODO.
+ * 
+ * @return the engine version
  */
 	public String getEngineVersion() {
 		return "0.0.0.1";
 	}
+
 /**
- *  TODO
+ * TODO.
+ * 
+ * @param state the state
+ * 
+ * @return the final score
  */
 	public GTPScore getFinalScore(GTPState state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 /**
- *  TODO
+ * TODO.
+ * 
+ * @param colour the colour
+ * @param state the state
+ * 
+ * @return the move
  */
 	public Move regGenMove(int colour, GTPState state) {
 		BoardI board = state.getBoard();

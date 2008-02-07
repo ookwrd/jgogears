@@ -2,10 +2,17 @@ package jgogears;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SGFNodeTest.
+ */
 public class SGFNodeTest extends TestCase {
 
 	/*
 	 * Test method for 'jgogears.SGFNode.columnFromMoveString(String)'
+	 */
+	/**
+	 * Test from move string.
 	 */
 	public void testFromMoveString() {
 		String example = "[aa]";

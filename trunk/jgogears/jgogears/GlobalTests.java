@@ -3,6 +3,7 @@ package jgogears;
 import jgogears.engine.*;
 import junit.framework.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * Manually created test suite of all useful tests in the project, across all packages. The default test suite for the
  * project.
@@ -11,8 +12,11 @@ import junit.framework.*;
  */
 
 public class GlobalTests {
+	
 	/**
-	 * test collection
+	 * test collection.
+	 * 
+	 * @return the test
 	 * 
 	 * @author syeates
 	 */

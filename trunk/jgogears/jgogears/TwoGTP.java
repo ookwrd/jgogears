@@ -1,19 +1,23 @@
 package jgogears;
 
 import java.io.IOException;
+
 /**
  * An incomplete clone of the TwoGTP program included in the GnuGo distribution. It runs a go game between a pair of GTP-capiable players
  * 
  * TODO finish this implementation
+ * 
  * @author syeates
- *
  */
 
 public class TwoGTP {
+	
 	/**
-	 * Play two GTP-compatible players against each other
-	 * @param args
-	 * @throws IOException
+	 * Play two GTP-compatible players against each other.
+	 * 
+	 * @param args (ignored)
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 
 	public static void main(String[] args) throws IOException {
@@ -23,17 +27,17 @@ public class TwoGTP {
 		twoGTP.playOutGame();
 
 	}
-/**
- * The black player
- */
-	private GTPStatelessInterface black = null;
-/**
- * The white player
- */
-	private GTPStatelessInterface white = null;
+
+/** The black player. */
+	private GTPInterfaceRaw black = null;
+
+/** The white player. */
+	private GTPInterfaceRaw white = null;
+	
 	/**
 	 * Run the game. Assumes that the black and white players have already been set up.
-	 * @return
+	 * 
+	 * @return true, if play out game
 	 */
 
 	public boolean playOutGame() {

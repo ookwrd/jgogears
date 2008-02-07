@@ -8,16 +8,15 @@ import java.util.Vector;
  * @author Stuart
  */
 public final class Vertex extends Vector<Short> implements Comparable {
-	/**
-	 * the serial id for serialisation
-	 */
+	
+	/** the serial id for serialisation. */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Short cut constructor with ints rather than shorts
+	 * Short cut constructor with ints rather than shorts.
 	 * 
-	 * @param row
-	 * @param column
+	 * @param row the row
+	 * @param column the column
 	 */
 	public Vertex(int row, int column) {
 		this.add((short) row);
@@ -25,10 +24,10 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Preferred constuctor
+	 * Preferred constuctor.
 	 * 
-	 * @param row
-	 * @param column
+	 * @param row the row
+	 * @param column the column
 	 */
 	public Vertex(short row, short column) {
 		this.add(row);
@@ -36,9 +35,9 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Constuctor based on a string
+	 * Constuctor based on a string.
 	 * 
-	 * @param vertexString
+	 * @param vertexString the vertex string
 	 */
 	public Vertex(String vertexString) {
 		// System.err.println("parseVertex(\"" + vertexString + "\")");
@@ -133,7 +132,11 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Comparison operator to ensure that (in)equality operators work as expected
+	 * Comparison operator to ensure that (in)equality operators work as expected.
+	 * 
+	 * @param o the o
+	 * 
+	 * @return the int
 	 */
 	public int compareTo(Object o) {
 		if ((this == null) && (o == null))
@@ -164,7 +167,11 @@ public final class Vertex extends Vector<Short> implements Comparable {
 
 	/**
 	 * equality operator to ensure that two different vertex objects representing the same vertex are recognised as
-	 * being equal
+	 * being equal.
+	 * 
+	 * @param o the o
+	 * 
+	 * @return true, if equals
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -186,7 +193,7 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Get the column of this vertex
+	 * Get the column of this vertex.
 	 * 
 	 * @return the column of this vertex
 	 */
@@ -198,7 +205,7 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Get the row of this vertex
+	 * Get the row of this vertex.
 	 * 
 	 * @return the row of this vertex
 	 */
@@ -210,9 +217,9 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * set the column of this vertex
+	 * set the column of this vertex.
 	 * 
-	 * @param column
+	 * @param column the column
 	 */
 	private void setColumn(int column) {
 		short row = this.getRow();
@@ -222,9 +229,9 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	}
 
 	/**
-	 * Set the row of this vertex
+	 * Set the row of this vertex.
 	 * 
-	 * @param row
+	 * @param row the row
 	 */
 	private void setRow(int row) {
 		short column = this.getColumn();

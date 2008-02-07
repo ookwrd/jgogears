@@ -3,10 +3,19 @@ package jgogears;
 import jgogears.SGF.ParseException;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoveTest.
+ */
 public class MoveTest extends TestCase {
 
 	/*
 	 * Test method
+	 */
+	/**
+	 * Test bad.
+	 * 
+	 * @throws ParseException the parse exception
 	 */
 	public void testBad() throws ParseException {
 		try {
@@ -46,6 +55,11 @@ public class MoveTest extends TestCase {
 		}
 	}
 
+	/**
+	 * Test gtp constructor.
+	 * 
+	 * @throws ParseException the parse exception
+	 */
 	public void testGTPConstructor() throws ParseException {
 		assertTrue(new Move("w ReSiGn").getResign() == true);
 		assertTrue(new Move("w resign").getColour() == BoardI.VERTEX_WHITE);
@@ -82,6 +96,11 @@ public class MoveTest extends TestCase {
 	/*
 	 * Test method
 	 */
+	/**
+	 * Test string conversions.
+	 * 
+	 * @throws ParseException the parse exception
+	 */
 	public void testStringConversions() throws ParseException {
 		for (int i = 0; i < 25; i++) {
 			for (int j = 0; j < 25; j++) {
@@ -101,6 +120,11 @@ public class MoveTest extends TestCase {
 
 	/*
 	 * Test method
+	 */
+	/**
+	 * Test to string.
+	 * 
+	 * @throws ParseException the parse exception
 	 */
 	public void testToString() throws ParseException {
 		System.err.println(new Move(0, 0, BoardI.VERTEX_WHITE));

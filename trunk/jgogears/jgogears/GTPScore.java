@@ -1,5 +1,6 @@
 package jgogears;
 
+// TODO: Auto-generated Javadoc
 /**
  * A class representing a go score, as represented by SGF and GTP (GTP defines scores in terms of the SGF standard). A
  * score is either (a) a win to {black|white} with a margin, by time, by resignation or by forfiet (b) a win to niether
@@ -13,73 +14,161 @@ package jgogears;
 
 public final class GTPScore {
 
+	/** The white win. */
 	private boolean whiteWin;
+	
+	/** The neither win. */
 	private boolean neitherWin = false;
+	
+	/** The scored. */
 	private boolean scored = false;
+	
+	/** The margin. */
 	private double margin = Double.MIN_VALUE;
+	
+	/** The resign. */
 	private boolean resign = false;
+	
+	/** The time. */
 	private boolean time = false;
+	
+	/** The forfeit. */
 	private boolean forfeit = false;
+	
+	/** The _void. */
 	private boolean _void = false;
+	
+	/** The unknown. */
 	private boolean unknown = false;
+	
+	/** The value. */
 	private String value;
 
+	/** The DEBUG. */
 	public boolean DEBUG = false;
 
+	/**
+	 * Instantiates a new gTP score.
+	 * 
+	 * @param s the s
+	 */
 	public GTPScore(String s) {
 		this.init(s);
 	};
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return new GTPScore(this.toString());
 	};
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object arg0) {
 		return this.toString().equalsIgnoreCase(arg0.toString());
 	};
 
+	/**
+	 * Gets the black win.
+	 * 
+	 * @return the black win
+	 */
 	public boolean getBlackWin() {
 		return !this.neitherWin && !this.whiteWin;
 	};
 
+	/**
+	 * Gets the draw.
+	 * 
+	 * @return the draw
+	 */
 	public boolean getDraw() {
 		return this.margin == 0.0;
 	};
 
+	/**
+	 * Gets the forfeit.
+	 * 
+	 * @return the forfeit
+	 */
 	public boolean getForfeit() {
 		return this.forfeit;
 	};
 
+	/**
+	 * Gets the margin.
+	 * 
+	 * @return the margin
+	 */
 	public double getMargin() {
 		return this.margin;
 	};
 
+	/**
+	 * Gets the resign.
+	 * 
+	 * @return the resign
+	 */
 	public boolean getResign() {
 		return this.resign;
 	};
 
+	/**
+	 * Gets the scored.
+	 * 
+	 * @return the scored
+	 */
 	public boolean getScored() {
 		return this.scored;
 	};
 
+	/**
+	 * Gets the time.
+	 * 
+	 * @return the time
+	 */
 	public boolean getTime() {
 		return this.time;
 	};
 
+	/**
+	 * Gets the unknown.
+	 * 
+	 * @return the unknown
+	 */
 	public boolean getUnknown() {
 		return this.unknown;
 	}
 
+	/**
+	 * Gets the void.
+	 * 
+	 * @return the void
+	 */
 	public boolean getVoid() {
 		return this._void;
 	}
 
+	/**
+	 * Gets the white win.
+	 * 
+	 * @return the white win
+	 */
 	public boolean getWhiteWin() {
 		return !this.neitherWin && this.whiteWin;
 	}
 
+	/**
+	 * Inits the.
+	 * 
+	 * @param s the s
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean init(String s) {
 		String original = s;
 		if (s.length() == 0) {
@@ -161,6 +250,9 @@ public final class GTPScore {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		if (this.neitherWin)
