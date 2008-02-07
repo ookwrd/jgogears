@@ -5,8 +5,16 @@ import java.util.*;
 
 import junit.framework.TestCase;
 
+/**
+ * The Class FastBoardTest.
+ */
 public class FastBoardTest extends TestCase {
 
+	/**
+	 * Test all vertexes on a board of size N
+	 * 
+	 * @param size the size
+	 */
 	public void testAllVertexesN(int size) {
 		BoardI board = new FastBoard(size);
 
@@ -78,14 +86,19 @@ public class FastBoardTest extends TestCase {
 		}
 	}
 
-	public void testLoadAllSGFfiles() throws IOException {
+	/**
+	 * Test load all SGF files.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public void testLoadAllSGFFiles() throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
 
 		while (files.size() > 0) {
 			String filename = files.pop();
 			File file = new File(filename);
-			System.err.println("examining \"" + filename + "\"");
+			//System.err.println("examining \"" + filename + "\"");
 			if (file.exists()) {
 				if (!file.isDirectory()) {
 					// System.err.println("\"" + filename + "\" is not a
@@ -113,7 +126,7 @@ public class FastBoardTest extends TestCase {
 					return;
 
 				} else {
-					System.err.println("\"" + filename + "\" is a directory");
+					//System.err.println("\"" + filename + "\" is a directory");
 					String[] children = file.list();
 					for (int i = 0; i < children.length; i++) {
 						// System.err.println("pushing \"" + children[i] +
@@ -126,6 +139,11 @@ public class FastBoardTest extends TestCase {
 
 	}
 
+	/**
+	 * Test load simple gnugo.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void testLoadSimpleGnugo() throws IOException {
 
 		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
@@ -140,99 +158,168 @@ public class FastBoardTest extends TestCase {
 		// System.err.println(g);
 	}
 
+	/**
+	 * Test size10.
+	 */
 	public void testSize10() {
 		this.testAllVertexesN(10);
 	}
 
+	/**
+	 * Test size11.
+	 */
 	public void testSize11() {
 		this.testAllVertexesN(11);
 	}
 
+	/**
+	 * Test size12.
+	 */
 	public void testSize12() {
 		this.testAllVertexesN(12);
 	}
 
+	/**
+	 * Test size13.
+	 */
 	public void testSize13() {
 		this.testAllVertexesN(13);
 	}
 
+	/**
+	 * Test size14.
+	 */
 	public void testSize14() {
 		this.testAllVertexesN(14);
 	}
 
+	/**
+	 * Test size16.
+	 */
 	public void testSize16() {
 		this.testAllVertexesN(16);
 	}
 
+	/**
+	 * Test size17.
+	 */
 	public void testSize17() {
 		this.testAllVertexesN(17);
 	}
 
+	/**
+	 * Test size18.
+	 */
 	public void testSize18() {
 		this.testAllVertexesN(18);
 	}
 
+	/**
+	 * Test size19.
+	 */
 	public void testSize19() {
 		this.testAllVertexesN(19);
 	}
 
+	/**
+	 * Test size20.
+	 */
 	public void testSize20() {
 		this.testAllVertexesN(20);
 	}
 
+	/**
+	 * Test size21.
+	 */
 	public void testSize21() {
 		this.testAllVertexesN(21);
 	}
 
+	/**
+	 * Test size22.
+	 */
 	public void testSize22() {
 		this.testAllVertexesN(22);
 	}
 
+	/**
+	 * Test size23.
+	 */
 	public void testSize23() {
 		this.testAllVertexesN(23);
 	}
 
+	/**
+	 * Test size24.
+	 */
 	public void testSize24() {
 		this.testAllVertexesN(24);
 	}
 
+	/**
+	 * Test size25.
+	 */
 	public void testSize25() {
 		this.testAllVertexesN(25);
 	}
 
+	/**
+	 * Test size3.
+	 */
 	public void testSize3() {
 		this.testAllVertexesN(3);
 	}
 
+	/**
+	 * Test size4.
+	 */
 	public void testSize4() {
 		this.testAllVertexesN(4);
 	}
 
+	/**
+	 * Test size5.
+	 */
 	public void testSize5() {
 		this.testAllVertexesN(5);
 	}
 
+	/**
+	 * Test size6.
+	 */
 	public void testSize6() {
 		this.testAllVertexesN(6);
 	}
 
+	/**
+	 * Test size7.
+	 */
 	public void testSize7() {
 		this.testAllVertexesN(7);
 	}
 
+	/**
+	 * Test size8.
+	 */
 	public void testSize8() {
 		this.testAllVertexesN(8);
 	}
 
+	/**
+	 * Test size9.
+	 */
 	public void testSize9() {
 		this.testAllVertexesN(9);
 	}
 
+	/**
+	 * Test to string.
+	 */
 	public void testToString() {
 		BoardI working = new FastBoard((short) 19);
 		assertNotNull(working);
 		working = working.newBoard(new Move("B q10"));
-		System.out.println(working);
+		//System.out.println(working);
 	}
 
 }
