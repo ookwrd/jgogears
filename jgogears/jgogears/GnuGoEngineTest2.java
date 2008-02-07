@@ -5,12 +5,23 @@ import java.util.*;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * TODO.
+ * 
+ * @author syeates
+ */
 public class GnuGoEngineTest2 extends TestCase {
 
+	/** The DEBUG. */
 	boolean DEBUG = false;
 
+	/** The engine. */
 	GnuGoEngine engine = null;
 
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -18,6 +29,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		this.engine.initialise();
 	}
 
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#tearDown()
+	 */
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
@@ -25,6 +39,11 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 	}
 
+	/**
+	 * Test clear board.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public final void testClearBoard() throws IOException {
 		this.engine.initialise();
 		boolean r = this.engine.clearBoard();
@@ -32,6 +51,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		assertTrue(r);
 	}
 
+	/**
+	 * Test final status list.
+	 */
 	public final void testFinalStatusList() {
 		try {
 
@@ -61,6 +83,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test fixed handicap.
+	 */
 	public final void testFixedHandicap() {
 		try {
 			this.engine.initialise();
@@ -78,6 +103,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test gen move.
+	 */
 	public final void testGenMove() {
 		try {
 			this.engine.initialise();
@@ -95,6 +123,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	}
 
+	/**
+	 * Test get engine name.
+	 */
 	public final void testGetEngineName() {
 		try {
 			this.engine.initialise();
@@ -109,6 +140,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get engine version.
+	 */
 	public final void testGetEngineVersion() {
 		try {
 			this.engine.initialise();
@@ -122,6 +156,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get final score.
+	 */
 	public final void testGetFinalScore() {
 		try {
 			this.engine.initialise();
@@ -140,6 +177,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get known command.
+	 */
 	public final void testGetKnownCommand() {
 		try {
 			this.engine.initialise();
@@ -153,6 +193,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get list commands.
+	 */
 	public final void testGetListCommands() {
 		try {
 			this.engine.initialise();
@@ -167,6 +210,9 @@ public class GnuGoEngineTest2 extends TestCase {
 
 	}
 
+	/**
+	 * Test get protocol version.
+	 */
 	public final void testGetProtocolVersion() {
 		try {
 			this.engine.initialise();
@@ -182,6 +228,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test loadsgf.
+	 */
 	public final void testLoadsgf() {
 		try {
 			this.engine.initialise();
@@ -201,6 +250,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test place free handicap go move array.
+	 */
 	public final void testPlaceFreeHandicapGoMoveArray() {
 		try {
 			this.engine.initialise();
@@ -214,6 +266,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test place free handicap int.
+	 */
 	public final void testPlaceFreeHandicapInt() {
 
 		try {
@@ -230,6 +285,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test place free handicap int multi.
+	 */
 	public final void testPlaceFreeHandicapIntMulti() {
 
 		try {
@@ -264,6 +322,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test play.
+	 */
 	public final void testPlay() {
 		try {
 			this.engine.initialise();
@@ -278,6 +339,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test quit.
+	 */
 	public final void testQuit() {
 		try {
 			this.engine.initialise();
@@ -289,6 +353,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test reg gen move.
+	 */
 	public final void testRegGenMove() {
 		try {
 			this.engine.initialise();
@@ -302,6 +369,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test set board size.
+	 */
 	public final void testSetBoardSize() {
 		try {
 			this.engine.initialise();
@@ -317,6 +387,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test set komi.
+	 */
 	public final void testSetKomi() {
 		try {
 			this.engine.initialise();
@@ -329,6 +402,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test set time left.
+	 */
 	public final void testSetTimeLeft() {
 		try {
 			this.engine.initialise();
@@ -341,6 +417,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test set time settings.
+	 */
 	public final void testSetTimeSettings() {
 		try {
 			this.engine.initialise();
@@ -353,6 +432,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test show board.
+	 */
 	public final void testShowBoard() {
 		try {
 			this.engine.initialise();
@@ -366,6 +448,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		}
 	}
 
+	/**
+	 * Test undo.
+	 */
 	public final void testUndo() {
 		try {
 			this.engine.initialise();

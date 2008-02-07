@@ -3,10 +3,18 @@ package jgogears;
 import java.io.*;
 import java.util.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GnuGoSeki.
+ */
 public class GnuGoSeki {
 
 	/**
-	 * @param args
+	 * The main method.
+	 * 
+	 * @param args the args
+	 * 
+	 * @throws Exception the exception
 	 */
 	public static void main(String[] args) throws Exception {
 		Stack<String> files = new Stack<String>();
@@ -38,6 +46,15 @@ public class GnuGoSeki {
 		// testForSeki("sgf/testing/seki.sgf");
 	}
 
+	/**
+	 * Test for seki.
+	 * 
+	 * @param file the file
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	static public boolean testForSeki(File file) throws IOException {
 
 		Game game = Game.loadFromFile(file);
@@ -72,6 +89,15 @@ public class GnuGoSeki {
 		}
 	}
 
+	/**
+	 * Test for seki.
+	 * 
+	 * @param filename the filename
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	static public boolean testForSeki(String filename) throws IOException {
 		return testForSeki(new File(filename));
 	}

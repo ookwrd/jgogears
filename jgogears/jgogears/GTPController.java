@@ -2,20 +2,35 @@ package jgogears;
 
 import java.io.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GTPController.
+ */
 public class GTPController {
 
 	/**
-	 * @param args
+	 * The main method.
+	 * 
+	 * @param args the args
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws IOException {
 		new GTPController().run();
 
 	}
 
+	/** The reader. */
 	java.io.BufferedReader reader = null;
 
+	/** The writer. */
 	java.io.Writer writer = null;
 
+	/**
+	 * Consume result.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	void consumeResult() throws java.io.IOException {
 		while (this.reader.ready()) {
 			String s = this.reader.readLine();
@@ -23,6 +38,13 @@ public class GTPController {
 		}
 	}
 
+	/**
+	 * Run.
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	boolean run() throws java.io.IOException {
 		PipedWriter farwriter = new PipedWriter();
 		this.reader = new BufferedReader(new PipedReader(farwriter));
@@ -44,6 +66,13 @@ public class GTPController {
 		}
 	}
 
+	/**
+	 * Setup.
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	boolean setup() throws java.io.IOException {
 		this.writer.write("boardsize 19\n\n");
 		this.writer.flush();

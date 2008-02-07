@@ -4,12 +4,22 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
-// troll throught a directory heirachry containing sgf files and acrhives of sgf
-// files. each file is parsed as an sgf file and copied to a directory if it meets
-// the tests
 
+/**
+ * The Class CorpusBuilder.
+ *  troll through a directory hierarchy containing SGF files and archives of scoff
+ files. Each file is parsed as an SGF file and copied to a directory if it meets
+the tests
+ */
 public class CorpusBuilder {
 
+	/**
+	 * The main method.
+	 * 
+	 * @param args the arguments
+	 * 
+	 * @throws Exception the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		CorpusBuilder builder = new CorpusBuilder();
 
@@ -18,7 +28,11 @@ public class CorpusBuilder {
 	}
 
 	/**
-	 * @param args
+	 * Mainold.
+	 * 
+	 * @param args the args
+	 * 
+	 * @throws Exception the exception
 	 */
 	public static void mainold(String[] args) throws Exception {
 		Stack<String> files = new Stack<String>();
@@ -50,6 +64,15 @@ public class CorpusBuilder {
 		// testForSeki("sgf/testing/seki.sgf");
 	}
 
+	/**
+	 * Test for seki.
+	 * 
+	 * @param file the file
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	static public boolean testForSeki(File file) throws IOException {
 
 		Game game = Game.loadFromFile(file);
@@ -84,18 +107,34 @@ public class CorpusBuilder {
 		}
 	}
 
+	/**
+	 * Test for seki.
+	 * 
+	 * @param filename the filename
+	 * 
+	 * @return true, if successful
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	static public boolean testForSeki(String filename) throws IOException {
 		return testForSeki(new File(filename));
 	}
 
+	/** The from. */
 	public String from = "sgf/zipped";
 
+	/** The to. */
 	public String to = "sgf/archive";
 
+	/** The files. */
 	public Stack<File> files = new Stack<File>();
 
+	/** The BUFFER. */
 	final int BUFFER = 2048;
 
+	/**
+	 * Examinefiles.
+	 */
 	public void examinefiles() {
 		while (this.files.size() > 0) {
 			File file = this.files.pop();
@@ -111,6 +150,11 @@ public class CorpusBuilder {
 		}
 	}
 
+	/**
+	 * Process.
+	 * 
+	 * @param file the file
+	 */
 	void process(File file) {
 
 		try {
@@ -140,13 +184,27 @@ public class CorpusBuilder {
 		}
 	}
 
+	/**
+	 * The Class SGFFilter.
+	 */
 	class SGFFilter implements FilenameFilter {
+		
+		/* (non-Javadoc)
+		 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+		 */
 		public boolean accept(File dir, String name) {
 			return name.endsWith(".sgf");
 		}
 	}
 
+	/**
+	 * The Class ZIPFilter.
+	 */
 	class ZIPFilter implements FilenameFilter {
+		
+		/* (non-Javadoc)
+		 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+		 */
 		public boolean accept(File dir, String name) {
 			return name.endsWith(".zip");
 		}

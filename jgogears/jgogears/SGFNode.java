@@ -2,10 +2,17 @@ package jgogears;
 
 import java.util.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SGFNode.
+ */
 public class SGFNode {
 
 	/**
-	 * @param move
+	 * Column from move string.
+	 * 
+	 * @param move the move
+	 * 
 	 * @return the column of the move
 	 */
 	public static short columnFromMoveString(String move) {
@@ -68,9 +75,10 @@ public class SGFNode {
 	}
 
 	/**
-	 * Extract the row (second value) from tokens in the range of: [a1]:[t19] missing the i
+	 * Extract the row (second value) from tokens in the range of: [a1]:[t19] missing the i.
 	 * 
-	 * @param move
+	 * @param move the move
+	 * 
 	 * @return the column
 	 */
 	public static short columnFromMoveStringWRONG(String move) {
@@ -153,7 +161,10 @@ public class SGFNode {
 	}
 
 	/**
-	 * @param move
+	 * Row from move string.
+	 * 
+	 * @param move the move
+	 * 
 	 * @return the row of the move
 	 */
 	public static short rowFromMoveString(String move) {
@@ -215,10 +226,17 @@ public class SGFNode {
 		}
 	}
 
+	/** The DEBUG. */
 	boolean DEBUG = false;
 
+	/** The properties. */
 	public Vector<SGFProperty> properties = new Vector<SGFProperty>();
 
+	/**
+	 * First property.
+	 * 
+	 * @return the sGF property
+	 */
 	public SGFProperty firstProperty() {
 		Iterator<SGFProperty> props = this.properties.iterator();
 		if (props.hasNext())
@@ -227,6 +245,11 @@ public class SGFNode {
 			return null;
 	}
 
+	/**
+	 * Gets the move.
+	 * 
+	 * @return the move
+	 */
 	public Move getMove() {
 		Iterator<SGFProperty> iterator = this.properties.iterator();
 		while (iterator.hasNext()) {
@@ -237,6 +260,13 @@ public class SGFNode {
 		return null;
 	}
 
+	/**
+	 * Gets the move.
+	 * 
+	 * @param prop the prop
+	 * 
+	 * @return the move
+	 */
 	public Move getMove(SGFProperty prop) {
 		if (prop == null)
 			return null;
@@ -269,6 +299,9 @@ public class SGFNode {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		String result = ";";

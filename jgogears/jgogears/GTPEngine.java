@@ -2,6 +2,7 @@ package jgogears;
 
 import java.io.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The engine side of a GTP connection. Uses a GTPInterface to talk to the engine that actually does the work.
  * 
@@ -9,18 +10,24 @@ import java.io.*;
  */
 public class GTPEngine implements Runnable {
 
+	/** The reader. */
 	BufferedReader reader = null;
+	
+	/** The writer. */
 	Writer writer = null;
+	
+	/** The state. */
 	GTPState state = new GTPState();
+	
+	/** The engine. */
 	GTPInterface engine = null;
 
 	/**
-	 * compares two strings and returns true is the shorter is the first substring of the second
+	 * compares two strings and returns true is the shorter is the first substring of the second.
 	 * 
-	 * @param a
-	 *            the first string
-	 * @param b
-	 *            the second string
+	 * @param a the first string
+	 * @param b the second string
+	 * 
 	 * @return true if they match
 	 */
 	boolean compare(String a, String b) {
@@ -36,12 +43,13 @@ public class GTPEngine implements Runnable {
 	}
 
 	/**
-	 * Processes single command
+	 * Processes single command.
 	 * 
-	 * @param command
-	 *            the command to process
+	 * @param command the command to process
+	 * 
 	 * @return true on success
-	 * @throws Exception
+	 * 
+	 * @throws Exception the exception
 	 */
 	boolean processCommand(String command) throws Exception {
 		command = command.toLowerCase();
@@ -113,6 +121,9 @@ public class GTPEngine implements Runnable {
 			return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		try {
 			this.stuff();
@@ -122,6 +133,11 @@ public class GTPEngine implements Runnable {
 		}
 	}
 
+	/**
+	 * Stuff.
+	 * 
+	 * @throws Exception the exception
+	 */
 	void stuff() throws Exception {
 		boolean quit = false;
 		while (!quit) {

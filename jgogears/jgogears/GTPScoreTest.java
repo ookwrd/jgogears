@@ -2,8 +2,15 @@ package jgogears;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GTPScoreTest.
+ */
 public class GTPScoreTest extends TestCase {
 
+	/**
+	 * Test constructor with standard examples.
+	 */
 	public void testConstructorWithStandardExamples() {
 		{
 			GTPScore score = new GTPScore("0");

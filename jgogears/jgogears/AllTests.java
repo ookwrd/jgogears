@@ -3,13 +3,16 @@ package jgogears;
 import junit.framework.*;
 
 /**
- * Package-wide test collection
+ * Package-wide test collection.
  * 
  * @author syeates
  */
 public class AllTests {
+	
 	/**
-	 * Package-wide test collection
+	 * Package-wide test collection.
+	 * 
+	 * @return the test
 	 * 
 	 * @author syeates
 	 */

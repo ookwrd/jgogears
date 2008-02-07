@@ -6,10 +6,18 @@ import java.util.*;
 import jgogears.engine.Model;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NoKoRuleSetTest.
+ */
 public class NoKoRuleSetTest extends TestCase {
 
+	/** The Constant DEBUG. */
 	static final boolean DEBUG = true;
 
+	/**
+	 * Test center plays.
+	 */
 	public void testCenterPlays() {
 
 		NoKoRuleSet rule = new NoKoRuleSet();
@@ -30,6 +38,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test center plays ii.
+	 */
 	public void testCenterPlaysII() {
 
 		NoKoRuleSet rule = new NoKoRuleSet();
@@ -50,6 +61,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test center plays iii.
+	 */
 	public void testCenterPlaysIII() {
 
 		NoKoRuleSet rule = new NoKoRuleSet();
@@ -79,6 +93,9 @@ public class NoKoRuleSetTest extends TestCase {
 		// System.err.println(board);
 	}
 
+	/**
+	 * Test center plays iiii.
+	 */
 	public void testCenterPlaysIIII() {
 
 		NoKoRuleSet rule = new NoKoRuleSet();
@@ -117,6 +134,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test corner plays.
+	 */
 	public void testCornerPlays() {
 		// System.err.println();
 		// System.err.println();
@@ -171,6 +191,9 @@ public class NoKoRuleSetTest extends TestCase {
 		board = board.newBoard(move);
 	}
 
+	/**
+	 * Testinherits.
+	 */
 	public void testinherits() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		assertNotNull(rule);
@@ -178,6 +201,9 @@ public class NoKoRuleSetTest extends TestCase {
 		assertNotNull(rule2);
 	}
 
+	/**
+	 * Test liberties almost empty board.
+	 */
 	public void testLibertiesAlmostEmptyBoard() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 13;
@@ -218,6 +244,9 @@ public class NoKoRuleSetTest extends TestCase {
 			}
 	}
 
+	/**
+	 * Test liberties cross.
+	 */
 	public void testLibertiesCross() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -249,6 +278,9 @@ public class NoKoRuleSetTest extends TestCase {
 		assertTrue(libs.size() == 6);
 	}
 
+	/**
+	 * Test libertiesrow.
+	 */
 	public void testLibertiesrow() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -276,6 +308,11 @@ public class NoKoRuleSetTest extends TestCase {
 		assertTrue(libs.size() == 14);
 	}
 
+	/**
+	 * Test load all sg ffiles.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void testLoadAllSGFfiles() throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
@@ -321,6 +358,9 @@ public class NoKoRuleSetTest extends TestCase {
 		}
 	}
 
+	/**
+	 * Test string almost empty board.
+	 */
 	public void testStringAlmostEmptyBoard() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 5;
@@ -353,6 +393,9 @@ public class NoKoRuleSetTest extends TestCase {
 					}
 	}
 
+	/**
+	 * Test string empty board.
+	 */
 	public void testStringEmptyBoard() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -367,6 +410,9 @@ public class NoKoRuleSetTest extends TestCase {
 			}
 	}
 
+	/**
+	 * Test string off board.
+	 */
 	public void testStringOffBoard() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -387,6 +433,9 @@ public class NoKoRuleSetTest extends TestCase {
 		assertTrue(string.size() == 0);
 	}
 
+	/**
+	 * Test stringpair.
+	 */
 	public void testStringpair() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -407,6 +456,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test stringpairnext.
+	 */
 	public void testStringpairnext() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -427,6 +479,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test stringpairsame.
+	 */
 	public void testStringpairsame() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
@@ -447,6 +502,9 @@ public class NoKoRuleSetTest extends TestCase {
 
 	}
 
+	/**
+	 * Test stringrow.
+	 */
 	public void testStringrow() {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;

@@ -1,19 +1,18 @@
 package jgogears;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
 /**
- * Transform a board to ASCII, in the style of GnuGo
+ * Transform a board to ASCII, in the style of GnuGo.
  * 
  * @author syeates
- * @see TODO
  */
 public final class BoardToASCII {
+	
 	/**
-	 * Transform a board to an ASCII representation
+	 * Transform a board to an ASCII representation.
 	 * 
-	 * @param board
-	 * @return
+	 * @param board the board
+	 * @return the ASCII representation
 	 */
 	static String Transform(BoardI board) {
 		StringBuffer buf = new StringBuffer();

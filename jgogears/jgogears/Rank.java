@@ -1,5 +1,6 @@
 package jgogears;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class representing dan / kyu ranks. 30kyu to 1kyu and 1dan to 20dan. Classes are represented internally as a double.
  * Rank parsing and formatting are only supported for whole numbers.
@@ -9,17 +10,37 @@ package jgogears;
 
 public final class Rank {
 
+	/** The Constant SHODAN. */
 	public final static Rank SHODAN = new Rank("1d");
+	
+	/** The Constant BEGINNER. */
 	public final static Rank BEGINNER = new Rank("25k");
+	
+	/** The Constant ME. */
 	public final static Rank ME = new Rank("12k");
 
+	/** The Constant TESTING. */
 	final static boolean TESTING = false;
+	
+	/** The Constant MAX_RANK. */
 	final static double MAX_RANK = 80;
+	
+	/** The Constant MIN_RANK. */
 	final static double MIN_RANK = 130;
 
+	/** The Constant MAX_RATING. */
 	final static double MAX_RATING = 1;
+	
+	/** The Constant MIN_RATING. */
 	final static double MIN_RATING = 0;
 
+	/**
+	 * Check rank.
+	 * 
+	 * @param ranking the ranking
+	 * 
+	 * @return true, if successful
+	 */
 	static boolean checkRank(double ranking) {
 		if (TESTING)
 			if ((ranking > MAX_RATING) || (ranking < MIN_RATING))
@@ -27,6 +48,13 @@ public final class Rank {
 		return true;
 	}
 
+	/**
+	 * Check rating.
+	 * 
+	 * @param rating the rating
+	 * 
+	 * @return true, if successful
+	 */
 	static boolean checkRating(double rating) {
 		if (TESTING)
 			if ((rating > MAX_RATING) || (rating < MIN_RATING))
@@ -34,6 +62,13 @@ public final class Rank {
 		return true;
 	}
 
+	/**
+	 * Convert.
+	 * 
+	 * @param r the r
+	 * 
+	 * @return the int
+	 */
 	public static int convert(String r) {
 		if ((r == null) || (r.length() < 2))
 			return (int) BEGINNER.getRank();
@@ -61,13 +96,22 @@ public final class Rank {
 			throw new Error(r);
 	}
 
+	/** The rank. */
 	private double rank = 25;
 
+	/**
+	 * Instantiates a new rank.
+	 */
 	public Rank() {
 		if (TESTING)
 			checkRank(this.rank);
 	}
 
+	/**
+	 * Instantiates a new rank.
+	 * 
+	 * @param r the r
+	 */
 	public Rank(double r) {
 		if (TESTING)
 			checkRank(this.rank);
@@ -76,18 +120,33 @@ public final class Rank {
 			checkRank(this.rank);
 	}
 
+	/**
+	 * Instantiates a new rank.
+	 * 
+	 * @param r the r
+	 */
 	public Rank(String r) {
 		this.rank = convert(r);
 		if (TESTING)
 			checkRank(this.rank);
 	}
 
+	/**
+	 * Gets the rank.
+	 * 
+	 * @return the rank
+	 */
 	public double getRank() {
 		if (TESTING)
 			checkRank(this.rank);
 		return this.rank;
 	}
 
+	/**
+	 * Gets the rating.
+	 * 
+	 * @return the rating
+	 */
 	public double getRating() {
 		if (TESTING)
 			checkRank(this.rank);
@@ -98,10 +157,18 @@ public final class Rank {
 		return result;
 	}
 
+	/**
+	 * Sets the rank.
+	 * 
+	 * @param rank the new rank
+	 */
 	public void setRank(double rank) {
 		this.rank = rank;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		if (TESTING)

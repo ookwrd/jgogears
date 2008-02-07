@@ -5,12 +5,18 @@ package jgogears;
 
 import java.util.*;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class NoKoRuleSet.
+ * 
  * @author Stuart
  */
 final public class NoKoRuleSet extends RuleSet {
 
+	/** The Constant DEBUG. */
 	final static boolean DEBUG = false;
+	
+	/** The Constant EMPTY. */
 	final static TreeSet<Vertex> EMPTY = new TreeSet<Vertex>();
 
 	/*
@@ -43,6 +49,16 @@ final public class NoKoRuleSet extends RuleSet {
 		return captures;
 	}
 
+	/**
+	 * Captureshelper.
+	 * 
+	 * @param board the board
+	 * @param move the move
+	 * @param row the row
+	 * @param column the column
+	 * 
+	 * @return the tree set< vertex>
+	 */
 	public TreeSet<Vertex> captureshelper(BoardI board, Move move, int row, int column) {
 		if (DEBUG && (EMPTY.size() != 0))
 			throw new Error("EMPTY not empty");
@@ -81,6 +97,9 @@ final public class NoKoRuleSet extends RuleSet {
 		return "A ko rule which doesn't recognise any form of Ko whatsoever and allows unbounded loops and repetition.";
 	}
 
+	/* (non-Javadoc)
+	 * @see jgogears.RuleSet#getLiberties(short, short, jgogears.BoardI)
+	 */
 	@Override
 	public TreeSet<Vertex> getLiberties(short rowb, short columnb, BoardI board) {
 		if ((board.getColour(rowb, columnb) == BoardI.VERTEX_EMPTY)
@@ -131,11 +150,17 @@ final public class NoKoRuleSet extends RuleSet {
 		return "No Ko";
 	}
 
+	/* (non-Javadoc)
+	 * @see jgogears.RuleSet#getString(int, int, jgogears.BoardI)
+	 */
 	@Override
 	TreeSet<Vertex> getString(int rowb, int columnb, BoardI board) {
 		return this.getString((short) rowb, (short) columnb, board);
 	}
 
+	/* (non-Javadoc)
+	 * @see jgogears.RuleSet#getString(short, short, jgogears.BoardI)
+	 */
 	@Override
 	public TreeSet<Vertex> getString(short rowb, short columnb, BoardI board) {
 		TreeSet<Vertex> string = new TreeSet<Vertex>();
@@ -199,15 +224,13 @@ final public class NoKoRuleSet extends RuleSet {
 	}
 
 	/**
-	 * Helper for moveIsLegal
+	 * Helper for moveIsLegal.
 	 * 
-	 * @param row
-	 *            the row of the position that is a potential liberty
-	 * @param column
-	 *            the column of the position that is a potential liberty
-	 * @param colour
-	 *            the colour of the stone we want to use these liberties for
-	 * @param board
+	 * @param row the row of the position that is a potential liberty
+	 * @param column the column of the position that is a potential liberty
+	 * @param colour the colour of the stone we want to use these liberties for
+	 * @param board the board
+	 * 
 	 * @return the number of liberties through this position
 	 */
 	TreeSet<Vertex> legelsfrompos(int row, int column, short colour, BoardI board) {
@@ -215,15 +238,13 @@ final public class NoKoRuleSet extends RuleSet {
 	}
 
 	/**
-	 * Helper for moveIsLegal
+	 * Helper for moveIsLegal.
 	 * 
-	 * @param row
-	 *            the row of the position that is a potential liberty
-	 * @param column
-	 *            the column of the position that is a potential liberty
-	 * @param colour
-	 *            the colour of the stone we want to use these liberties for
-	 * @param board
+	 * @param row the row of the position that is a potential liberty
+	 * @param column the column of the position that is a potential liberty
+	 * @param colour the colour of the stone we want to use these liberties for
+	 * @param board the board
+	 * 
 	 * @return the number of liberties through this position
 	 */
 	TreeSet<Vertex> legelsfrompos(short row, short column, short colour, BoardI board) {

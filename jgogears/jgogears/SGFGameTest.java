@@ -6,10 +6,19 @@ import java.util.Iterator;
 import jgogears.SGF.ParseException;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SGFGameTest.
+ */
 public class SGFGameTest extends TestCase {
 
 	/*
 	 * Test method for 'jgogears.Sufgo.isTrue(boolean)'
+	 */
+	/**
+	 * Test is verbose.
+	 * 
+	 * @throws ParseException the parse exception
 	 */
 	public void testIsVerbose() throws ParseException {
 
@@ -32,6 +41,11 @@ public class SGFGameTest extends TestCase {
 
 	}
 
+	/**
+	 * Test load.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void testLoad() throws IOException {
 		try {
 			FileReader reader = new FileReader("sgf/testing/2007-01-12- BamboField- tokabe.sgf");

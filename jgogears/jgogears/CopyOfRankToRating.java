@@ -1,7 +1,18 @@
 package jgogears;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CopyOfRankToRating.
+ */
 final public class CopyOfRankToRating {
 
+	/**
+	 * Rank to rating.
+	 * 
+	 * @param S the s
+	 * 
+	 * @return the double
+	 */
 	public static final double rankToRating(String S) {
 		String s = S.toUpperCase();
 		s = s.replaceAll("kyu", "k");

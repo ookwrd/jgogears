@@ -2,6 +2,7 @@ package jgogears;
 
 import java.util.*;
 
+
 /**
  * Class representing a Zobrist hash, a binary hash of the current board state. TODO add proper references
  * 
@@ -9,18 +10,26 @@ import java.util.*;
  */
 
 public class Zobrist extends BitSet {
-	/**
-	 * TODO
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	/** The Constant MAX_BOARD_SIZE. */
 	public static final short MAX_BOARD_SIZE = 25;
+	
+	/** The Constant MAX_COLOUR. */
 	public static final short MAX_COLOUR = 4;
+	
+	/** The Constant ZOBRIST_SIZE. */
 	public static final short ZOBRIST_SIZE = 96;
 
 	// initialisers ...
+	/** The static grid of all random values */
 	static BitSet[][][] grid = null;
+	
+	/** have the statics been initialised? */
 	static private boolean initialised = false;
 
+	/**
+	 * Initialises the static grid of random values
+	 */
 	static private void init() {
 		if (!initialised) {
 			initialised = true;
@@ -39,19 +48,19 @@ public class Zobrist extends BitSet {
 	}
 
 	/**
-	 * Default constructor, represents an empty board
+	 * Default constructor, represents an empty board.
 	 */
 	public Zobrist() {
 		init();
 	}
 
 	/**
-	 * Constructor building a Zobrist from an existing Zobrist and a move
+	 * Constructor building a Zobrist from an existing Zobrist and a move.
 	 * 
-	 * @param old
-	 * @param row
-	 * @param column
-	 * @param colour
+	 * @param old the old
+	 * @param row the row
+	 * @param column the column
+	 * @param colour the colour
 	 */
 	public Zobrist(Zobrist old, int row, int column, int colour) {
 		init();
@@ -66,6 +75,13 @@ public class Zobrist extends BitSet {
 		this.xor(grid[row][column][colour]);
 	}
 
+	/**
+	 * compare this zobrist to another object, potentially another zobrist
+	 * 
+	 * @param o the other Object
+	 * 
+	 * @return 0 if equal, otherwise 1/-1
+	 */
 	public int compareTo(Object o) {
 		if (o.getClass() != this.getClass())
 			return this.hashCode() > o.hashCode() ? 1 : -1;
@@ -79,6 +95,9 @@ public class Zobrist extends BitSet {
 	}
 
 	// TODO why doesn't this work with == ?
+	/* (non-Javadoc)
+	 * @see java.util.BitSet#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == null)

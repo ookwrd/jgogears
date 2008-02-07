@@ -2,15 +2,19 @@ package jgogears;
 
 import java.util.TreeSet;
 
+// TODO: Auto-generated Javadoc
 /**
- * various utilities to help parsing GTP output
+ * various utilities to help parsing GTP output.
  * 
  * @author syeates
  */
 public class GTPParserUtils {
+	
 	/**
 	 * Takes a string returned from the GTP protocol and returns either an Error describing the error in the string or a
-	 * null if this is not an error
+	 * null if this is not an error.
+	 * 
+	 * @param s the s
 	 * 
 	 * @return the error represented by this string
 	 */
@@ -30,6 +34,13 @@ public class GTPParserUtils {
 		return null;
 	}
 
+	/**
+	 * Parses the vertex list.
+	 * 
+	 * @param s the s
+	 * 
+	 * @return the tree set< vertex>
+	 */
 	static TreeSet<Vertex> parseVertexList(String s) {
 		s = stripIntro(s);
 		TreeSet<Vertex> vert = new TreeSet<Vertex>();
@@ -60,6 +71,13 @@ public class GTPParserUtils {
 	// TODO make this mildy efficient by not creating a billion temp orary
 	// strings.
 	// probably use a stringbuffer
+	/**
+	 * Strip intro.
+	 * 
+	 * @param s the s
+	 * 
+	 * @return the string
+	 */
 	static String stripIntro(String s) {
 		if (s == null)
 			return null;

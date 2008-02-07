@@ -2,7 +2,10 @@ package jgogears;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class GnuGoEngineTest.
+ * 
  * @author syeates
  * @see GnuGoEngine
  * @see junit.framework.TestCase
@@ -10,7 +13,7 @@ import junit.framework.TestCase;
 public class GnuGoEngineTest extends TestCase {
 
 	/**
-	 * 
+	 * Test a.
 	 */
 	public void testA() {
 		if (true)
