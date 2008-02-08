@@ -1,10 +1,17 @@
 package jgogears.engine;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import junit.framework.*;
 
-public class AllTests {
+/**
+ * The Class EngineTests.
+ */
+public class EngineTests {
 
+	/**
+	 * Suite.
+	 * 
+	 * @return the test
+	 */
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for jgogears graph");
 		// $JUnit-BEGIN$

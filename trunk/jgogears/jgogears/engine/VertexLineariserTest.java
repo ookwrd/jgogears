@@ -1,26 +1,31 @@
 package jgogears.engine;
 
-import java.io.*;
-import java.util.*;
+import java.io.StringReader;
+import java.util.Iterator;
 
-import jgogears.BoardI;
-import jgogears.Game;
-import jgogears.SGFGameTree;
-import jgogears.SGFParser;
-
+import jgogears.*;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VertexLineariserTest.
+ */
 public class VertexLineariserTest extends TestCase {
 
 	/*
 	 * Test method for 'jgogears.SGFNode.columnFromMoveString(String)'
 	 */
+	/**
+	 * Test everything.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
 	public void testEverything() throws Exception {
 
 		String examples[] = {
-				// SGFParser.EXAMPLEONE,
-				SGFParser.EXAMPLETWO, SGFParser.EXAMPLETHREE,
-				SGFParser.EXAMPLEFOUR, SGFParser.EXAMPLEFIVE };
+		// SGFParser.EXAMPLEONE,
+				SGFParser.EXAMPLETWO, SGFParser.EXAMPLETHREE, SGFParser.EXAMPLEFOUR, SGFParser.EXAMPLEFIVE };
 
 		for (int i = 0; i < examples.length; i++) {
 			String example = examples[i];
@@ -48,8 +53,7 @@ public class VertexLineariserTest extends TestCase {
 				board = iterator.next();
 				assertTrue(board != null);
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new VertexLineariser(board,
-							(short) 2, (short) 2, j);
+					Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, j);
 					assertTrue(linear != null);
 					while (linear.hasNext()) {
 						Short s = linear.next();
