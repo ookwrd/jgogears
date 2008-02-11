@@ -6,7 +6,7 @@ import java.util.*;
 import jgogears.engine.Model;
 import junit.framework.TestCase;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class NoKoRuleSetTest.
  */

@@ -5,7 +5,7 @@ import java.io.StringReader;
 import jgogears.SGF.ParseException;
 import junit.framework.TestCase;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SGFParserTest.
  */

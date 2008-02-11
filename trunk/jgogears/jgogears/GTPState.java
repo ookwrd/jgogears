@@ -63,7 +63,7 @@ public class GTPState {
 	 * Clear board.
 	 */
 	public void clearBoard() {
-		// TODO
+		// TODO is this sufficient?
 		this.whiteCapturedCount = 0;
 		this.blackCapturedCount = 0;
 		this.board = new Board((short) this.getBoardsize());

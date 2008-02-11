@@ -136,7 +136,7 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
-	 * TODO.
+	 * Loads a ton of SGF files and tests the resulting boards
 	 * 
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */

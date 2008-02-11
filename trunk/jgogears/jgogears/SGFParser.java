@@ -1,14 +1,11 @@
 package jgogears;
 
 import java.io.StringReader;
-
 import jgogears.SGF.ParseException;
 
-// TODO: Auto-generated Javadoc
-// import java.util.*;
 
 /**
- * Front end to the SGF parser.
+ * Front end to the SGF parser. Also holds the SGF examples from the SGF standard
  * 
  * @author stuart
  */

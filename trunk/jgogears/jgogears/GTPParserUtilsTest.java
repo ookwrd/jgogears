@@ -100,7 +100,7 @@ public class GTPParserUtilsTest extends TestCase {
 		try {
 			this.engine.initialise();
 			BoardI board = this.engine.showBoard();
-			// TODO
+			// TODO actually test the generated board here...
 			this.engine.quit();
 		} catch (Throwable t) {
 			System.err.println(t);

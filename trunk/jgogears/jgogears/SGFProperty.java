@@ -4,7 +4,7 @@ import java.util.*;
 
 
 /**
- * The Class SGFProperty.
+ * An SGFProperty is a string identifier and a sequence of string values. Common the sequence contains exactly one item.
  */
 public class SGFProperty {
 	
