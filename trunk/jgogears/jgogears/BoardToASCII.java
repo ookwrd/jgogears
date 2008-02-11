@@ -46,6 +46,12 @@ public final class BoardToASCII {
 					return true;
 			return false;
 		}
+		if (size == 7) {
+			if ((row == 2) || (row == 4) )
+				if ((column == 2) || (column == 4))
+					return true;
+			return false;
+		}
 		throw new Error("not implemented");
 	}
 
@@ -65,7 +71,7 @@ public final class BoardToASCII {
 		for (short i = 0; i < size; i++) {
 			if (19 - i < 10)
 				buf.append(" ");
-			buf.append(" ").append(19 - i).append(" ");
+			buf.append(" ").append(size - i).append(" ");
 			for (short j = 0; j < size; j++) {
 				switch (board.getColour(j, size - 1 - i)) {
 				case BoardI.VERTEX_KO:

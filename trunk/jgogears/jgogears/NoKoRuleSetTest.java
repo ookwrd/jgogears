@@ -69,26 +69,27 @@ public class NoKoRuleSetTest extends TestCase {
 		NoKoRuleSet rule = new NoKoRuleSet();
 		short size = 7;
 		BoardI board = new Board(size);
-		Move move = new Move(1, 2, BoardI.VERTEX_BLACK);
+		Move move = new Move(0, 1, BoardI.VERTEX_BLACK);
 		board = board.newBoard(move);
-		move = new Move(2, 1, BoardI.VERTEX_BLACK);
+		move = new Move(1, 0,BoardI.VERTEX_BLACK);
 		board = board.newBoard(move);
-		move = new Move(2, 3, BoardI.VERTEX_BLACK);
+		move = new Move(1, 2, BoardI.VERTEX_BLACK);
 		board = board.newBoard(move);
-		move = new Move(2, 2, BoardI.VERTEX_WHITE);
+		move = new Move(1, 1, BoardI.VERTEX_WHITE);
 		// System.err.println(board);
 		assertTrue(rule.moveIsLegal(null, board, move));
 		board = board.newBoard(move);
 
-		move = new Move(3, 2, BoardI.VERTEX_BLACK);
-		assertTrue(rule.moveIsLegal(null, board, move));
-		assertTrue(rule.captures(null, board, move).size() == 1);
+		move = new Move(2, 1, BoardI.VERTEX_BLACK);
+		assertTrue(move + "\n " +BoardToASCII.Transform(board) ,rule.moveIsLegal(null, board, move));
+		assertTrue(move + "\n " +BoardToASCII.Transform(board) ,rule.captures(null, board, move).size() == 1);
 		board = board.newBoard(move);
 
-		move = new Move(2, 2, BoardI.VERTEX_WHITE);
-		assertFalse(rule.moveIsLegal(null, board, move));
-		move = new Move(2, 2, BoardI.VERTEX_BLACK);
-		assertTrue(rule.moveIsLegal(null, board, move));
+		move = new Move(1, 1, BoardI.VERTEX_WHITE);
+		assertFalse(move + "\n " +BoardToASCII.Transform(board) ,rule.moveIsLegal(null, board, move));
+		board = board.newBoard(new Move().setPass(true));
+		move = new Move(1, 1, BoardI.VERTEX_BLACK);
+		assertTrue(move + "\n " +BoardToASCII.Transform(board) ,rule.moveIsLegal(null, board, move));
 
 		// System.err.println(board);
 	}
@@ -186,8 +187,8 @@ public class NoKoRuleSetTest extends TestCase {
 		// System.err.println(board);
 
 		move = new Move(0, 0, BoardI.VERTEX_WHITE);
-		assertTrue(rule.moveIsLegal(game, board, move));
-		assertTrue(rule.captures(game, board, move).size() == 3);
+		assertTrue(move + "\n " +BoardToASCII.Transform(board) ,rule.moveIsLegal(game, board, move));
+		assertTrue(move + "\n " +BoardToASCII.Transform(board) ,rule.captures(game, board, move).size() == 3);
 		board = board.newBoard(move);
 	}
 
@@ -341,13 +342,10 @@ public class NoKoRuleSetTest extends TestCase {
 					while (i.hasNext()) {
 						Move move = i.next();
 						if (!rule.moveIsLegal(game, board, move)) {
-							System.err.println(move);
-							System.err.println(board);
-							assertTrue(false);
+							assertTrue(move + "\n " +BoardToASCII.Transform(board) ,false);
 						}
 						board = board.newBoard(move);
 					}
-
 				} else {
 					String[] children = file.list();
 					for (int i = 0; i < children.length; i++) {

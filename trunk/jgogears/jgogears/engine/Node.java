@@ -215,6 +215,8 @@ public final class Node {
 	 */
 	public void train(VertexLineariser linear, boolean expand) {
 			count++;
+			if (!linear.hasNext())
+				return;
 			Short colour = linear.next();
 			
 		switch (colour) {
