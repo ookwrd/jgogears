@@ -158,13 +158,13 @@ public abstract class BoardI {
 		zobrist = old.getZobrist();
 		ruleSet = old.getRuleSet();
 		
-		for (short i = 0; i < old.getSize(); i++)
-			for (short j = 0; j < old.getSize(); j++){
+		for (short i = 0; i < size; i++)
+			for (short j = 0; j < size; j++){
 				short colour = old.getColour(i, j);
-				if (colour != VERTEX_KO)
-					this.setColour(i, j, colour);
-				else
+				if (colour == VERTEX_KO)
 					this.setColour(i, j, VERTEX_EMPTY);
+				else
+					this.setColour(i, j, colour);
 			}
 		if (move == null)
 			return;
@@ -179,16 +179,23 @@ public abstract class BoardI {
 				setZobrist(new Zobrist(this.zobrist, move.getRow(), move.getColumn(), BoardI.VERTEX_EMPTY));
 
 			// take the captures
-			TreeSet<Vertex> captures = old.getRuleSet().captures(null, this, move);
+			TreeSet<Vertex> captures = old.getRuleSet().captures(null, old, move);
+			if (captures.size() > 0){
+			//System.err.println("captured" + captures);
 			Iterator<Vertex> i = captures.iterator();
 			while (i.hasNext()) {
 				Vertex v = i.next();
-				this.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY);
+				//System.err.println("captured" + v);
+				if (captures.size() == 1)
+					this.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_KO);
+				else 
+					this.setColour(v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY);
+				
 				if (this.zobrist != null)
 					this.setZobrist(new Zobrist(this.getZobrist(), v.getRow(), v.getColumn(), BoardI.VERTEX_EMPTY));
 			}
 		}
-
+		}
 	}
 
 	/**

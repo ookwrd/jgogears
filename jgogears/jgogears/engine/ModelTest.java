@@ -94,7 +94,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black h4"));
 		board = board.newBoard(new Move("white n4"));
-		float[][] r = null;// TODO model.getScores(board, BoardI.VERTEX_BLACK);
+		double[][] r =  model.getScores(board, false);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
@@ -139,7 +139,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black h4"));
 		board = board.newBoard(new Move("white n4"));
-		float[][] r = null; // TODO model.getScores(board, BoardI.VERTEX_BLACK);
+		double[][] r = model.getScores(board, false);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {

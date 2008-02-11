@@ -90,8 +90,65 @@ public final class Model {
 	public Node getRoot() {
 		return this.root;
 	}
-	
 
+	public double[][] getScores(BoardI board, boolean white) {
+		short size = board.getSize();
+		double[][] result = new double[size][size];
+		for (short row = 0; row < size; row++) {
+			for (short column = 0; column < size; column++) {
+				result[row][column] = TINY;
+				for (short sym = 0; sym < 8; sym++) {
+					Node node = this.getRoot();
+					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
+					double estimate = 0.6;
+					int depth = 1;
+					while (linear.hasNext() && node != null) {
+						short colour = linear.next();
+						switch (colour) {
+						case BoardI.VERTEX_BLACK:
+							if (node.getBlack() == null)
+								estimate = 1 - estimate * (1 / node.size()) * (depth / size*size);
+							else
+								estimate = 1 - estimate * (node.getBlack().size() / node.size()) * (depth / size*size);
+							node = node.getBlack();
+							break;
+						case BoardI.VERTEX_WHITE:
+							if (node.getWhite() == null)
+								estimate = 1 - estimate * (1 / node.size()) * (depth / size*size);
+							else
+								estimate = 1 - estimate * (node.getWhite().size() / node.size()) * (depth / size*size);
+							node = node.getWhite();
+							break;
+						case BoardI.VERTEX_OFF_BOARD:
+							if (node.getOff() == null)
+								estimate = 1 - estimate * (1 / node.size()) * (depth / size*size);
+							else
+								estimate = 1 - estimate * (node.getOff().size() / node.size()) * (depth / size*size);
+							node = node.getOff();
+							break;
+						case BoardI.VERTEX_KO:
+						case BoardI.VERTEX_EMPTY:
+							if (node.getEmpty() == null)
+								estimate = 1 - estimate * (1 / node.size()) * (depth / size*size);
+							else
+								estimate = 1 - estimate * (node.getEmpty().size() / node.size()) * (depth / size*size);
+							node = node.getEmpty();
+							break;
+						default:
+							throw new Error("Unknown vertex colour: " + colour);
+						}
+
+					}
+				
+				if (result[row][column] < estimate){
+					result[row][column] = estimate;
+					//System.err.println(estimate);
+				}
+				}
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * Train.
@@ -135,7 +192,7 @@ public final class Model {
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)
 						for (short sym = 0; sym < 8; sym++) {
-							VertexLineariser linear = new VertexLineariser(board, i, j, sym,!isBlack);
+							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
 
 							boolean played = false;
 							if ((!move.getPass()) && (move.getRow() == i) && (move.getColumn() == j))
