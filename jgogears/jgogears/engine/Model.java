@@ -83,24 +83,6 @@ public final class Model {
 	}
 
 	/**
-	 * Recursively count the nodes in a model
-	 * 
-	 * @param node
-	 *            the node
-	 * @return the long
-	 */
-	public long countNodes(Node node) {
-		long count = 1;
-		if (node.black != null)
-			count = count + this.countNodes(node.black);
-		if (node.white != null)
-			count = count + this.countNodes(node.white);
-		if (node.empty != null)
-			count = count + this.countNodes(node.empty);
-		return count;
-	}
-
-	/**
 	 * Gets the root.
 	 * 
 	 * @return the root
@@ -108,89 +90,8 @@ public final class Model {
 	public Node getRoot() {
 		return this.root;
 	}
+	
 
-	/**
-	 * Gets the score for a situation
-	 *  
-	 * @param board
-	 *            the board
-	 * @param colour
-	 *            the colour
-	 * @param row
-	 *            the row
-	 * @param column
-	 *            the column
-	 * @param sym
-	 *            the sym
-	 * @return the score
-	 */
-	 float getScore(BoardI board, short colour, short row, short column, short sym) {
-		VertexLineariser linear = new VertexLineariser(board, row, column, sym);
-		if (!linear.hasNext())
-			throw new Error();
-		Node current = this.root;
-		int counter = 1;
-		float result = DELTA;
-		while (linear.hasNext()) {
-			if (DEBUG)
-				System.out.println("result = " + result + " current.score = " + current.score);
-			result = (float) (java.lang.Math.sqrt(result) + current.score);
-			counter++;
-			Short c = linear.next();
-			switch (c) {
-			case BoardI.VERTEX_BLACK:
-				if (current.black == null)
-					return result;
-				else
-					current = current.black;
-				break;
-			case BoardI.VERTEX_WHITE:
-				if (current.white == null)
-					return result;
-				else
-					current = current.white;
-				break;
-			case BoardI.VERTEX_OFF_BOARD:
-				if (current.off == null)
-					return result;
-				else
-					current = current.off;
-				break;
-			case BoardI.VERTEX_KO:
-			case BoardI.VERTEX_EMPTY:
-				if (current.empty == null)
-					return result;
-				else
-					current = current.empty;
-				break;
-			default:
-				throw new Error();
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * Gets the score for every vertex on the board.
-	 * 
-	 * @param board
-	 *            the board
-	 * @param colour
-	 *            the colour
-	 * @return the scores
-	 */
-	public float[][] getScores(BoardI board, short colour) {
-		float[][] result = new float[board.getSize()][board.getSize()];
-		for (short i = 0; i < board.getSize(); i++)
-			for (short j = 0; j < board.getSize(); j++) {
-				result[i][j] = -DELTA;
-				for (short sym = 0; sym < 8; sym++) {
-					float tmp = this.getScore(board, colour, i, j, sym);
-					result[i][j] = max(result[i][j], tmp);
-				}
-			}
-		return result;
-	}
 
 	/**
 	 * Train.
@@ -234,139 +135,15 @@ public final class Model {
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)
 						for (short sym = 0; sym < 8; sym++) {
-							VertexLineariser linear = new VertexLineariser(board, i, j, sym);
+							VertexLineariser linear = new VertexLineariser(board, i, j, sym,!isBlack);
 
 							boolean played = false;
 							if ((!move.getPass()) && (move.getRow() == i) && (move.getColumn() == j))
 								played = true;
 							// TODO
-							this.train(linear, str, played);
+							root.train(linear, played);
 						}
 			}
 		}
 	}
-
-	/**
-	 * Train.
-	 * 
-	 * @param linear
-	 *            the linear
-	 * @param strength
-	 *            the strength
-	 * @param played
-	 *            the played
-	 */
-	public void train(VertexLineariser linear, float strength, boolean played) {
-		if (strength == 0.0)
-			strength = DELTA;
-		Node current = this.root;
-		while (linear.hasNext()) {
-			Short colour = linear.next();
-			switch (colour) {
-			case BoardI.VERTEX_BLACK:
-				if (current.black == null)
-					if (played)
-						current.black = new Node(strength);
-					else
-						return;
-				current = current.black;
-				break;
-			case BoardI.VERTEX_WHITE:
-				if (current.white == null)
-					if (played)
-						current.white = new Node(strength);
-					else
-						return;
-				current = current.white;
-				break;
-			case BoardI.VERTEX_OFF_BOARD:
-				if (current.off == null)
-					if (played)
-						current.off = new Node(strength);
-					else
-						return;
-				current = current.off;
-				break;
-			case BoardI.VERTEX_EMPTY:
-			case BoardI.VERTEX_KO:
-				if (current.empty == null)
-					if (played)
-						current.empty = new Node(strength);
-					else
-						return;
-				current = current.empty;
-				break;
-
-			default:
-				throw new Error();
-			}
-			if (played) {
-				if (strength > current.score) {
-					current.score = strength;
-				} else {
-					current.score = current.score + DELTA;
-				}
-			} else {
-				if (strength > current.score) {
-					current.score = current.score - DELTA;
-				} else {
-					current.score = current.score - DELTA;
-				}
-			}
-			current.count++;
-		}
-	}
-
-	/**
-	 * Class to hold a single node in the tree.
-	 * 
-	 * @author stuart
-	 */
-	private final class Node {
-
-		/** The score. */
-		double score = 1;;
-
-		/** The count. */
-		long count = 0;;
-
-		/** The white. */
-		Node white = null;;
-
-		/** The off. */
-		Node off = null;
-
-		/** The black. */
-		Node black = null;
-
-		/** The empty. */
-		Node empty = null;
-
-		/**
-		 * Instantiates a new node.
-		 */
-		Node() {
-		}
-
-		/**
-		 * Instantiates a new node.
-		 * 
-		 * @param score
-		 *            the score
-		 */
-		Node(double score) {
-			this.score = (float) score;
-		}
-
-		/**
-		 * Instantiates a new node.
-		 * 
-		 * @param score
-		 *            the score
-		 */
-		Node(float score) {
-			this.score = score;
-		}
-	}
-
 }

@@ -42,6 +42,9 @@ public class VertexLineariser implements Iterator<Short> {
 
 	/** The sym. */
 	short sym = -2;
+	
+	/** Have the colours been inverted? */
+	boolean invert = false;
 
 	/**
 	 * Instantiates a new vertex lineariser.
@@ -55,11 +58,12 @@ public class VertexLineariser implements Iterator<Short> {
 	 * @param sym
 	 *            the sym
 	 */
-	public VertexLineariser(BoardI board, short row, short column, short sym) {
+	public VertexLineariser(BoardI board, short row, short column, short sym,boolean invert) {
 		this.board = board;
 		this.row = row;
 		this.column = column;
 		this.sym = sym;
+		this.invert = invert;
 
 		if (this.board.getSize() != BOARD_SIZE)
 			throw new IllegalArgumentException("only boards of SIZE " + SIZE + " please");
@@ -203,10 +207,14 @@ public class VertexLineariser implements Iterator<Short> {
 			throw new NoSuchElementException();
 		// System.err.println("next() " + sym + " " + row + " " + column + " "
 		// + offset);
-		int c = this.board.getColour(cache[0][this.sym][this.row][this.column][this.offset],
+		short c = this.board.getColour(cache[0][this.sym][this.row][this.column][this.offset],
 				cache[1][this.sym][this.row][this.column][this.offset]);
 		this.offset++;
-		return new Short((short) c);
+		if (this.invert)
+			return c;
+		else
+			return invert(c);
+		
 	}
 
 	/*
@@ -217,5 +225,18 @@ public class VertexLineariser implements Iterator<Short> {
 	public void remove() {
 		throw new java.lang.UnsupportedOperationException();
 	}
+	
+	public Short invert(Short colour){
+		switch (colour.shortValue()){
+		case BoardI.VERTEX_BLACK:
+			return BoardI.VERTEX_WHITE;
+		case BoardI.VERTEX_WHITE:
+			return BoardI.VERTEX_BLACK;
+		default:
+			return colour;
+
+		}
+	}
+
 
 }
