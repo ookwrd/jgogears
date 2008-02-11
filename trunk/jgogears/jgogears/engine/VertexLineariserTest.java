@@ -53,7 +53,7 @@ public class VertexLineariserTest extends TestCase {
 				board = iterator.next();
 				assertTrue(board != null);
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, j);
+					Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, j, false);
 					assertTrue(linear != null);
 					while (linear.hasNext()) {
 						Short s = linear.next();

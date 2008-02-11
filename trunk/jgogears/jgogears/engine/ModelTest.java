@@ -70,7 +70,7 @@ public class ModelTest extends TestCase {
 						if (DEBUG)
 							System.err.println("loaded " + filecount + " files with " + movecount + " moves in "
 									+ (after.getTime() - before.getTime()) + " milliseconds,  model size =  "
-									+ model.countNodes(model.getRoot()));
+									+ model.getRoot().size());
 					}
 
 				} else {
@@ -94,7 +94,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black h4"));
 		board = board.newBoard(new Move("white n4"));
-		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
+		float[][] r = null;// TODO model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
@@ -128,9 +128,9 @@ public class ModelTest extends TestCase {
 	public void testTrainedModel() {
 		Model model = new Model();
 		assertNotNull(model);
-		System.out.println(" model size =  " + model.countNodes(model.getRoot()));
+		System.out.println(" model size =  " + model.getRoot().size());
 		model.train(this.loadTestGame());
-		System.out.println(" model size =  " + model.countNodes(model.getRoot()));
+		System.out.println(" model size =  " + model.getRoot().size());
 		BoardI board = new Board();
 		board = board.newBoard(new Move("white b2"));
 		board = board.newBoard(new Move("black k4"));
@@ -139,7 +139,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black h4"));
 		board = board.newBoard(new Move("white n4"));
-		float[][] r = model.getScores(board, BoardI.VERTEX_BLACK);
+		float[][] r = null; // TODO model.getScores(board, BoardI.VERTEX_BLACK);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
