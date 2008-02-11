@@ -5,14 +5,13 @@ import java.util.*;
 
 import jgogears.SGF.ParseException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SGFGameTree.
+ * The Class SGFGameTree. An SGF Game Tree represents zero or more SGF encoded games or game problems
  */
 public class SGFGameTree {
 
 	/**
-	 * Load from file.
+	 * Load an SGF tree from a file
 	 * 
 	 * @param file the file
 	 * 

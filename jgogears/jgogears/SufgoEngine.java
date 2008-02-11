@@ -77,12 +77,13 @@ public class SufgoEngine extends SkeletonEngine {
 		short size = board.getSize();
 
 		Short[][] values = new Short[size][size];
+		boolean invert = colour == BoardI.VERTEX_WHITE;
 
 		for (short r = 0; r < size; r++) {
 			for (short c = 0; c < size; c++) {
 
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new VertexLineariser(board, r, c, j);
+					Iterator<Short> linear = new VertexLineariser(board, r, c, j,invert);
 					while (linear.hasNext()) {
 						Short s = linear.next();
 						// System.out.print(" " + s + ", ");

@@ -2,7 +2,7 @@ package jgogears;
 
 import java.util.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SGFNode.
  */

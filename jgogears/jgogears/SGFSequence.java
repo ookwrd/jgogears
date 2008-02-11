@@ -8,9 +8,6 @@ import java.util.*;
  */
 public class SGFSequence extends Vector<SGFNode> {
 
-	/** The Constant serialVersionUID. */
-	static final long serialVersionUID = 1;
-
 	/* (non-Javadoc)
 	 * @see java.util.Vector#toString()
 	 */
