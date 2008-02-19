@@ -136,6 +136,26 @@ public abstract class BoardI {
 	/** the ruleset. */
 	protected RuleSet ruleSet = new NoKoRuleSet();
 	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj.getClass() != this.getClass())
+			return super.equals(obj);
+		BoardI other = (BoardI) obj;
+		if (other == null)
+			throw new Error();
+		if (this.size != other.size)
+			return false;
+		if (this.getZobrist() != null && other.getZobrist() != null)
+			return this.getZobrist().equals(other.getZobrist());
+		for (int i=0;i<size;i++)
+			for (int j=0;j<size;j++)
+				if (this.getColour(i, j) != other.getColour(i, j))
+					return false;
+		return true;
+	}
+
+	
 	/**
 	 * create a new board based on the current board plus a move.
 	 * 
