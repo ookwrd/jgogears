@@ -189,6 +189,48 @@ public class BoardTest extends TestCase {
 	}
 
 	/**
+	 * Test each undoable ii.
+	 */
+	public void testEachUndoableII() {
+		for (int i = 0; i < Zobrist.MAX_BOARD_SIZE; i++)
+			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
+				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
+
+					BoardI board1 = new Board(true);
+					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+				
+					assertFalse(board1.equals(board2));
+					assertFalse(board1.equals(board3));
+					assertTrue(board1.equals(board4));
+					assertTrue(board2.equals(board3));
+
+				}
+	}
+
+	/**
+	 * Test each undoable ii.
+	 */
+	public void testEachUndoableIII() {
+		for (int i = 0; i < Zobrist.MAX_BOARD_SIZE; i++)
+			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
+				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
+
+					BoardI board1 = new Board(false);
+					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+				
+					assertFalse(board1.equals(board2));
+					assertFalse(board1.equals(board3));
+					assertTrue(board1.equals(board4));
+					assertTrue(board2.equals(board3));
+
+				}
+	}
+
+	/**
 	 * Test load simple gnugo.
 	 * 
 	 * @throws IOException Signals that an I/O exception has occurred.

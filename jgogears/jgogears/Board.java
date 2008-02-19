@@ -177,50 +177,8 @@ public class Board extends BoardI {
 	 */
 	@Override
 	public String toString() {
-		return this.toString(null);
+		return BoardToASCII.Transform(this);
 	}
-
-
-	public String toString(Move move) {
-		StringBuffer buf = new StringBuffer();
-		int rowoff = -1, coloff = -1;
-		if (move != null) {
-			rowoff = move.getRow();
-			coloff = move.getColumn();
-		}
-		// do the header
-		buf.append("   ");
-		for (int i = 0; i < this.size; i++) {
-			buf.append(i);
-		}
-		buf.append("\n");
-		for (int i = 0; i < this.size; i++) {
-			buf.append(" ").append(i).append(" ");
-			for (int j = 0; j < this.size; j++) {
-				if ((i == rowoff) && (j == coloff)) {
-					buf.append("&");
-				}
-				switch (this.board[i][j]) {
-				case VERTEX_KO:
-					buf.append("!");
-					break;
-				case VERTEX_BLACK:
-					buf.append("X");
-					break;
-				case VERTEX_WHITE:
-					buf.append("O");
-					break;
-				case VERTEX_EMPTY:
-					buf.append(".");
-					break;
-				default:
-					throw new Error();
-				}
-			}
-			buf.append("\n");
-		}
-		buf.append("\n");
-		return buf.toString();
-	}
+	
 
 }

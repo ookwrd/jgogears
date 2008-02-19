@@ -14,6 +14,9 @@ public class ZobristTest extends TestCase {
 	 * Check that all of the hashes are different
 	 */
 	public void testEachNotEqual() {
+		// this is needed to initialise the random numbers
+		Zobrist z = new Zobrist();
+
 		for (int i = 0; i < Zobrist.MAX_BOARD_SIZE; i++)
 			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
 				for (int k = 0; k < Zobrist.MAX_COLOUR; k++)
@@ -64,7 +67,6 @@ public class ZobristTest extends TestCase {
 				}
 	}
 
-	// why isn't this working??
 	/**
 	 * Test each undoable ii.
 	 */
@@ -74,15 +76,25 @@ public class ZobristTest extends TestCase {
 				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
 					Zobrist z = new Zobrist();
 					Zobrist z2 = new Zobrist(z, i, j, k);
-					Zobrist zz = new Zobrist(z, i, j, k);
-
+					Zobrist z3 = new Zobrist(z, i, j, k);
+	
 					assertNotNull(z);
 					assertNotNull(z2);
 					System.err.println(z);
 					System.err.println(z2);
-					System.err.println(zz);
+					System.err.println(z3);
 					assertFalse(z2.equals(z));
-					assertTrue(z2 == zz);
+					assertTrue(z2.equals(z3));
+					
+					BoardI board1 = new Board(true);
+					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					// make sure the hashes are the same
+					assertFalse(board1.getZobrist().equals(board2.getZobrist()));
+					assertFalse(board1.getZobrist().equals(board3.getZobrist()));
+					assertTrue(board1.getZobrist().equals(board4.getZobrist()));
+					assertTrue(board2.getZobrist().equals(board3.getZobrist()));
 
 				}
 	}
@@ -198,10 +210,13 @@ public class ZobristTest extends TestCase {
 
 		BoardI board6 = board.newBoard(new Move((short) 2, (short) 2, BoardI.VERTEX_BLACK));
 		BoardI board7 = board6.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_WHITE));
-		assertFalse(board5.getZobrist().equals(board7.getZobrist()));
+		System.err.println(board5.getZobrist());
+		System.err.println(board7.getZobrist());
+
+		assertTrue(board5.getZobrist().equals(board7.getZobrist()));
 
 		BoardI board8 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_WHITE));
-		assertFalse(board8.getZobrist().equals(board2.getZobrist()));
+		assertTrue(board8.getZobrist().equals(board2.getZobrist()));
 	}
 
 	/**

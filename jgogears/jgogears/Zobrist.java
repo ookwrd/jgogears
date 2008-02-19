@@ -93,27 +93,27 @@ public class Zobrist extends BitSet {
 				return this.get(i) == true ? 1 : -1;
 		return 0;
 	}
-
-	// TODO why doesn't this work with == ?
-	/* (non-Javadoc)
-	 * @see java.util.BitSet#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object o) {
-		if (this == null)
-			throw new Error();
-		if (o == null)
-			return false;
-		if (o.getClass() != this.getClass())
-			return super.equals(o);
-		Zobrist other = (Zobrist) o;
-		if (other == null)
-			throw new Error();
-		for (int i = 0; i < ZOBRIST_SIZE; i++)
-			if (this.get(i) != other.get(i))
-				return false;
-		System.err.println(",");
-		return true;
-	}
+//
+//	// TODO why doesn't this work with == ?
+//	/* (non-Javadoc)
+//	 * @see java.util.BitSet#equals(java.lang.Object)
+//	 */
+//	@Override
+//	public boolean equals(Object o) {
+//		if (this == null)
+//			throw new Error();
+//		if (o == null)
+//			return false;
+//		if (o.getClass() != this.getClass())
+//			return super.equals(o);
+//		Zobrist other = (Zobrist) o;
+//		if (other == null)
+//			throw new Error();
+//		for (int i = 0; i < ZOBRIST_SIZE; i++)
+//			if (this.get(i) != other.get(i))
+//				return false;
+//		System.err.println(",");
+//		return true;
+//	}
 
 }

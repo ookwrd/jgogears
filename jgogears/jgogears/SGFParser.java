@@ -11,7 +11,7 @@ import jgogears.SGF.ParseException;
  */
 public class SGFParser {
 
-	/** Example SGF file {@link}. */
+	/** Trivial example SGF file. */
 	public static String EXAMPLEA = "(;)";
 
 	// //////////// static examples NOT from the standard
