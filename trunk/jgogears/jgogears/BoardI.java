@@ -194,6 +194,8 @@ public abstract class BoardI {
 			// do nothing, since GoBoard doesn't know whose turn it is
 		} else {
 			// place the stone
+			if (move.getColumn() >= size || move.getRow() >= size)
+				throw new Error();
 			this.setColour(move.getRow(), move.getColumn(), move.getColour());
 			if (zobrist != null)
 				setZobrist(new Zobrist(this.zobrist, move.getRow(), move.getColumn(), BoardI.VERTEX_EMPTY));
