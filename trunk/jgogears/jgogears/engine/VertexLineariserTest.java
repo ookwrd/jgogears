@@ -12,9 +12,78 @@ import junit.framework.TestCase;
  */
 public class VertexLineariserTest extends TestCase {
 
-	/*
-	 * Test method for 'jgogears.SGFNode.columnFromMoveString(String)'
+	/**
+	 * test what happens when linearising boards of different sizes
+	 * 
+	 * @throws Exception
 	 */
+	public void testDifferenetSizes5() throws Exception {
+		try {
+			BoardI board = new Board(19);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(lineariser);
+			board = new Board(9);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			fail("shouldn't be able to linearise different sizes of board");
+		} catch (IllegalArgumentException e) {
+			assertNotNull(e);
+		}
+	}
+
+	/**
+	 * test what happens when linearising boards of different sizes
+	 * 
+	 * @throws Exception
+	 */
+	public void testDifferenetSizes9() throws Exception {
+		try {
+			BoardI board = new Board(19);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(lineariser);
+			board = new Board(9);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			fail("shouldn't be able to linearise different sizes of board");
+		} catch (IllegalArgumentException e) {
+			assertNotNull(e);
+		}
+	}
+
+	/**
+	 * test what happens when linearising boards of different sizes
+	 * 
+	 * @throws Exception
+	 */
+	public void testDifferenetSizes13() throws Exception {
+		try {
+			BoardI board = new Board(19);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(lineariser);
+			board = new Board(13);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			fail("shouldn't be able to linearise different sizes of board");
+		} catch (IllegalArgumentException e) {
+			assertNotNull(e);
+		}
+	}
+
+	/**
+	 * test what happens when linearising boards of different sizes
+	 * 
+	 * @throws Exception
+	 */
+	public void testDifferenetSizes25() throws Exception {
+		try {
+			BoardI board = new Board(19);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(lineariser);
+			board = new Board(25);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			fail("shouldn't be able to linearise different sizes of board");
+		} catch (IllegalArgumentException e) {
+			assertNotNull(e);
+		}
+	}
+
 	/**
 	 * Test everything.
 	 * 
