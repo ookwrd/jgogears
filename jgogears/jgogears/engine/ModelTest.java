@@ -36,7 +36,7 @@ public class ModelTest extends TestCase {
 
 	/**
 	 * Test load all sgf files.
-	 * 
+	 * TODO make this quciker. it takes far too long
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -86,14 +86,14 @@ public class ModelTest extends TestCase {
 		if (DEBUG)
 			System.err.println("loaded " + filecount + " files with " + movecount + " moves in "
 					+ (after.getTime() - start.getTime()) + " milliseconds");
-		BoardI board = new Board();
+		BoardI board = new Board(19);
 		board = board.newBoard(new Move("white b2"));
-		board = board.newBoard(new Move("black k4"));
+		board = board.newBoard(new Move("black b4"));
 		board = board.newBoard(new Move("white c3"));
-		board = board.newBoard(new Move("black g4"));
+		board = board.newBoard(new Move("black c4"));
 		board = board.newBoard(new Move("white d4"));
-		board = board.newBoard(new Move("black h4"));
-		board = board.newBoard(new Move("white n4"));
+		board = board.newBoard(new Move("black a4"));
+		board = board.newBoard(new Move("white d2"));
 		double[][] r =  model.getScores(board, false);
 		assertNotNull(r);
 		if (DEBUG) {
