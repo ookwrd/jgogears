@@ -33,18 +33,11 @@ public class ModelTest extends TestCase {
 		}
 
 	}
-
-	/**
-	 * Test load all sgf files.
-	 * TODO make this quciker. it takes far too long
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public void testLoadAllSGFFiles() throws IOException {
+	public Model trainNFiles(int count)throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
 		assertNotNull(files);
-		
+
 		int filecount = 0;
 		int movecount = 0;
 		Model model = new Model();
@@ -52,7 +45,7 @@ public class ModelTest extends TestCase {
 		Date start = new Date();
 		assertNotNull(start);
 
-		while ((files.size() > 0) && (filecount < 10)) {
+		while ((files.size() > 0) && (filecount < count)) {
 			String filename = files.pop();
 			File file = new File(filename);
 			if (file.exists()) {
@@ -65,14 +58,7 @@ public class ModelTest extends TestCase {
 					if (game.getSize() == 19) {
 						filecount++;
 						model.train(game);
-
-						Date after = new Date();
-						if (DEBUG)
-							System.err.println("loaded " + filecount + " files with " + movecount + " moves in "
-									+ (after.getTime() - before.getTime()) + " milliseconds,  model size =  "
-									+ model.getRoot().size());
-					}
-
+				}
 				} else {
 					String[] children = file.list();
 					for (int i = 0; i < children.length; i++) {
@@ -80,12 +66,24 @@ public class ModelTest extends TestCase {
 					}
 				}
 			}
-
 		}
-		Date after = new Date();
 		if (DEBUG)
-			System.err.println("loaded " + filecount + " files with " + movecount + " moves in "
-					+ (after.getTime() - start.getTime()) + " milliseconds");
+			System.err.println("loaded " + filecount + " files ");
+		return model;
+	}
+	
+	/**
+	 * Test load all sgf files. TODO make this quciker. it takes far too long
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void testLoadAllSGFFiles() throws IOException {
+
+		// this takes too long
+		fail();
+		Model model = this.trainNFiles(10);
+
 		BoardI board = new Board(19);
 		board = board.newBoard(new Move("white b2"));
 		board = board.newBoard(new Move("black b4"));
@@ -94,7 +92,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black a4"));
 		board = board.newBoard(new Move("white d2"));
-		double[][] r =  model.getScores(board, false);
+		double[][] r = model.getScores(board, false);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
@@ -107,11 +105,101 @@ public class ModelTest extends TestCase {
 	}
 
 	/**
+	 * check some stats on some files
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void testTreeWellFormedness() throws IOException {
+		Model model = this.trainNFiles(10);
+		// generate
+		int nodeCount = 0;
+		int leafCount = 0;
+		int fullCount = 0;
+		int countSum = 0;
+		Stack<Node> nodes = new Stack<Node>();
+		nodes.push(model.getRoot());
+		while (nodes.size() > 0) {
+			Node node = nodes.pop();
+			if (node != null) {
+				nodeCount++;
+				assertTrue(node.getBlack() != node);
+				assertTrue(node.getWhite() != node);
+				assertTrue(node.getEmpty() != node);
+				assertTrue(node.getOff() != node);
+				assertTrue(node.getCount() >= 0);
+
+				if (node.getBlack() != null) {
+					assertTrue(node.getCount() >= 1);
+					nodes.push(node.getBlack());
+				}
+				if (node.getWhite() != null) {
+					assertTrue(node.getCount() >= 1);
+					nodes.push(node.getWhite());
+				}
+				if (node.getEmpty() != null) {
+					assertTrue(node.getCount() >= 1);
+					nodes.push(node.getEmpty());
+				}
+				if (node.getOff() != null) {
+					assertTrue(node.getCount() >= 1);
+					nodes.push(node.getOff());
+				}
+				if (node.getBlack() != null && node.getWhite() != null && node.getEmpty() != null
+						&& node.getOff() != null)
+					fullCount++;
+				if (node.getBlack() == null && node.getWhite() == null && node.getEmpty() == null
+						&& node.getOff() == null)
+					leafCount++;
+				countSum += node.getCount();
+			}
+		}
+		if (DEBUG)
+			System.err.println("nodes=" + nodeCount + " leaves=" + leafCount + " full=" + fullCount + " countSum="
+					+ countSum + " countAvg =" + countSum / nodeCount + " ");
+
+	}
+
+	/**
+	 * check that there are no loops in the tree
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void testTreeWellFormednessII() throws IOException {
+		Model model = this.trainNFiles(10);
+		Stack<Node> nodes = new Stack<Node>();
+		Set<Node> nodeSet = new TreeSet<Node>();
+		nodes.push(model.getRoot());
+		while (nodes.size() > 0) {
+			Node node = nodes.pop();
+			if (node != null) {
+				assertFalse(nodeSet.contains(node));
+				nodeSet.add(node);
+			}
+			if (node.getBlack() != null) {
+				nodes.push(node.getBlack());
+			}
+			if (node.getWhite() != null) {
+				nodes.push(node.getWhite());
+			}
+			if (node.getEmpty() != null) {
+				nodes.push(node.getEmpty());
+			}
+			if (node.getOff() != null) {
+				nodes.push(node.getOff());
+			}
+
+		}
+	}
+
+	/**
 	 * Test random.
 	 */
 	public void testRandom() {
 		double a = Model.getRandom();
-		if (DEBUG)System.err.println("Random data = " + a);
+		if (DEBUG)
+			System.err.println("Random data = " + a);
 	}
 
 	/**
