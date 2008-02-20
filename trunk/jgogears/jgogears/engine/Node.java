@@ -155,7 +155,11 @@ public final class Node implements Comparable<Node> {
 				throw new Error();
 		this.empty = empty;
 	}
-
+/**
+ * get the size of this (sub)tree
+ * 
+ * @return the size
+ */
 	public int size() {
 		int result = 1;
 		if (black != null)
@@ -168,13 +172,24 @@ public final class Node implements Comparable<Node> {
 			result = result + off.size();
 		return result;
 	}
-	
+	/**
+	 * return an iterator over the children of this Node;
+	 * @return the iterator
+	 */
 	public Iterator<Node> iterator(){
 		return new NodeIterator(this);
 	}
+	/**
+	 * return an iterator over the children of this Node;
+	 * @return the iterator
+	 */
 	public Iterator<Node> getChildren(){
 		return new NodeIterator(this);
 	}
+	/**
+	 * return an iterator over the decendents of this Node;
+	 * @return the iterator
+	 */
 	public Iterator<Node> getDecendents(){
 		return new TreeIterator(this);
 	}

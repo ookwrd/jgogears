@@ -43,6 +43,17 @@ public class Board extends BoardI {
 	 * 
 	 * @param size the size
 	 */
+	public Board(int size, boolean zobrist) {
+		super(zobrist);
+		this.size = (short) size;
+		this.init();
+	}
+
+	/**
+	 * constructor of specially sized boards.
+	 * 
+	 * @param size the size
+	 */
 	public Board(int size) {
 		this.size = (short) size;
 		this.init();
@@ -55,6 +66,19 @@ public class Board extends BoardI {
 	 * @param rule the rule
 	 */
 	public Board(int size, RuleSet rule) {
+		this.size = (short) size;
+		this.ruleSet = rule;
+		this.init();
+	}
+
+	/**
+	 * constructor of specially sized boards.
+	 * 
+	 * @param size the size
+	 * @param rule the rule
+	 */
+	public Board(int size, RuleSet rule, boolean zobrist) {
+		super(zobrist);
 		this.size = (short) size;
 		this.ruleSet = rule;
 		this.init();
