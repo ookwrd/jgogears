@@ -4,13 +4,21 @@
 package jgogears.engine;
 
 import jgogears.BoardI;
+import java.util.*;
 
 /**
  * Class to hold a single node in the tree.
  * 
  * @author stuart
  */
-public final class Node {
+public final class Node implements Comparable<Node> {
+
+	public int compareTo(Node node) {
+		if (node == this)
+			return 0;
+		return (node.hashCode() > this.hashCode() ? 1 : -1);
+	}
+
 	/** are we doing expensive checking? */
 	private final static boolean CHECKING = true;
 
@@ -19,7 +27,7 @@ public final class Node {
 
 	/** The count. Should be equal to or higher than the sum of the childrens counts */
 	private long count = 0;
-	
+
 	/** The white child */
 	private Node white = null;;
 
@@ -147,14 +155,28 @@ public final class Node {
 				throw new Error();
 		this.empty = empty;
 	}
-	
-	public int size(){
+
+	public int size() {
 		int result = 1;
-		if (black != null) result = result + black.size();
-		if (white != null) result = result + white.size();
-		if (empty != null) result = result + empty.size();
-		if (off != null) result = result + off.size();
+		if (black != null)
+			result = result + black.size();
+		if (white != null)
+			result = result + white.size();
+		if (empty != null)
+			result = result + empty.size();
+		if (off != null)
+			result = result + off.size();
 		return result;
+	}
+	
+	public Iterator<Node> iterator(){
+		return new NodeIterator(this);
+	}
+	public Iterator<Node> getChildren(){
+		return new NodeIterator(this);
+	}
+	public Iterator<Node> getDecendents(){
+		return new TreeIterator(this);
 	}
 
 	public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
@@ -162,8 +184,8 @@ public final class Node {
 			throw new Error();
 		VertexLineariser linear = null;
 		boolean invert = colour == BoardI.VERTEX_WHITE;
-	
-			 linear = new VertexLineariser(board, row, column, sym, invert);
+
+		linear = new VertexLineariser(board, row, column, sym, invert);
 		if (!linear.hasNext())
 			throw new Error();
 		return getLeaf(linear, node);
@@ -182,14 +204,14 @@ public final class Node {
 				child = node.black;
 				break;
 			case BoardI.VERTEX_WHITE:
-				child =  node.white;
+				child = node.white;
 				break;
 			case BoardI.VERTEX_OFF_BOARD:
-				child =  node.off;
+				child = node.off;
 				break;
 			case BoardI.VERTEX_KO:
 			case BoardI.VERTEX_EMPTY:
-				child =  node.empty;
+				child = node.empty;
 				break;
 			default:
 				throw new Error("Unknown vertex colour: " + colour);
@@ -200,8 +222,6 @@ public final class Node {
 		}
 		return node;
 	}
-	
-
 
 	/**
 	 * Train.
@@ -214,49 +234,49 @@ public final class Node {
 	 *            the played
 	 */
 	public void train(VertexLineariser linear, boolean expand) {
-			count++;
-			if (!linear.hasNext())
-				return;
-			Short colour = linear.next();
-			
+		count++;
+		if (!linear.hasNext())
+			return;
+		Short colour = linear.next();
+
 		switch (colour) {
-			case BoardI.VERTEX_BLACK:
-				if (black == null)
-					if (expand)
-						black = new Node();
-					else
-						return;
-				black.train(linear,expand);
-				break;
-			case BoardI.VERTEX_WHITE:
-				if (white == null)
-					if (expand)
-						white = new Node();
-					else
-						return;
-				white.train(linear,expand);
+		case BoardI.VERTEX_BLACK:
+			if (black == null)
+				if (expand)
+					black = new Node();
+				else
+					return;
+			black.train(linear, expand);
+			break;
+		case BoardI.VERTEX_WHITE:
+			if (white == null)
+				if (expand)
+					white = new Node();
+				else
+					return;
+			white.train(linear, expand);
 
-				break;
-			case BoardI.VERTEX_OFF_BOARD:
-				if (off == null)
-					if (expand)
-						off = new Node();
-					else
-						return;
-				off.train(linear,expand);
+			break;
+		case BoardI.VERTEX_OFF_BOARD:
+			if (off == null)
+				if (expand)
+					off = new Node();
+				else
+					return;
+			off.train(linear, expand);
 
-				break;
-			case BoardI.VERTEX_EMPTY:
-			case BoardI.VERTEX_KO:
-				if (empty == null)
-					if (expand)
-						empty = new Node();
-					else
-						return;
-				empty.train(linear,expand);
-				break;
-			default:
-				throw new Error();
-			}
+			break;
+		case BoardI.VERTEX_EMPTY:
+		case BoardI.VERTEX_KO:
+			if (empty == null)
+				if (expand)
+					empty = new Node();
+				else
+					return;
+			empty.train(linear, expand);
+			break;
+		default:
+			throw new Error();
+		}
 	}
 }

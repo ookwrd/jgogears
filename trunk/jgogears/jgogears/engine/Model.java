@@ -58,7 +58,7 @@ public final class Model {
 	}
 
 	/**
-	 * Max of two doubles, biased towards the first in teh case of equality
+	 * Max of two doubles, biased towards the first in the case of equality
 	 * 
 	 * @param a
 	 *            the first double
@@ -83,14 +83,20 @@ public final class Model {
 	}
 
 	/**
-	 * Gets the root.
+	 * Gets the root of the model
 	 * 
 	 * @return the root
 	 */
 	public Node getRoot() {
 		return this.root;
 	}
-
+/**
+ * 
+ * TODO
+ * @param board
+ * @param white
+ * @return
+ */
 	public double[][] getScores(BoardI board, boolean white) {
 		short size = board.getSize();
 		double[][] result = new double[size][size];
@@ -100,7 +106,7 @@ public final class Model {
 				for (short sym = 0; sym < 8; sym++) {
 					Node node = this.getRoot();
 					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
-					double estimate = 0.6;
+					double estimate = 0.01;
 					int depth = 1;
 					while (linear.hasNext() && node != null) {
 						short colour = linear.next();
