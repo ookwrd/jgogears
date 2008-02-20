@@ -66,7 +66,7 @@ public class VertexLineariser implements Iterator<Short> {
 		this.invert = invert;
 
 		if (this.board.getSize() != BOARD_SIZE)
-			throw new IllegalArgumentException("only boards of SIZE " + SIZE + " please");
+			throw new IllegalArgumentException("only boards of BOARD_SIZE " + BOARD_SIZE + " please");
 		if (cache == null)
 			this.init();
 		this.check();

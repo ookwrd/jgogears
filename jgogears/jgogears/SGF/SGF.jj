@@ -44,7 +44,9 @@ PARSER_BEGIN(SGF)
  package jgogears.SGF;
  import java.util.*;
  import jgogears.*;
-
+/**
+* The main JavaCC parser class
+*/
 public class SGF {
  
 }

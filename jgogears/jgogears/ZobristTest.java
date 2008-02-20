@@ -149,6 +149,17 @@ public class ZobristTest extends TestCase {
 	}
 
 	/**
+	 * Test with board.
+	 */
+	public void testWithBoardSizes() {
+		for (int i=0;i<Zobrist.MAX_BOARD_SIZE;i++){
+		BoardI board = new Board(19,true);
+		BoardI board2 = new Board(i,true);
+		}
+
+	}
+
+	/**
 	 * Test with board
 	 */
 	public void testWithFastBoard() {

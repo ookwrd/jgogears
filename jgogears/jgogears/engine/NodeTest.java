@@ -56,56 +56,115 @@ public class NodeTest extends TestCase {
 	 * Test method for {@link jgogears.engine.Node#getWhite()}.
 	 */
 	public void testGetWhite() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setWhite(child);
+		assertTrue(parent.getWhite() == child);
+		parent.setWhite(null);
+		assertNull(parent.getWhite());
+		
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#setWhite(jgogears.engine.Node)}.
 	 */
 	public void testSetWhite() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setWhite(child);
+		assertTrue(parent.getWhite() == child);
+		parent.setWhite(null);
+		assertNull(parent.getWhite());
+		
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#getOff()}.
 	 */
 	public void testGetOff() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setOff(child);
+		assertTrue(parent.getOff() == child);
+		parent.setOff(null);
+		assertNull(parent.getOff());
+		
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#setOff(jgogears.engine.Node)}.
 	 */
 	public void testSetOff() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setOff(child);
+		assertTrue(parent.getOff() == child);
+		parent.setOff(null);
+		assertNull(parent.getOff());
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#getBlack()}.
 	 */
 	public void testGetBlack() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setBlack(child);
+		assertTrue(parent.getBlack() == child);
+		parent.setBlack(null);
+		assertNull(parent.getBlack());
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#setBlack(jgogears.engine.Node)}.
 	 */
 	public void testSetBlack() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setBlack(child);
+		assertTrue(parent.getBlack() == child);
+		parent.setBlack(null);
+		assertNull(parent.getBlack());
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#getEmpty()}.
 	 */
 	public void testGetEmpty() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setEmpty(child);
+		assertTrue(parent.getEmpty() == child);
+		parent.setEmpty(null);
+		assertNull(parent.getEmpty());
 	}
 
 	/**
 	 * Test method for {@link jgogears.engine.Node#setEmpty(jgogears.engine.Node)}.
 	 */
 	public void testSetEmpty() {
-		fail("Not yet implemented");
+		Node parent = new Node();
+		assertNotNull(parent);
+		Node child = new Node();
+		assertNotNull(child);
+		parent.setEmpty(child);
+		assertTrue(parent.getEmpty() == child);
+		parent.setEmpty(null);
+		assertNull(parent.getEmpty());
 	}
 
 }

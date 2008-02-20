@@ -24,15 +24,12 @@ public class Zobrist extends BitSet {
 	/** The static grid of all random values */
 	static BitSet[][][] grid = null;
 	
-	/** have the statics been initialised? */
-	static private boolean initialised = false;
 
 	/**
 	 * Initialises the static grid of random values
 	 */
 	static private void init() {
-		if (!initialised) {
-			initialised = true;
+		if (grid == null) {
 			grid = new BitSet[MAX_BOARD_SIZE][MAX_BOARD_SIZE][MAX_COLOUR];
 			Random random = new Random(new Date().getTime());
 			for (int i = 0; i < MAX_BOARD_SIZE; i++)
@@ -68,7 +65,7 @@ public class Zobrist extends BitSet {
 			throw new Error("" + row);
 		if ((column >= MAX_BOARD_SIZE) || (column < 0))
 			throw new Error("" + column);
-		if ((colour >= 4) || (colour < 0))
+		if ((colour >= BoardI.VERTEX_MAX) || (colour < BoardI.VERTEX_MIN))
 			throw new Error("" + colour);
 		this.clear();
 		this.xor(old);
@@ -88,32 +85,10 @@ public class Zobrist extends BitSet {
 		Zobrist other = (Zobrist) o;
 		if (other == null)
 			throw new Error();
-		for (int i = 0; i < ZOBRIST_SIZE; i++)
+		for (int i = 0; i < this.size(); i++)
 			if (this.get(i) != other.get(i))
 				return this.get(i) == true ? 1 : -1;
 		return 0;
 	}
-//
-//	// TODO why doesn't this work with == ?
-//	/* (non-Javadoc)
-//	 * @see java.util.BitSet#equals(java.lang.Object)
-//	 */
-//	@Override
-//	public boolean equals(Object o) {
-//		if (this == null)
-//			throw new Error();
-//		if (o == null)
-//			return false;
-//		if (o.getClass() != this.getClass())
-//			return super.equals(o);
-//		Zobrist other = (Zobrist) o;
-//		if (other == null)
-//			throw new Error();
-//		for (int i = 0; i < ZOBRIST_SIZE; i++)
-//			if (this.get(i) != other.get(i))
-//				return false;
-//		System.err.println(",");
-//		return true;
-//	}
 
 }
