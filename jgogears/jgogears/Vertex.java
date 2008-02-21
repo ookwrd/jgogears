@@ -7,7 +7,7 @@ import java.util.Vector;
  * 
  * @author Stuart
  */
-public final class Vertex extends Vector<Short> implements Comparable {
+public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	
 	/** the serial id for serialisation. */
 	private static final long serialVersionUID = 1L;
@@ -138,15 +138,7 @@ public final class Vertex extends Vector<Short> implements Comparable {
 	 * 
 	 * @return the int
 	 */
-	public int compareTo(Object o) {
-		if ((this == null) && (o == null))
-			return 0;
-		if (o == null)
-			return -1;
-		if (this == null)
-			return 1;
-		try {
-			Vertex v = (Vertex) o;
+	public int compareTo(Vertex v) {
 
 			if (v.getRow() > this.getRow())
 				return 1;
@@ -156,12 +148,6 @@ public final class Vertex extends Vector<Short> implements Comparable {
 				return 1;
 			if (v.getColumn() < this.getColumn())
 				return -1;
-		} catch (Throwable t) {
-			if (o.hashCode() > this.hashCode())
-				return 1;
-			if (o.hashCode() < this.hashCode())
-				return -1;
-		}
 		return 0;
 	}
 
