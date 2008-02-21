@@ -44,7 +44,6 @@ public class FasterBoard extends BoardI {
 	 * @param board the move
 	 * @param move the move
 	 * 
-	 * @return the new board 
 	 */
 	public FasterBoard(FasterBoard board , Move move) {
 		this.size = board.getSize();

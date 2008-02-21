@@ -16,6 +16,7 @@ public class ZobristTest extends TestCase {
 	public void testEachNotEqual() {
 		// this is needed to initialise the random numbers
 		Zobrist z = new Zobrist();
+		assertNotNull(z);
 
 		for (int i = 0; i < Zobrist.MAX_BOARD_SIZE; i++)
 			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
@@ -155,6 +156,8 @@ public class ZobristTest extends TestCase {
 		for (int i=0;i<Zobrist.MAX_BOARD_SIZE;i++){
 		BoardI board = new Board(19,true);
 		BoardI board2 = new Board(i,true);
+		assertNotNull(board);
+		assertNotNull(board2);
 		}
 
 	}

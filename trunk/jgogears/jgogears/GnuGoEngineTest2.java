@@ -438,6 +438,7 @@ public class GnuGoEngineTest2 extends TestCase {
 		try {
 			this.engine.initialise();
 			BoardI board = this.engine.showBoard();
+			assertNotNull(board);
 			// TODO
 			this.engine.quit();
 		} catch (Throwable t) {
