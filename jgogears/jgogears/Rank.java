@@ -150,7 +150,8 @@ public final class Rank {
 	public double getRating() {
 		if (TESTING)
 			checkRank(this.rank);
-		System.err.println(MAX_RANK + " " + MIN_RANK + " " + this.rank);
+		if (TESTING)
+			System.err.println(MAX_RANK + " " + MIN_RANK + " " + this.rank);
 		double result = (MIN_RANK - this.rank) / (MIN_RANK - MAX_RANK);
 		if (TESTING)
 			checkRating(result);
