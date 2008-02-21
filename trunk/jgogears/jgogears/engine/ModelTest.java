@@ -79,28 +79,35 @@ public class ModelTest extends TestCase {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadAllSGFFiles() throws IOException {
-
-		// this takes too long
-		fail();
 		Model model = this.trainNFiles(10);
 
 		BoardI board = new Board(19);
-		board = board.newBoard(new Move("white b2"));
-		board = board.newBoard(new Move("black b4"));
-		board = board.newBoard(new Move("white c3"));
-		board = board.newBoard(new Move("black c4"));
-		board = board.newBoard(new Move("white d4"));
-		board = board.newBoard(new Move("black a4"));
-		board = board.newBoard(new Move("white d2"));
+//		board = board.newBoard(new Move("white b2"));
+//		board = board.newBoard(new Move("black b4"));
+//		board = board.newBoard(new Move("white c3"));
+//		board = board.newBoard(new Move("black c4"));
+//		board = board.newBoard(new Move("white d4"));
+//		board = board.newBoard(new Move("black a4"));
+//		board = board.newBoard(new Move("white d2"));
 		double[][] r = model.getScores(board, false);
 		assertNotNull(r);
 		if (DEBUG) {
 			for (int i = 0; i < r.length; i++) {
 				for (int j = 0; j < r[i].length; j++)
-					System.out.print(" " + r[i][j]);
-				System.out.println();
+					System.err.print(" " + r[i][j]);
+				System.err.println();
 			}
 		}
+		double maxScore = Double.MIN_NORMAL;
+		Move maxMove = null;
+		for (int i = 0; i < r.length; i++) 
+			for (int j = 0; j < r[i].length; j++)
+				if (maxScore <= r[i][j]){
+					maxScore = r[i][j];
+					maxMove = new Move(i,j, Board.VERTEX_BLACK) ;
+			}
+				
+			System.out.println("MaxScore = " + maxScore + ", " + maxMove);
 
 	}
 
