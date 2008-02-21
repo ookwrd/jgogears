@@ -1,6 +1,6 @@
 package jgogears;
 
-import java.util.*;
+
 
 
 /**
@@ -42,6 +42,7 @@ public class Board extends BoardI {
 	 * constructor of specially sized boards.
 	 * 
 	 * @param size the size
+	 * @param zobrist true if we're using zobrist hashes
 	 */
 	public Board(int size, boolean zobrist) {
 		super(zobrist);
@@ -76,6 +77,7 @@ public class Board extends BoardI {
 	 * 
 	 * @param size the size
 	 * @param rule the rule
+	 * @param zobrist true if we're using zobrist hashes
 	 */
 	public Board(int size, RuleSet rule, boolean zobrist) {
 		super(zobrist);
@@ -100,7 +102,6 @@ public class Board extends BoardI {
 	 * @param board the move
 	 * @param move the move
 	 * 
-	 * @return the new board 
 	 */
 	public Board(Board board , Move move) {
 		this.size = board.getSize();
@@ -179,7 +180,6 @@ public class Board extends BoardI {
 	 * @param column the column
 	 * @param colour the colour
 	 * 
-	 * @return the previous colour
 	 */
 	public void setColour(int row, int column, short colour) {
 

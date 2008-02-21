@@ -134,7 +134,7 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * Comparison operator to ensure that (in)equality operators work as expected.
 	 * 
-	 * @param o the o
+	 * @param v the v
 	 * 
 	 * @return the int
 	 */

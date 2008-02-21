@@ -225,7 +225,11 @@ public class VertexLineariser implements Iterator<Short> {
 	public void remove() {
 		throw new java.lang.UnsupportedOperationException();
 	}
-	
+	/**
+	 * Invert a colour. Used when white is to play
+	 * @param colour
+	 * @return the inverted colour
+	 */
 	public Short invert(Short colour){
 		switch (colour.shortValue()){
 		case BoardI.VERTEX_BLACK:

@@ -49,8 +49,6 @@ public class GTPParserUtils {
 			do {
 				// System.err.println("parseVertexList(\"" + s + "\")");
 				Vertex v = null;
-				short row = -1;
-				short column = -1;
 				while ((s.indexOf(' ') == 1) || (s.indexOf(' ') == 0)) {
 					s = s.substring(1);
 				}

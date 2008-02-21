@@ -1,6 +1,6 @@
 package jgogears;
 
-import java.util.TreeSet;
+
 // TODO: Auto-generated Javadoc
 
 /**

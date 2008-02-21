@@ -1,7 +1,7 @@
 package jgogears;
 
 import java.util.*;
-import java.lang.reflect.*;
+
 
 
 /**
@@ -96,8 +96,8 @@ public abstract class BoardI {
 	 * 
 	 * @param row the row
 	 * @param column the column
+	 * @param colour the colour to set this to
 	 * 
-	 * @return the colour
 	 */
 	public abstract void setColour(int row, int column, short colour);
 
@@ -169,7 +169,6 @@ public abstract class BoardI {
 		 * 
 		 * @param move the move
 		 * 
-		 * @return the new board 
 		 */
 		protected void copydata(BoardI old , Move move) {
 		size = old.getSize();

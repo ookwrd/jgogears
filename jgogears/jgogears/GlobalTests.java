@@ -24,6 +24,8 @@ public class GlobalTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("all tests in project");
 		suite.addTestSuite(NodeIteratorTest.class);
+		suite.addTestSuite(TreeIteratorTest.class);
+		suite.addTestSuite(NodeTest.class);
 		suite.addTestSuite(ModelTest.class);
 		suite.addTestSuite(VertexLineariserTest.class);
 		suite.addTestSuite(MoveTest.class);
