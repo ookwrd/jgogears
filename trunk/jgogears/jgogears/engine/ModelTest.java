@@ -33,15 +33,14 @@ public class ModelTest extends TestCase {
 		}
 
 	}
-	public Model trainNFiles(int count)throws IOException {
+	public static Model trainNFiles(int count, Model model)throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
 		assertNotNull(files);
 
 		int filecount = 0;
 		int movecount = 0;
-		Model model = new Model();
-		assertNotNull(model);
+			assertNotNull(model);
 		Date start = new Date();
 		assertNotNull(start);
 
@@ -79,7 +78,10 @@ public class ModelTest extends TestCase {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadAllSGFFiles() throws IOException {
-		Model model = this.trainNFiles(10);
+		Model model = new Model();
+		ModelTest.trainNFiles(20,model);
+		ModelTest.trainNFiles(20,model);
+
 
 		BoardI board = new Board(19);
 //		board = board.newBoard(new Move("white b2"));
@@ -118,7 +120,8 @@ public class ModelTest extends TestCase {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testTreeWellFormedness() throws IOException {
-		Model model = this.trainNFiles(10);
+		Model model = new Model();
+		this.trainNFiles(10,model);
 		// generate
 		int nodeCount = 0;
 		int leafCount = 0;
@@ -174,7 +177,8 @@ public class ModelTest extends TestCase {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testTreeWellFormednessII() throws IOException {
-		Model model = this.trainNFiles(10);
+		Model model = new Model();
+		this.trainNFiles(10,model);
 		Stack<Node> nodes = new Stack<Node>();
 		Set<Node> nodeSet = new TreeSet<Node>();
 		nodes.push(model.getRoot());

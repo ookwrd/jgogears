@@ -13,13 +13,17 @@ public final class Model {
 	public static float DELTA = (float) 0.0001;
 
 	/** A value used for == analysis of doubles */
-	public static float TINY = (float) 0.0000001;
+	public static float TINY = (float) 0.000000000001;
 
 	/** are we being verbose? */
 	public static boolean DEBUG = false;
 
 	/** The random number generator */
 	private static Random random = new Random();
+	
+	private int boardsTrained = 0;
+	private int gamesTrained = 0;
+	
 
 	/**
 	 * Gets the random.
@@ -39,6 +43,16 @@ public final class Model {
 	static public double getRandomDelta() {
 		double r = random.nextDouble();
 		return r * DELTA;
+	}
+
+	/**
+	 * Gets the random tiny.
+	 * 
+	 * @return the random tiny
+	 */
+	static public double getRandomTiny() {
+		double r = random.nextDouble();
+		return r * TINY;
 	}
 
 	/**
@@ -90,6 +104,25 @@ public final class Model {
 	public Node getRoot() {
 		return this.root;
 	}
+	
+	Vertex getBestScore(BoardI board, boolean white){
+		double[][] result = getScores(board, white);
+		double best = Double.MIN_VALUE;
+		int I = 0,J = 0;
+		int i,j;
+		for (i=0;i<board.getSize();i++)
+			for (j=0;j<board.getSize();j++) {
+				if (result[i][j] > best){
+					if (RuleSet.DEFAULT.moveIsLegal(null, board, new Move(i,j,white?BoardI.VERTEX_WHITE:BoardI.VERTEX_BLACK))){
+					best = result[i][j] + getRandomTiny();
+					I =i;
+					J = j;
+					}
+				}
+			}
+		return new Vertex(I,J);
+	}
+	
 /**
  * 
  * TODO
@@ -101,10 +134,11 @@ public final class Model {
 		short size = board.getSize();
 		double[][] result = new double[size][size];
 		for (short row = 0; row < size; row++) {
-			for (short column = 0; column < size; column++) {
+			for (short column = 0; column < size; column++) 
+				for (short sym = 0; sym < 8; sym++) {
 				result[row][column] = TINY;
 				Node node = this.getRoot();
-					VertexLineariser linear = new VertexLineariser(board, row, column, (short)0, white);
+					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
 					double estimate = 1;
 					int depth = 0;
 					while (linear.hasNext() && node != null) {
@@ -132,7 +166,7 @@ public final class Model {
 						long childCount = 1;
 						if (child != null)
 							childCount = child.getCount();
-						estimate = estimate * child.getCount() / node.getCount() ;
+						estimate = estimate * childCount / node.getCount() ;
 
 					}
 				
@@ -178,11 +212,9 @@ public final class Model {
 				System.out.println("about to train on: " + move);
 			int colour = move.getColour();
 			boolean isBlack = colour == BoardI.VERTEX_BLACK;
-			float str = (float) (isBlack ? strengthB : strengthW);
+			//float str = (float) (isBlack ? strengthB : strengthW);
 
-			// mark the remaining points as not worth playing
-			if ((game != null) || (game.getScore() != null) || game.getScore().getScored() || (move != null)
-					|| move.getPass()) {
+			if ((game != null) || (move != null)|| move.getPass()) {
 				movecounter++;
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)
@@ -193,7 +225,7 @@ public final class Model {
 							if ((!move.getPass()) && (move.getRow() == i) && (move.getColumn() == j))
 								played = true;
 							// TODO
-							root.train(linear, played);
+							root.train(linear, played, played, Integer.MAX_VALUE);
 						}
 			}
 		}

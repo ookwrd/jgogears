@@ -57,14 +57,6 @@ public final class GTPScore {
 	};
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return new GTPScore(this.toString());
-	};
-
-	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -173,7 +165,8 @@ public final class GTPScore {
 		String original = s;
 		if (s.length() == 0) {
 			System.err.println("cannot initialise a score from a zero length string");
-			return false;
+			throw new Error();
+			//return false;
 		}
 		try {
 			this.value = s;

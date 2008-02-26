@@ -8,9 +8,6 @@ package jgogears;
  */
 public class GTPError extends Error {
 
-	/** TODO. */
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Instantiates a new gTP error.
 	 */

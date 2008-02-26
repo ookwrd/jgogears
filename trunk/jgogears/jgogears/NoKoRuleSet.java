@@ -103,8 +103,8 @@ final public class NoKoRuleSet extends RuleSet {
 	@Override
 	public TreeSet<Vertex> getLiberties(short rowb, short columnb, BoardI board) {
 		if ((board.getColour(rowb, columnb) == BoardI.VERTEX_EMPTY)
-				|| (board.getColour(rowb, columnb) == BoardI.VERTEX_EMPTY)
-				|| (board.getColour(rowb, columnb) == BoardI.VERTEX_EMPTY)) {
+				|| (board.getColour(rowb, columnb) == BoardI.VERTEX_KO)
+				|| (board.getColour(rowb, columnb) == BoardI.VERTEX_OFF_BOARD)) {
 			throw new Error("empty sqaures don't have liberties");
 		}
 
@@ -283,7 +283,7 @@ final public class NoKoRuleSet extends RuleSet {
 		short colour = move.getColour();
 
 		if (board.getColour(row, column) != BoardI.VERTEX_EMPTY) {
-			System.err.println("illegal move, not empty");
+			if (DEBUG)System.err.println("illegal move, not empty");
 			return false;
 		}
 
@@ -297,6 +297,8 @@ final public class NoKoRuleSet extends RuleSet {
 		liberties.addAll(this.legelsfrompos(row, column - 1, colour, board));
 
 		liberties.addAll(this.captures(game, board, move));
+		
+		liberties.remove(new Vertex(row,column));
 
 		if (liberties.size() > 0)
 			return true;

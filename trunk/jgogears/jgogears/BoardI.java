@@ -5,7 +5,7 @@ import java.util.*;
 
 
 /**
- * Abstract interface to a cabin. Knows about the size of the board, which stones are where, and about colours. Knows
+ * Abstract interface to a board. Knows about the size of the board, which stones are where, and about colours. Knows
  * nothing of the history of the board or whose turn it is to play.
  * 
  * @author Stuart
@@ -89,6 +89,18 @@ public abstract class BoardI {
 	 * 
 	 * @return the colour
 	 */
+	public  short getColour(Vertex v){
+		return this.getColour(v.getRow(), v.getColumn());
+	}
+
+	/**
+	 * get the colour of a vertex.
+	 * 
+	 * @param row the row
+	 * @param column the column
+	 * 
+	 * @return the colour
+	 */
 	public abstract short getColour(int row, int column);
 
 	/**
@@ -100,6 +112,13 @@ public abstract class BoardI {
 	 * 
 	 */
 	public abstract void setColour(int row, int column, short colour);
+	
+	public Collection<Move> getAllLegalMoves(RuleSet rules, short colour){
+		return rules.getAllLegalMoves(null, this, colour);
+	}
+	public Collection<Vertex> getAllLegalVertexes(RuleSet rules, short colour){
+		return rules.getAllLegalVertexes(null, this, colour);
+	}
 
 	/**
 	 * get the size of this board.
@@ -154,7 +173,6 @@ public abstract class BoardI {
 					return false;
 		return true;
 	}
-
 	
 	/**
 	 * create a new board based on the current board plus a move.

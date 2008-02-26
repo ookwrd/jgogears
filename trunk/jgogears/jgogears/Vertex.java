@@ -5,13 +5,14 @@ import java.util.Vector;
 /**
  * A class representing a vertex on the board. There is no representation of colour or the occupancy of the vertex.
  * 
+ * TODO write some tests for this
+ * 
  * @author Stuart
  */
 public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	
-	/** the serial id for serialisation. */
-	private static final long serialVersionUID = 1L;
-
+	static final boolean DEBUG = false;
+	
 	/**
 	 * Short cut constructor with ints rather than shorts.
 	 * 
@@ -40,7 +41,8 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	 * @param vertexString the vertex string
 	 */
 	public Vertex(String vertexString) {
-		// System.err.println("parseVertex(\"" + vertexString + "\")");
+		if (DEBUG)
+			System.err.println("parseVertex(\"" + vertexString + "\")");
 		vertexString = vertexString.toLowerCase();
 		switch (vertexString.charAt(0)) {
 		case 'a':
@@ -128,7 +130,8 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 			this.setColumn(((vertexString.charAt(1) - '0') * 10) + (vertexString.charAt(2) - '1'));
 		} else
 			throw new IllegalArgumentException("trying to parse (4) \"" + vertexString + "\", \"" + vertexString + "\"");
-		System.err.println(this);
+		if (DEBUG)
+			System.err.println(this);
 	}
 
 	/**

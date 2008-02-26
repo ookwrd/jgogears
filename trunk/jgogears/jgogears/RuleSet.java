@@ -3,7 +3,7 @@
  */
 package jgogears;
 
-import java.util.TreeSet;
+import java.util.*;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -12,6 +12,8 @@ import java.util.TreeSet;
  * @author Stuart
  */
 public abstract class RuleSet {
+	
+	static public final RuleSet DEFAULT = new NoKoRuleSet();
 	
 	/**
 	 * Captures.
@@ -133,5 +135,28 @@ public abstract class RuleSet {
 	 * @return true, if move is legal
 	 */
 	public abstract boolean moveIsLegal(Game game, BoardI board, Move move);
+	
+
+	public Collection<Move> getAllLegalMoves(Game game, BoardI board, short colour){
+		Stack<Move> moves = new Stack<Move>();
+		for (int i=0;i<board.getSize();i++)
+			for (int j=0;j<board.getSize();j++){
+			Move move = 	new Move(i,j,colour);
+			if (this.moveIsLegal(null, board, move))
+				moves.push(move);
+			}
+		return moves;
+	}
+
+
+	public Collection<Vertex> getAllLegalVertexes(Game game, BoardI board, short colour){
+		Stack<Vertex> moves = new Stack<Vertex>();
+		for (int i=0;i<board.getSize();i++)
+			for (int j=0;j<board.getSize();j++)
+			if (this.moveIsLegal(null, board, new Move(i,j,colour)))
+				moves.push(new Vertex(i,j));
+		return moves;
+	}
+
 
 }

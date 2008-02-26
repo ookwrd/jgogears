@@ -139,6 +139,30 @@ public final class Move {
 			this.setColumn(v.getColumn());
 		}
 	}
+	/**
+	 * create a GoMove from a move string minus the mvoe colour
+	 * 
+	 * @param move the string to parse
+	 * @param colour the colour of the move
+	 * 
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
+	public Move(String move, short colour) throws IllegalArgumentException {
+		// System.err.println("GoMove::GoMove(\"" + move + "\"");
+
+		move = move.toLowerCase();
+
+		this.colour = colour;
+		if (move.contains("resign")) {
+			this.resign = true;
+		} else if (move.contains("pass")) {
+			this.pass = true;
+		} else {
+			Vertex v = new Vertex(move);
+			this.setRow(v.getRow());
+			this.setColumn(v.getColumn());
+		}
+	}
 
 	/**
 	 * return the colour of this move.

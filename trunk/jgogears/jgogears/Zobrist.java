@@ -4,7 +4,9 @@ import java.util.*;
 
 
 /**
- * Class representing a Zobrist hash, a binary hash of the current board state. TODO add proper references
+ * Class representing a Zobrist hash, a binary hash of the current board state. 
+ * 
+ * TODO add proper references
  * 
  * @author Stuart
  */

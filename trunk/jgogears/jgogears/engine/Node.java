@@ -243,13 +243,17 @@ public final class Node implements Comparable<Node> {
 	 * 
 	 * @param linear
 	 *            the linear
-	 * @param strength
-	 *            the strength
+	 * @param expand are we expanding?
+	 * @param depth the depth to expand to
 	 * @param played
 	 *            the played
 	 */
-	public void train(VertexLineariser linear, boolean expand) {
-		count++;
+	public void train(VertexLineariser linear, boolean played, boolean expand, int depth) {
+		if (depth < 0)
+			expand = false;
+		depth--;
+		if (played)
+			count++;
 		if (!linear.hasNext())
 			return;
 		Short colour = linear.next();
@@ -261,7 +265,7 @@ public final class Node implements Comparable<Node> {
 					black = new Node();
 				else
 					return;
-			black.train(linear, expand);
+			black.train(linear, played, expand, depth);
 			break;
 		case BoardI.VERTEX_WHITE:
 			if (white == null)
@@ -269,7 +273,7 @@ public final class Node implements Comparable<Node> {
 					white = new Node();
 				else
 					return;
-			white.train(linear, expand);
+			white.train(linear, played, expand,  depth);
 
 			break;
 		case BoardI.VERTEX_OFF_BOARD:
@@ -278,7 +282,7 @@ public final class Node implements Comparable<Node> {
 					off = new Node();
 				else
 					return;
-			off.train(linear, expand);
+			off.train(linear, played, expand,  depth);
 
 			break;
 		case BoardI.VERTEX_EMPTY:
@@ -288,7 +292,7 @@ public final class Node implements Comparable<Node> {
 					empty = new Node();
 				else
 					return;
-			empty.train(linear, expand);
+			empty.train(linear, played, expand,  depth);
 			break;
 		default:
 			throw new Error();
