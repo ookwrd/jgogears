@@ -168,7 +168,7 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 			return true;
 		if ((o == null) || (this == null))
 			return false;
-		if (Object.class != this.getClass())
+		if (o.getClass() != this.getClass())
 			return super.equals(o);
 		try {
 			Vertex v = (Vertex) o;
