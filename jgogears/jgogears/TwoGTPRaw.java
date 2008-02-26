@@ -10,18 +10,31 @@ import java.io.IOException;
  * @author syeates
  */
 
-public class TwoGTP {
+public class TwoGTPRaw {
 	
+	/**
+	 * Play two GTP-compatible players against each other.
+	 * 
+	 * @param args (ignored)
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+
+	public static void main(String[] args) throws IOException {
+		TwoGTPRaw twoGTP = new TwoGTPRaw();
+		twoGTP.black = new GnuGoEngine();
+		twoGTP.white = new GnuGoEngine();
+		twoGTP.playOutGame();
+
+	}
 
 /** The black player. */
-	private GTPInterface black = null;
+	private GTPInterfaceRaw black = null;
 
 /** The white player. */
-	private GTPInterface white = null;
+	private GTPInterfaceRaw white = null;
 	
-	private GTPState state = new GTPState();
-	
-	public static final boolean DEBUG = true;
+	private BoardI currentBoard = new Board();
 	
 	/**
 	 * Run the game. Assumes that the black and white players have already been set up.
@@ -29,55 +42,47 @@ public class TwoGTP {
 	 * @return true, if play out game
 	 */
 
-	public GTPState playOutGame() {
+	public boolean playOutGame() {
 		int passes = 0;
 		boolean blackNext = true;
-		if (black == null)
-			throw new Error();
-		if (white == null)
-			throw new Error();
-		
+		//TODO check the black and white players have been set up
 
 		while (passes < 4) {
 			Move move = null;
 			if (blackNext) {
-				move = this.black.genMove(BoardI.VERTEX_BLACK, this.state);
+				move = this.black.genMove(BoardI.VERTEX_BLACK);
 				assert (move != null);
+				this.white.play(move);
 				if (move.getPass())
 					passes++;
 				else
 					passes = 0;
 				blackNext = false;
 			} else {
-				move = this.white.genMove(BoardI.VERTEX_WHITE, this.state);
+				move = this.white.genMove(BoardI.VERTEX_WHITE);
 				assert (move != null);
+				this.black.play(move);
 				if (move.getPass())
 					passes++;
 				else
 					passes = 0;
 				blackNext = true;
 			}
-			if (DEBUG)
-				System.err.println("TwoGTP: played " + move);
-		this.state.playMove(move);
-		if (DEBUG)
-			System.err.println("TwoGTP: played " + move);
-		if (DEBUG)
-			System.err.println(state.getBoard());
+			currentBoard = currentBoard.newBoard(move);
 		}
-		if (DEBUG)
-		System.err.println(this.black.getFinalScore(state));
-		if (DEBUG)
-		System.err.println(this.white.getFinalScore(state));
+		System.err.println(this.black.getFinalScore());
+		System.err.println(this.white.getFinalScore());
+		System.err.println(this.black.showBoard());
+		System.err.println(this.white.showBoard());
 
-		return state;
+		return true;
 	}
 
 	/**
 	 * get the black
 	 * @return the black
 	 */
-	public final GTPInterface getBlack() {
+	public final GTPInterfaceRaw getBlack() {
 		return black;
 	}
 
@@ -85,7 +90,7 @@ public class TwoGTP {
 	 * set the black
 	 * @param black the black to set
 	 */
-	public final void setBlack(GTPInterface black) {
+	public final void setBlack(GTPInterfaceRaw black) {
 		this.black = black;
 	}
 
@@ -93,7 +98,7 @@ public class TwoGTP {
 	 * get the white
 	 * @return the white
 	 */
-	public final GTPInterface getWhite() {
+	public final GTPInterfaceRaw getWhite() {
 		return white;
 	}
 
@@ -101,7 +106,7 @@ public class TwoGTP {
 	 * set the white
 	 * @param white the white to set
 	 */
-	public final void setWhite(GTPInterface white) {
+	public final void setWhite(GTPInterfaceRaw white) {
 		this.white = white;
 	}
 
@@ -110,7 +115,7 @@ public class TwoGTP {
 	 * @return the currentBoard
 	 */
 	public final BoardI getCurrentBoard() {
-		return this.state.getBoard();
+		return currentBoard;
 	}
 
 }

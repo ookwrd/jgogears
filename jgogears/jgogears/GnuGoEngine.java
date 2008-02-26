@@ -43,6 +43,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	
 	/** The DEBUG. */
 	public boolean DEBUG = false;
+	
+	private short size = BoardI.DEFAULT_BOARD_SIZE;
 
 	/**
 	 * Instantiates a new gnu go engine.
@@ -50,6 +52,24 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public GnuGoEngine() throws IOException {
+		this.initialise();
+	}
+	/**
+	 * Instantiates a new gnu go engine.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public GnuGoEngine(short size) throws IOException {
+		this.size = size;
+		this.initialise();
+	}
+	/**
+	 * Instantiates a new gnu go engine.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public GnuGoEngine(int size) throws IOException {
+		this.size = (short)size;
 		this.initialise();
 	}
 
@@ -88,10 +108,11 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		this.write(GTPConstants.FINALSTATUSLIST + " " + status + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (this.DEBUG)
-			System.err.println(s);
-		if (this.DEBUG)
-			System.err.println(v);
+		if (this.DEBUG){
+			System.err.println("finalStatusList" +status);
+			System.err.println("finalStatusList" +s);
+			System.err.println("finalStatusList" +v);
+		}
 		return v;
 	}
 
@@ -102,10 +123,11 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		this.write(GTPConstants.FIXEDHANDICAP + " " + handicap + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (this.DEBUG)
-			System.err.println(s);
-		if (this.DEBUG)
-			System.err.println(v);
+		if (this.DEBUG){
+			System.err.println("fixedHandicap" + handicap);
+			System.err.println("fixedHandicap" + s);
+			System.err.println("fixedHandicap" + v);
+		}
 		return v;
 	}
 
@@ -116,8 +138,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		this.write(GTPConstants.GENMOVE + " " + Move.colourString(colour) + "\n\n");
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
-		Vertex v = new Vertex(s);
-		Move move = new Move(v.getRow(), v.getColumn(), colour);
+		Move move = new Move(s, colour);
+		if (DEBUG)
+			System.err.println("genMove:" + colour + " " + move);
 		return move;
 	}
 
@@ -249,6 +272,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			this.errreader = new java.io.BufferedReader(new InputStreamReader(this.process.getErrorStream()));
 			this.writer = new OutputStreamWriter(this.process.getOutputStream());
 			this.initialised = true;
+			
+			this.setBoardSize(this.getSize());
 
 			this.check();
 			Thread.sleep(LARGE_PAUSE);
@@ -273,7 +298,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		if (null == e)
 			return true;
 		if (this.DEBUG)
-			System.err.println("clearBoard:" + s);
+			System.err.println("loadsgf:" + s);
 		return false;
 
 	}
@@ -317,10 +342,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
 			return true;
-		if (this.DEBUG)
-			System.err.println("clearBoard:" + s);
 		return false;
-
 	}
 
 	/* (non-Javadoc)
@@ -566,6 +588,22 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			t.printStackTrace();
 			System.err.println(t);
 		}
+	}
+
+	/**
+	 * get the size
+	 * @return the size
+	 */
+	public final short getSize() {
+		return size;
+	}
+
+	/**
+	 * set the size
+	 * @param size the size to set
+	 */
+	public final void setSize(short size) {
+		this.size = size;
 	}
 
 }

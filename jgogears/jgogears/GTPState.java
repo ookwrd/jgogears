@@ -1,5 +1,7 @@
 package jgogears;
 
+import java.util.*;
+
 // TODO: Auto-generated Javadoc
 /**
  * Class representing the state of a GTP game.
@@ -9,7 +11,7 @@ package jgogears;
 public class GTPState {
 
 	/** The boardsize. */
-	protected short boardsize = -1;
+	protected short boardsize = BoardI.DEFAULT_BOARD_SIZE;
 	
 	/** The board. */
 	protected BoardI board = null;
@@ -34,6 +36,10 @@ public class GTPState {
 	
 	/** The played moves. */
 	protected java.util.Vector<Move> playedMoves = new java.util.Vector<Move>();
+	
+	public GTPState(){
+		this.board = new Board(boardsize);
+	}
 
 	/**
 	 * returns true if we're in a playable state or throws an error.
@@ -162,6 +168,23 @@ public class GTPState {
 			return;
 		if (move.getResign())
 			return;
+		TreeSet<Vertex> captures = RuleSet.DEFAULT.captures(null, board, move);
+		//TODO count the captures
+		Iterator<Vertex> each = captures.iterator();
+		while(each.hasNext()){
+			Vertex vert = each.next();
+			switch (this.board.getColour(vert)){
+			case BoardI.VERTEX_BLACK:
+				this.whiteCapturedCount++;
+				break;
+			case BoardI.VERTEX_WHITE:
+				this.blackCapturedCount++;
+				break;
+			default:
+				throw new Error("capture neither black or white");
+			}
+			
+		}
 		this.board = this.board.newBoard(move);
 	}
 
@@ -190,6 +213,7 @@ public class GTPState {
 	 */
 	public void setBoardsize(short boardsize) {
 		this.boardsize = boardsize;
+		this.board = new Board(boardsize);
 	}
 
 	/**
@@ -215,8 +239,8 @@ public class GTPState {
 	 * 
 	 * @param komi the new komi
 	 */
-	public void setKomi(double komi) {
-		this.komi = komi;
+	public void setKomi(double komia) {
+		this.komi = komia;
 	}
 
 	/**
@@ -224,8 +248,8 @@ public class GTPState {
 	 * 
 	 * @param mainTime the new main time
 	 */
-	public void setMainTime(double mainTime) {
-		this.mainTime = mainTime;
+	public void setMainTime(double mainTimea) {
+		this.mainTime = mainTimea;
 	}
 
 	/**
