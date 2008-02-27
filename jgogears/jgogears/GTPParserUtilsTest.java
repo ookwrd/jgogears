@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class GTPParserUtilsTest.
  */
 public class GTPParserUtilsTest extends TestCase {
 
-	/** The DEBUG. */
+	/** Are we being verbose? */
 	boolean DEBUG = false;
 
 	/** The engine. */
@@ -48,6 +48,7 @@ public class GTPParserUtilsTest extends TestCase {
 			assertNotNull(move);
 			BoardI board = this.engine.showBoard();
 			System.err.println("testLoadsgf:: the following board should have moves on it:");
+			assertNotNull(board);
 			System.err.println(board);
 			this.engine.quit();
 		} catch (Throwable t) {
@@ -59,10 +60,9 @@ public class GTPParserUtilsTest extends TestCase {
 
 	/**
 	 * Test parse gnu go board.
+	 * @throws IOException if the underlying engine can't be created or communicated with
 	 */
-	public void testParseGnuGoBoard() {
-		this.testParseGnuGoBoard((short) 3);
-		this.testParseGnuGoBoard((short) 5);
+	public void testParseGnuGoBoard() throws IOException {
 		this.testParseGnuGoBoard((short) 7);
 		this.testParseGnuGoBoard((short) 9);
 		this.testParseGnuGoBoard((short) 11);
@@ -80,7 +80,7 @@ public class GTPParserUtilsTest extends TestCase {
 	 * 
 	 * @param i the i
 	 */
-	public void testParseGnuGoBoard(short i) {
+	public void testParseGnuGoBoard(short i) throws IOException {
 		try {
 			this.engine = new GnuGoEngine();
 			boolean result = this.engine.initialise();
@@ -88,13 +88,17 @@ public class GTPParserUtilsTest extends TestCase {
 			result = this.engine.setBoardSize(i);
 			assertTrue(result);
 			this.engine.quit();
-		} catch (IOException e) {
-
+		} catch (GTPError e) {
+			System.err.println("testParseGnuGoBoard(" + i + ") failed");
+			//System.err.println(e);
+			//e.printStackTrace();
+			fail();
 		}
 	}
 
 	/**
-	 * Test show board.
+	 * 
+	 * This is currently failing because I don't have good code to parse the ASCII board back into a BoardI
 	 */
 	public final void testShowBoard() {
 		try {

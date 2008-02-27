@@ -29,7 +29,7 @@ public class GTPParserUtils {
 			int i;
 			for (i = 1; (s.length() > i) && Character.isDigit(s.charAt(i)); i++)
 				;
-			return new Error(s.substring(i));
+			return new GTPError(s.substring(i));
 		}
 		return null;
 	}
@@ -102,7 +102,6 @@ public class GTPParserUtils {
 		if (s.charAt(0) == '?') {
 			throw getError(s);
 		}
-
 		return s;
 	}
 
