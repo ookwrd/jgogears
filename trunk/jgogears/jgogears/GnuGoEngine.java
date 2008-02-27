@@ -36,7 +36,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	private BufferedReader reader = null;
 
 	/** The errreader. */
-	private BufferedReader errreader = null;
+	private BufferedReader errReader = null;
 
 	/** The process. */
 	private Process process = null;
@@ -78,8 +78,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	 */
 	protected synchronized void check() {
 		try {
-			while (this.errreader.ready()) {
-				System.err.print("GnuGo Process Error:\"" + this.errreader.readLine() + "\"");
+			while (this.errReader.ready()) {
+				System.err.print("GnuGo Process Error:\"" + this.errReader.readLine() + "\"");
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -170,12 +170,12 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	}
 
 	/**
-	 * Gets the errreader.
+	 * Gets the Reader for the error stream
 	 * 
-	 * @return the errreader
+	 * @return the errReader
 	 */
-	public BufferedReader getErrreader() {
-		return this.errreader;
+	public BufferedReader getErrReader() {
+		return this.errReader;
 	}
 
 	/* (non-Javadoc)
@@ -269,7 +269,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			String command = executable + " " + this.args;
 			this.process = java.lang.Runtime.getRuntime().exec(command);
 			this.reader = new java.io.BufferedReader(new InputStreamReader(this.process.getInputStream()));
-			this.errreader = new java.io.BufferedReader(new InputStreamReader(this.process.getErrorStream()));
+			this.errReader = new java.io.BufferedReader(new InputStreamReader(this.process.getErrorStream()));
 			this.writer = new OutputStreamWriter(this.process.getOutputStream());
 			this.initialised = true;
 			
@@ -345,8 +345,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see jgogears.GTPInterfaceRaw#quit()
+	/**
+	 * quit notifies the remote engine, flushes all buffers and sets variables to null
 	 */
 	public synchronized boolean quit() {
 		if (this.initialised) {
@@ -360,8 +360,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 				this.initialised = false;
 				this.reader.close();
 				this.reader = null;
-				this.errreader.close();
-				this.errreader = null;
+				this.errReader.close();
+				this.errReader = null;
 				this.writer.close();
 				this.writer = null;
 				this.process.destroy();
@@ -386,7 +386,11 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		String s = "";
 		String result = "";
 		try {
-			Thread.sleep(SMALL_PAUSE);
+			try {
+				Thread.sleep(SMALL_PAUSE);
+			} catch (Throwable t) {
+				// do nothing 
+			}
 			while ((s != null) && (s.compareTo("") == 0)) {
 				s = this.reader.readLine();
 			}
@@ -398,10 +402,15 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 				System.err.println("GnuGo Process Output:\"" + s + "\" ==> \"" + result + "\"");
 
 			this.check();
-		} catch (Throwable t) {
+		} catch (GTPError t) {
 			t.printStackTrace();
 			System.err.println(t);
+			throw t;
 		}
+		 catch (IOException t) {
+				t.printStackTrace();
+				System.err.println(t);
+			}
 		return result;
 	}
 
@@ -457,19 +466,16 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			System.err.println("clearBoard:" + s);
 		if (null == e)
 			return true;
-		if (this.DEBUG)
-			System.err.println("clearBoard:" + s);
-		return false;
-
+		return false;	
 	}
 
 	/**
-	 * Sets the errreader.
+	 * Sets the errReader.
 	 * 
-	 * @param errreader the new errreader
+	 * @param errReader the new errReader
 	 */
-	public void setErrreader(BufferedReader errreader) {
-		this.errreader = errreader;
+	public void setErrReader(BufferedReader errReader) {
+		this.errReader = errReader;
 	}
 
 	/* (non-Javadoc)

@@ -432,7 +432,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	}
 
 	/**
-	 * Test show board.
+	 * This is currently failing because I don't have good code to parse the ASCII board back into a BoardI
 	 */
 	public final void testShowBoard() {
 		try {
