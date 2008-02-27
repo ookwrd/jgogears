@@ -139,7 +139,7 @@ Vector<SGFGameTree> collection() :
  }
  {
    name=<NAME>
-   {result.setIdentifier(new String(name.image));}
+   {result.setIdentifier(name.image);}
    (
       value =<VALUE>
       {result.getValues().add(value.image);}
