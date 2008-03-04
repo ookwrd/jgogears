@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  */
 public class VertexLineariserTest extends TestCase {
 
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 
 	/**
 	 * test what happens when linearising boards of different sizes
@@ -194,26 +194,101 @@ public class VertexLineariserTest extends TestCase {
 		board = board.newBoard(new Move("white n4"));
 
 		assertNotNull(board);
-		for (short j = 0; j < 8; j++) 
+		for (short j = 0; j < 8; j++)
 			for (short i = 0; i < 8; i++) {
-				if (i!= j){
-				Iterator<Short> lineara = new VertexLineariser(board, (short) 2, (short) 2, j, false);
-				Iterator<Short> linearb = new VertexLineariser(board, (short) 2, (short) 2, i, false);
-				assertTrue(lineara != null);
-				assertTrue(linearb != null);
-				boolean differenceFound = false;
-				while (lineara.hasNext() && linearb.hasNext()) {
-					Short a = lineara.next();
-					Short b = linearb.next();
-					assertTrue(a != null);
-					assertTrue(b != null);
-					if (!a.equals(b))
-						differenceFound = true;
+				if (i != j) {
+					Iterator<Short> lineara = new VertexLineariser(board, (short) 2, (short) 2, j, false);
+					Iterator<Short> linearb = new VertexLineariser(board, (short) 2, (short) 2, i, false);
+					assertTrue(lineara != null);
+					assertTrue(linearb != null);
+					boolean differenceFound = false;
+					while (lineara.hasNext() && linearb.hasNext()) {
+						Short a = lineara.next();
+						Short b = linearb.next();
+						assertTrue(a != null);
+						assertTrue(b != null);
+						if (!a.equals(b))
+							differenceFound = true;
+					}
+					assertTrue(i + " " + j, differenceFound);
 				}
-				assertTrue(i + " "+  j, differenceFound);
+			}
+
+	}
+
+	/**
+	 * make sure that all the linearisations are different
+	 */
+	public void testAllDifferentII() {
+		BoardI board = new Board();
+		assertNotNull(board);
+		board = board.newBoard(new Move("white b1"));
+
+		assertNotNull(board);
+		for (short j = 0; j < 8; j++)
+			for (short i = 0; i < 8; i++) {
+				if (i != j) {
+					Iterator<Short> lineara = new VertexLineariser(board, (short) 2, (short) 2, j, false);
+					Iterator<Short> linearb = new VertexLineariser(board, (short) 2, (short) 2, i, false);
+					assertTrue(lineara != null);
+					assertTrue(linearb != null);
+					boolean differenceFound = false;
+					while (lineara.hasNext() && linearb.hasNext()) {
+						Short a = lineara.next();
+						Short b = linearb.next();
+						assertTrue(a != null);
+						assertTrue(b != null);
+						if (!a.equals(b))
+							differenceFound = true;
+					}
+					assertTrue(i + " " + j, differenceFound);
 				}
+			}
+
+	}
+
+	/**
+	 * make sure that all the linearisations are different
+	 */
+	public void testFirst() {
+		BoardI board = new Board();
+		assertNotNull(board);
+		board = board.newBoard(new Move("white b2"));
+
+		assertNotNull(board);
+
+		if (DEBUG)
+			System.err.print("VertexLineariserTest::testFirst() Black = " + Board.parseColour("black"));
+		if (DEBUG)
+			System.err.print(" White = " + Board.parseColour("white"));
+		if (DEBUG)
+			System.err.print(" Empty = " + Board.VERTEX_EMPTY);
+		if (DEBUG)
+			System.err.print(" Off = " + Board.VERTEX_OFF_BOARD);
+		if (DEBUG)
+			System.err.println("");
+		for (short j = 0; j < 8; j++) {
+			Iterator<Short> linear = new VertexLineariser(board, (short) 1, (short) 1, j, false);
+			assertTrue(linear != null);
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertTrue(s != null);
+				if (DEBUG)
+					System.err.print(" " + s + ", ");
+			}
+			if (DEBUG)
+				System.err.println();
 		}
 
+		for (short j = 0; j < 8; j++) {
+			if (DEBUG)
+				System.err.println("VertexLineariserTest::testFirst sym=" + j);
+			Iterator<Short> lineara = new VertexLineariser(board, (short) 1, (short) 1, j, true);
+			assertTrue(lineara != null);
+			Short a = lineara.next();
+			assertTrue(a != null);
+			assertTrue(a + " " + Board.VERTEX_WHITE + "\n" + board, a.equals(new Short((short) Board.VERTEX_WHITE)));
+		}
 	}
 
 	/**
@@ -230,7 +305,7 @@ public class VertexLineariserTest extends TestCase {
 			count++;
 		}
 		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
-		
+
 		assertTrue(count + "/" + plussize, count == plussize);
 	}
 
