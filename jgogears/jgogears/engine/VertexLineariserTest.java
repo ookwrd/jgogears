@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  */
 public class VertexLineariserTest extends TestCase {
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	/**
 	 * test what happens when linearising boards of different sizes
