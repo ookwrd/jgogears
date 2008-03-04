@@ -96,7 +96,7 @@ public class VertexLineariser implements Iterator<Short> {
 	 * @see java.util.Iterator#hasNext()
 	 */
 	public boolean hasNext() {
-		return this.offset * this.offset < SIZE * SIZE;
+		return this.offset < SIZE * SIZE;
 	}
 
 	/**
