@@ -21,12 +21,10 @@ public class VertexLineariser implements Iterator<Short> {
 	/** The Constant SIZE. */
 	static private final short SIZE = 21;
 
-	// arbitrary offset to break
-	/** The RO w_ offset. */
-	static double ROW_OFFSET = -0.0100;
-	// arbitrary offset to break
-	/** The COLUM n_ offset. */
-	static double COLUMN_OFFSET = -0.0230;
+	/** OFFSETs need to be very small and prime relative to each other and 19 */
+	static double SMALL_OFFSET = 0.000000100;
+	/** OFFSETs need to be very small and prime relative to each other and 19 */
+	static double LARGE_OFFSET = 0.000000230;
 
 	/** The offset. */
 	protected int offset = 0;
@@ -42,7 +40,7 @@ public class VertexLineariser implements Iterator<Short> {
 
 	/** The sym. */
 	short sym = -2;
-	
+
 	/** Have the colours been inverted? */
 	boolean invert = false;
 
@@ -58,10 +56,10 @@ public class VertexLineariser implements Iterator<Short> {
 	 * @param sym
 	 *            the sym
 	 */
-	public VertexLineariser(BoardI board, short row, short column, short sym,boolean invert) {
+	public VertexLineariser(BoardI board, short row, short column, short sym, boolean invert) {
 		this.board = board;
-		this.row = row;
-		this.column = column;
+		this.row = (short) (row + 1);
+		this.column = (short) (column + 1);
 		this.sym = sym;
 		this.invert = invert;
 
@@ -123,60 +121,59 @@ public class VertexLineariser implements Iterator<Short> {
 					TreeMap<Double, ArrayList<Short>> values = new TreeMap<Double, ArrayList<Short>>();
 					for (short i = 0; i < SIZE; i++)
 						for (short j = 0; j < SIZE; j++) {
-							short a, b; // i and j map to a and b after
+							double row_offset, column_offset;
 							// transform
 							switch (sym) {
 							case 0:
-								a = i;
-								b = j;
+								row_offset = SMALL_OFFSET;
+								column_offset = LARGE_OFFSET;
 								break;
 							case 1:
-								a = j;
-								b = i;
+								row_offset = -SMALL_OFFSET;
+								column_offset = LARGE_OFFSET;
 								break;
 							case 2:
-								a = (short) (SIZE - 1 - i);
-								b = j;
+								row_offset = SMALL_OFFSET;
+								column_offset = -LARGE_OFFSET;
 								break;
 							case 3:
-								a = i;
-								b = (short) (SIZE - 1 - j);
+								row_offset = -SMALL_OFFSET;
+								column_offset = -LARGE_OFFSET;
 								break;
 							case 4:
-								a = (short) (SIZE - 1 - i);
-								b = (short) (SIZE - 1 - j);
+								row_offset = LARGE_OFFSET;
+								column_offset = SMALL_OFFSET;
 								break;
 							case 5:
-								a = (short) (SIZE - 1 - j);
-								b = i;
+								row_offset = -LARGE_OFFSET;
+								column_offset = SMALL_OFFSET;
 								break;
 							case 6:
-								a = j;
-								b = (short) (SIZE - 1 - i);
+								row_offset = LARGE_OFFSET;
+								column_offset = -SMALL_OFFSET;
 								break;
 							case 7:
-								a = (short) (SIZE - 1 - j);
-								b = (short) (SIZE - 1 - i);
+								row_offset = -LARGE_OFFSET;
+								column_offset = -SMALL_OFFSET;
 								break;
 							default:
 								throw new Error();
 							}
-							double d = Math.sqrt(Math.pow(row - i + ROW_OFFSET, 2)
-									+ Math.pow(column - j + COLUMN_OFFSET, 2));
+							double d = Math.pow(row - i + row_offset, 2) + Math.pow(column - j + column_offset, 2);
 
 							ArrayList<Short> array = new ArrayList<Short>();
-							array.add(new Short(a));
-							array.add(new Short(b));
+							array.add(new Short(i));
+							array.add(new Short(j));
 
 							// System.out.println(" (" + i + "," + j + "," + a +
 							// "," + b + "), ");
 							values.put(new Double(d), array);
 						}
 					// System.out.println();
-					Short[] array = new Short[] { 1, 2 };
+					Short[] array = new Short[] { null, null };
 					// System.out.println(values.size() + ", " +SIZE*SIZE+ ", "
 					// +19*19);
-					for (int i = 0; i < (SIZE * SIZE); i++) {
+					for (int i = 0; i < SIZE * SIZE; i++) {
 						if (values.isEmpty())
 							throw new Error();
 						Short[] thisone = values.get(values.firstKey()).toArray(array);
@@ -197,41 +194,14 @@ public class VertexLineariser implements Iterator<Short> {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.Iterator#next()
-	 */
-	public Short next() {
-		if (!this.hasNext())
-			throw new NoSuchElementException();
-		// System.err.println("next() " + sym + " " + row + " " + column + " "
-		// + offset);
-		short c = this.board.getColour(cache[0][this.sym][this.row][this.column][this.offset],
-				cache[1][this.sym][this.row][this.column][this.offset]);
-		this.offset++;
-		if (this.invert)
-			return c;
-		else
-			return invert(c);
-		
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.Iterator#remove()
-	 */
-	public void remove() {
-		throw new java.lang.UnsupportedOperationException();
-	}
 	/**
 	 * Invert a colour. Used when white is to play
+	 * 
 	 * @param colour
 	 * @return the inverted colour
 	 */
-	public Short invert(Short colour){
-		switch (colour.shortValue()){
+	public Short invert(Short colour) {
+		switch (colour.shortValue()) {
 		case BoardI.VERTEX_BLACK:
 			return BoardI.VERTEX_WHITE;
 		case BoardI.VERTEX_WHITE:
@@ -242,5 +212,42 @@ public class VertexLineariser implements Iterator<Short> {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Iterator#next()
+	 */
+	public Short next() {
+		if (!this.hasNext())
+			throw new NoSuchElementException();
+		// System.err.println("next() " + sym + " " + row + " " + column + " "
+		// + offset);
+		short c = this.board.getColour(cache[0][this.sym][this.row][this.column][this.offset] - 1,
+				cache[1][this.sym][this.row][this.column][this.offset] - 1);
+		this.offset++;
+		if (this.invert)
+			return c;
+		else
+			return this.invert(c);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Iterator#remove()
+	 */
+	public void remove() {
+		throw new java.lang.UnsupportedOperationException();
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buf = new StringBuffer();
+		while (this.hasNext())
+			buf.append(this.next()).append(' ');
+		;
+		return buf.toString();
+	}
 
 }

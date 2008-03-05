@@ -5,7 +5,6 @@ package jgogears.engine;
 
 import java.util.Iterator;
 
-
 /**
  * An iterator for nodes.
  * 
@@ -13,69 +12,74 @@ import java.util.Iterator;
  */
 
 public class NodeIterator implements Iterator<Node> {
-	
+
 	/** The node we're iterating over */
 	private Node node = null;
-	
+
 	/** indicator of where we are */
 	private short next = 0;
 
 	/**
 	 * public constructor.
 	 * 
-	 * @param node the Node to iterator over
+	 * @param node
+	 *            the Node to iterator over
 	 */
 	public NodeIterator(Node node) {
 		this.node = node;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Iterator#next()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Iterator#hasNext()
 	 */
-	public Node next() {
-		switch (next) {
+	public boolean hasNext() {
+		switch (this.next) {
 		case 0:
-			next++;
-			if (node.getBlack() != null)
-				return node.getBlack();
+			if (this.node.getBlack() != null)
+				return true;
 		case 1:
-			next++;
-			if (node.getWhite() != null)
-				return node.getWhite();
+			if (this.node.getWhite() != null)
+				return true;
 		case 2:
-			next++;
-			if (node.getEmpty() != null)
-				return node.getEmpty();
+			if (this.node.getEmpty() != null)
+				return true;
 		case 3:
-			next++;
-			if (node.getOff() != null)
-				return node.getOff();
+			if (this.node.getOff() != null)
+				return true;
 		default:
-			throw new Error("nothing left");
-
+			return false;
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Iterator#hasNext()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Iterator#next()
 	 */
-	public boolean hasNext() {
-		switch (next) {
+	public Node next() {
+		switch (this.next) {
 		case 0:
-			if (node.getBlack() != null)
-				return true;
+			this.next++;
+			if (this.node.getBlack() != null)
+				return this.node.getBlack();
 		case 1:
-			if (node.getWhite() != null)
-				return true;
+			this.next++;
+			if (this.node.getWhite() != null)
+				return this.node.getWhite();
 		case 2:
-			if (node.getEmpty() != null)
-				return true;
+			this.next++;
+			if (this.node.getEmpty() != null)
+				return this.node.getEmpty();
 		case 3:
-			if (node.getOff() != null)
-				return true;
+			this.next++;
+			if (this.node.getOff() != null)
+				return this.node.getOff();
 		default:
-			return false;
+			throw new Error("nothing left");
+
 		}
 
 	}

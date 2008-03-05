@@ -41,14 +41,14 @@ public final class BoardToASCII {
 	 */
 	static boolean isEyeVertex(short row, short column, short size) {
 		if (size == 19) {
-			if ((row == 4) || (row == 9) || (row == 16))
-				if ((column == 4) || (column == 9) || (column == 16))
+			if (row == 4 || row == 9 || row == 16)
+				if (column == 4 || column == 9 || column == 16)
 					return true;
 			return false;
 		}
 		if (size == 7) {
-			if ((row == 2) || (row == 4) )
-				if ((column == 2) || (column == 4))
+			if (row == 2 || row == 4)
+				if (column == 2 || column == 4)
 					return true;
 			return false;
 		}

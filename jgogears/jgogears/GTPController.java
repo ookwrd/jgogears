@@ -11,9 +11,10 @@ public class GTPController {
 	/**
 	 * The main method.
 	 * 
-	 * @param args the args
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param args
+	 *            the args
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws IOException {
 		new GTPController().run();
@@ -29,7 +30,8 @@ public class GTPController {
 	/**
 	 * Consume result.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	void consumeResult() throws java.io.IOException {
 		while (this.reader.ready()) {
@@ -42,8 +44,8 @@ public class GTPController {
 	 * Run.
 	 * 
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	boolean run() throws java.io.IOException {
 		PipedWriter farwriter = new PipedWriter();
@@ -70,8 +72,8 @@ public class GTPController {
 	 * Setup.
 	 * 
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	boolean setup() throws java.io.IOException {
 		this.writer.write("boardsize 19\n\n");

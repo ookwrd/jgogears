@@ -1,20 +1,18 @@
 package jgogears;
 
-
-
 import junit.framework.TestCase;
 
-
+// TODO: Auto-generated Javadoc
 /**
  * The Class SGFPropertyTest.
  */
 public class SGFPropertyTest extends TestCase {
 
-	
 	/**
 	 * Test strip.
 	 * 
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	public void testStrip() throws Exception {
 		String a1 = "[19]";

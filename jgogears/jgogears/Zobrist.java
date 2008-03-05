@@ -2,30 +2,26 @@ package jgogears;
 
 import java.util.*;
 
-
 /**
- * Class representing a Zobrist hash, a binary hash of the current board state. 
- * 
- * TODO add proper references
+ * Class representing a Zobrist hash, a binary hash of the current board state. TODO add proper references
  * 
  * @author Stuart
  */
 
 public class Zobrist extends BitSet {
-	
+
 	/** The Constant MAX_BOARD_SIZE. */
 	public static final short MAX_BOARD_SIZE = 25;
-	
+
 	/** The Constant MAX_COLOUR. */
 	public static final short MAX_COLOUR = 4;
-	
+
 	/** The Constant ZOBRIST_SIZE. */
 	public static final short ZOBRIST_SIZE = 96;
 
 	// initialisers ...
 	/** The static grid of all random values */
 	static BitSet[][][] grid = null;
-	
 
 	/**
 	 * Initialises the static grid of random values
@@ -56,18 +52,22 @@ public class Zobrist extends BitSet {
 	/**
 	 * Constructor building a Zobrist from an existing Zobrist and a move.
 	 * 
-	 * @param old the old
-	 * @param row the row
-	 * @param column the column
-	 * @param colour the colour
+	 * @param old
+	 *            the old
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
+	 * @param colour
+	 *            the colour
 	 */
 	public Zobrist(Zobrist old, int row, int column, int colour) {
 		init();
-		if ((row >= MAX_BOARD_SIZE) || (row < 0))
+		if (row >= MAX_BOARD_SIZE || row < 0)
 			throw new Error("" + row);
-		if ((column >= MAX_BOARD_SIZE) || (column < 0))
+		if (column >= MAX_BOARD_SIZE || column < 0)
 			throw new Error("" + column);
-		if ((colour >= BoardI.VERTEX_MAX) || (colour < BoardI.VERTEX_MIN))
+		if (colour >= BoardI.VERTEX_MAX || colour < BoardI.VERTEX_MIN)
 			throw new Error("" + colour);
 		this.clear();
 		this.xor(old);
@@ -77,8 +77,8 @@ public class Zobrist extends BitSet {
 	/**
 	 * compare this zobrist to another object, potentially another zobrist
 	 * 
-	 * @param o the other Object
-	 * 
+	 * @param o
+	 *            the other Object
 	 * @return 0 if equal, otherwise 1/-1
 	 */
 	public int compareTo(Object o) {

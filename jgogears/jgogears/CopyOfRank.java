@@ -1,6 +1,5 @@
 package jgogears;
 
-
 /**
  * Class representing dan / kyu ranks. 20000kyu to 1kyu and 1dan to 99dan. Classes are represented internally as a
  * double. Rank parsing and formatting are only supported for whole numbers.
@@ -12,22 +11,22 @@ public final class CopyOfRank {
 
 	/** The Constant SHODAN. */
 	public final static CopyOfRank SHODAN = new CopyOfRank("1d");
-	
+
 	/** The Constant BEGINNER. */
 	public final static CopyOfRank BEGINNER = new CopyOfRank("25k");
-	
+
 	/** The Constant ME. */
 	public final static CopyOfRank ME = new CopyOfRank("12k");
 
 	/**
 	 * Convert.
 	 * 
-	 * @param r the r
-	 * 
+	 * @param r
+	 *            the r
 	 * @return the int
 	 */
 	public static int convert(String r) {
-		if ((r == null) || (r.length() < 2))
+		if (r == null || r.length() < 2)
 			throw new Error();
 		r = r.toLowerCase();
 		int offset = 0;
@@ -57,7 +56,8 @@ public final class CopyOfRank {
 	/**
 	 * Instantiates a new copy of rank.
 	 * 
-	 * @param r the r
+	 * @param r
+	 *            the r
 	 */
 	public CopyOfRank(double r) {
 		this.rank = r;
@@ -66,7 +66,8 @@ public final class CopyOfRank {
 	/**
 	 * Instantiates a new copy of rank.
 	 * 
-	 * @param r the r
+	 * @param r
+	 *            the r
 	 */
 	public CopyOfRank(String r) {
 		this.rank = convert(r);
@@ -84,13 +85,16 @@ public final class CopyOfRank {
 	/**
 	 * Sets the rank.
 	 * 
-	 * @param rank the new rank
+	 * @param rank
+	 *            the new rank
 	 */
 	public void setRank(double rank) {
 		this.rank = rank;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

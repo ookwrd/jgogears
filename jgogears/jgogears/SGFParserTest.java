@@ -5,7 +5,7 @@ import java.io.StringReader;
 import jgogears.SGF.ParseException;
 import junit.framework.TestCase;
 
-
+// TODO: Auto-generated Javadoc
 /**
  * The Class SGFParserTest.
  */
@@ -20,7 +20,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test a.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testA() throws ParseException {
 		String example = SGFParser.EXAMPLEA;
@@ -32,7 +33,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test bad repeat.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testBADRepeat() throws ParseException {
 		String examples[] = BADEXAMPLES;
@@ -76,7 +78,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test five.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testFive() throws ParseException {
 		String example = SGFParser.EXAMPLEFIVE;
@@ -95,7 +98,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test four.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testFour() throws ParseException {
 		String example = SGFParser.EXAMPLEFOUR;
@@ -114,7 +118,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test one.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testOne() throws ParseException {
 		String example = SGFParser.EXAMPLEONE;
@@ -133,7 +138,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test repeat.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testRepeat() throws ParseException {
 		String examples[] = { SGFParser.EXAMPLEA, SGFParser.EXAMPLEONE, SGFParser.EXAMPLETWO, SGFParser.EXAMPLETHREE,
@@ -169,7 +175,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test three.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testThree() throws ParseException {
 		String example = SGFParser.EXAMPLETHREE;
@@ -188,7 +195,8 @@ public class SGFParserTest extends TestCase {
 	/**
 	 * Test two.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testTwo() throws ParseException {
 		String example = SGFParser.EXAMPLETWO;
