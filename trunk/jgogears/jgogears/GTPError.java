@@ -18,7 +18,8 @@ public class GTPError extends Error {
 	/**
 	 * Instantiates a new gTP error.
 	 * 
-	 * @param arg0 the arg0
+	 * @param arg0
+	 *            the arg0
 	 */
 	public GTPError(String arg0) {
 		super(arg0);

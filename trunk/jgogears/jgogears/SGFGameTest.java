@@ -18,7 +18,8 @@ public class SGFGameTest extends TestCase {
 	/**
 	 * Test is verbose.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testIsVerbose() throws ParseException {
 
@@ -44,7 +45,8 @@ public class SGFGameTest extends TestCase {
 	/**
 	 * Test load.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoad() throws IOException {
 		try {

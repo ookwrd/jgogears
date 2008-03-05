@@ -13,8 +13,8 @@ public class SGFGameTree {
 	/**
 	 * Load an SGF tree from a file
 	 * 
-	 * @param file the file
-	 * 
+	 * @param file
+	 *            the file
 	 * @return the game
 	 */
 	public static Game loadFromFile(File file) {
@@ -49,7 +49,8 @@ public class SGFGameTree {
 	/**
 	 * Inits the.
 	 * 
-	 * @param game the game
+	 * @param game
+	 *            the game
 	 */
 	protected void init(Game game) {
 		if (game == null)
@@ -74,8 +75,8 @@ public class SGFGameTree {
 			Iterator<SGFProperty> iterator = node.properties.iterator();
 			while (iterator.hasNext()) {
 				SGFProperty prop = iterator.next();
-				if ((prop.getIdentifier().compareToIgnoreCase("B") == 0)
-						|| (prop.getIdentifier().compareToIgnoreCase("W") == 0))
+				if (prop.getIdentifier().compareToIgnoreCase("B") == 0
+						|| prop.getIdentifier().compareToIgnoreCase("W") == 0)
 					movec++;
 				if (prop.getIdentifier().compareToIgnoreCase("C") == 0)
 					game.setCommentCount(game.getCommentCount() + 1);
@@ -92,7 +93,7 @@ public class SGFGameTree {
 			if (prop.getIdentifier().compareToIgnoreCase("FF") == 0) {
 				String s = prop.firstStripped();
 				int value = Integer.parseInt(s);
-				if ((value != 4) && (value != 3))
+				if (value != 4 && value != 3)
 					throw new Error("wrong version of SGF, we only handle versions 3 and 4");
 				continue;
 			}
@@ -127,13 +128,13 @@ public class SGFGameTree {
 			if (prop.getIdentifier().compareToIgnoreCase("BR") == 0) {
 				String s = prop.firstStripped();
 				// TODO
-				//game.getBlackRank(s)
+				// game.getBlackRank(s)
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("WR") == 0) {
 				String s = prop.firstStripped();
-				//TODO
-				//game.setWhiteRank(s);
+				// TODO
+				// game.setWhiteRank(s);
 				continue;
 			}
 			if (prop.getIdentifier().compareToIgnoreCase("DT") == 0) {
@@ -164,7 +165,9 @@ public class SGFGameTree {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

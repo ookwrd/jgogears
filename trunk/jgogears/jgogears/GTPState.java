@@ -12,33 +12,36 @@ public class GTPState {
 
 	/** The boardsize. */
 	protected short boardsize = BoardI.DEFAULT_BOARD_SIZE;
-	
+
 	/** The board. */
 	protected BoardI board = null;
-	
+
 	/** The white captured count. */
 	protected int whiteCapturedCount = Integer.MIN_VALUE;
-	
+
 	/** The black captured count. */
 	protected int blackCapturedCount = Integer.MIN_VALUE;
-	
+
 	/** The komi. */
 	protected double komi = Double.MIN_VALUE;
-	
+
 	/** The main time. */
 	protected double mainTime = Double.MIN_VALUE;
-	
+
 	/** The byo yomi time. */
 	protected double byoYomiTime = Double.MIN_VALUE;
-	
+
 	/** The byo yomi stones. */
 	protected double byoYomiStones = Double.MIN_VALUE;
-	
+
 	/** The played moves. */
 	protected java.util.Vector<Move> playedMoves = new java.util.Vector<Move>();
-	
-	public GTPState(){
-		this.board = new Board(boardsize);
+
+	/**
+	 * Create a new GTPState
+	 */
+	public GTPState() {
+		this.board = BoardI.newBoard(this.boardsize);
 	}
 
 	/**
@@ -53,7 +56,7 @@ public class GTPState {
 			throw new Error("Illegal GTPState state");
 		if (this.blackCapturedCount < 0)
 			throw new Error("Illegal GTPState state");
-		if ((this.komi < 10000) && (this.komi > 10000))
+		if (this.komi < 10000 && this.komi > 10000)
 			throw new Error("Illegal GTPState state");
 		if (this.mainTime < 0)
 			throw new Error("Illegal GTPState state");
@@ -72,7 +75,7 @@ public class GTPState {
 		// TODO is this sufficient?
 		this.whiteCapturedCount = 0;
 		this.blackCapturedCount = 0;
-		this.board = new Board((short) this.getBoardsize());
+		this.board = BoardI.newBoard((short) this.getBoardsize());
 		this.playedMoves = new java.util.Vector<Move>();
 	}
 
@@ -160,7 +163,8 @@ public class GTPState {
 	/**
 	 * Play move.
 	 * 
-	 * @param move the move
+	 * @param move
+	 *            the move
 	 */
 	public void playMove(Move move) {
 		this.playedMoves.add(move);
@@ -168,12 +172,12 @@ public class GTPState {
 			return;
 		if (move.getResign())
 			return;
-		TreeSet<Vertex> captures = RuleSet.DEFAULT.captures(null, board, move);
-		//TODO count the captures
+		TreeSet<Vertex> captures = RuleSet.DEFAULT.captures(null, this.board, move);
+		// TODO count the captures
 		Iterator<Vertex> each = captures.iterator();
-		while(each.hasNext()){
+		while (each.hasNext()) {
 			Vertex vert = each.next();
-			switch (this.board.getColour(vert)){
+			switch (this.board.getColour(vert)) {
 			case BoardI.VERTEX_BLACK:
 				this.whiteCapturedCount++;
 				break;
@@ -183,7 +187,7 @@ public class GTPState {
 			default:
 				throw new Error("capture neither black or white");
 			}
-			
+
 		}
 		this.board = this.board.newBoard(move);
 	}
@@ -191,7 +195,8 @@ public class GTPState {
 	/**
 	 * Sets the black captured count.
 	 * 
-	 * @param blackCapturedCount the new black captured count
+	 * @param blackCapturedCount
+	 *            the new black captured count
 	 */
 	public void setBlackCapturedCount(int blackCapturedCount) {
 		this.blackCapturedCount = blackCapturedCount;
@@ -200,26 +205,29 @@ public class GTPState {
 	/**
 	 * Sets the board.
 	 * 
-	 * @param board the new board
+	 * @param board
+	 *            the new board
 	 */
-	public void setBoard(Board board) {
+	public void setBoard(BoardI board) {
 		this.board = board;
 	}
 
 	/**
 	 * Sets the boardsize.
 	 * 
-	 * @param boardsize the new boardsize
+	 * @param boardsize
+	 *            the new boardsize
 	 */
 	public void setBoardsize(short boardsize) {
 		this.boardsize = boardsize;
-		this.board = new Board(boardsize);
+		this.board = BoardI.newBoard(boardsize);
 	}
 
 	/**
 	 * Sets the byo yomi stones.
 	 * 
-	 * @param byoTomiStones the new byo yomi stones
+	 * @param byoTomiStones
+	 *            the new byo yomi stones
 	 */
 	public void setByoYomiStones(double byoTomiStones) {
 		this.byoYomiStones = byoTomiStones;
@@ -228,7 +236,8 @@ public class GTPState {
 	/**
 	 * Sets the byo yomi time.
 	 * 
-	 * @param byoYomiTime the new byo yomi time
+	 * @param byoYomiTime
+	 *            the new byo yomi time
 	 */
 	public void setByoYomiTime(double byoYomiTime) {
 		this.byoYomiTime = byoYomiTime;
@@ -237,7 +246,8 @@ public class GTPState {
 	/**
 	 * Sets the komi.
 	 * 
-	 * @param komi the new komi
+	 * @param komi
+	 *            the new komi
 	 */
 	public void setKomi(double komia) {
 		this.komi = komia;
@@ -246,7 +256,8 @@ public class GTPState {
 	/**
 	 * Sets the main time.
 	 * 
-	 * @param mainTime the new main time
+	 * @param mainTime
+	 *            the new main time
 	 */
 	public void setMainTime(double mainTimea) {
 		this.mainTime = mainTimea;
@@ -255,7 +266,8 @@ public class GTPState {
 	/**
 	 * Sets the white captured count.
 	 * 
-	 * @param whiteCapturedCount the new white captured count
+	 * @param whiteCapturedCount
+	 *            the new white captured count
 	 */
 	public void setWhiteCapturedCount(int whiteCapturedCount) {
 		this.whiteCapturedCount = whiteCapturedCount;

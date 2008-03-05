@@ -1,6 +1,6 @@
 package jgogears;
 
-import java.util.*;
+import java.util.BitSet;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -9,16 +9,16 @@ import java.util.*;
  * @author syeates
  */
 public class FasterBoard extends BoardI {
-	
+
 	/** the bit number for empty. */
 	final static short OFFSET_EMPTY = 0;
-	
+
 	/** the bit number for colour / ko. */
 	final static short OFFSET_COLOUR = 1;
-	
+
 	/** verbose debugging info. */
 	private final boolean DEBUG = true;
-	
+
 	/** the underlying bitset holding the data. */
 	private final BitSet bits = new BitSet();
 
@@ -26,53 +26,49 @@ public class FasterBoard extends BoardI {
 	 * Create a new board.
 	 */
 	public FasterBoard() {
-	}
-	/**
-	 * create a new board based on the current board plus a move.
-	 * 
-	 * @param move the move
-	 * 
-	 * @return the new board 
-	 */
-	public final FasterBoard newBoard( Move move) {
-		return new FasterBoard(this,move);
-	}
-
-	/**
-	 * create a new board based on the current board plus a move.
-	 * 
-	 * @param board the move
-	 * @param move the move
-	 * 
-	 */
-	public FasterBoard(FasterBoard board , Move move) {
-		this.size = board.getSize();
-		copydata(board,move);
+		// nothing
 	}
 
 	/**
 	 * Create a new board.
 	 * 
-	 * @param size the size of the board
-	 */
-	public FasterBoard(int size) {
-		this.size = (short) size;
-	}
-	
-	/**
-	 * Create a new board.
-	 * 
-	 * @param zobrist true if using zorbist hashing
+	 * @param zobrist
+	 *            true if using zorbist hashing
 	 */
 	public FasterBoard(boolean zobrist) {
 		super(zobrist);
 	}
 
 	/**
+	 * create a new board based on the current board plus a move.
+	 * 
+	 * @param board
+	 *            the move
+	 * @param move
+	 *            the move
+	 */
+	public FasterBoard(FasterBoard board, Move move) {
+		this.size = board.getSize();
+		this.copydata(board, move);
+	}
+
+	/**
 	 * Create a new board.
 	 * 
-	 * @param size the size of the board
-	 * @param rule the ruleset to use
+	 * @param size
+	 *            the size of the board
+	 */
+	public FasterBoard(int size) {
+		this.size = (short) size;
+	}
+
+	/**
+	 * Create a new board.
+	 * 
+	 * @param size
+	 *            the size of the board
+	 * @param rule
+	 *            the ruleset to use
 	 */
 	public FasterBoard(int size, RuleSet rule) {
 		this.size = (short) size;
@@ -82,7 +78,8 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Create a new board.
 	 * 
-	 * @param rule the ruleset to use
+	 * @param rule
+	 *            the ruleset to use
 	 */
 	public FasterBoard(RuleSet rule) {
 		this.ruleSet = rule;
@@ -91,7 +88,8 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Create a new board.
 	 * 
-	 * @param size the size of the board
+	 * @param size
+	 *            the size of the board
 	 */
 
 	public FasterBoard(short size) {
@@ -101,22 +99,53 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Create a new board.
 	 * 
-	 * @param size the size of the board
-	 * @param rule the ruleset to use
+	 * @param size
+	 *            the size of the board
+	 * @param rule
+	 *            the ruleset to use
+	 */
+	public FasterBoard(short size, boolean zobrist) {
+		super(zobrist);
+		this.size = size;
+	}
+
+	/**
+	 * Create a new board.
+	 * 
+	 * @param size
+	 *            the size of the board
+	 * @param rule
+	 *            the ruleset to use
 	 */
 	public FasterBoard(short size, RuleSet rule) {
 		this.size = size;
 		this.ruleSet = rule;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Create a new board.
+	 * 
+	 * @param size
+	 *            the size of the board
+	 * @param rule
+	 *            the ruleset to use
+	 */
+	public FasterBoard(short size, RuleSet rule, boolean zobrist) {
+		super(zobrist);
+		this.size = size;
+		this.ruleSet = rule;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.BoardI#getColour(int, int)
 	 */
 	@Override
 	public short getColour(int row, int column) {
-		if ((row < 0) || (row >= this.size))
+		if (row < 0 || row >= this.size)
 			return VERTEX_OFF_BOARD;
-		if ((column < 0) || (column >= this.size))
+		if (column < 0 || column >= this.size)
 			return VERTEX_OFF_BOARD;
 
 		boolean empty = this.bits.get(this.getEmptyOffSet(row, column));
@@ -136,25 +165,27 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Gets the colour off set.
 	 * 
-	 * @param row the row
-	 * @param column the column
-	 * 
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
 	 * @return the colour offset
 	 */
 	int getColourOffSet(int row, int column) {
-		return OFFSET_COLOUR * this.size * this.size + (row * this.size) + (column);
+		return OFFSET_COLOUR * this.size * this.size + row * this.size + column;
 	}
 
 	/**
 	 * Gets the empty off set.
 	 * 
-	 * @param row the row
-	 * @param column the column
-	 * 
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
 	 * @return the empty offset
 	 */
 	int getEmptyOffSet(int row, int column) {
-		return OFFSET_EMPTY * this.size * this.size + (row * this.size) + (column);
+		return OFFSET_EMPTY * this.size * this.size + row * this.size + column;
 	}
 
 	/*
@@ -167,17 +198,31 @@ public class FasterBoard extends BoardI {
 		return this.size;
 	}
 
+	/**
+	 * create a new board based on the current board plus a move.
+	 * 
+	 * @param move
+	 *            the move
+	 * @return the new board
+	 */
+	@Override
+	public final FasterBoard newBoard(Move move) {
+		return new FasterBoard(this, move);
+	}
 
 	/**
 	 * Sets the colour.
 	 * 
-	 * @param row the row
-	 * @param column the column
-	 * @param colour the colour
-	 * 
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
+	 * @param colour
+	 *            the colour
 	 */
-	public  void  setColour(int row, int column, short colour) {
-		if ((row < 0) || (column < 0) || (row >= this.size) || (column >= this.size)) {
+	@Override
+	public void setColour(int row, int column, short colour) {
+		if (row < 0 || column < 0 || row >= this.size || column >= this.size) {
 			if (this.DEBUG)
 				System.err.println("attempt to set a colour off-board");
 			throw new Error();
@@ -206,6 +251,6 @@ public class FasterBoard extends BoardI {
 			throw new Error();
 		}
 
-}
+	}
 
 }

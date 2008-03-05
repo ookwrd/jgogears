@@ -2,16 +2,13 @@ package jgogears.engine;
 
 import jgogears.*;
 
-
 /**
- * 
- * 
  * @author syeates
  */
 public class SufgoEngine extends SkeletonEngine {
 
 	/** The model. */
-	Model model = new Model();
+	private Model model = null;
 
 	/**
 	 * Create an engine with an empty model
@@ -65,6 +62,15 @@ public class SufgoEngine extends SkeletonEngine {
 	}
 
 	/**
+	 * get the model
+	 * 
+	 * @return the model
+	 */
+	public final Model getModel() {
+		return this.model;
+	}
+
+	/**
 	 * Get the best move for this state and colour
 	 * 
 	 * @param colour
@@ -76,22 +82,16 @@ public class SufgoEngine extends SkeletonEngine {
 	public Move regGenMove(int colour, GTPState state) {
 		BoardI board = state.getBoard();
 
-		Vertex vertex = model.getBestScore(board, colour == BoardI.VERTEX_WHITE);
-		
+		Vertex vertex = this.model.getBestScore(board, colour == BoardI.VERTEX_WHITE);
+
 		return new Move(vertex.getRow(), vertex.getColumn(), colour);
 	}
 
 	/**
-	 * get the model
-	 * @return the model
-	 */
-	public final Model getModel() {
-		return model;
-	}
-
-	/**
 	 * set the model
-	 * @param model the model to set
+	 * 
+	 * @param model
+	 *            the model to set
 	 */
 	public final void setModel(Model model) {
 		this.model = model;

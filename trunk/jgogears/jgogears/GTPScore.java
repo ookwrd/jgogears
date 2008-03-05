@@ -16,31 +16,31 @@ public final class GTPScore {
 
 	/** The white win. */
 	private boolean whiteWin;
-	
+
 	/** The neither win. */
 	private boolean neitherWin = false;
-	
+
 	/** The scored. */
 	private boolean scored = false;
-	
+
 	/** The margin. */
 	private double margin = Double.MIN_VALUE;
-	
+
 	/** The resign. */
 	private boolean resign = false;
-	
+
 	/** The time. */
 	private boolean time = false;
-	
+
 	/** The forfeit. */
 	private boolean forfeit = false;
-	
+
 	/** The _void. */
 	private boolean _void = false;
-	
+
 	/** The unknown. */
 	private boolean unknown = false;
-	
+
 	/** The value. */
 	private String value;
 
@@ -50,13 +50,16 @@ public final class GTPScore {
 	/**
 	 * Instantiates a new gTP score.
 	 * 
-	 * @param s the s
+	 * @param s
+	 *            the s
 	 */
 	public GTPScore(String s) {
 		this.init(s);
 	};
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -157,8 +160,8 @@ public final class GTPScore {
 	/**
 	 * Inits the.
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return true, if successful
 	 */
 	public boolean init(String s) {
@@ -166,7 +169,7 @@ public final class GTPScore {
 		if (s.length() == 0) {
 			System.err.println("cannot initialise a score from a zero length string");
 			throw new Error();
-			//return false;
+			// return false;
 		}
 		try {
 			this.value = s;
@@ -177,7 +180,7 @@ public final class GTPScore {
 			} else if (s.contains("b+r")) {
 				this.whiteWin = false;
 				this.resign = true;
-			} else if ((s.compareTo("0") == 0) || (s.compareTo("draw") == 0)) {
+			} else if (s.compareTo("0") == 0 || s.compareTo("draw") == 0) {
 				this.whiteWin = false;
 				this.neitherWin = true;
 				this.margin = 0.0;
@@ -243,7 +246,9 @@ public final class GTPScore {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

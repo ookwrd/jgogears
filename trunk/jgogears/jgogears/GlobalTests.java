@@ -12,12 +12,11 @@ import junit.framework.*;
  */
 
 public class GlobalTests {
-	
+
 	/**
 	 * test collection.
 	 * 
 	 * @return the test
-	 * 
 	 * @author syeates
 	 */
 

@@ -11,7 +11,9 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 	/** The random. */
 	public Random random = new Random(0);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#finalStatusList(java.lang.String, jgogears.GTPState)
 	 */
 	public Move[] finalStatusList(String status, GTPState state) {
@@ -20,21 +22,27 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getEngineName()
 	 */
 	public String getEngineName() {
 		return "Mii / Barrotts Reef";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getEngineVersion()
 	 */
 	public String getEngineVersion() {
 		return "00.001" + new Date();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getFinalScore(jgogears.GTPState)
 	 */
 	public GTPScore getFinalScore(GTPState state) {
@@ -42,7 +50,9 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 		return new GTPScore("?");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#regGenMove(int, jgogears.GTPState)
 	 */
 	public Move regGenMove(int colour, GTPState state) {
@@ -59,8 +69,8 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 	/**
 	 * Score.
 	 * 
-	 * @param state the state
-	 * 
+	 * @param state
+	 *            the state
 	 * @return the gTP score
 	 */
 	public GTPScore score(GTPState state) {

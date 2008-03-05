@@ -7,7 +7,7 @@ import java.util.TreeSet;
  * The Interface GTPInterfaceRaw.
  */
 public interface GTPInterfaceRaw {
-	
+
 	/**
 	 * Clear board.
 	 * 
@@ -18,8 +18,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Final status list.
 	 * 
-	 * @param status the status
-	 * 
+	 * @param status
+	 *            the status
 	 * @return the tree set< vertex>
 	 */
 	TreeSet<Vertex> finalStatusList(String status);
@@ -27,8 +27,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Fixed handicap.
 	 * 
-	 * @param handicap the handicap
-	 * 
+	 * @param handicap
+	 *            the handicap
 	 * @return the tree set< vertex>
 	 */
 	TreeSet<Vertex> fixedHandicap(short handicap);
@@ -36,8 +36,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Gen move.
 	 * 
-	 * @param colour the colour
-	 * 
+	 * @param colour
+	 *            the colour
 	 * @return the move
 	 */
 	Move genMove(short colour);
@@ -66,8 +66,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Gets the known command.
 	 * 
-	 * @param command the command
-	 * 
+	 * @param command
+	 *            the command
 	 * @return the known command
 	 */
 	boolean getKnownCommand(String command);
@@ -89,9 +89,10 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Loadsgf.
 	 * 
-	 * @param filename the filename
-	 * @param moveNumber the move number
-	 * 
+	 * @param filename
+	 *            the filename
+	 * @param moveNumber
+	 *            the move number
 	 * @return true, if successful
 	 */
 	boolean loadsgf(String filename, int moveNumber);
@@ -99,8 +100,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Place free handicap.
 	 * 
-	 * @param handicap the handicap
-	 * 
+	 * @param handicap
+	 *            the handicap
 	 * @return the tree set< vertex>
 	 */
 	TreeSet<Vertex> placeFreeHandicap(short handicap);
@@ -108,8 +109,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Place free handicap.
 	 * 
-	 * @param stones the stones
-	 * 
+	 * @param stones
+	 *            the stones
 	 * @return true, if successful
 	 */
 	boolean placeFreeHandicap(TreeSet<Vertex> stones);
@@ -117,8 +118,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Play.
 	 * 
-	 * @param move the move
-	 * 
+	 * @param move
+	 *            the move
 	 * @return true, if successful
 	 */
 	boolean play(Move move);
@@ -133,8 +134,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Reg gen move.
 	 * 
-	 * @param colour the colour
-	 * 
+	 * @param colour
+	 *            the colour
 	 * @return the move
 	 */
 	Move regGenMove(short colour);
@@ -142,8 +143,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Sets the board size.
 	 * 
-	 * @param size the size
-	 * 
+	 * @param size
+	 *            the size
 	 * @return true, if successful
 	 */
 	boolean setBoardSize(short size);
@@ -151,8 +152,8 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Sets the komi.
 	 * 
-	 * @param komi the komi
-	 * 
+	 * @param komi
+	 *            the komi
 	 * @return true, if successful
 	 */
 	boolean setKomi(double komi);
@@ -160,10 +161,12 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Sets the time left.
 	 * 
-	 * @param colour the colour
-	 * @param byoYomiTime the byo yomi time
-	 * @param byoYomiStones the byo yomi stones
-	 * 
+	 * @param colour
+	 *            the colour
+	 * @param byoYomiTime
+	 *            the byo yomi time
+	 * @param byoYomiStones
+	 *            the byo yomi stones
 	 * @return true, if successful
 	 */
 	boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones);
@@ -171,10 +174,12 @@ public interface GTPInterfaceRaw {
 	/**
 	 * Sets the time settings.
 	 * 
-	 * @param mainTime the main time
-	 * @param byoYomiTime the byo yomi time
-	 * @param byoYomiStones the byo yomi stones
-	 * 
+	 * @param mainTime
+	 *            the main time
+	 * @param byoYomiTime
+	 *            the byo yomi time
+	 * @param byoYomiStones
+	 *            the byo yomi stones
 	 * @return true, if successful
 	 */
 	boolean setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones);

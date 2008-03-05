@@ -3,21 +3,22 @@ package jgogears;
 import java.util.Vector;
 
 /**
- * A class representing a vertex on the board. There is no representation of colour or the occupancy of the vertex.
- * 
- * TODO write some tests for this
+ * A class representing a vertex on the board. There is no representation of colour or the occupancy of the vertex. TODO
+ * write some tests for this
  * 
  * @author Stuart
  */
 public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
-	
+	/** are we spewing out lots of debugging info? */
 	static final boolean DEBUG = false;
-	
+
 	/**
 	 * Short cut constructor with ints rather than shorts.
 	 * 
-	 * @param row the row
-	 * @param column the column
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
 	 */
 	public Vertex(int row, int column) {
 		this.add((short) row);
@@ -27,8 +28,10 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * Preferred constuctor.
 	 * 
-	 * @param row the row
-	 * @param column the column
+	 * @param row
+	 *            the row
+	 * @param column
+	 *            the column
 	 */
 	public Vertex(short row, short column) {
 		this.add(row);
@@ -38,7 +41,8 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * Constuctor based on a string.
 	 * 
-	 * @param vertexString the vertex string
+	 * @param vertexString
+	 *            the vertex string
 	 */
 	public Vertex(String vertexString) {
 		if (DEBUG)
@@ -127,7 +131,7 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 		if (vertexString.length() == 2) {
 			this.setColumn((vertexString.charAt(1) - '1'));
 		} else if (vertexString.length() == 3) {
-			this.setColumn(((vertexString.charAt(1) - '0') * 10) + (vertexString.charAt(2) - '1'));
+			this.setColumn((vertexString.charAt(1) - '0') * 10 + vertexString.charAt(2) - '1');
 		} else
 			throw new IllegalArgumentException("trying to parse (4) \"" + vertexString + "\", \"" + vertexString + "\"");
 		if (DEBUG)
@@ -137,20 +141,20 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * Comparison operator to ensure that (in)equality operators work as expected.
 	 * 
-	 * @param v the v
-	 * 
+	 * @param v
+	 *            the v
 	 * @return the int
 	 */
 	public int compareTo(Vertex v) {
 
-			if (v.getRow() > this.getRow())
-				return 1;
-			if (v.getRow() < this.getRow())
-				return -1;
-			if (v.getColumn() > this.getColumn())
-				return 1;
-			if (v.getColumn() < this.getColumn())
-				return -1;
+		if (v.getRow() > this.getRow())
+			return 1;
+		if (v.getRow() < this.getRow())
+			return -1;
+		if (v.getColumn() > this.getColumn())
+			return 1;
+		if (v.getColumn() < this.getColumn())
+			return -1;
 		return 0;
 	}
 
@@ -158,21 +162,21 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	 * equality operator to ensure that two different vertex objects representing the same vertex are recognised as
 	 * being equal.
 	 * 
-	 * @param o the o
-	 * 
+	 * @param o
+	 *            the o
 	 * @return true, if equals
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if ((this == null) && (o == null))
+		if (this == null && o == null)
 			return true;
-		if ((o == null) || (this == null))
+		if (o == null || this == null)
 			return false;
 		if (o.getClass() != this.getClass())
 			return super.equals(o);
 		try {
 			Vertex v = (Vertex) o;
-			if ((v.getRow() == this.getRow()) && (v.getColumn() == this.getColumn()))
+			if (v.getRow() == this.getRow() && v.getColumn() == this.getColumn())
 				return true;
 			else
 				return false;
@@ -208,7 +212,8 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * set the column of this vertex.
 	 * 
-	 * @param column the column
+	 * @param column
+	 *            the column
 	 */
 	private void setColumn(int column) {
 		short row = this.getRow();
@@ -220,7 +225,8 @@ public final class Vertex extends Vector<Short> implements Comparable<Vertex> {
 	/**
 	 * Set the row of this vertex.
 	 * 
-	 * @param row the row
+	 * @param row
+	 *            the row
 	 */
 	private void setRow(int row) {
 		short column = this.getColumn();

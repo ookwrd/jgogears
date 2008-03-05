@@ -2,13 +2,14 @@ package jgogears;
 
 import java.util.*;
 
-
 /**
  * The Class SGFSequence.
  */
 public class SGFSequence extends Vector<SGFNode> {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Vector#toString()
 	 */
 	@Override

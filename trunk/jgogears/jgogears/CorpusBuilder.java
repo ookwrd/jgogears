@@ -4,21 +4,19 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
-
 /**
- * The Class CorpusBuilder.
- *  troll through a directory hierarchy containing SGF files and archives of scoff
- files. Each file is parsed as an SGF file and copied to a directory if it meets
-the tests
+ * The Class CorpusBuilder. troll through a directory hierarchy containing SGF files and archives of scoff files. Each
+ * file is parsed as an SGF file and copied to a directory if it meets the tests
  */
 public class CorpusBuilder {
 
 	/**
 	 * The main method.
 	 * 
-	 * @param args the arguments
-	 * 
-	 * @throws Exception the exception
+	 * @param args
+	 *            the arguments
+	 * @throws Exception
+	 *             the exception
 	 */
 	public static void main(String[] args) throws Exception {
 		CorpusBuilder builder = new CorpusBuilder();
@@ -30,9 +28,10 @@ public class CorpusBuilder {
 	/**
 	 * Mainold.
 	 * 
-	 * @param args the args
-	 * 
-	 * @throws Exception the exception
+	 * @param args
+	 *            the args
+	 * @throws Exception
+	 *             the exception
 	 */
 	public static void mainold(String[] args) throws Exception {
 		Stack<String> files = new Stack<String>();
@@ -67,11 +66,11 @@ public class CorpusBuilder {
 	/**
 	 * Test for seki.
 	 * 
-	 * @param file the file
-	 * 
+	 * @param file
+	 *            the file
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	static public boolean testForSeki(File file) throws IOException {
 
@@ -80,7 +79,7 @@ public class CorpusBuilder {
 			System.err.println("failed to load \"" + file + "\"");
 			return false;
 		}
-		if (!game.getScore().getScored() || (game.getSize() != 19))
+		if (!game.getScore().getScored() || game.getSize() != 19)
 			return false;
 		if (game.isBranched())
 			return false;
@@ -99,7 +98,7 @@ public class CorpusBuilder {
 		Date after = new Date();
 		System.err.println("\"" + file + "\" time = \"" + (after.getTime() - before.getTime()) + "\" result = \""
 				+ game.getScore() + "\"");
-		if ((stonesInSeki != null) && (stonesInSeki.size() != 0)) {
+		if (stonesInSeki != null && stonesInSeki.size() != 0) {
 			System.err.println("\"" + file + "\" stonesInSeki = \"" + stonesInSeki + "\"");
 			return true;
 		} else {
@@ -110,11 +109,11 @@ public class CorpusBuilder {
 	/**
 	 * Test for seki.
 	 * 
-	 * @param filename the filename
-	 * 
+	 * @param filename
+	 *            the filename
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	static public boolean testForSeki(String filename) throws IOException {
 		return testForSeki(new File(filename));
@@ -144,8 +143,6 @@ public class CorpusBuilder {
 					this.files.add(fs[i]);
 			} else if (file.getName().endsWith(".zip")) {
 				this.process(file);
-			} else if (file.getName().endsWith(".zip")) {
-
 			}
 		}
 	}
@@ -153,7 +150,8 @@ public class CorpusBuilder {
 	/**
 	 * Process.
 	 * 
-	 * @param file the file
+	 * @param file
+	 *            the file
 	 */
 	void process(File file) {
 
@@ -188,8 +186,10 @@ public class CorpusBuilder {
 	 * The Class SGFFilter.
 	 */
 	class SGFFilter implements FilenameFilter {
-		
-		/* (non-Javadoc)
+
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
 		 */
 		public boolean accept(File dir, String name) {
@@ -201,8 +201,10 @@ public class CorpusBuilder {
 	 * The Class ZIPFilter.
 	 */
 	class ZIPFilter implements FilenameFilter {
-		
-		/* (non-Javadoc)
+
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
 		 */
 		public boolean accept(File dir, String name) {

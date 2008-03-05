@@ -5,15 +5,17 @@ import java.util.*;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class FastBoardTest.
  */
 public class FastBoardTest extends TestCase {
 
 	/**
-	 * Test all vertexes on a board of size N
+	 * Test all vertexes on a board of size N.
 	 * 
-	 * @param size the size
+	 * @param size
+	 *            the size
 	 */
 	public void testAllVertexesN(int size) {
 		BoardI board = new FastBoard(size);
@@ -26,7 +28,7 @@ public class FastBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 							assertTrue(BoardI.VERTEX_EMPTY == BoardI.VERTEX_EMPTY);
 							assertTrue(board.getColour(l, m) == board.getColour(l, m));
@@ -44,7 +46,7 @@ public class FastBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue(board.getColour(i, j) == BoardI.VERTEX_EMPTY);
 						}
 					}
@@ -55,7 +57,7 @@ public class FastBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
@@ -66,7 +68,7 @@ public class FastBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
@@ -77,7 +79,7 @@ public class FastBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue(board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
 					}
@@ -89,7 +91,8 @@ public class FastBoardTest extends TestCase {
 	/**
 	 * Test load all SGF files.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadAllSGFFiles() throws IOException {
 		Stack<String> files = new Stack<String>();
@@ -98,7 +101,7 @@ public class FastBoardTest extends TestCase {
 		while (files.size() > 0) {
 			String filename = files.pop();
 			File file = new File(filename);
-			//System.err.println("examining \"" + filename + "\"");
+			// System.err.println("examining \"" + filename + "\"");
 			if (file.exists()) {
 				if (!file.isDirectory()) {
 					// System.err.println("\"" + filename + "\" is not a
@@ -126,7 +129,7 @@ public class FastBoardTest extends TestCase {
 					return;
 
 				} else {
-					//System.err.println("\"" + filename + "\" is a directory");
+					// System.err.println("\"" + filename + "\" is a directory");
 					String[] children = file.list();
 					for (int i = 0; i < children.length; i++) {
 						// System.err.println("pushing \"" + children[i] +
@@ -142,7 +145,8 @@ public class FastBoardTest extends TestCase {
 	/**
 	 * Test load simple gnugo.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadSimpleGnugo() throws IOException {
 
@@ -319,7 +323,7 @@ public class FastBoardTest extends TestCase {
 		BoardI working = new FastBoard((short) 19);
 		assertNotNull(working);
 		working = working.newBoard(new Move("B q10"));
-		//System.out.println(working);
+		// System.out.println(working);
 	}
 
 }

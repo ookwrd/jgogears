@@ -12,38 +12,38 @@ public final class Rank {
 
 	/** The Constant SHODAN. */
 	public final static Rank SHODAN = new Rank("1d");
-	
+
 	/** The Constant BEGINNER. */
 	public final static Rank BEGINNER = new Rank("25k");
-	
+
 	/** The Constant ME. */
 	public final static Rank ME = new Rank("12k");
 
 	/** The Constant TESTING. */
 	final static boolean TESTING = false;
-	
+
 	/** The Constant MAX_RANK. */
 	final static double MAX_RANK = 80;
-	
+
 	/** The Constant MIN_RANK. */
 	final static double MIN_RANK = 130;
 
 	/** The Constant MAX_RATING. */
 	final static double MAX_RATING = 1;
-	
+
 	/** The Constant MIN_RATING. */
 	final static double MIN_RATING = 0;
 
 	/**
 	 * Check rank.
 	 * 
-	 * @param ranking the ranking
-	 * 
+	 * @param ranking
+	 *            the ranking
 	 * @return true, if successful
 	 */
 	static boolean checkRank(double ranking) {
 		if (TESTING)
-			if ((ranking > MAX_RATING) || (ranking < MIN_RATING))
+			if (ranking > MAX_RATING || ranking < MIN_RATING)
 				throw new Error("bad ranking " + ranking);
 		return true;
 	}
@@ -51,13 +51,13 @@ public final class Rank {
 	/**
 	 * Check rating.
 	 * 
-	 * @param rating the rating
-	 * 
+	 * @param rating
+	 *            the rating
 	 * @return true, if successful
 	 */
 	static boolean checkRating(double rating) {
 		if (TESTING)
-			if ((rating > MAX_RATING) || (rating < MIN_RATING))
+			if (rating > MAX_RATING || rating < MIN_RATING)
 				throw new Error("bad rating " + rating);
 		return true;
 	}
@@ -65,12 +65,12 @@ public final class Rank {
 	/**
 	 * Convert.
 	 * 
-	 * @param r the r
-	 * 
+	 * @param r
+	 *            the r
 	 * @return the int
 	 */
 	public static int convert(String r) {
-		if ((r == null) || (r.length() < 2))
+		if (r == null || r.length() < 2)
 			return (int) BEGINNER.getRank();
 		r = r.toLowerCase();
 		int offset = 0;
@@ -110,7 +110,8 @@ public final class Rank {
 	/**
 	 * Instantiates a new rank.
 	 * 
-	 * @param r the r
+	 * @param r
+	 *            the r
 	 */
 	public Rank(double r) {
 		if (TESTING)
@@ -123,7 +124,8 @@ public final class Rank {
 	/**
 	 * Instantiates a new rank.
 	 * 
-	 * @param r the r
+	 * @param r
+	 *            the r
 	 */
 	public Rank(String r) {
 		this.rank = convert(r);
@@ -161,13 +163,16 @@ public final class Rank {
 	/**
 	 * Sets the rank.
 	 * 
-	 * @param rank the new rank
+	 * @param rank
+	 *            the new rank
 	 */
 	public void setRank(double rank) {
 		this.rank = rank;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -9,8 +9,8 @@ final public class CopyOfRankToRating {
 	/**
 	 * Rank to rating.
 	 * 
-	 * @param S the s
-	 * 
+	 * @param S
+	 *            the s
 	 * @return the double
 	 */
 	public static final double rankToRating(String S) {

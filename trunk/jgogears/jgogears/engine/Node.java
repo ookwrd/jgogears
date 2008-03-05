@@ -3,8 +3,9 @@
  */
 package jgogears.engine;
 
+import java.util.Iterator;
+
 import jgogears.BoardI;
-import java.util.*;
 
 /**
  * Class to hold a single node in the tree.
@@ -13,12 +14,6 @@ import java.util.*;
  */
 public final class Node implements Comparable<Node> {
 
-	public int compareTo(Node node) {
-		if (node == this)
-			return 0;
-		return (node.hashCode() > this.hashCode() ? 1 : -1);
-	}
-
 	/** are we doing expensive checking? */
 	private final static boolean CHECKING = true;
 
@@ -26,13 +21,14 @@ public final class Node implements Comparable<Node> {
 	public static boolean DEBUG = false;
 
 	/** The count. Should be equal to or higher than the sum of the childrens counts */
-	private long count = 0;
+	private long played = 0;
 
+	private long notPlayed = 0;
 	/** The white child */
-	private Node white = null;;
+	private Node white = null;
 
 	/** The off child */
-	private Node off = null;
+	private Node off = null;;
 
 	/** The black child */
 	private Node black = null;
@@ -46,70 +42,10 @@ public final class Node implements Comparable<Node> {
 	Node() {
 	}
 
-	/**
-	 * get the count
-	 * 
-	 * @return the count
-	 */
-	public final long getCount() {
-		return count;
-	}
-
-	/**
-	 * set the count
-	 * 
-	 * @param count
-	 *            the count to set
-	 */
-	public final void setCount(long count) {
-		if (CHECKING)
-			if (count < 0)
-				throw new Error();
-		this.count = count;
-	}
-
-	/**
-	 * get the white
-	 * 
-	 * @return the white
-	 */
-	public final Node getWhite() {
-		return white;
-	}
-
-	/**
-	 * set the white
-	 * 
-	 * @param white
-	 *            the white to set
-	 */
-	public final void setWhite(Node white) {
-		if (CHECKING)
-			if (white == this)
-				throw new Error();
-		this.white = white;
-	}
-
-	/**
-	 * get the off
-	 * 
-	 * @return the off
-	 */
-	public final Node getOff() {
-		return off;
-	}
-
-	/**
-	 * set the off
-	 * 
-	 * @param off
-	 *            the off to set
-	 */
-	public final void setOff(Node off) {
-		if (CHECKING)
-			if (white == this)
-				throw new Error();
-		this.off = off;
+	public int compareTo(Node node) {
+		if (node == this)
+			return 0;
+		return node.hashCode() > this.hashCode() ? 1 : -1;
 	}
 
 	/**
@@ -118,20 +54,25 @@ public final class Node implements Comparable<Node> {
 	 * @return the black
 	 */
 	public final Node getBlack() {
-		return black;
+		return this.black;
 	}
 
 	/**
-	 * set the black
+	 * return an iterator over the children of this Node;
 	 * 
-	 * @param black
-	 *            the black to set
+	 * @return the iterator
 	 */
-	public final void setBlack(Node black) {
-		if (CHECKING)
-			if (white == this)
-				throw new Error();
-		this.black = black;
+	public Iterator<Node> getChildren() {
+		return new NodeIterator(this);
+	}
+
+	/**
+	 * return an iterator over the decendents of this Node;
+	 * 
+	 * @return the iterator
+	 */
+	public Iterator<Node> getDecendents() {
+		return new TreeIterator(this);
 	}
 
 	/**
@@ -140,58 +81,7 @@ public final class Node implements Comparable<Node> {
 	 * @return the empty
 	 */
 	public final Node getEmpty() {
-		return empty;
-	}
-
-	/**
-	 * set the empty
-	 * 
-	 * @param empty
-	 *            the empty to set
-	 */
-	public final void setEmpty(Node empty) {
-		if (CHECKING)
-			if (white == this)
-				throw new Error();
-		this.empty = empty;
-	}
-/**
- * get the size of this (sub)tree
- * 
- * @return the size
- */
-	public int size() {
-		int result = 1;
-		if (black != null)
-			result = result + black.size();
-		if (white != null)
-			result = result + white.size();
-		if (empty != null)
-			result = result + empty.size();
-		if (off != null)
-			result = result + off.size();
-		return result;
-	}
-	/**
-	 * return an iterator over the children of this Node;
-	 * @return the iterator
-	 */
-	public Iterator<Node> iterator(){
-		return new NodeIterator(this);
-	}
-	/**
-	 * return an iterator over the children of this Node;
-	 * @return the iterator
-	 */
-	public Iterator<Node> getChildren(){
-		return new NodeIterator(this);
-	}
-	/**
-	 * return an iterator over the decendents of this Node;
-	 * @return the iterator
-	 */
-	public Iterator<Node> getDecendents(){
-		return new TreeIterator(this);
+		return this.empty;
 	}
 
 	public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
@@ -203,7 +93,7 @@ public final class Node implements Comparable<Node> {
 		linear = new VertexLineariser(board, row, column, sym, invert);
 		if (!linear.hasNext())
 			throw new Error();
-		return getLeaf(linear, node);
+		return this.getLeaf(linear, node);
 
 	}
 
@@ -239,60 +129,209 @@ public final class Node implements Comparable<Node> {
 	}
 
 	/**
+	 * get the notplayed
+	 * 
+	 * @return the notplayed
+	 */
+	public final long getNotPlayed() {
+		return this.notPlayed;
+	}
+
+	/**
+	 * get the off
+	 * 
+	 * @return the off
+	 */
+	public final Node getOff() {
+		return this.off;
+	}
+
+	/**
+	 * get the played
+	 * 
+	 * @return the played
+	 */
+	public final long getPlayed() {
+		return this.played;
+	}
+
+	/**
+	 * get the white
+	 * 
+	 * @return the white
+	 */
+	public final Node getWhite() {
+		return this.white;
+	}
+
+	/**
+	 * return an iterator over the children of this Node;
+	 * 
+	 * @return the iterator
+	 */
+	public Iterator<Node> iterator() {
+		return new NodeIterator(this);
+	}
+
+	/**
+	 * set the black
+	 * 
+	 * @param black
+	 *            the black to set
+	 */
+	public final void setBlack(Node black) {
+		if (CHECKING)
+			if (this.white == this)
+				throw new Error();
+		this.black = black;
+	}
+
+	/**
+	 * set the empty
+	 * 
+	 * @param empty
+	 *            the empty to set
+	 */
+	public final void setEmpty(Node empty) {
+		if (CHECKING)
+			if (this.white == this)
+				throw new Error();
+		this.empty = empty;
+	}
+
+	/**
+	 * set the notplayed
+	 * 
+	 * @param notplayed
+	 *            the notplayed to set
+	 */
+	public final void setNotPlayed(long notplayed) {
+		this.notPlayed = notplayed;
+	}
+
+	/**
+	 * set the off
+	 * 
+	 * @param off
+	 *            the off to set
+	 */
+	public final void setOff(Node off) {
+		if (CHECKING)
+			if (this.white == this)
+				throw new Error();
+		this.off = off;
+	}
+
+	/**
+	 * set the played
+	 * 
+	 * @param played
+	 *            the played to set
+	 */
+	public final void setPlayed(long played) {
+		this.played = played;
+	}
+
+	/**
+	 * set the white
+	 * 
+	 * @param white
+	 *            the white to set
+	 */
+	public final void setWhite(Node white) {
+		if (CHECKING)
+			if (white == this)
+				throw new Error();
+		this.white = white;
+	}
+
+	/**
+	 * get the size of this (sub)tree
+	 * 
+	 * @return the size
+	 */
+	public int size() {
+		int result = 1;
+		if (this.black != null)
+			result = result + this.black.size();
+		if (this.white != null)
+			result = result + this.white.size();
+		if (this.empty != null)
+			result = result + this.empty.size();
+		if (this.off != null)
+			result = result + this.off.size();
+		return result;
+	}
+
+	/**
 	 * Train.
 	 * 
 	 * @param linear
 	 *            the linear
-	 * @param expand are we expanding?
-	 * @param depth the depth to expand to
-	 * @param played
+	 * @param expand
+	 *            are we expanding?
+	 * @param depth
+	 *            the depth to expand to
+	 * @param playeda
 	 *            the played
 	 */
-	public void train(VertexLineariser linear, boolean played, boolean expand, int depth) {
-		if (depth < 0)
+	public void train(VertexLineariser linear, boolean playeda, boolean expand, int depth) {
+		if (depth <= 0)
+			expand = false;
+		if (this.notPlayed + this.played < 100)
 			expand = false;
 		depth--;
-		if (played)
-			count++;
+		if (playeda)
+			this.played++;
+		else
+			this.notPlayed++;
 		if (!linear.hasNext())
 			return;
 		Short colour = linear.next();
 
 		switch (colour) {
 		case BoardI.VERTEX_BLACK:
-			if (black == null)
-				if (expand)
-					black = new Node();
-				else
+			if (this.black == null)
+				if (expand) {
+					this.black = new Node();
+					this.black.train(linear, playeda, false, depth);
+				} else
 					return;
-			black.train(linear, played, expand, depth);
+			else
+				this.black.train(linear, playeda, expand, depth);
 			break;
 		case BoardI.VERTEX_WHITE:
-			if (white == null)
-				if (expand)
-					white = new Node();
-				else
+			if (this.white == null)
+				if (expand) {
+					this.white = new Node();
+					this.white.train(linear, playeda, false, depth);
+				} else
 					return;
-			white.train(linear, played, expand,  depth);
-
+			else
+				this.white.train(linear, playeda, expand, depth);
 			break;
 		case BoardI.VERTEX_OFF_BOARD:
-			if (off == null)
-				if (expand)
-					off = new Node();
-				else
+			if (this.off == null)
+
+				if (expand) {
+					this.off = new Node();
+					this.off.train(linear, playeda, false, depth);
+				} else
 					return;
-			off.train(linear, played, expand,  depth);
+			else
+				this.off.train(linear, playeda, expand, depth);
 
 			break;
 		case BoardI.VERTEX_EMPTY:
 		case BoardI.VERTEX_KO:
-			if (empty == null)
-				if (expand)
-					empty = new Node();
-				else
+			if (this.empty == null)
+				if (expand) {
+					this.empty = new Node();
+					this.empty.train(linear, playeda, false, depth);
+				} else
 					return;
-			empty.train(linear, played, expand,  depth);
+			else
+				this.empty.train(linear, playeda, expand, depth);
 			break;
 		default:
 			throw new Error();

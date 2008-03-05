@@ -2,17 +2,16 @@ package jgogears;
 
 import java.util.*;
 
-
 /**
  * An SGFProperty is a string identifier and a sequence of string values. Common the sequence contains exactly one item.
  */
 public class SGFProperty {
-	
+
 	/**
 	 * String all square brackets from a string. DOES NOT LEAVE escaped squre bracekets!
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return the new string
 	 */
 	protected static String stripSquareBrackets(String s) {
@@ -30,7 +29,7 @@ public class SGFProperty {
 	/**
 	 * get the first value
 	 * 
-	 * @return  the first value
+	 * @return the first value
 	 */
 	public String first() {
 		return this.getValues().firstElement();
@@ -39,7 +38,7 @@ public class SGFProperty {
 	/**
 	 * get the first value (stripped)
 	 * 
-	 * @return  the first value (stripped)
+	 * @return the first value (stripped)
 	 */
 	public String firstStripped() {
 		return stripSquareBrackets(this.first());
@@ -66,7 +65,8 @@ public class SGFProperty {
 	/**
 	 * Sets the identifier.
 	 * 
-	 * @param propIdent the identifier
+	 * @param propIdent
+	 *            the identifier
 	 */
 	public void setIdentifier(String propIdent) {
 		if (this.identifier != null)
@@ -77,7 +77,8 @@ public class SGFProperty {
 	/**
 	 * Sets the values.
 	 * 
-	 * @param propvalues the values to set
+	 * @param propvalues
+	 *            the values to set
 	 */
 	public void setValues(Vector<String> propvalues) {
 		if (this.values != null)
@@ -94,7 +95,9 @@ public class SGFProperty {
 		return stripSquareBrackets(this.toString());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

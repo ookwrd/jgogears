@@ -8,12 +8,11 @@ import junit.framework.*;
  * @author syeates
  */
 public class AllTests {
-	
+
 	/**
 	 * Package-wide test collection.
 	 * 
 	 * @return the test
-	 * 
 	 * @author syeates
 	 */
 

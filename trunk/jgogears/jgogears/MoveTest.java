@@ -15,7 +15,8 @@ public class MoveTest extends TestCase {
 	/**
 	 * Test bad.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testBad() throws ParseException {
 		try {
@@ -58,7 +59,8 @@ public class MoveTest extends TestCase {
 	/**
 	 * Test gtp constructor.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testGTPConstructor() throws ParseException {
 		assertTrue(new Move("w ReSiGn").getResign() == true);
@@ -99,7 +101,8 @@ public class MoveTest extends TestCase {
 	/**
 	 * Test string conversions.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testStringConversions() throws ParseException {
 		for (int i = 0; i < 25; i++) {
@@ -124,7 +127,8 @@ public class MoveTest extends TestCase {
 	/**
 	 * Test to string.
 	 * 
-	 * @throws ParseException the parse exception
+	 * @throws ParseException
+	 *             the parse exception
 	 */
 	public void testToString() throws ParseException {
 		System.err.println(new Move(0, 0, BoardI.VERTEX_WHITE));

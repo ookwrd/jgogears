@@ -1,10 +1,7 @@
 package jgogears;
 
-
 /**
- * A skeleton GTP player
- * TODO complete this implementation
- * TODO add tests
+ * A skeleton GTP player TODO complete this implementation TODO add tests
  * 
  * @author syeates
  */
@@ -17,7 +14,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		super();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#clearBoard(jgogears.GTPState)
 	 */
 	public void clearBoard(GTPState state) {
@@ -25,7 +24,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		state.clearBoard();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#fixedHandicap(int, jgogears.GTPState)
 	 */
 	public Move[] fixedHandicap(int handicap, GTPState state) {
@@ -36,7 +37,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		return stones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#genMove(short, jgogears.GTPState)
 	 */
 	public Move genMove(short colour, GTPState state) {
@@ -45,7 +48,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getKnownCommand(java.lang.String)
 	 */
 	public boolean getKnownCommand(String command) {
@@ -53,7 +58,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getListCommands()
 	 */
 	public String[] getListCommands() {
@@ -61,14 +68,18 @@ public abstract class SkeletonEngine implements GTPInterface {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#getProtocolVersion()
 	 */
 	public int getProtocolVersion() {
 		return 2;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#loadsgf(java.lang.String, int, jgogears.GTPState)
 	 */
 	public void loadsgf(String filename, int moveNumber, GTPState state) {
@@ -76,7 +87,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#placeFreeHandicap(int, jgogears.GTPState)
 	 */
 	public Move[] placeFreeHandicap(int handicap, GTPState state) {
@@ -87,7 +100,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		return stones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#placeFreeHandicap(jgogears.Move[], jgogears.GTPState)
 	 */
 	public void placeFreeHandicap(Move[] stones, GTPState state) {
@@ -96,21 +111,27 @@ public abstract class SkeletonEngine implements GTPInterface {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#play(jgogears.Move, jgogears.GTPState)
 	 */
 	public void play(Move move, GTPState state) {
 		state.playMove(move);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#quit()
 	 */
 	public boolean quit() {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#setBoardSize(short, jgogears.GTPState)
 	 */
 	public void setBoardSize(short size, GTPState state) {
@@ -118,14 +139,18 @@ public abstract class SkeletonEngine implements GTPInterface {
 		state.setBoardsize(size);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#setKomi(double, jgogears.GTPState)
 	 */
 	public void setKomi(double komi, GTPState state) {
 		state.setKomi(komi);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#setTimeLeft(int, double, double, jgogears.GTPState)
 	 */
 	public void setTimeLeft(int colour, double byoYomiTime, double byoYomiStones, GTPState state) {
@@ -133,7 +158,9 @@ public abstract class SkeletonEngine implements GTPInterface {
 		state.setByoYomiTime(byoYomiTime);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#setTimeSettings(double, double, double, jgogears.GTPState)
 	 */
 	public void setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones, GTPState state) {
@@ -143,14 +170,18 @@ public abstract class SkeletonEngine implements GTPInterface {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#showBoard(jgogears.GTPState)
 	 */
 	public BoardI showBoard(GTPState state) {
 		return state.getBoard();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterface#undo(jgogears.GTPState)
 	 */
 	public boolean undo(GTPState state) {
@@ -161,7 +192,7 @@ public abstract class SkeletonEngine implements GTPInterface {
 		newState.komi = state.komi;
 		newState.boardsize = state.boardsize;
 		newState.mainTime = state.mainTime;
-		newState.board = new Board(newState.boardsize);
+		newState.board = BoardI.newBoard(newState.boardsize);
 
 		// TODO generate new board
 

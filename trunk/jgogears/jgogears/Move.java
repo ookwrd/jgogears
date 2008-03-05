@@ -10,39 +10,10 @@ package jgogears;
 public final class Move {
 
 	/**
-	 * Colour string.
-	 * 
-	 * @param colour the colour
-	 * 
-	 * @return the colour as a string
-	 */
-	public static String colourString(int colour) {
-		// find the colour of the move
-		String colourS = "";
-		switch (colour) {
-		case BoardI.VERTEX_WHITE:
-			colourS = "white";
-			break;
-		case BoardI.VERTEX_BLACK:
-			colourS = "black";
-			break;
-		case BoardI.VERTEX_KO:
-			colourS = "k";
-			break;
-		case BoardI.VERTEX_EMPTY:
-			colourS = "";
-			break;
-		default:
-			throw new java.lang.InternalError();
-		}
-		return colourS;
-	}
-
-	/**
 	 * Create a handicap stone from a string.
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return the stone as a move
 	 */
 	public static Move createHandicapStone(String s) {
@@ -70,14 +41,18 @@ public final class Move {
 	 * create an empty GoMove.
 	 */
 	public Move() {
+		// nothing
 	}
 
 	/**
 	 * create a GoMove.
 	 * 
-	 * @param row the row of the move
-	 * @param column the column of the move
-	 * @param colour the colour of the move
+	 * @param row
+	 *            the row of the move
+	 * @param column
+	 *            the column of the move
+	 * @param colour
+	 *            the colour of the move
 	 */
 	public Move(int row, int column, int colour) {
 		this.row = (short) row;
@@ -88,9 +63,12 @@ public final class Move {
 	/**
 	 * create a GoMove.
 	 * 
-	 * @param row the row of the move
-	 * @param column the column of the move
-	 * @param colour the colour of the move
+	 * @param row
+	 *            the row of the move
+	 * @param column
+	 *            the column of the move
+	 * @param colour
+	 *            the colour of the move
 	 */
 	public Move(short row, short column, int colour) {
 		this.row = row;
@@ -101,9 +79,12 @@ public final class Move {
 	/**
 	 * create a GoMove.
 	 * 
-	 * @param row the row of the move
-	 * @param column the column of the move
-	 * @param colour the colour of the move
+	 * @param row
+	 *            the row of the move
+	 * @param column
+	 *            the column of the move
+	 * @param colour
+	 *            the colour of the move
 	 */
 	public Move(short row, short column, short colour) {
 		this.row = row;
@@ -114,9 +95,10 @@ public final class Move {
 	/**
 	 * create a GoMove from a GTP move string.
 	 * 
-	 * @param move the string to parse
-	 * 
-	 * @throws IllegalArgumentException the illegal argument exception
+	 * @param move
+	 *            the string to parse
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
 	 */
 	public Move(String move) throws IllegalArgumentException {
 		// System.err.println("GoMove::GoMove(\"" + move + "\"");
@@ -139,13 +121,16 @@ public final class Move {
 			this.setColumn(v.getColumn());
 		}
 	}
+
 	/**
 	 * create a GoMove from a move string minus the mvoe colour
 	 * 
-	 * @param move the string to parse
-	 * @param colour the colour of the move
-	 * 
-	 * @throws IllegalArgumentException the illegal argument exception
+	 * @param move
+	 *            the string to parse
+	 * @param colour
+	 *            the colour of the move
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
 	 */
 	public Move(String move, short colour) throws IllegalArgumentException {
 		// System.err.println("GoMove::GoMove(\"" + move + "\"");
@@ -177,8 +162,8 @@ public final class Move {
 	 * get the row of this column.
 	 * 
 	 * @return the column
-	 * 
-	 * @throws Error if this is a pass move
+	 * @throws Error
+	 *             if this is a pass move
 	 */
 	public short getColumn() {
 		if (this.resign)
@@ -223,8 +208,8 @@ public final class Move {
 	 * get the row of this column.
 	 * 
 	 * @return the column
-	 * 
-	 * @throws Error if this is a pass move
+	 * @throws Error
+	 *             if this is a pass move
 	 */
 	public short getRow() {
 		if (this.resign)
@@ -237,8 +222,8 @@ public final class Move {
 	/**
 	 * Number to character.
 	 * 
-	 * @param s an alphabetic label from a traditional goban
-	 * 
+	 * @param s
+	 *            an alphabetic label from a traditional goban
 	 * @return the corresponding (zero-indexed) integer
 	 */
 	protected String numberToCharacter(short s) {
@@ -328,8 +313,8 @@ public final class Move {
 	/**
 	 * Sets the colour.
 	 * 
-	 * @param colour the colour to set
-	 * 
+	 * @param colour
+	 *            the colour to set
 	 * @return the move
 	 */
 	public Move setColour(short colour) {
@@ -340,8 +325,8 @@ public final class Move {
 	/**
 	 * Sets the column.
 	 * 
-	 * @param column the column to set
-	 * 
+	 * @param column
+	 *            the column to set
 	 * @return the move
 	 */
 	public Move setColumn(short column) {
@@ -352,8 +337,8 @@ public final class Move {
 	/**
 	 * Sets the pass.
 	 * 
-	 * @param pass the pass to set
-	 * 
+	 * @param pass
+	 *            the pass to set
 	 * @return the move
 	 */
 	public Move setPass(boolean pass) {
@@ -364,8 +349,8 @@ public final class Move {
 	/**
 	 * Sets the resign.
 	 * 
-	 * @param resign the resign to set
-	 * 
+	 * @param resign
+	 *            the resign to set
 	 * @return the move
 	 */
 	public Move setResign(boolean resign) {
@@ -376,8 +361,8 @@ public final class Move {
 	/**
 	 * Sets the row.
 	 * 
-	 * @param row the row to set
-	 * 
+	 * @param row
+	 *            the row to set
 	 * @return the move
 	 */
 	public Move setRow(short row) {
@@ -385,7 +370,9 @@ public final class Move {
 		return this;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -401,7 +388,7 @@ public final class Move {
 	public String toStringGTP() {
 
 		// find the colour of the move
-		String colourS = colourString(this.colour);
+		String colourS = BoardI.colourString(this.colour);
 
 		// calculate the position
 		String vertexS = this.toVertexString();

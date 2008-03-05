@@ -5,9 +5,9 @@ package jgogears.engine;
 
 import junit.framework.TestCase;
 
-
+// TODO: Auto-generated Javadoc
 /**
- * Tests for NodeIterator
+ * Tests for NodeIterator.
  * 
  * @author syeates
  */
@@ -24,14 +24,87 @@ public class NodeIteratorTest extends TestCase {
 	}
 
 	/**
-	 * Test basic i.
+	 * Test basic10.
 	 */
-	public void testBasicI() {
+	public void testBasic10() {
 		Node node = new Node();
+		node.setBlack(new Node());
+		node.setWhite(null);
+		node.setEmpty(null);
+		node.setOff(null);
 		assertNotNull(node);
 		NodeIterator iter = new NodeIterator(node);
 		assertNotNull(iter);
-		assertFalse(iter.hasNext());
+		int count = 0;
+		while (iter.hasNext()) {
+			Node child = iter.next();
+			assertNotNull(child);
+			count++;
+		}
+		assertTrue(count == 1);
+	}
+
+	/**
+	 * Test basic11.
+	 */
+	public void testBasic11() {
+		Node node = new Node();
+		node.setBlack(null);
+		node.setWhite(new Node());
+		node.setEmpty(null);
+		node.setOff(null);
+		assertNotNull(node);
+		NodeIterator iter = new NodeIterator(node);
+		assertNotNull(iter);
+		int count = 0;
+		while (iter.hasNext()) {
+			Node child = iter.next();
+			assertNotNull(child);
+			count++;
+		}
+		assertTrue(count == 1);
+	}
+
+	/**
+	 * Test basic12.
+	 */
+	public void testBasic12() {
+		Node node = new Node();
+		node.setBlack(null);
+		node.setWhite(null);
+		node.setEmpty(new Node());
+		node.setOff(null);
+		assertNotNull(node);
+		NodeIterator iter = new NodeIterator(node);
+		assertNotNull(iter);
+		int count = 0;
+		while (iter.hasNext()) {
+			Node child = iter.next();
+			assertNotNull(child);
+			count++;
+		}
+		assertTrue(count == 1);
+	}
+
+	/**
+	 * Test basic13.
+	 */
+	public void testBasic13() {
+		Node node = new Node();
+		node.setBlack(null);
+		node.setWhite(null);
+		node.setEmpty(null);
+		node.setOff(new Node());
+		assertNotNull(node);
+		NodeIterator iter = new NodeIterator(node);
+		assertNotNull(iter);
+		int count = 0;
+		while (iter.hasNext()) {
+			Node child = iter.next();
+			assertNotNull(child);
+			count++;
+		}
+		assertTrue(count == 1);
 	}
 
 	/**
@@ -182,87 +255,14 @@ public class NodeIteratorTest extends TestCase {
 	}
 
 	/**
-	 * Test basic10.
+	 * Test basic i.
 	 */
-	public void testBasic10() {
+	public void testBasicI() {
 		Node node = new Node();
-		node.setBlack(new Node());
-		node.setWhite(null);
-		node.setEmpty(null);
-		node.setOff(null);
 		assertNotNull(node);
 		NodeIterator iter = new NodeIterator(node);
 		assertNotNull(iter);
-		int count = 0;
-		while (iter.hasNext()) {
-			Node child = iter.next();
-			assertNotNull(child);
-			count++;
-		}
-		assertTrue(count == 1);
-	}
-
-	/**
-	 * Test basic11.
-	 */
-	public void testBasic11() {
-		Node node = new Node();
-		node.setBlack(null);
-		node.setWhite(new Node());
-		node.setEmpty(null);
-		node.setOff(null);
-		assertNotNull(node);
-		NodeIterator iter = new NodeIterator(node);
-		assertNotNull(iter);
-		int count = 0;
-		while (iter.hasNext()) {
-			Node child = iter.next();
-			assertNotNull(child);
-			count++;
-		}
-		assertTrue(count == 1);
-	}
-
-	/**
-	 * Test basic12.
-	 */
-	public void testBasic12() {
-		Node node = new Node();
-		node.setBlack(null);
-		node.setWhite(null);
-		node.setEmpty(new Node());
-		node.setOff(null);
-		assertNotNull(node);
-		NodeIterator iter = new NodeIterator(node);
-		assertNotNull(iter);
-		int count = 0;
-		while (iter.hasNext()) {
-			Node child = iter.next();
-			assertNotNull(child);
-			count++;
-		}
-		assertTrue(count == 1);
-	}
-
-	/**
-	 * Test basic13.
-	 */
-	public void testBasic13() {
-		Node node = new Node();
-		node.setBlack(null);
-		node.setWhite(null);
-		node.setEmpty(null);
-		node.setOff(new Node());
-		assertNotNull(node);
-		NodeIterator iter = new NodeIterator(node);
-		assertNotNull(iter);
-		int count = 0;
-		while (iter.hasNext()) {
-			Node child = iter.next();
-			assertNotNull(child);
-			count++;
-		}
-		assertTrue(count == 1);
+		assertFalse(iter.hasNext());
 	}
 
 	/**

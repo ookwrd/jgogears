@@ -9,13 +9,13 @@ import java.util.TreeSet;
  * @author syeates
  */
 public class GTPParserUtils {
-	
+
 	/**
 	 * Takes a string returned from the GTP protocol and returns either an Error describing the error in the string or a
 	 * null if this is not an error.
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return the error represented by this string
 	 */
 	static public Error getError(String s) {
@@ -27,7 +27,7 @@ public class GTPParserUtils {
 			return getError(s.substring(1));
 		if (s.charAt(0) == '?') {
 			int i;
-			for (i = 1; (s.length() > i) && Character.isDigit(s.charAt(i)); i++)
+			for (i = 1; s.length() > i && Character.isDigit(s.charAt(i)); i++)
 				;
 			return new GTPError(s.substring(i));
 		}
@@ -37,19 +37,19 @@ public class GTPParserUtils {
 	/**
 	 * Parses the vertex list.
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return the tree set< vertex>
 	 */
 	static TreeSet<Vertex> parseVertexList(String s) {
 		s = stripIntro(s);
 		TreeSet<Vertex> vert = new TreeSet<Vertex>();
-		if ((s != null) && (s.length() != 0)) {
+		if (s != null && s.length() != 0) {
 
 			do {
 				// System.err.println("parseVertexList(\"" + s + "\")");
 				Vertex v = null;
-				while ((s.indexOf(' ') == 1) || (s.indexOf(' ') == 0)) {
+				while (s.indexOf(' ') == 1 || s.indexOf(' ') == 0) {
 					s = s.substring(1);
 				}
 				if (s.indexOf(' ') != -1) {
@@ -72,8 +72,8 @@ public class GTPParserUtils {
 	/**
 	 * Strip intro.
 	 * 
-	 * @param s the s
-	 * 
+	 * @param s
+	 *            the s
 	 * @return the string
 	 */
 	static String stripIntro(String s) {
@@ -82,19 +82,19 @@ public class GTPParserUtils {
 		if (s.length() == 0)
 			return s;
 		// strip leading whitespace
-		while ((s.length() != 0) && (s.charAt(0) == ' ')) {
+		while (s.length() != 0 && s.charAt(0) == ' ') {
 			s = s.substring(1);
 		}
 		// strip the equal sign
-		while ((s.length() != 0) && (s.charAt(0) == '=')) {
+		while (s.length() != 0 && s.charAt(0) == '=') {
 			s = s.substring(1);
 		}
 		// strip the number
-		while ((s.length() != 0) && Character.isDigit(s.charAt(0))) {
+		while (s.length() != 0 && Character.isDigit(s.charAt(0))) {
 			s = s.substring(1);
 		}
 		// strip leading whitespace
-		while ((s.length() != 0) && (s.length() != 0) && (s.charAt(0) == ' ')) {
+		while (s.length() != 0 && s.length() != 0 && s.charAt(0) == ' ') {
 			s = s.substring(1);
 		}
 		if (s.length() == 0)

@@ -1,6 +1,12 @@
 TODO
 ====
 
+Short Term
+* fix java compiler style warnings (javadoc etc)
+* trace lack of symmetry in testTrainedModelEmptyBoard
+* work on ASCIIToBoard -> BoardI round triping
+* update javacc generated files in svn (eclipse javacc plugin is preventing this happening)
+
 SGF Support
 * parse tt in SGF files
 * work out the differences between SGF 3 and 4

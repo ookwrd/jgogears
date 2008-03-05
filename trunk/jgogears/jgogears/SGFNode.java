@@ -2,7 +2,6 @@ package jgogears;
 
 import java.util.*;
 
-
 /**
  * The Class SGFNode.
  */
@@ -11,8 +10,8 @@ public class SGFNode {
 	/**
 	 * Column from move string.
 	 * 
-	 * @param move the move
-	 * 
+	 * @param move
+	 *            the move
 	 * @return the column of the move
 	 */
 	public static short columnFromMoveString(String move) {
@@ -77,8 +76,8 @@ public class SGFNode {
 	/**
 	 * Extract the row (second value) from tokens in the range of: [a1]:[t19] missing the i.
 	 * 
-	 * @param move the move
-	 * 
+	 * @param move
+	 *            the move
 	 * @return the column
 	 */
 	public static short columnFromMoveStringWRONG(String move) {
@@ -163,8 +162,8 @@ public class SGFNode {
 	/**
 	 * Row from move string.
 	 * 
-	 * @param move the move
-	 * 
+	 * @param move
+	 *            the move
 	 * @return the row of the move
 	 */
 	public static short rowFromMoveString(String move) {
@@ -263,8 +262,8 @@ public class SGFNode {
 	/**
 	 * Gets the move.
 	 * 
-	 * @param prop the prop
-	 * 
+	 * @param prop
+	 *            the prop
 	 * @return the move
 	 */
 	public Move getMove(SGFProperty prop) {
@@ -287,7 +286,7 @@ public class SGFNode {
 		move.setRow(rowFromMoveString(value.toLowerCase()));
 		move.setColumn(columnFromMoveString(value.toLowerCase()));
 		// check for [tt] pass
-		if ((move.getRow() == 19) && (move.getColumn() == 19)) {
+		if (move.getRow() == 19 && move.getColumn() == 19) {
 			Move newmove = new Move();
 			newmove.setPass(true);
 			newmove.setColour(move.getColour());
@@ -299,7 +298,9 @@ public class SGFNode {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

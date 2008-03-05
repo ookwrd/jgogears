@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 
 // TODO: Auto-generated Javadoc
 /**
+ * The Class GnuGoEngineTest2.
  * 
  * @author syeates
  */
@@ -18,7 +19,9 @@ public class GnuGoEngineTest2 extends TestCase {
 	/** The engine. */
 	GnuGoEngine engine = null;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -28,7 +31,9 @@ public class GnuGoEngineTest2 extends TestCase {
 		this.engine.initialise();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 */
 	@Override
@@ -41,7 +46,8 @@ public class GnuGoEngineTest2 extends TestCase {
 	/**
 	 * Test clear board.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public final void testClearBoard() throws IOException {
 		this.engine.initialise();
@@ -432,7 +438,7 @@ public class GnuGoEngineTest2 extends TestCase {
 	}
 
 	/**
-	 * This is currently failing because I don't have good code to parse the ASCII board back into a BoardI
+	 * This is currently failing because I don't have good code to parse the ASCII board back into a BoardI.
 	 */
 	public final void testShowBoard() {
 		try {

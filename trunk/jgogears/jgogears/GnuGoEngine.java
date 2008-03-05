@@ -13,7 +13,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 
 	/** The Constant SMALL_PAUSE. */
 	public static final int SMALL_PAUSE = 3;
-	
+
 	/** The Constant LARGE_PAUSE. */
 	public static final int LARGE_PAUSE = 33;
 
@@ -40,36 +40,41 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 
 	/** The process. */
 	private Process process = null;
-	
+
 	/** The DEBUG. */
 	public boolean DEBUG = false;
-	
+
 	private short size = BoardI.DEFAULT_BOARD_SIZE;
 
 	/**
 	 * Instantiates a new gnu go engine.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public GnuGoEngine() throws IOException {
 		this.initialise();
 	}
+
 	/**
 	 * Instantiates a new gnu go engine.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public GnuGoEngine(int size) throws IOException {
+		this.size = (short) size;
+		this.initialise();
+	}
+
+	/**
+	 * Instantiates a new gnu go engine.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public GnuGoEngine(short size) throws IOException {
 		this.size = size;
-		this.initialise();
-	}
-	/**
-	 * Instantiates a new gnu go engine.
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public GnuGoEngine(int size) throws IOException {
-		this.size = (short)size;
 		this.initialise();
 	}
 
@@ -87,7 +92,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#clearBoard()
 	 */
 	public boolean clearBoard() {
@@ -101,29 +108,33 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#finalStatusList(java.lang.String)
 	 */
 	public TreeSet<Vertex> finalStatusList(String status) {
 		this.write(GTPConstants.FINALSTATUSLIST + " " + status + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (this.DEBUG){
-			System.err.println("finalStatusList" +status);
-			System.err.println("finalStatusList" +s);
-			System.err.println("finalStatusList" +v);
+		if (this.DEBUG) {
+			System.err.println("finalStatusList" + status);
+			System.err.println("finalStatusList" + s);
+			System.err.println("finalStatusList" + v);
 		}
 		return v;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#fixedHandicap(short)
 	 */
 	public TreeSet<Vertex> fixedHandicap(short handicap) {
 		this.write(GTPConstants.FIXEDHANDICAP + " " + handicap + "\n\n");
 		String s = this.read();
 		TreeSet<Vertex> v = GTPParserUtils.parseVertexList(s);
-		if (this.DEBUG){
+		if (this.DEBUG) {
 			System.err.println("fixedHandicap" + handicap);
 			System.err.println("fixedHandicap" + s);
 			System.err.println("fixedHandicap" + v);
@@ -131,15 +142,17 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return v;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#genMove(short)
 	 */
 	public Move genMove(short colour) {
-		this.write(GTPConstants.GENMOVE + " " + Move.colourString(colour) + "\n\n");
+		this.write(GTPConstants.GENMOVE + " " + BoardI.colourString(colour) + "\n\n");
 		String s = this.read();
 		// GoMove move = GoMove.createVertex(s.substring(2));
 		Move move = new Move(s, colour);
-		if (DEBUG)
+		if (this.DEBUG)
 			System.err.println("genMove:" + colour + " " + move);
 		return move;
 	}
@@ -153,7 +166,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return this.args;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getEngineName()
 	 */
 	public String getEngineName() {
@@ -161,7 +176,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return this.read();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getEngineVersion()
 	 */
 	public String getEngineVersion() {
@@ -178,7 +195,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return this.errReader;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getFinalScore()
 	 */
 	public GTPScore getFinalScore() {
@@ -188,7 +207,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return new GTPScore(result);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getKnownCommand(java.lang.String)
 	 */
 	public boolean getKnownCommand(String command) {
@@ -196,7 +217,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		throw new Error();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getListCommands()
 	 */
 	public TreeSet<String> getListCommands() {
@@ -213,7 +236,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return this.process;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#getProtocolVersion()
 	 */
 	public int getProtocolVersion() {
@@ -232,6 +257,15 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	}
 
 	/**
+	 * get the size
+	 * 
+	 * @return the size
+	 */
+	public final short getSize() {
+		return this.size;
+	}
+
+	/**
 	 * Gets the writer.
 	 * 
 	 * @return the writer
@@ -244,8 +278,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	 * Initialise.
 	 * 
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public synchronized boolean initialise() throws IOException {
 		if (this.initialised)
@@ -272,7 +306,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			this.errReader = new java.io.BufferedReader(new InputStreamReader(this.process.getErrorStream()));
 			this.writer = new OutputStreamWriter(this.process.getOutputStream());
 			this.initialised = true;
-			
+
 			this.setBoardSize(this.getSize());
 
 			this.check();
@@ -285,7 +319,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#loadsgf(java.lang.String, int)
 	 */
 	public boolean loadsgf(String filename, int moveNumber) {
@@ -303,7 +339,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#placeFreeHandicap(short)
 	 */
 	public TreeSet<Vertex> placeFreeHandicap(short handicap) {
@@ -318,7 +356,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return v;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#placeFreeHandicap(java.util.TreeSet)
 	 */
 	public boolean placeFreeHandicap(TreeSet<Vertex> stones) {
@@ -333,7 +373,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#play(jgogears.Move)
 	 */
 	public boolean play(Move move) {
@@ -389,9 +431,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			try {
 				Thread.sleep(SMALL_PAUSE);
 			} catch (Throwable t) {
-				// do nothing 
+				// do nothing
 			}
-			while ((s != null) && (s.compareTo("") == 0)) {
+			while (s != null && s.compareTo("") == 0) {
 				s = this.reader.readLine();
 			}
 			if (s == null)
@@ -406,11 +448,10 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			t.printStackTrace();
 			System.err.println(t);
 			throw t;
+		} catch (IOException t) {
+			t.printStackTrace();
+			System.err.println(t);
 		}
-		 catch (IOException t) {
-				t.printStackTrace();
-				System.err.println(t);
-			}
 		return result;
 	}
 
@@ -439,7 +480,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return s;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#regGenMove(short)
 	 */
 	public Move regGenMove(short colour) {
@@ -449,13 +492,16 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Sets the args.
 	 * 
-	 * @param args the new args
+	 * @param args
+	 *            the new args
 	 */
 	public void setArgs(String args) {
 		this.args = args;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#setBoardSize(short)
 	 */
 	public boolean setBoardSize(short size) {
@@ -466,19 +512,22 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			System.err.println("clearBoard:" + s);
 		if (null == e)
 			return true;
-		return false;	
+		return false;
 	}
 
 	/**
 	 * Sets the errReader.
 	 * 
-	 * @param errReader the new errReader
+	 * @param errReader
+	 *            the new errReader
 	 */
 	public void setErrReader(BufferedReader errReader) {
 		this.errReader = errReader;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#setKomi(double)
 	 */
 	public boolean setKomi(double komi) {
@@ -496,7 +545,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Sets the process.
 	 * 
-	 * @param process the new process
+	 * @param process
+	 *            the new process
 	 */
 	public void setProcess(Process process) {
 		this.process = process;
@@ -505,18 +555,31 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Sets the reader.
 	 * 
-	 * @param reader the new reader
+	 * @param reader
+	 *            the new reader
 	 */
 	public void setReader(BufferedReader reader) {
 		this.reader = reader;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * set the size
+	 * 
+	 * @param size
+	 *            the size to set
+	 */
+	public final void setSize(short size) {
+		this.size = size;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#setTimeLeft(short, double, double)
 	 */
 	public boolean setTimeLeft(short colour, double byoYomiTime, double byoYomiStones) {
-		this.write(GTPConstants.TIMELEFT + " " + Move.colourString(colour) + " " + ((int) byoYomiTime) + " "
-				+ ((int) byoYomiStones) + "\n\n");
+		this.write(GTPConstants.TIMELEFT + " " + BoardI.colourString(colour) + " " + (int) byoYomiTime + " "
+				+ (int) byoYomiStones + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
@@ -527,12 +590,14 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#setTimeSettings(double, double, double)
 	 */
 	public boolean setTimeSettings(double mainTime, double byoYomiTime, double byoYomiStones) {
-		this.write(GTPConstants.TIMESETTINGS + " " + ((int) mainTime) + " " + ((int) byoYomiTime) + " "
-				+ ((int) byoYomiStones) + "\n\n");
+		this.write(GTPConstants.TIMESETTINGS + " " + (int) mainTime + " " + (int) byoYomiTime + " "
+				+ (int) byoYomiStones + "\n\n");
 		String s = this.read();
 		Error e = GTPParserUtils.getError(s);
 		if (null == e)
@@ -546,13 +611,16 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Sets the writer.
 	 * 
-	 * @param writer the new writer
+	 * @param writer
+	 *            the new writer
 	 */
 	public void setWriter(Writer writer) {
 		this.writer = writer;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#showBoard()
 	 */
 	public BoardI showBoard() {
@@ -564,7 +632,9 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.GTPInterfaceRaw#undo()
 	 */
 	public boolean undo() {
@@ -580,7 +650,8 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Write.
 	 * 
-	 * @param s the s
+	 * @param s
+	 *            the s
 	 */
 	protected synchronized void write(String s) {
 		try {
@@ -594,22 +665,6 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 			t.printStackTrace();
 			System.err.println(t);
 		}
-	}
-
-	/**
-	 * get the size
-	 * @return the size
-	 */
-	public final short getSize() {
-		return size;
-	}
-
-	/**
-	 * set the size
-	 * @param size the size to set
-	 */
-	public final void setSize(short size) {
-		this.size = size;
 	}
 
 }

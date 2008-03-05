@@ -5,6 +5,7 @@ import java.util.*;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class FasterBoardTest.
  */
@@ -37,7 +38,8 @@ public class FasterBoardTest extends TestCase {
 	/**
 	 * Test all vertexes n.
 	 * 
-	 * @param size the size
+	 * @param size
+	 *            the size
 	 */
 	public void testAllVertexesN(int size) {
 		BoardI board = new FasterBoard(size);
@@ -51,7 +53,7 @@ public class FasterBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 
 							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
 									+ "," + BoardI.VERTEX_EMPTY, board.getColour(l, m) == BoardI.VERTEX_EMPTY);
@@ -68,7 +70,7 @@ public class FasterBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
 									+ ",", board.getColour(i, j) == BoardI.VERTEX_EMPTY);
 						}
@@ -80,7 +82,7 @@ public class FasterBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
 									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
@@ -92,7 +94,7 @@ public class FasterBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
 									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
@@ -104,7 +106,7 @@ public class FasterBoardTest extends TestCase {
 
 				for (int l = 0; l < size; l++) {
 					for (int m = 0; m < size; m++) {
-						if ((l != i) && (m != j)) {
+						if (l != i && m != j) {
 							assertTrue("" + size + "," + i + "," + j + "," + l + "," + m + "," + board.getColour(l, m)
 									+ ",", board.getColour(l, m) == BoardI.VERTEX_EMPTY);
 						}
@@ -117,7 +119,8 @@ public class FasterBoardTest extends TestCase {
 	/**
 	 * Test load all sg ffiles.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadAllSGFfiles() throws IOException {
 		Stack<String> files = new Stack<String>();
@@ -171,7 +174,8 @@ public class FasterBoardTest extends TestCase {
 	/**
 	 * Test load simple gnugo.
 	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testLoadSimpleGnugo() throws IOException {
 

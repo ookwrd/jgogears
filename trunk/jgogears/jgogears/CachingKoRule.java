@@ -2,27 +2,29 @@ package jgogears;
 
 import java.util.TreeSet;
 
-
 /**
  * A RuleSet that caches the results to speed things up.
  * 
  * @author syeates
  */
 public class CachingKoRule extends RuleSet {
-	
+
 	/** the inner ruleset. */
 	private final RuleSet rule;
 
 	/**
 	 * The constructor, passing in the inner rule whose results are cached.
 	 * 
-	 * @param rule the inner rule whose results are cached
+	 * @param rule
+	 *            the inner rule whose results are cached
 	 */
 	public CachingKoRule(RuleSet rule) {
 		this.rule = rule;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#captures(jgogears.Game, jgogears.BoardI, jgogears.Move)
 	 */
 	@Override
@@ -30,7 +32,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.captures(game, Board, move);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#getDescription()
 	 */
 	@Override
@@ -38,7 +42,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.getDescription() + "+ caching";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#getLiberties(short, short, jgogears.BoardI)
 	 */
 	@Override
@@ -46,7 +52,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.getLiberties(rowb, columnb, board);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#getName()
 	 */
 	@Override
@@ -54,7 +62,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.getName() + "+ caching";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#getString(short, short, jgogears.BoardI)
 	 */
 	@Override
@@ -62,7 +72,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.getString(row, column, board);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#leavesKo(jgogears.Game, jgogears.BoardI, jgogears.Move)
 	 */
 	@Override
@@ -70,7 +82,9 @@ public class CachingKoRule extends RuleSet {
 		return this.rule.leavesKo(game, Board, move);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.RuleSet#moveIsLegal(jgogears.Game, jgogears.BoardI, jgogears.Move)
 	 */
 	@Override

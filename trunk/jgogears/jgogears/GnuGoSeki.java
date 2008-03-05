@@ -12,9 +12,10 @@ public class GnuGoSeki {
 	/**
 	 * The main method.
 	 * 
-	 * @param args the args
-	 * 
-	 * @throws Exception the exception
+	 * @param args
+	 *            the args
+	 * @throws Exception
+	 *             the exception
 	 */
 	public static void main(String[] args) throws Exception {
 		Stack<String> files = new Stack<String>();
@@ -49,11 +50,11 @@ public class GnuGoSeki {
 	/**
 	 * Test for seki.
 	 * 
-	 * @param file the file
-	 * 
+	 * @param file
+	 *            the file
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	static public boolean testForSeki(File file) throws IOException {
 
@@ -62,7 +63,7 @@ public class GnuGoSeki {
 			System.err.println("failed to load \"" + file + "\"");
 			return false;
 		}
-		if (!game.getScore().getScored() || (game.getSize() != 19))
+		if (!game.getScore().getScored() || game.getSize() != 19)
 			return false;
 		if (game.isBranched())
 			return false;
@@ -81,7 +82,7 @@ public class GnuGoSeki {
 		Date after = new Date();
 		System.err.println("\"" + file + "\" time = \"" + (after.getTime() - before.getTime()) + "\" result = \""
 				+ game.getScore() + "\"");
-		if ((stonesInSeki != null) && (stonesInSeki.size() != 0)) {
+		if (stonesInSeki != null && stonesInSeki.size() != 0) {
 			System.err.println("\"" + file + "\" stonesInSeki = \"" + stonesInSeki + "\"");
 			return true;
 		} else {
@@ -92,11 +93,11 @@ public class GnuGoSeki {
 	/**
 	 * Test for seki.
 	 * 
-	 * @param filename the filename
-	 * 
+	 * @param filename
+	 *            the filename
 	 * @return true, if successful
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	static public boolean testForSeki(String filename) throws IOException {
 		return testForSeki(new File(filename));
