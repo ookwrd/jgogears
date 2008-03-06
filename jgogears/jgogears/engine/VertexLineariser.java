@@ -55,6 +55,8 @@ public class VertexLineariser implements Iterator<Short> {
 	 *            the column
 	 * @param sym
 	 *            the sym
+	 * @param invert
+	 *            are we inverting the colour?
 	 */
 	public VertexLineariser(BoardI board, short row, short column, short sym, boolean invert) {
 		this.board = board;
@@ -66,7 +68,7 @@ public class VertexLineariser implements Iterator<Short> {
 		if (this.board.getSize() != BOARD_SIZE)
 			throw new IllegalArgumentException("only boards of BOARD_SIZE " + BOARD_SIZE + " please");
 		if (cache == null)
-			this.init();
+			init();
 		this.check();
 	}
 
@@ -102,7 +104,7 @@ public class VertexLineariser implements Iterator<Short> {
 	 * 
 	 * @return true, if successful
 	 */
-	boolean init() {
+	static boolean init() {
 		if (cache == null) {
 			cache = new short[2][8][SIZE][SIZE][SIZE * SIZE];
 			for (int n = 0; n < 2; n++)

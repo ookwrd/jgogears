@@ -105,8 +105,6 @@ public abstract class BoardI {
 	 * 
 	 * @param size
 	 *            the size of the board
-	 * @param rule
-	 *            the ruleset to use
 	 * @param zobrist
 	 *            are we using a zobrist hash?
 	 * @return the new empty board
@@ -189,6 +187,7 @@ public abstract class BoardI {
 	 *            the zobrist
 	 */
 	public BoardI(boolean zobrist) {
+		if (zobrist)
 		this.zobrist = new Zobrist();
 	}
 
@@ -197,6 +196,7 @@ public abstract class BoardI {
 	 * 
 	 * @param move
 	 *            the move
+	 *            @param old the old board we're coping data from
 	 */
 	protected void copydata(BoardI old, Move move) {
 		this.size = old.getSize();
@@ -281,7 +281,7 @@ public abstract class BoardI {
 	 *            the ruleset in use
 	 * @param colour
 	 *            the colour of the move we want to play
-	 * @return
+	 * @return a collection of the moves
 	 */
 	public Collection<Move> getAllLegalMoves(RuleSet rules, short colour) {
 		return rules.getAllLegalMoves(null, this, colour);
@@ -294,7 +294,7 @@ public abstract class BoardI {
 	 *            the ruleset in use
 	 * @param colour
 	 *            the colour of the move we want to play
-	 * @return
+	 * @return the moves
 	 */
 
 	public Collection<Vertex> getAllLegalVertexes(RuleSet rules, short colour) {
@@ -315,14 +315,11 @@ public abstract class BoardI {
 	/**
 	 * get the colour of a vertex.
 	 * 
-	 * @param row
-	 *            the row
-	 * @param column
-	 *            the column
+	 * @param vertex the vertex we're getting the colour of
 	 * @return the colour
 	 */
-	public short getColour(Vertex v) {
-		return this.getColour(v.getRow(), v.getColumn());
+	public short getColour(Vertex vertex) {
+		return this.getColour(vertex.getRow(), vertex.getColumn());
 	}
 
 	/**

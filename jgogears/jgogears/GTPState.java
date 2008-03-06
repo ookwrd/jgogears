@@ -249,8 +249,8 @@ public class GTPState {
 	 * @param komi
 	 *            the new komi
 	 */
-	public void setKomi(double komia) {
-		this.komi = komia;
+	public void setKomi(double komi) {
+		this.komi = komi;
 	}
 
 	/**
@@ -259,8 +259,8 @@ public class GTPState {
 	 * @param mainTime
 	 *            the new main time
 	 */
-	public void setMainTime(double mainTimea) {
-		this.mainTime = mainTimea;
+	public void setMainTime(double mainTime) {
+		this.mainTime = mainTime;
 	}
 
 	/**

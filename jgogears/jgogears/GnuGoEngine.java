@@ -59,6 +59,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Instantiates a new gnu go engine.
 	 * 
+	 * @param size the board size we're playing on
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -70,6 +71,7 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	/**
 	 * Instantiates a new gnu go engine.
 	 * 
+	 *  @param size the board size we're playing on	
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
