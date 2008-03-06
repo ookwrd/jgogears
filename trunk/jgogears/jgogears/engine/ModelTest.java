@@ -35,7 +35,6 @@ public class ModelTest extends TestCase {
 		assertNotNull(files);
 
 		int filecount = 0;
-		int movecount = 0;
 		assertNotNull(model);
 		Date start = new Date();
 		assertNotNull(start);
@@ -258,6 +257,7 @@ public class ModelTest extends TestCase {
 	 */
 	public void testShowTree() throws IOException {
 		Node root = model.getRoot();
+		assertNotNull(root);
 		if (DEBUG)
 			System.err.println("ModelTest tree:");
 		// this.showTreeHelper(0, root);
@@ -382,20 +382,19 @@ public class ModelTest extends TestCase {
 			if (node != null) {
 				assertFalse(nodeSet.contains(node));
 				nodeSet.add(node);
+				if (node.getBlack() != null) {
+					nodes.push(node.getBlack());
+				}
+				if (node.getWhite() != null) {
+					nodes.push(node.getWhite());
+				}
+				if (node.getEmpty() != null) {
+					nodes.push(node.getEmpty());
+				}
+				if (node.getOff() != null) {
+					nodes.push(node.getOff());
+				}
 			}
-			if (node.getBlack() != null) {
-				nodes.push(node.getBlack());
-			}
-			if (node.getWhite() != null) {
-				nodes.push(node.getWhite());
-			}
-			if (node.getEmpty() != null) {
-				nodes.push(node.getEmpty());
-			}
-			if (node.getOff() != null) {
-				nodes.push(node.getOff());
-			}
-
 		}
 	}
 
@@ -403,7 +402,7 @@ public class ModelTest extends TestCase {
 	 * Test trivial.
 	 */
 	public void testTrivial() {
-		Model model = new Model();
+		model = new Model();
 		assertNotNull(model);
 	}
 

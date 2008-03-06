@@ -128,7 +128,7 @@ public final class Model {
 	 * 
 	 * @param board
 	 * @param white
-	 * @return
+	 * @return the array of scores
 	 */
 	public double[][] getScores(BoardI board, boolean white) {
 		short size = board.getSize();
@@ -138,7 +138,6 @@ public final class Model {
 				for (short sym = 0; sym < 8; sym++) {
 					result[row][column] = 0.0;
 					Node node = this.getRoot();
-					Node previous = this.getRoot();
 					int maxdepth = 0;
 					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
 					double estimate = 1.0;
@@ -172,7 +171,6 @@ public final class Model {
 						if (child != null) {
 							childP = child.getPlayed();
 							childNP = child.getNotPlayed();
-							previous = node;
 							node = child;
 							estimate = estimate * 0.5 + childP / (childP + childNP) * 0.5;
 						}
@@ -214,8 +212,8 @@ public final class Model {
 			throw new Error();
 		int movecounter = 1;
 
-		double strengthB = game.getBlackRank().getRating();
-		double strengthW = game.getWhiteRank().getRating();
+		//double strengthB = game.getBlackRank().getRating();
+		//double strengthW = game.getWhiteRank().getRating();
 
 		while (boards.hasNext() && moves.hasNext()) {
 			movecounter++;
@@ -233,7 +231,7 @@ public final class Model {
 			boolean isBlack = colour == BoardI.VERTEX_BLACK;
 			// float str = (float) (isBlack ? strengthB : strengthW);
 
-			if (game != null || move != null || move.getPass()) {
+			if (game != null || move.getPass()) {
 				movecounter++;
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)

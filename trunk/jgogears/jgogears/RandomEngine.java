@@ -74,6 +74,8 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 	 * @return the gTP score
 	 */
 	public GTPScore score(GTPState state) {
+		if (state == null)
+			throw new Error();
 		// TODO Auto-generated method stub
 		return new GTPScore("?");
 	}

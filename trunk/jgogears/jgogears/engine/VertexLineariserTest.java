@@ -95,6 +95,8 @@ public class VertexLineariserTest extends TestCase {
 								Short b = linearb.next();
 								assertTrue(a != null);
 								assertTrue(b != null);
+								if (a == null || b == null)
+									throw new Error();
 								if (!a.equals(b))
 									differenceFound = true;
 							}
@@ -128,6 +130,8 @@ public class VertexLineariserTest extends TestCase {
 						Short b = linearb.next();
 						assertTrue(a != null);
 						assertTrue(b != null);
+						if (a == null || b == null)
+							throw new Error();
 						if (!a.equals(b))
 							differenceFound = true;
 					}
@@ -403,6 +407,8 @@ public class VertexLineariserTest extends TestCase {
 			assertTrue(parser.toString().length() > 0);
 
 			assertTrue(tree != null);
+			if (tree == null)
+				throw new Error();
 			assertTrue(tree.toString() != null);
 			assertTrue(tree.toString().length() > 0);
 
@@ -411,7 +417,8 @@ public class VertexLineariserTest extends TestCase {
 
 			Iterator<BoardI> iterator = game.getBoards();
 			assertTrue(iterator != null);
-
+			if (iterator == null)
+				throw new Error();
 			BoardI board = null;
 			while (iterator.hasNext()) {
 				board = iterator.next();
@@ -472,6 +479,8 @@ public class VertexLineariserTest extends TestCase {
 			assertTrue(lineara != null);
 			Short a = lineara.next();
 			assertTrue(a != null);
+			if (a == null )
+				throw new Error();
 			assertTrue(a + " " + BoardI.VERTEX_WHITE + "\n" + board, a.equals(new Short(BoardI.VERTEX_WHITE)));
 		}
 	}
@@ -505,6 +514,8 @@ public class VertexLineariserTest extends TestCase {
 					assertTrue(lineara != null);
 					Short a = lineara.next();
 					assertTrue(a != null);
+					if (a == null)
+						throw new Error();
 					assertTrue(a + " " + board.getColour(row, column) + "\n" + board, a.equals(new Short(board
 							.getColour(row, column))));
 				}

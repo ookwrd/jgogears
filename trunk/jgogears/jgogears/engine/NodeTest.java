@@ -25,7 +25,9 @@ public class NodeTest extends TestCase {
 		parent.setBlack(null);
 		assertNull(parent.getBlack());
 	}
-
+	/**
+	 * 
+	 */
 	public void testGetCount() {
 		Node node = new Node();
 		Node node2 = new Node();
@@ -104,7 +106,9 @@ public class NodeTest extends TestCase {
 		parent.setBlack(null);
 		assertNull(parent.getBlack());
 	}
-
+	/**
+	 * 
+	 */
 	public void testSetCount() {
 		Node node = new Node();
 		Node node2 = new Node();

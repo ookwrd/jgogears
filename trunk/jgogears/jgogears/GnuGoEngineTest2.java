@@ -67,7 +67,7 @@ public class GnuGoEngineTest2 extends TestCase {
 
 			Iterator<Move> moves = game.getMoves();
 			assertNotNull(moves);
-			GnuGoEngine engine = new GnuGoEngine();
+			engine = new GnuGoEngine();
 			while (moves.hasNext()) {
 				Move move = moves.next();
 				// System.err.println(move);

@@ -6,6 +6,9 @@ Short Term
 * trace lack of symmetry in testTrainedModelEmptyBoard
 * work on ASCIIToBoard -> BoardI round triping
 * update javacc generated files in svn (eclipse javacc plugin is preventing this happening)
+* commandline program to play jgogears against gnugo
+* commandline program to guess moves from real games
+* separate the model data structures from the algorithms
 
 SGF Support
 * parse tt in SGF files

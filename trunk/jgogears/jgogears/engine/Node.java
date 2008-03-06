@@ -83,8 +83,17 @@ public final class Node implements Comparable<Node> {
 	public final Node getEmpty() {
 		return this.empty;
 	}
-
-	public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
+/**
+ * find a particular leaf in this tree
+ * @param board
+ * @param colour
+ * @param row
+ * @param column
+ * @param sym
+ * @param node
+ * @return the leaf node
+ */
+	static public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
 		if (board == null)
 			throw new Error();
 		VertexLineariser linear = null;
@@ -93,11 +102,17 @@ public final class Node implements Comparable<Node> {
 		linear = new VertexLineariser(board, row, column, sym, invert);
 		if (!linear.hasNext())
 			throw new Error();
-		return this.getLeaf(linear, node);
+		return getLeaf(linear, node);
 
 	}
+	/**
+	 * find a particular leaf in this tree
+	 * @param linear the linearisation to use
+	 * @param node the root node to use
+	 * @return the leaf node
+	 */
 
-	public Node getLeaf(VertexLineariser linear, Node node) {
+	static public Node getLeaf(VertexLineariser linear, Node node) {
 		if (!linear.hasNext())
 			throw new Error();
 
@@ -129,9 +144,9 @@ public final class Node implements Comparable<Node> {
 	}
 
 	/**
-	 * get the notplayed
+	 * how many times has this node not been played?
 	 * 
-	 * @return the notplayed
+	 * @return the number of  times has this node not been played?
 	 */
 	public final long getNotPlayed() {
 		return this.notPlayed;
@@ -147,9 +162,9 @@ public final class Node implements Comparable<Node> {
 	}
 
 	/**
-	 * get the played
+	 * how many times has this node been played?
 	 * 
-	 * @return the played
+	 * @return the number of  times has this node been played?
 	 */
 	public final long getPlayed() {
 		return this.played;

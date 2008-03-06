@@ -9,7 +9,7 @@ package jgogears;
  */
 
 public class TwoGTP {
-
+/** are we spewing debugging information? */ 
 	public static final boolean DEBUG = false;
 
 	/** The black player. */

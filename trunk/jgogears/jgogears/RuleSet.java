@@ -72,7 +72,7 @@ public abstract class RuleSet {
 		for (int i = 0; i < board.getSize(); i++)
 			for (int j = 0; j < board.getSize(); j++) {
 				Move move = new Move(i, j, colour);
-				if (this.moveIsLegal(null, board, move))
+				if (this.moveIsLegal(game, board, move))
 					moves.push(move);
 			}
 		return moves;
@@ -88,7 +88,7 @@ public abstract class RuleSet {
 		Stack<Vertex> moves = new Stack<Vertex>();
 		for (int i = 0; i < board.getSize(); i++)
 			for (int j = 0; j < board.getSize(); j++)
-				if (this.moveIsLegal(null, board, new Move(i, j, colour)))
+				if (this.moveIsLegal(game, board, new Move(i, j, colour)))
 					moves.push(new Vertex(i, j));
 		return moves;
 	}

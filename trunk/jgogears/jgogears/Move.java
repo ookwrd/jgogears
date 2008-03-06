@@ -228,7 +228,7 @@ public final class Move {
 	 */
 	protected String numberToCharacter(short s) {
 		String rowS = null;
-		switch (this.row) {
+		switch (s) {
 		case 0:
 			rowS = "a";
 			break;
