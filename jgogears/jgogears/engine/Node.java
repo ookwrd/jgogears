@@ -83,65 +83,65 @@ public final class Node implements Comparable<Node> {
 	public final Node getEmpty() {
 		return this.empty;
 	}
-/**
- * find a particular leaf in this tree
- * @param board
- * @param colour
- * @param row
- * @param column
- * @param sym
- * @param node
- * @return the leaf node
- */
-	static public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
-		if (board == null)
-			throw new Error();
-		VertexLineariser linear = null;
-		boolean invert = colour == BoardI.VERTEX_WHITE;
-
-		linear = new VertexLineariser(board, row, column, sym, invert);
-		if (!linear.hasNext())
-			throw new Error();
-		return getLeaf(linear, node);
-
-	}
-	/**
-	 * find a particular leaf in this tree
-	 * @param linear the linearisation to use
-	 * @param node the root node to use
-	 * @return the leaf node
-	 */
-
-	static public Node getLeaf(VertexLineariser linear, Node node) {
-		if (!linear.hasNext())
-			throw new Error();
-
-		while (linear.hasNext()) {
-			Node child = null;
-			Short colour = linear.next();
-			switch (colour) {
-			case BoardI.VERTEX_BLACK:
-				child = node.black;
-				break;
-			case BoardI.VERTEX_WHITE:
-				child = node.white;
-				break;
-			case BoardI.VERTEX_OFF_BOARD:
-				child = node.off;
-				break;
-			case BoardI.VERTEX_KO:
-			case BoardI.VERTEX_EMPTY:
-				child = node.empty;
-				break;
-			default:
-				throw new Error("Unknown vertex colour: " + colour);
-			}
-			if (child == null)
-				return node;
-			node = child;
-		}
-		return node;
-	}
+///**
+// * find a particular leaf in this tree
+// * @param board
+// * @param colour
+// * @param row
+// * @param column
+// * @param sym
+// * @param node
+// * @return the leaf node
+// */
+//	static public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
+//		if (board == null)
+//			throw new Error();
+//		VertexLineariser linear = null;
+//		boolean invert = colour == BoardI.VERTEX_WHITE;
+//
+//		linear = new VertexLineariser(board, row, column, sym, invert);
+//		if (!linear.hasNext())
+//			throw new Error();
+//		return getLeaf(linear, node);
+//
+//	}
+//	/**
+//	 * find a particular leaf in this tree
+//	 * @param linear the linearisation to use
+//	 * @param node the root node to use
+//	 * @return the leaf node
+//	 */
+//
+//	static public Node getLeaf(VertexLineariser linear, Node node) {
+//		if (!linear.hasNext())
+//			throw new Error();
+//
+//		while (linear.hasNext()) {
+//			Node child = null;
+//			Short colour = linear.next();
+//			switch (colour) {
+//			case BoardI.VERTEX_BLACK:
+//				child = node.black;
+//				break;
+//			case BoardI.VERTEX_WHITE:
+//				child = node.white;
+//				break;
+//			case BoardI.VERTEX_OFF_BOARD:
+//				child = node.off;
+//				break;
+//			case BoardI.VERTEX_KO:
+//			case BoardI.VERTEX_EMPTY:
+//				child = node.empty;
+//				break;
+//			default:
+//				throw new Error("Unknown vertex colour: " + colour);
+//			}
+//			if (child == null)
+//				return node;
+//			node = child;
+//		}
+//		return node;
+//	}
 
 	/**
 	 * how many times has this node not been played?
@@ -278,78 +278,4 @@ public final class Node implements Comparable<Node> {
 		return result;
 	}
 
-	/**
-	 * Train.
-	 * 
-	 * @param linear
-	 *            the linear
-	 * @param expand
-	 *            are we expanding?
-	 * @param depth
-	 *            the depth to expand to
-	 * @param playeda
-	 *            the played
-	 */
-	public void train(VertexLineariser linear, boolean playeda, boolean expand, int depth) {
-		if (depth <= 0)
-			expand = false;
-		if (this.notPlayed + this.played < 100)
-			expand = false;
-		depth--;
-		if (playeda)
-			this.played++;
-		else
-			this.notPlayed++;
-		if (!linear.hasNext())
-			return;
-		Short colour = linear.next();
-
-		switch (colour) {
-		case BoardI.VERTEX_BLACK:
-			if (this.black == null)
-				if (expand) {
-					this.black = new Node();
-					this.black.train(linear, playeda, false, depth);
-				} else
-					return;
-			else
-				this.black.train(linear, playeda, expand, depth);
-			break;
-		case BoardI.VERTEX_WHITE:
-			if (this.white == null)
-				if (expand) {
-					this.white = new Node();
-					this.white.train(linear, playeda, false, depth);
-				} else
-					return;
-			else
-				this.white.train(linear, playeda, expand, depth);
-			break;
-		case BoardI.VERTEX_OFF_BOARD:
-			if (this.off == null)
-
-				if (expand) {
-					this.off = new Node();
-					this.off.train(linear, playeda, false, depth);
-				} else
-					return;
-			else
-				this.off.train(linear, playeda, expand, depth);
-
-			break;
-		case BoardI.VERTEX_EMPTY:
-		case BoardI.VERTEX_KO:
-			if (this.empty == null)
-				if (expand) {
-					this.empty = new Node();
-					this.empty.train(linear, playeda, false, depth);
-				} else
-					return;
-			else
-				this.empty.train(linear, playeda, expand, depth);
-			break;
-		default:
-			throw new Error();
-		}
-	}
 }

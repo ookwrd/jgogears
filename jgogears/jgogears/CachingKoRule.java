@@ -5,6 +5,8 @@ import java.util.TreeSet;
 /**
  * A RuleSet that caches the results to speed things up.
  * 
+ * TODO this class is still a skeleton, it doesn't actually do anything yet.
+ * 
  * @author syeates
  */
 public class CachingKoRule extends RuleSet {

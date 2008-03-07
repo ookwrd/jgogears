@@ -2,13 +2,11 @@ TODO
 ====
 
 Short Term
-* fix java compiler style warnings (javadoc etc)
 * trace lack of symmetry in testTrainedModelEmptyBoard
 * work on ASCIIToBoard -> BoardI round triping
 * update javacc generated files in svn (eclipse javacc plugin is preventing this happening)
 * commandline program to play jgogears against gnugo
 * commandline program to guess moves from real games
-* separate the model data structures from the algorithms
 
 SGF Support
 * parse tt in SGF files
@@ -27,8 +25,7 @@ General
   * cut and paste
 * Better test coverage
 * improve GTP support
-* SGF saving (validation use SGFC)
-* tests for ko rules
+* SGF saving (use SGFC for validation)
 * generate and quality-check the javadoc
 
 Speed improvements, test and improve:
@@ -38,5 +35,7 @@ Speed improvements, test and improve:
 
 DONE
 * implement abstract KO detection 
-
+* fix java compiler style warnings (javadoc etc)
+* tests for ko rules
+* separate the Model/Node data structures from the algorithms
 

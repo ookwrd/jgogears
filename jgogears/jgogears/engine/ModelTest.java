@@ -18,50 +18,6 @@ public class ModelTest extends TestCase {
 	/** The model. */
 	static Model model = null;
 
-	/**
-	 * Train n files.
-	 * 
-	 * @param count
-	 *            the count
-	 * @param model
-	 *            the model
-	 * @return the model
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public static Model trainNFiles(int count, Model model) throws IOException {
-		Stack<String> files = new Stack<String>();
-		files.push("sgf/2004-12");
-		assertNotNull(files);
-
-		int filecount = 0;
-		assertNotNull(model);
-		Date start = new Date();
-		assertNotNull(start);
-
-		while (files.size() > 0 && filecount < count) {
-			String filename = files.pop();
-			File file = new File(filename);
-			if (file.exists()) {
-				if (!file.isDirectory()) {
-
-					Game game = Game.loadFromFile(file);
-					if (game.getSize() == 19) {
-						filecount++;
-						model.train(game);
-					}
-				} else {
-					String[] children = file.list();
-					for (int i = 0; i < children.length; i++) {
-						files.push(filename + "/" + children[i]);
-					}
-				}
-			}
-		}
-		if (DEBUG)
-			System.err.println("ModelTest::trainNFiles loaded " + filecount + " files ");
-		return model;
-	}
 
 	/**
 	 * Instantiates a new model test.
@@ -72,7 +28,7 @@ public class ModelTest extends TestCase {
 	public ModelTest() throws IOException {
 		if (model == null) {
 			model = new Model();
-			ModelTest.trainNFiles(10, model);
+			new Trainer().trainNFiles(10, model);
 		}
 	}
 
@@ -160,7 +116,7 @@ public class ModelTest extends TestCase {
 	public void testEmptyModelEmptyBoard() throws IOException {
 		assertNotNull(model);
 		BoardI board = BoardI.newBoard();
-		double[][] r = new Model().getScores(board, false);
+		double[][] r = new Scorer().getScores(model,board, false);
 		assertNotNull(r);
 		assertTrue(r.length == r[0].length);
 		if (DEBUG) {
@@ -199,7 +155,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black a4"));
 		board = board.newBoard(new Move("white d2"));
-		double[][] r = model.getScores(board, false);
+		double[][] r = new Scorer().getScores(model, board, false);
 		assertNotNull(r);
 		if (DEBUG)
 			System.err.println("ModelTest::testLoadAllSGFFiles()  ");
@@ -273,7 +229,7 @@ public class ModelTest extends TestCase {
 	public void testTrainedModel() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
-		model.train(this.loadTestGame());
+		new Trainer().train(model,this.loadTestGame());
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		board = board.newBoard(new Move("white b2"));
@@ -283,7 +239,7 @@ public class ModelTest extends TestCase {
 		board = board.newBoard(new Move("white d4"));
 		board = board.newBoard(new Move("black h4"));
 		board = board.newBoard(new Move("white n4"));
-		double[][] r = model.getScores(board, false);
+		double[][] r = new Scorer().getScores(model, board, false);
 		assertNotNull(r);
 		if (DEBUG) {
 			System.err.println("ModeTest::testTrainedModel() Double.MIN_VALUE " + Double.MIN_VALUE);
@@ -304,10 +260,10 @@ public class ModelTest extends TestCase {
 	public void testTrainedModelEmptyBoard() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
-		model.train(this.loadTestGame());
+		new Trainer().train(model,this.loadTestGame());
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
-		double[][] r = model.getScores(board, false);
+		double[][] r = new Scorer().getScores(model,board, false);
 		assertNotNull(r);
 		assertTrue(r.length == r[0].length);
 		if (DEBUG) {
