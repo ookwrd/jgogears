@@ -258,11 +258,16 @@ public abstract class BoardI {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj.getClass() != this.getClass())
+		if (obj == this)
+			return true;
+		BoardI other = null;
+		try {
+			other = (BoardI) obj;
+		} catch (Throwable t) {
 			return super.equals(obj);
-		BoardI other = (BoardI) obj;
+		}
 		if (other == null)
-			throw new Error();
+			return false;
 		if (this.size != other.size)
 			return false;
 		if (this.getZobrist() != null && other.getZobrist() != null)
