@@ -15,20 +15,33 @@ import jgogears.*;
  */
 public class Trainer {
 	 static final private boolean DEBUG = false;
+	 private int minBranchSize = 20;
+	 private int defaultNumberOfFiles = 100;
 	
-	
-	/**
-	 * Train n files.
-	 * 
-	 * @param count
-	 *            the count
-	 * @param model
-	 *            the model
-	 * @return the model
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public Model trainNFiles(int count, Model model) throws IOException {
+		/**
+		 * Train on files.
+		 * 
+		 * @param model
+		 *            the model
+		 * @return the model
+		 * @throws IOException
+		 *             Signals that an I/O exception has occurred.
+		 */
+		public Model trainFiles( Model model) throws IOException {
+			return trainFiles(defaultNumberOfFiles, model);
+		}
+			/**
+			 * Train  on files.
+			 * 
+			 * @param count
+			 *            the count
+			 * @param model
+			 *            the model
+			 * @return the model
+			 * @throws IOException
+			 *             Signals that an I/O exception has occurred.
+			 */
+			public Model trainFiles(int count, Model model) throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
 
@@ -117,13 +130,15 @@ public class Trainer {
 	 *            are we expanding?
 	 * @param depth
 	 *            the depth to expand to
+	 * @param root
+	 *            the root of the model
 	 * @param playeda
 	 *            the played
 	 */
 	public void train(Node root, VertexLineariser linear, boolean playeda, boolean expand, int depth) {
 		if (depth <= 0)
 			expand = false;
-		if (root.getNotPlayed() + root.getPlayed() < 100)
+		if (root.getNotPlayed() + root.getPlayed() < minBranchSize)
 			expand = false;
 		depth--;
 		if (playeda)

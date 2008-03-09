@@ -153,6 +153,8 @@ public final class Game {
 	 * @return the boardlist
 	 */
 	public final LinkedList<BoardI> getBoardlist() {
+		if (this.boardlist == null) 
+			getBoards();
 		return this.boardlist;
 	}
 
@@ -162,7 +164,7 @@ public final class Game {
 	 * @return an iterator
 	 */
 	public Iterator<BoardI> getBoards() {
-		if (this.boardlist != null) {
+		if (this.boardlist == null) {
 
 			Iterator<Move> moves = this.getMoves();
 			this.boardlist = new LinkedList<BoardI>();
@@ -232,7 +234,7 @@ public final class Game {
 	}
 
 	/**
-	 * get the movelist.
+	 * get the movelist
 	 * 
 	 * @return the movelist
 	 */

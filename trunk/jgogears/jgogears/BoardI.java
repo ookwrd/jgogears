@@ -385,4 +385,14 @@ public abstract class BoardI {
 		this.zobrist = zobrist;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see jgogears.BoardInterface#toString()
+	 */
+	@Override
+	public String toString() {
+		return BoardToASCII.Transform(this);
+	}
+
 }

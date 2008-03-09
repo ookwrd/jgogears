@@ -4,9 +4,12 @@ TODO
 Short Term
 * trace lack of symmetry in testTrainedModelEmptyBoard
 * work on ASCIIToBoard -> BoardI round triping
-* update javacc generated files in svn (eclipse javacc plugin is preventing this happening)
+* update javacc generated files in svn (eclipse javacc plugin is preventing this happening via eclipse)
 * commandline program to play jgogears against gnugo
 * commandline program to guess moves from real games
+* change training to only train on winning moves rather than all moves
+* decided whether to dual licence under the Apache 2 license
+* find a decent training corpus
 
 SGF Support
 * parse tt in SGF files
