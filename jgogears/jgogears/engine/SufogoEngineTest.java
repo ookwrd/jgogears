@@ -25,10 +25,9 @@ public class SufogoEngineTest extends TestCase {
 	 */
 	public void testSimple() throws Exception {
 
-		// TODO make sure this terminates
 		GTPState state = new GTPState();
 		Model model = new Model();
-		new Trainer().trainNFiles(10, model);
+		new Trainer().trainFiles(10, model);
 
 		SufgoEngine black = new SufgoEngine();
 		black.setModel(model);

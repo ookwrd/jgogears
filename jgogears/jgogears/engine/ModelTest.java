@@ -28,7 +28,7 @@ public class ModelTest extends TestCase {
 	public ModelTest() throws IOException {
 		if (model == null) {
 			model = new Model();
-			new Trainer().trainNFiles(10, model);
+			new Trainer().trainFiles(10, model);
 		}
 	}
 

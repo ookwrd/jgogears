@@ -206,14 +206,4 @@ public class Board extends BoardI {
 		this.board[row][column] = colour;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see jgogears.BoardInterface#toString()
-	 */
-	@Override
-	public String toString() {
-		return BoardToASCII.Transform(this);
-	}
-
 }

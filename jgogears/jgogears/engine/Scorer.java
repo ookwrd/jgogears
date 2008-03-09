@@ -6,7 +6,7 @@ package jgogears.engine;
 import jgogears.*;
 
 /**
- * TODO
+ * Class to calculate scores using a model and a board.
  * @author syeates
  *
  */

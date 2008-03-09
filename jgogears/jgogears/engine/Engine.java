@@ -26,7 +26,7 @@ public class Engine {
 		Model model = new Model();
 		System.out.println("about to train model");
 
-		new Trainer().trainNFiles(100, model);
+		new Trainer().trainFiles(100, model);
 		System.out.println("model trained");
 
 		SufgoEngine black = new SufgoEngine();
