@@ -93,7 +93,7 @@ public final class Game {
 	private LinkedList<Move> movelist = new LinkedList<Move>();
 
 	/** The boardlist. */
-	private LinkedList<BoardI> boardlist = new LinkedList<BoardI>();
+	private LinkedList<BoardI> boardlist = null;
 
 	/**
 	 * default constractor.
