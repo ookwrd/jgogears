@@ -18,26 +18,34 @@ public class SGFGameTree {
 	 * @return the game
 	 */
 	public static Game loadFromFile(File file) {
+		Reader reader = null;
 		try {
 			// speed up file reading. BufferedReader doesn't help
-			Reader reader = new FileReader(file);
+			reader = new FileReader(file);
 			jgogears.SGF.SGF parser = new jgogears.SGF.SGF(reader);
 			SGFGameTree tree = parser.gameTree();
 			Game result = new Game(tree);
+			reader.close();
 			return result;
 		} catch (IOException e) {
 			System.err.println(e);
 			e.printStackTrace();
-			return null;
 		} catch (ParseException e) {
 			System.err.println(e);
 			e.printStackTrace();
-			return null;
 		} catch (Throwable e) {
 			System.err.println(e);
 			e.printStackTrace();
-			return null;
+		} finally {
+			try {
+			if (reader != null)
+				reader.close();
+			} catch (IOException e) {
+				System.err.println(e);
+				e.printStackTrace();
+			}
 		}
+		return null;
 	}
 
 	/** The sequence. */
