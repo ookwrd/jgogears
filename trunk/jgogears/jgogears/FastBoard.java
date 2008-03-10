@@ -157,7 +157,7 @@ public class FastBoard extends BoardI {
 	 *            the colour
 	 */
 	@Override
-	public void setColour(int row, int column, short colour) {
+	protected void setColour(int row, int column, int colour) {
 		int offset = row * BITS_PER_VERTEX * this.size + column * BITS_PER_VERTEX;
 
 		switch (colour) {

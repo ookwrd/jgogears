@@ -193,7 +193,7 @@ public class Board extends BoardI {
 	 *            the colour
 	 */
 	@Override
-	public void setColour(int row, int column, short colour) {
+	protected void setColour(int row, int column, int colour) {
 
 		// if (CHECK)
 		// if ((row >= this.getSize()) || (row < 0))
@@ -203,7 +203,7 @@ public class Board extends BoardI {
 		// throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) "
 		// + column + "/" + this.getSize() + " ");
 
-		this.board[row][column] = colour;
+		this.board[row][column] = (short)colour;
 	}
 
 }
