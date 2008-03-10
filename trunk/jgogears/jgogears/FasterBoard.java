@@ -99,8 +99,10 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Create a new board.
 	 * 
-	 * @param zobrist are we using zobrist hashes?
-	 * @param size the board size
+	 * @param zobrist
+	 *            are we using zobrist hashes?
+	 * @param size
+	 *            the board size
 	 */
 	public FasterBoard(short size, boolean zobrist) {
 		super(zobrist);
@@ -125,8 +127,10 @@ public class FasterBoard extends BoardI {
 	 * 
 	 * @param size
 	 *            the size of the board
-	 * @param zobrist are we using zobrist hashes?
-	 * @param rule the ruleset in use
+	 * @param zobrist
+	 *            are we using zobrist hashes?
+	 * @param rule
+	 *            the ruleset in use
 	 */
 	public FasterBoard(short size, RuleSet rule, boolean zobrist) {
 		super(zobrist);

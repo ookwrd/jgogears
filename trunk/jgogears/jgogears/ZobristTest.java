@@ -91,11 +91,11 @@ public class ZobristTest extends TestCase {
 					BoardI board1 = BoardI.newBoard(true);
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
-					//BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					// make sure the hashes are the same
 					assertFalse(board1.getZobrist().equals(board2.getZobrist()));
 					assertFalse(board1.getZobrist().equals(board3.getZobrist()));
-					//assertTrue(board1.getZobrist().equals(board4.getZobrist()));
+					// assertTrue(board1.getZobrist().equals(board4.getZobrist()));
 					assertTrue(board2.getZobrist().equals(board3.getZobrist()));
 
 				}

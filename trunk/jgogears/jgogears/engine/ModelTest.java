@@ -18,7 +18,6 @@ public class ModelTest extends TestCase {
 	/** The model. */
 	static Model model = null;
 
-
 	/**
 	 * Instantiates a new model test.
 	 * 
@@ -116,7 +115,7 @@ public class ModelTest extends TestCase {
 	public void testEmptyModelEmptyBoard() throws IOException {
 		assertNotNull(model);
 		BoardI board = BoardI.newBoard();
-		double[][] r = new Scorer().getScores(model,board, false);
+		double[][] r = new Scorer().getScores(model, board, false);
 		assertNotNull(r);
 		assertTrue(r.length == r[0].length);
 		if (DEBUG) {
@@ -229,7 +228,7 @@ public class ModelTest extends TestCase {
 	public void testTrainedModel() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
-		new Trainer().train(model,this.loadTestGame());
+		new Trainer().train(model, this.loadTestGame());
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		board = board.newBoard(new Move("white b2"));
@@ -260,10 +259,10 @@ public class ModelTest extends TestCase {
 	public void testTrainedModelEmptyBoard() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
-		new Trainer().train(model,this.loadTestGame());
+		new Trainer().train(model, this.loadTestGame());
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
-		double[][] r = new Scorer().getScores(model,board, false);
+		double[][] r = new Scorer().getScores(model, board, false);
 		assertNotNull(r);
 		assertTrue(r.length == r[0].length);
 		if (DEBUG) {

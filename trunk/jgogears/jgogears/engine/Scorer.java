@@ -7,8 +7,8 @@ import jgogears.*;
 
 /**
  * Class to calculate scores using a model and a board.
+ * 
  * @author syeates
- *
  */
 public class Scorer {
 	/** are we being verbose? */
@@ -51,7 +51,7 @@ public class Scorer {
 	 * @param model
 	 * @return the array of scores
 	 */
-	public double[][] getScores(Model model,BoardI board, boolean white) {
+	public double[][] getScores(Model model, BoardI board, boolean white) {
 		short size = board.getSize();
 		double[][] result = new double[size][size];
 		for (short row = 0; row < size; row++) {

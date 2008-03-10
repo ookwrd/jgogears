@@ -479,7 +479,7 @@ public class VertexLineariserTest extends TestCase {
 			assertTrue(lineara != null);
 			Short a = lineara.next();
 			assertTrue(a != null);
-			if (a == null )
+			if (a == null)
 				throw new Error();
 			assertTrue(a + " " + BoardI.VERTEX_WHITE + "\n" + board, a.equals(new Short(BoardI.VERTEX_WHITE)));
 		}

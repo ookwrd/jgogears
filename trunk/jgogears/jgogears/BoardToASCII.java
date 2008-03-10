@@ -52,6 +52,12 @@ public final class BoardToASCII {
 					return true;
 			return false;
 		}
+		if (size == 9) {
+			if (row == 3 || row == 5)
+				if (column == 3 || column == 5)
+					return true;
+			return false;
+		}
 		throw new Error("not implemented");
 	}
 

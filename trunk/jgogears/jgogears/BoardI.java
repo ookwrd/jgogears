@@ -237,7 +237,7 @@ public abstract class BoardI {
 					if (move.getColour() == VERTEX_KO || move.getColour() == VERTEX_EMPTY) {
 						break;
 					} else {
-						throw new Error(move + "");
+						throw new Error(move + "\n " + old);
 					}
 				case VERTEX_OFF_BOARD:
 					if (move.getColour() != VERTEX_OFF_BOARD) {

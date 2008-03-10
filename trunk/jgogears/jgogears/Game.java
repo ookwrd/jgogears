@@ -153,7 +153,7 @@ public final class Game {
 	 * @return the boardlist
 	 */
 	public final LinkedList<BoardI> getBoardlist() {
-		if (this.boardlist == null) 
+		if (this.boardlist == null)
 			getBoards();
 		return this.boardlist;
 	}

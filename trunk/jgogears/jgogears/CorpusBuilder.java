@@ -19,10 +19,10 @@ public class CorpusBuilder {
 	 *             the exception
 	 */
 	public static void main(String[] args) throws Exception {
-		if (args.length > 0){
+		if (args.length > 0) {
 			System.err.println("arguments are not examined ");
 		}
-		
+
 		CorpusBuilder builder = new CorpusBuilder();
 		builder.files.push(new File(builder.from));
 
@@ -37,7 +37,7 @@ public class CorpusBuilder {
 	 *             the exception
 	 */
 	public static void mainold(String[] args) throws Exception {
-		if (args.length > 0){
+		if (args.length > 0) {
 			System.err.println("arguments are not examined ");
 		}
 		Stack<String> files = new Stack<String>();

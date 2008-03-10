@@ -1,6 +1,5 @@
 package jgogears;
 
-
 /**
  * An incomplete clone of the TwoGTP program included in the GnuGo distribution. It runs a go game between a pair of
  * GTP-capiable players TODO finish this implementation
@@ -9,7 +8,7 @@ package jgogears;
  */
 
 public class TwoGTP {
-/** are we spewing debugging information? */ 
+	/** are we spewing debugging information? */
 	public static final boolean DEBUG = false;
 
 	/** The black player. */
