@@ -147,19 +147,19 @@ public class BoardTest extends TestCase {
 					BoardI board1 = new Board();
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
-					//BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 
 					assertTrue(board1.equals(board1));
 					assertTrue(board2.equals(board2));
 					assertTrue(board3.equals(board3));
-					//assertTrue(board4.equals(board4));
-					
+					// assertTrue(board4.equals(board4));
+
 					assertFalse(board1.equals(board2));
 					assertFalse(board2.equals(board1));
 					assertFalse(board1.equals(board3));
 					assertFalse(board3.equals(board1));
-					//assertTrue(board4.equals(board1));
-					//assertTrue(board1.equals(board4));
+					// assertTrue(board4.equals(board1));
+					// assertTrue(board1.equals(board4));
 					assertTrue(board2.equals(board3));
 					assertTrue(board3.equals(board2));
 
@@ -177,19 +177,19 @@ public class BoardTest extends TestCase {
 					BoardI board1 = new Board(true);
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
-					//BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 
 					assertTrue(board1.equals(board1));
 					assertTrue(board2.equals(board2));
 					assertTrue(board3.equals(board3));
-					//assertTrue(board4.equals(board4));
-					
+					// assertTrue(board4.equals(board4));
+
 					assertFalse(board1.equals(board2));
 					assertFalse(board2.equals(board1));
 					assertFalse(board1.equals(board3));
 					assertFalse(board3.equals(board1));
-					//assertTrue(board4.equals(board1));
-					//assertTrue(board1.equals(board4));
+					// assertTrue(board4.equals(board1));
+					// assertTrue(board1.equals(board4));
 					assertTrue(board2.equals(board3));
 					assertTrue(board3.equals(board2));
 
@@ -207,13 +207,13 @@ public class BoardTest extends TestCase {
 					BoardI board1 = new Board(false);
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
-					//BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
+					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 
 					assertTrue(board1.equals(board1));
 					assertTrue(board2.equals(board2));
 					assertTrue(board3.equals(board3));
-					//assertTrue(board4.equals(board4));
-					
+					// assertTrue(board4.equals(board4));
+
 					assertFalse(board1.equals(board2));
 					assertFalse(board2.equals(board1));
 					assertFalse(board1.equals(board3));
@@ -244,34 +244,33 @@ public class BoardTest extends TestCase {
 					// directory, parsing as an SGF file");
 
 					Game game = Game.loadFromFile(file);
-					Iterator<Move> i = game.getMoves();
-					Move move = null;
-					BoardI board = new Board(game.getSize());
-					// System.err.println("board size is: \"" + goGame.getSize()
-					// + "\"");
-					while (i.hasNext()) {
-						move = i.next();
-						assertNotNull(move);
-						// System.err.print("move: \"" + move + "\"");
-						// assertTrue("" + board + "\n" +
-						// move.toString(),board.isLegalMove(move));
-						board = board.newBoard(move);
-						// System.err.println(" board size is: \"" +
-						// board.getSize() + "\"");
+					if (game.getSize() == 19) {
+						Iterator<Move> i = game.getMoves();
+						Move move = null;
+						BoardI board = new Board(game.getSize());
+						// System.err.println("board size is: \"" + goGame.getSize()
+						// + "\"");
+						while (i.hasNext()) {
+							move = i.next();
+							assertNotNull(move);
+							// System.err.print("move: \"" + move + "\"");
+							// assertTrue("" + board + "\n" +
+							// move.toString(),board.isLegalMove(move));
+							board = board.newBoard(move);
+							// System.err.println(" board size is: \"" +
+							// board.getSize() + "\"");
+						}
+						// System.err.println();
 					}
-					// System.err.println();
-
-					// TODO allow us to actually read all the files
-					return;
-
 				} else {
 					System.err.println("\"" + filename + "\" is a directory");
 					String[] children = file.list();
-					for (int i = 0; i < children.length; i++) {
-						// System.err.println("pushing \"" + children[i] +
-						// "\"");
-						files.push(filename + "/" + children[i]);
-					}
+					if (!file.getName().contains(".svn"))
+						for (int i = 0; i < children.length; i++) {
+							// System.err.println("pushing \"" + children[i] +
+							// "\"");
+							files.push(filename + "/" + children[i]);
+						}
 				}
 			}
 		}

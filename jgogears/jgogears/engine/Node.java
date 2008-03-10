@@ -83,70 +83,71 @@ public final class Node implements Comparable<Node> {
 	public final Node getEmpty() {
 		return this.empty;
 	}
-///**
-// * find a particular leaf in this tree
-// * @param board
-// * @param colour
-// * @param row
-// * @param column
-// * @param sym
-// * @param node
-// * @return the leaf node
-// */
-//	static public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
-//		if (board == null)
-//			throw new Error();
-//		VertexLineariser linear = null;
-//		boolean invert = colour == BoardI.VERTEX_WHITE;
-//
-//		linear = new VertexLineariser(board, row, column, sym, invert);
-//		if (!linear.hasNext())
-//			throw new Error();
-//		return getLeaf(linear, node);
-//
-//	}
-//	/**
-//	 * find a particular leaf in this tree
-//	 * @param linear the linearisation to use
-//	 * @param node the root node to use
-//	 * @return the leaf node
-//	 */
-//
-//	static public Node getLeaf(VertexLineariser linear, Node node) {
-//		if (!linear.hasNext())
-//			throw new Error();
-//
-//		while (linear.hasNext()) {
-//			Node child = null;
-//			Short colour = linear.next();
-//			switch (colour) {
-//			case BoardI.VERTEX_BLACK:
-//				child = node.black;
-//				break;
-//			case BoardI.VERTEX_WHITE:
-//				child = node.white;
-//				break;
-//			case BoardI.VERTEX_OFF_BOARD:
-//				child = node.off;
-//				break;
-//			case BoardI.VERTEX_KO:
-//			case BoardI.VERTEX_EMPTY:
-//				child = node.empty;
-//				break;
-//			default:
-//				throw new Error("Unknown vertex colour: " + colour);
-//			}
-//			if (child == null)
-//				return node;
-//			node = child;
-//		}
-//		return node;
-//	}
+
+	// /**
+	// * find a particular leaf in this tree
+	// * @param board
+	// * @param colour
+	// * @param row
+	// * @param column
+	// * @param sym
+	// * @param node
+	// * @return the leaf node
+	// */
+	// static public Node getLeaf(BoardI board, short colour, short row, short column, short sym, Node node) {
+	// if (board == null)
+	// throw new Error();
+	// VertexLineariser linear = null;
+	// boolean invert = colour == BoardI.VERTEX_WHITE;
+	//
+	// linear = new VertexLineariser(board, row, column, sym, invert);
+	// if (!linear.hasNext())
+	// throw new Error();
+	// return getLeaf(linear, node);
+	//
+	// }
+	// /**
+	// * find a particular leaf in this tree
+	// * @param linear the linearisation to use
+	// * @param node the root node to use
+	// * @return the leaf node
+	// */
+	//
+	// static public Node getLeaf(VertexLineariser linear, Node node) {
+	// if (!linear.hasNext())
+	// throw new Error();
+	//
+	// while (linear.hasNext()) {
+	// Node child = null;
+	// Short colour = linear.next();
+	// switch (colour) {
+	// case BoardI.VERTEX_BLACK:
+	// child = node.black;
+	// break;
+	// case BoardI.VERTEX_WHITE:
+	// child = node.white;
+	// break;
+	// case BoardI.VERTEX_OFF_BOARD:
+	// child = node.off;
+	// break;
+	// case BoardI.VERTEX_KO:
+	// case BoardI.VERTEX_EMPTY:
+	// child = node.empty;
+	// break;
+	// default:
+	// throw new Error("Unknown vertex colour: " + colour);
+	// }
+	// if (child == null)
+	// return node;
+	// node = child;
+	// }
+	// return node;
+	// }
 
 	/**
 	 * how many times has this node not been played?
 	 * 
-	 * @return the number of  times has this node not been played?
+	 * @return the number of times has this node not been played?
 	 */
 	public final long getNotPlayed() {
 		return this.notPlayed;
@@ -164,7 +165,7 @@ public final class Node implements Comparable<Node> {
 	/**
 	 * how many times has this node been played?
 	 * 
-	 * @return the number of  times has this node been played?
+	 * @return the number of times has this node been played?
 	 */
 	public final long getPlayed() {
 		return this.played;

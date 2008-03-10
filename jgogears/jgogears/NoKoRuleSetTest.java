@@ -645,22 +645,25 @@ public class NoKoRuleSetTest extends TestCase {
 					filecount++;
 
 					Game game = Game.loadFromFile(file);
-					BoardI board = BoardI.newBoard(game.getSize());
-					System.err.println(filename);
+					if (game.getSize() == 19) {
+						BoardI board = BoardI.newBoard(game.getSize());
+						System.err.println(filename);
 
-					Iterator<Move> i = game.getMovelist().iterator();
-					while (i.hasNext()) {
-						Move move = i.next();
-						if (!rule.moveIsLegal(game, board, move)) {
-							assertTrue(move + "\n " + BoardToASCII.Transform(board), false);
+						Iterator<Move> i = game.getMovelist().iterator();
+						while (i.hasNext()) {
+							Move move = i.next();
+							if (!rule.moveIsLegal(game, board, move)) {
+								assertTrue(move + "\n " + BoardToASCII.Transform(board), false);
+							}
+							board = board.newBoard(move);
 						}
-						board = board.newBoard(move);
 					}
 				} else {
 					String[] children = file.list();
-					for (int i = 0; i < children.length; i++) {
-						files.push(filename + "/" + children[i]);
-					}
+					if (!file.getName().contains(".svn"))
+						for (int i = 0; i < children.length; i++) {
+							files.push(filename + "/" + children[i]);
+						}
 				}
 			}
 		}

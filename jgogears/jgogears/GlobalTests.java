@@ -36,13 +36,13 @@ public class GlobalTests {
 		suite.addTestSuite(GnuGoEngineTest.class);
 		suite.addTestSuite(BoardTest.class);
 		suite.addTestSuite(SGFGameTest.class);
-		suite.addTestSuite(CopyOfRankTest.class);
 		suite.addTestSuite(GTPScoreTest.class);
 		suite.addTestSuite(GnuGoEngineTest2.class);
 		suite.addTestSuite(FastBoardTest.class);
 		suite.addTestSuite(FasterBoardTest.class);
 		suite.addTestSuite(NoKoRuleSetTest.class);
 		suite.addTestSuite(ZobristTest.class);
+		suite.addTestSuite(CheckAllSGFFilesTest.class);
 		return suite;
 	}
 

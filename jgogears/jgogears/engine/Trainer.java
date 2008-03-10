@@ -10,38 +10,39 @@ import jgogears.*;
 
 /**
  * TODO
+ * 
  * @author syeates
- *
  */
 public class Trainer {
-	 static final private boolean DEBUG = false;
-	 private int minBranchSize = 20;
-	 private int defaultNumberOfFiles = 100;
-	
-		/**
-		 * Train on files.
-		 * 
-		 * @param model
-		 *            the model
-		 * @return the model
-		 * @throws IOException
-		 *             Signals that an I/O exception has occurred.
-		 */
-		public Model trainFiles( Model model) throws IOException {
-			return trainFiles(defaultNumberOfFiles, model);
-		}
-			/**
-			 * Train  on files.
-			 * 
-			 * @param count
-			 *            the count
-			 * @param model
-			 *            the model
-			 * @return the model
-			 * @throws IOException
-			 *             Signals that an I/O exception has occurred.
-			 */
-			public Model trainFiles(int count, Model model) throws IOException {
+	static final private boolean DEBUG = false;
+	private int minBranchSize = 20;
+	private int defaultNumberOfFiles = 100;
+
+	/**
+	 * Train on files.
+	 * 
+	 * @param model
+	 *            the model
+	 * @return the model
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public Model trainFiles(Model model) throws IOException {
+		return trainFiles(defaultNumberOfFiles, model);
+	}
+
+	/**
+	 * Train on files.
+	 * 
+	 * @param count
+	 *            the count
+	 * @param model
+	 *            the model
+	 * @return the model
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public Model trainFiles(int count, Model model) throws IOException {
 		Stack<String> files = new Stack<String>();
 		files.push("sgf/2004-12");
 
@@ -70,7 +71,6 @@ public class Trainer {
 			System.err.println("Trainer::trainNFiles loaded " + filecount + " files ");
 		return model;
 	}
-	
 
 	/**
 	 * Train.
@@ -113,9 +113,9 @@ public class Trainer {
 
 							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
 							if (!move.getPass() && move.getRow() != i && move.getColumn() != j)
-								train(model.getRoot(),linear, true, true, 100);
+								train(model.getRoot(), linear, true, true, 100);
 							else
-								train(model.getRoot(),linear, false, true, 30);
+								train(model.getRoot(), linear, false, true, 30);
 						}
 			}
 		}
@@ -142,9 +142,9 @@ public class Trainer {
 			expand = false;
 		depth--;
 		if (playeda)
-			root.setPlayed(root.getPlayed() +1);
+			root.setPlayed(root.getPlayed() + 1);
 		else
-			root.setNotPlayed(root.getNotPlayed() +1);
+			root.setNotPlayed(root.getNotPlayed() + 1);
 		if (!linear.hasNext())
 			return;
 		Short colour = linear.next();
@@ -154,42 +154,42 @@ public class Trainer {
 			if (root.getBlack() == null)
 				if (expand) {
 					root.setBlack(new Node());
-					train(root.getBlack(),linear, playeda, false, depth);
+					train(root.getBlack(), linear, playeda, false, depth);
 				} else
 					return;
 			else
-				train(root.getBlack(),linear, playeda, expand, depth);
+				train(root.getBlack(), linear, playeda, expand, depth);
 			break;
 		case BoardI.VERTEX_WHITE:
 			if (root.getWhite() == null)
 				if (expand) {
 					root.setWhite(new Node());
-					train(root.getWhite(),linear, playeda, false, depth);
+					train(root.getWhite(), linear, playeda, false, depth);
 				} else
 					return;
 			else
-				train(root.getWhite(),linear, playeda, expand, depth);
+				train(root.getWhite(), linear, playeda, expand, depth);
 			break;
 		case BoardI.VERTEX_KO:
 		case BoardI.VERTEX_EMPTY:
 			if (root.getEmpty() == null)
 				if (expand) {
 					root.setEmpty(new Node());
-					train(root.getEmpty(),linear, playeda, false, depth);
+					train(root.getEmpty(), linear, playeda, false, depth);
 				} else
 					return;
 			else
-				train(root.getEmpty(),linear, playeda, expand, depth);
+				train(root.getEmpty(), linear, playeda, expand, depth);
 			break;
 		case BoardI.VERTEX_OFF_BOARD:
 			if (root.getOff() == null)
 				if (expand) {
 					root.setOff(new Node());
-					train(root.getOff(),linear, playeda, false, depth);
+					train(root.getOff(), linear, playeda, false, depth);
 				} else
 					return;
 			else
-				train(root.getOff(),linear, playeda, expand, depth);
+				train(root.getOff(), linear, playeda, expand, depth);
 			break;
 		default:
 			throw new Error();

@@ -59,11 +59,16 @@ public abstract class RuleSet {
 	public short countLiberties(short rowb, short columnb, BoardI board) {
 		return (short) this.getLiberties(rowb, columnb, board).size();
 	}
+
 	/**
 	 * Get all the legal moves
-	 * @param game the game being played
-	 * @param board the current state of the baord
-	 * @param colour the colour being played
+	 * 
+	 * @param game
+	 *            the game being played
+	 * @param board
+	 *            the current state of the baord
+	 * @param colour
+	 *            the colour being played
 	 * @return the collection of moves
 	 */
 
@@ -77,13 +82,18 @@ public abstract class RuleSet {
 			}
 		return moves;
 	}
-/**
- * Get all the legal moves
- * @param game the game being played
- * @param board the current state of the baord
- * @param colour the colour being played
- * @return the collection of vertexes
- */
+
+	/**
+	 * Get all the legal moves
+	 * 
+	 * @param game
+	 *            the game being played
+	 * @param board
+	 *            the current state of the baord
+	 * @param colour
+	 *            the colour being played
+	 * @return the collection of vertexes
+	 */
 	public Collection<Vertex> getAllLegalVertexes(Game game, BoardI board, short colour) {
 		Stack<Vertex> moves = new Stack<Vertex>();
 		for (int i = 0; i < board.getSize(); i++)

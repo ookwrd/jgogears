@@ -25,6 +25,7 @@ public class NodeTest extends TestCase {
 		parent.setBlack(null);
 		assertNull(parent.getBlack());
 	}
+
 	/**
 	 * 
 	 */
@@ -106,6 +107,7 @@ public class NodeTest extends TestCase {
 		parent.setBlack(null);
 		assertNull(parent.getBlack());
 	}
+
 	/**
 	 * 
 	 */

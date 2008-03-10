@@ -203,7 +203,7 @@ public class Board extends BoardI {
 		// throw new Error("Bad board size or play off the edge of the board (remember we're zero indexed) "
 		// + column + "/" + this.getSize() + " ");
 
-		this.board[row][column] = (short)colour;
+		this.board[row][column] = (short) colour;
 	}
 
 }
