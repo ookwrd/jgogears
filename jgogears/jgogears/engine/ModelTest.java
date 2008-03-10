@@ -17,6 +17,10 @@ public class ModelTest extends TestCase {
 
 	/** The model. */
 	static Model model = null;
+	
+	boolean compare(double first,double second){
+		return ((float)first) == ((float)second);
+	}
 
 	/**
 	 * Instantiates a new model test.
@@ -27,7 +31,7 @@ public class ModelTest extends TestCase {
 	public ModelTest() throws IOException {
 		if (model == null) {
 			model = new Model();
-			new Trainer().train(10, model);
+			new Trainer().train(2, model);
 		}
 	}
 
@@ -113,6 +117,7 @@ public class ModelTest extends TestCase {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void testEmptyModelEmptyBoard() throws IOException {
+		Model model = new Model(); // yes, this overrides an instance variable
 		assertNotNull(model);
 		BoardI board = BoardI.newBoard();
 		double[][] r = new Scorer().getScores(model, board, false);
@@ -129,11 +134,11 @@ public class ModelTest extends TestCase {
 			for (int j = 0; j < r[i].length; j++) {
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[j][i], r[i][j] == r[j][i]);
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[r.length - i - 1][r.length - j - 1],
-						r[i][j] == r[r.length - i - 1][r.length - j - 1]);
+						this.compare(r[i][j] , r[r.length - i - 1][r.length - j - 1]));
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[r.length - i - 1][j],
-						r[i][j] == r[r.length - i - 1][j]);
+						this.compare(r[i][j] , r[r.length - i - 1][j]));
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[i][r.length - j - 1],
-						r[i][j] == r[i][r.length - j - 1]);
+						this.compare(r[i][j] , r[i][r.length - j - 1]));
 			}
 	}
 
@@ -277,11 +282,11 @@ public class ModelTest extends TestCase {
 			for (int j = 0; j < r[i].length; j++) {
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[j][i], r[i][j] == r[j][i]);
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[r.length - i - 1][r.length - j - 1],
-						r[i][j] == r[r.length - i - 1][r.length - j - 1]);
+					this.compare(r[i][j], r[r.length - i - 1][r.length - j - 1]));
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[r.length - i - 1][j],
-						r[i][j] == r[r.length - i - 1][j]);
+						this.compare(r[i][j] , r[r.length - i - 1][j]));
 				assertTrue(i + " " + j + " " + r[i][j] + " " + r[i][r.length - j - 1],
-						r[i][j] == r[i][r.length - j - 1]);
+						this.compare(r[i][j] , r[i][r.length - j - 1]));
 			}
 	}
 
