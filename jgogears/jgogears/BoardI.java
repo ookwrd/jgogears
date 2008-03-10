@@ -37,6 +37,9 @@ public abstract class BoardI {
 	/** The Constant DEFAULT_ZOBRIST. */
 	public final static boolean DEFAULT_ZOBRIST = true;
 
+	/** Are we sanity checking moves? */
+	public final static boolean SANITY_CHECK_MOVES = true;
+
 	/**
 	 * Colour string.
 	 * 
@@ -188,7 +191,7 @@ public abstract class BoardI {
 	 */
 	public BoardI(boolean zobrist) {
 		if (zobrist)
-		this.zobrist = new Zobrist();
+			this.zobrist = new Zobrist();
 	}
 
 	/**
@@ -196,12 +199,14 @@ public abstract class BoardI {
 	 * 
 	 * @param move
 	 *            the move
-	 *            @param old the old board we're coping data from
+	 * @param old
+	 *            the old board we're coping data from
 	 */
 	protected void copydata(BoardI old, Move move) {
 		this.size = old.getSize();
 		if (this.size < 3 || this.size > 25)
 			throw new Error();
+
 		this.zobrist = old.getZobrist();
 		this.ruleSet = old.getRuleSet();
 
@@ -220,9 +225,32 @@ public abstract class BoardI {
 		} else if (move.getPass()) {
 			// do nothing, since GoBoard doesn't know whose turn it is
 		} else {
+			// check the sanity of moves
+			if (SANITY_CHECK_MOVES) {
+				short oldColour = old.getColour(move.getRow(), move.getColumn());
+				switch (oldColour) {
+				case VERTEX_KO:
+				case VERTEX_EMPTY:
+					break;
+				case VERTEX_WHITE:
+				case VERTEX_BLACK:
+					if (move.getColour() == VERTEX_KO || move.getColour() == VERTEX_EMPTY) {
+						break;
+					} else {
+						throw new Error(move + "");
+					}
+				case VERTEX_OFF_BOARD:
+					if (move.getColour() != VERTEX_OFF_BOARD) {
+						throw new Error(move + "");
+					} else {
+						break;
+					}
+				default:
+				}
+			}
 			// place the stone
 			if (move.getColumn() >= this.size || move.getRow() >= this.size)
-				throw new Error();
+				throw new Error(move + "");
 			this.setColour(move.getRow(), move.getColumn(), move.getColour());
 			if (this.zobrist != null)
 				this.setZobrist(new Zobrist(this.zobrist, move.getRow(), move.getColumn(), BoardI.VERTEX_EMPTY));
@@ -320,7 +348,8 @@ public abstract class BoardI {
 	/**
 	 * get the colour of a vertex.
 	 * 
-	 * @param vertex the vertex we're getting the colour of
+	 * @param vertex
+	 *            the vertex we're getting the colour of
 	 * @return the colour
 	 */
 	public short getColour(Vertex vertex) {
@@ -373,7 +402,9 @@ public abstract class BoardI {
 	 * @param colour
 	 *            the colour to set this to
 	 */
-	public abstract void setColour(int row, int column, short colour);
+	protected void setColour(int row, int column, int colour) {
+		throw new Error();
+	}
 
 	/**
 	 * Sets the zobrist.

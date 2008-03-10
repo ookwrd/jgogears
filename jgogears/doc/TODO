@@ -41,4 +41,5 @@ DONE
 * fix java compiler style warnings (javadoc etc)
 * tests for ko rules
 * separate the Model/Node data structures from the algorithms
+* better tests of the Board implementations
 

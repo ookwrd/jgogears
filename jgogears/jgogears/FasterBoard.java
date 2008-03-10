@@ -219,7 +219,7 @@ public class FasterBoard extends BoardI {
 	 *            the colour
 	 */
 	@Override
-	public void setColour(int row, int column, short colour) {
+	protected void setColour(int row, int column, int colour) {
 		if (row < 0 || column < 0 || row >= this.size || column >= this.size) {
 			if (this.DEBUG)
 				System.err.println("attempt to set a colour off-board");
