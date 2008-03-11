@@ -2,7 +2,6 @@ package jgogears.engine;
 
 import java.util.*;
 
-import jgogears.*;
 
 /**
  * A probability model of Go

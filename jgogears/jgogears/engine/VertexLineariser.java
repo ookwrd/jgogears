@@ -8,7 +8,7 @@ import jgogears.BoardI;
 /**
  * The Class VertexLineariser.
  */
-public class VertexLineariser implements Iterator<Short> {
+final public class VertexLineariser implements Iterator<Short> {
 	// Table of sequences
 	/** The cache. */
 	static private short[][][][][] cache = null;
@@ -43,6 +43,9 @@ public class VertexLineariser implements Iterator<Short> {
 
 	/** Have the colours been inverted? */
 	boolean invert = false;
+	
+	/** are we being verbose */
+	final static boolean PROGRESS = true;
 
 	/**
 	 * Instantiates a new vertex lineariser.
@@ -159,7 +162,7 @@ public class VertexLineariser implements Iterator<Short> {
 								column_offset = -SMALL_OFFSET;
 								break;
 							default:
-								throw new Error();
+								throw new Error("VertexLineariser::init  bad symmetry: " + sym);
 							}
 							double d = Math.pow(row - i + row_offset, 2) + Math.pow(column - j + column_offset, 2);
 
@@ -190,9 +193,14 @@ public class VertexLineariser implements Iterator<Short> {
 					}
 					if (values.size() > 0)
 						throw new Error("values should be empty but was " + values.size());
+					if (PROGRESS)
+						System.err.print(":");
 				}
 			}
 		// System.out.println();
+		if (PROGRESS)
+			System.err.println();
+
 		return true;
 	}
 

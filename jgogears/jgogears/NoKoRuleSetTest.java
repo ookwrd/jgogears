@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 public class NoKoRuleSetTest extends TestCase {
 
 	/** The Constant DEBUG. */
-	static final boolean DEBUG = true;
+	static final boolean DEBUG = false;
 
 	/**
 	 * Test capture complex.

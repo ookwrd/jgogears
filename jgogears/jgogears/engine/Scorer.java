@@ -33,7 +33,8 @@ public class Scorer {
 			for (j = 0; j < board.getSize(); j++) {
 				if (result[i][j] < best) {
 					if (RuleSet.DEFAULT.moveIsLegal(null, board, new Move(i, j, white ? BoardI.VERTEX_WHITE
-							: BoardI.VERTEX_BLACK))) {
+							: BoardI.VERTEX_BLACK))
+							&& best < result[i][j]) {
 						best = result[i][j];
 						I = i;
 						J = j;
@@ -56,12 +57,12 @@ public class Scorer {
 		double[][] result = new double[size][size];
 		for (short row = 0; row < size; row++) {
 			for (short column = 0; column < size; column++) {
-				for (short sym = 0; sym < 8; sym++) {
+				for (short sym = 0; sym < 8; sym++) { 
 					result[row][column] = 0.0;
 					Node node = model.getRoot();
 					int maxdepth = 0;
 					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
-					double estimate = 1.0;
+					double estimate = 0.0;
 					int depth = 0;
 					while (linear.hasNext() && node != null) {
 						depth++;
@@ -104,7 +105,7 @@ public class Scorer {
 
 					// estimate = (1 + previous.getPlayed()) / (previous.getPlayed() + previous.getNotPlayed()) * (1 -
 					// (1 /depth));
-					if (result[row][column] < estimate) {
+					if (result[row][column] <= estimate) {
 						result[row][column] = estimate;
 						if (DEBUG)
 							System.err.println("Model::getScores  " + estimate);

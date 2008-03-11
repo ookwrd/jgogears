@@ -31,8 +31,6 @@ public class VertexLineariserTest extends TestCase {
 	 * @return true, if successful
 	 */
 	boolean identicalLinearisation(BoardI board, short rowa, short columna, short rowb, short columnb) {
-		if (board == null)
-			return false;
 		for (short j = 0; j < 8; j++) {
 			boolean matchFound = false;
 			for (short i = 0; i < 8; i++) {
@@ -381,6 +379,84 @@ public class VertexLineariserTest extends TestCase {
 				result = this.identicalLinearisation(board, row, column, column, row);
 				assertTrue(result);
 			}
+	}
+
+	/**
+	 * make sure that all the linearisations are different.
+	 */
+	public void testEmptyBoardSymmetryReimplematation() {
+		BoardI board = BoardI.newBoard();
+		short size = board.getSize();
+		boolean matches[][][] = new boolean[3][8][8];
+
+		for (short sym1 = 0; sym1 < 8; sym1++) {
+
+			for (short sym2 = 0; sym2 < 8; sym2++) {
+				matches[0][sym1][sym2] = true;
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) (size - 1), (short) (size - 1), sym2,
+						false);
+				while (lineara.hasNext()) {
+					assertTrue(lineara.hasNext());
+					assertTrue(linearb.hasNext());
+					Short a = lineara.next();
+					Short b = linearb.next();
+					if (!a.equals(b))
+						matches[0][sym1][sym2] = false;
+				}
+				assertFalse(linearb.hasNext());
+			}
+
+			for (short sym2 = 0; sym2 < 8; sym2++) {
+				matches[1][sym1][sym2] = true;
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) 0, (short) (size - 1), sym2, false);
+				while (lineara.hasNext()) {
+					assertTrue(lineara.hasNext());
+					assertTrue(linearb.hasNext());
+					Short a = lineara.next();
+					Short b = linearb.next();
+					if (!a.equals(b))
+						matches[1][sym1][sym2] = false;
+				}
+				assertFalse(linearb.hasNext());
+			}
+
+			for (short sym2 = 0; sym2 < 8; sym2++) {
+				matches[2][sym1][sym2] = true;
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) (size - 1), (short) 0, sym2, false);
+				while (lineara.hasNext()) {
+					assertTrue(lineara.hasNext());
+					assertTrue(linearb.hasNext());
+					Short a = lineara.next();
+					Short b = linearb.next();
+					if (!a.equals(b))
+						matches[2][sym1][sym2] = false;
+				}
+				assertFalse(linearb.hasNext());
+			}
+		}
+		for (short corn = 0; corn < 3; corn++) {
+			for (short sym1 = 0; sym1 < 8; sym1++) {
+				boolean tfound= false;
+				boolean ffound= false;
+				for (short sym2 = 0; sym2 < 8; sym2++) {
+					if(DEBUG)
+					System.err.print(matches[corn][sym1][sym2] + " ");
+					if (matches[corn][sym1][sym2])
+						tfound = true;
+					else
+						ffound = true;
+				}
+				assertTrue(tfound);
+				assertTrue(ffound);
+				if(DEBUG)
+				System.err.println();
+			}
+			if(DEBUG)
+			System.err.println();
+		}
 	}
 
 	/**

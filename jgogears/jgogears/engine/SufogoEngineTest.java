@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class SufogoEngineTest extends TestCase {
 
 	/** The Constant DEBUG. */
-	static final boolean DEBUG = true;
+	static final boolean DEBUG = false;
 
 	/**
 	 * Test simple.
@@ -27,7 +27,9 @@ public class SufogoEngineTest extends TestCase {
 
 		GTPState state = new GTPState();
 		Model model = new Model();
-		new Trainer().train(10, model);
+		Trainer trainer = new Trainer();
+		trainer.setModel(model);
+		trainer.train(10);
 
 		SufgoEngine black = new SufgoEngine();
 		black.setModel(model);

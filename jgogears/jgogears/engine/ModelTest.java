@@ -31,7 +31,9 @@ public class ModelTest extends TestCase {
 	public ModelTest() throws IOException {
 		if (model == null) {
 			model = new Model();
-			new Trainer().train(2, model);
+			Trainer trainer = new Trainer();
+			trainer.setModel(model);
+			trainer.train(2);
 		}
 	}
 
@@ -233,7 +235,10 @@ public class ModelTest extends TestCase {
 	public void testTrainedModel() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
-		new Trainer().train(model, this.loadTestGame());
+		Trainer trainer = new Trainer();
+		trainer.setModel(model);
+		trainer.train(this.loadTestGame());
+
 		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		board = board.newBoard(new Move("white b2"));
@@ -264,7 +269,10 @@ public class ModelTest extends TestCase {
 	public void testTrainedModelEmptyBoard() throws IOException {
 		assertNotNull(model);
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
-		new Trainer().train(model, this.loadTestGame());
+		Trainer trainer = new Trainer();
+		trainer.setModel(model);
+		trainer.train(this.loadTestGame());
+
 		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		double[][] r = new Scorer().getScores(model, board, false);
