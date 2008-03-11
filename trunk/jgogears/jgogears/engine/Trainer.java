@@ -9,7 +9,6 @@ import java.util.*;
 import jgogears.*;
 
 /**
- * TODO
  * 
  * @author syeates
  */
@@ -17,15 +16,13 @@ public class Trainer {
 	static final private boolean DEBUG = false;
 	static final private boolean PROGRESS = true;
 	private boolean onlyOneNewNodePerSymmetry = true;
-	private int minBranchSize = 20;
-	private int defaultNumberOfFiles = Integer.MAX_VALUE;
+	public final int DEFAULT_NUMBER_OF_FILES = Integer.MAX_VALUE;
+	private Model model = null;
 	final public static String LIBRARY = "sgf/2004-12";
 
 	/**
 	 * Loads all the default SGF files
 	 * 
-	 * @param directory
-	 *            the directory to load
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @return a Collection of Strings
@@ -80,14 +77,10 @@ public class Trainer {
 	/**
 	 * Train on files.
 	 * 
-	 * @param model
-	 *            the model
 	 * @return the model
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	public Model train(Model model) throws IOException {
-		return train(defaultNumberOfFiles, model);
+	public Model train()  {
+		return train(DEFAULT_NUMBER_OF_FILES);
 	}
 
 	/**
@@ -95,13 +88,10 @@ public class Trainer {
 	 * 
 	 * @param count
 	 *            the count
-	 * @param model
-	 *            the model
 	 * @return the model
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	public Model train(int count, Model model) throws IOException {
+	public Model train(int count)  {
+		try {
 		Collection<String> files = loadAllSGFfiles();
 		int filecount = 0;
 		int examined = 0;
@@ -113,7 +103,7 @@ public class Trainer {
 			examined++;
 			if (game.getSize() == 19) {
 				filecount++;
-				train(model, game);
+				train( game);
 			} else {
 				if (DEBUG)
 					System.err.print("!");
@@ -132,6 +122,10 @@ public class Trainer {
 
 		if (DEBUG)
 			System.err.println("\nTrainer::trainNFiles loaded " + filecount + " files ");
+		}catch (IOException e) {
+			System.err.println(e);
+			return null;
+		}
 		return model;
 	}
 
@@ -141,7 +135,7 @@ public class Trainer {
 	 * @param game
 	 *            the game
 	 */
-	public void train(Model model, Game game) {
+	public void train(Game game) {
 		short size = game.getSize();
 		Iterator<BoardI> boards = game.getBoards();
 		if (boards == null)
@@ -149,11 +143,9 @@ public class Trainer {
 		Iterator<Move> moves = game.getMoves();
 		if (moves == null)
 			throw new Error();
-		int movecounter = 1;
 		model.setGamesTrained(model.getGamesTrained() + 1);
 
 		while (boards.hasNext() && moves.hasNext()) {
-			movecounter++;
 			model.setBoardsTrained(model.getBoardsTrained() + 1);
 			BoardI board = boards.next();
 			if (board == null)
@@ -169,18 +161,23 @@ public class Trainer {
 			boolean isBlack = colour == BoardI.VERTEX_BLACK;
 			// float str = (float) (isBlack ? strengthB : strengthW);
 
-			if (game != null && !move.getPass()) {
-				movecounter++;
+			if (move != null)
+			if ( move.getPlay()){
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)
 						for (short sym = 0; sym < 8; sym++) {
-							// TODO this needs a lot of work, i think
-
 							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
-							if (!move.getPass() && move.getRow() != i && move.getColumn() != j)
-								train(model.getRoot(), linear, true, true, 100);
+							if (move.getRow() != i && move.getColumn() != j)
+								train( linear, true, true, 100);//TODO
 							else
-								train(model.getRoot(), linear, false, true, 30);
+								train( linear, false, true, 100);//TODO
+						}
+			} else if ( move.getPass()) { 
+				for (short i = 0; i < size; i++)
+					for (short j = 0; j < size; j++)
+						for (short sym = 0; sym < 8; sym++) {
+							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
+							train(linear, false, true, 100);//TODO
 						}
 			}
 		}
@@ -200,11 +197,12 @@ public class Trainer {
 	 * @param playeda
 	 *            the played
 	 */
-	public void train(Node root, VertexLineariser linear, boolean playeda, boolean expand, int depth) {
+	public void train(VertexLineariser linear, boolean playeda, boolean expand, int depth) {
+		Node root = model.getRoot();
 		while (root !=null && linear.hasNext()){
 		if (depth <= 0)
 			expand = false;
-		if (root.getNotPlayed() + root.getPlayed() < minBranchSize)
+		if (root.getNotPlayed() + root.getPlayed() < this.getMinBranchSize())
 			expand = false;
 		depth--;
 		if (playeda)
@@ -290,37 +288,25 @@ public class Trainer {
 	 * 
 	 * @return the minBranchSize
 	 */
-	public final int getMinBranchSize() {
-		return minBranchSize;
+	public final double getMinBranchSize() {
+		return model.getGamesTrained()*2 + 10;
+	}
+
+
+	/**
+	 * get the model
+	 * @return the model
+	 */
+	public final Model getModel() {
+		return model;
 	}
 
 	/**
-	 * set the minBranchSize
-	 * 
-	 * @param minBranchSize
-	 *            the minBranchSize to set
+	 * set the model
+	 * @param model the model to set
 	 */
-	public final void setMinBranchSize(int minBranchSize) {
-		this.minBranchSize = minBranchSize;
-	}
-
-	/**
-	 * get the defaultNumberOfFiles
-	 * 
-	 * @return the defaultNumberOfFiles
-	 */
-	public final int getDefaultNumberOfFiles() {
-		return defaultNumberOfFiles;
-	}
-
-	/**
-	 * set the defaultNumberOfFiles
-	 * 
-	 * @param defaultNumberOfFiles
-	 *            the defaultNumberOfFiles to set
-	 */
-	public final void setDefaultNumberOfFiles(int defaultNumberOfFiles) {
-		this.defaultNumberOfFiles = defaultNumberOfFiles;
+	public final void setModel(Model model) {
+		this.model = model;
 	}
 
 }

@@ -220,7 +220,7 @@ public class ZobristTest extends TestCase {
 	 * Test with board.
 	 */
 	public void testWithFastBoard() {
-		BoardI board = new FastBoard(true);
+		BoardI board = new SmallBoard(true);
 		BoardI board2 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 		BoardI board3 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 		System.err.println(board.getZobrist());
@@ -238,7 +238,7 @@ public class ZobristTest extends TestCase {
 	 * Test with board.
 	 */
 	public void testWithFasterBoard() {
-		BoardI board = new FasterBoard(true);
+		BoardI board = new SmallerBoard(true);
 		BoardI board2 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 		BoardI board3 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 		assertTrue(board2.getZobrist().equals(board3.getZobrist()));

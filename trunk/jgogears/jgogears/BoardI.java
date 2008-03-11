@@ -78,7 +78,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard() {
-		return new FasterBoard(DEFAULT_BOARD_SIZE);
+		return new Board(DEFAULT_BOARD_SIZE);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard(boolean zobrist) {
-		return new FasterBoard(zobrist);
+		return new Board(zobrist);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard(int size) {
-		return new FasterBoard((short) size);
+		return new Board((short) size);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard(int size, boolean zobrist) {
-		return new FasterBoard((short) size, zobrist);
+		return new Board((short) size, zobrist);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard(int size, RuleSet rule) {
-		return new FasterBoard((short) size, rule);
+		return new Board((short) size, rule);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public abstract class BoardI {
 	 * @return the new empty board
 	 */
 	public static BoardI newBoard(int size, RuleSet rule, boolean zobrist) {
-		return new FasterBoard((short) size, rule, zobrist);
+		return new Board((short) size, rule, zobrist);
 	}
 
 	/**

@@ -150,16 +150,6 @@ public class Board extends BoardI {
 		return this.board[row][column];
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see jgogears.BoardInterface#getSize()
-	 */
-	@Override
-	public short getSize() {
-		return this.size;
-	}
-
 	/**
 	 * initialise the board, creating it and setting it empty.
 	 */

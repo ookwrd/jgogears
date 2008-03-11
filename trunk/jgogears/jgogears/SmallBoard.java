@@ -7,7 +7,7 @@ import java.util.BitSet;
  * 
  * @author syeates
  */
-public class FastBoard extends BoardI {
+public class SmallBoard extends BoardI {
 
 	/** How many bits we're allocating per square on the board. */
 	final static short BITS_PER_VERTEX = 4;
@@ -19,7 +19,7 @@ public class FastBoard extends BoardI {
 	 * Constructor for default board size.
 	 */
 
-	public FastBoard() {
+	public SmallBoard() {
 		// nothing
 	}
 
@@ -30,7 +30,7 @@ public class FastBoard extends BoardI {
 	 *            true if we're using zobrist hashing
 	 */
 
-	public FastBoard(boolean zobrist) {
+	public SmallBoard(boolean zobrist) {
 		super(zobrist);
 	}
 
@@ -42,7 +42,7 @@ public class FastBoard extends BoardI {
 	 * @param move
 	 *            the move
 	 */
-	public FastBoard(FastBoard board, Move move) {
+	public SmallBoard(SmallBoard board, Move move) {
 		this.size = board.getSize();
 		this.copydata(board, move);
 	}
@@ -54,7 +54,7 @@ public class FastBoard extends BoardI {
 	 *            size of the board
 	 */
 
-	public FastBoard(int size) {
+	public SmallBoard(int size) {
 		this.size = (short) size;
 	}
 
@@ -66,7 +66,7 @@ public class FastBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset to use
 	 */
-	public FastBoard(int size, RuleSet rule) {
+	public SmallBoard(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.ruleSet = rule;
 	}
@@ -77,7 +77,7 @@ public class FastBoard extends BoardI {
 	 * @param rule
 	 *            the rule
 	 */
-	public FastBoard(RuleSet rule) {
+	public SmallBoard(RuleSet rule) {
 		this.ruleSet = rule;
 	}
 
@@ -88,7 +88,7 @@ public class FastBoard extends BoardI {
 	 *            size of the board
 	 */
 
-	public FastBoard(short size) {
+	public SmallBoard(short size) {
 		this.size = size;
 	}
 
@@ -100,7 +100,7 @@ public class FastBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset to use
 	 */
-	public FastBoard(short size, RuleSet rule) {
+	public SmallBoard(short size, RuleSet rule) {
 		this.size = size;
 		this.ruleSet = rule;
 	}
@@ -139,8 +139,8 @@ public class FastBoard extends BoardI {
 	 * @return the new board
 	 */
 	@Override
-	public final FastBoard newBoard(Move move) {
-		return new FastBoard(this, move);
+	public final SmallBoard newBoard(Move move) {
+		return new SmallBoard(this, move);
 	}
 
 	/*

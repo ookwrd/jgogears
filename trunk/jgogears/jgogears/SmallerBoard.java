@@ -8,7 +8,7 @@ import java.util.BitSet;
  * 
  * @author syeates
  */
-public class FasterBoard extends BoardI {
+public class SmallerBoard extends BoardI {
 
 	/** the bit number for empty. */
 	final static short OFFSET_EMPTY = 0;
@@ -17,7 +17,7 @@ public class FasterBoard extends BoardI {
 	final static short OFFSET_COLOUR = 1;
 
 	/** verbose debugging info. */
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 
 	/** the underlying bitset holding the data. */
 	private final BitSet bits = new BitSet();
@@ -25,7 +25,7 @@ public class FasterBoard extends BoardI {
 	/**
 	 * Create a new board.
 	 */
-	public FasterBoard() {
+	public SmallerBoard() {
 		// nothing
 	}
 
@@ -35,7 +35,7 @@ public class FasterBoard extends BoardI {
 	 * @param zobrist
 	 *            true if using zorbist hashing
 	 */
-	public FasterBoard(boolean zobrist) {
+	public SmallerBoard(boolean zobrist) {
 		super(zobrist);
 	}
 
@@ -47,7 +47,7 @@ public class FasterBoard extends BoardI {
 	 * @param move
 	 *            the move
 	 */
-	public FasterBoard(FasterBoard board, Move move) {
+	public SmallerBoard(SmallerBoard board, Move move) {
 		this.size = board.getSize();
 		this.copydata(board, move);
 	}
@@ -58,7 +58,7 @@ public class FasterBoard extends BoardI {
 	 * @param size
 	 *            the size of the board
 	 */
-	public FasterBoard(int size) {
+	public SmallerBoard(int size) {
 		this.size = (short) size;
 	}
 
@@ -70,7 +70,7 @@ public class FasterBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset to use
 	 */
-	public FasterBoard(int size, RuleSet rule) {
+	public SmallerBoard(int size, RuleSet rule) {
 		this.size = (short) size;
 		this.ruleSet = rule;
 	}
@@ -81,7 +81,7 @@ public class FasterBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset to use
 	 */
-	public FasterBoard(RuleSet rule) {
+	public SmallerBoard(RuleSet rule) {
 		this.ruleSet = rule;
 	}
 
@@ -92,7 +92,7 @@ public class FasterBoard extends BoardI {
 	 *            the size of the board
 	 */
 
-	public FasterBoard(short size) {
+	public SmallerBoard(short size) {
 		this.size = size;
 	}
 
@@ -104,7 +104,7 @@ public class FasterBoard extends BoardI {
 	 * @param size
 	 *            the board size
 	 */
-	public FasterBoard(short size, boolean zobrist) {
+	public SmallerBoard(short size, boolean zobrist) {
 		super(zobrist);
 		this.size = size;
 	}
@@ -117,7 +117,7 @@ public class FasterBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset to use
 	 */
-	public FasterBoard(short size, RuleSet rule) {
+	public SmallerBoard(short size, RuleSet rule) {
 		this.size = size;
 		this.ruleSet = rule;
 	}
@@ -132,7 +132,7 @@ public class FasterBoard extends BoardI {
 	 * @param rule
 	 *            the ruleset in use
 	 */
-	public FasterBoard(short size, RuleSet rule, boolean zobrist) {
+	public SmallerBoard(short size, RuleSet rule, boolean zobrist) {
 		super(zobrist);
 		this.size = size;
 		this.ruleSet = rule;
@@ -190,16 +190,6 @@ public class FasterBoard extends BoardI {
 		return OFFSET_EMPTY * this.size * this.size + row * this.size + column;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see jgogears.BoardInterface#getSize()
-	 */
-	@Override
-	public short getSize() {
-		return this.size;
-	}
-
 	/**
 	 * create a new board based on the current board plus a move.
 	 * 
@@ -208,8 +198,8 @@ public class FasterBoard extends BoardI {
 	 * @return the new board
 	 */
 	@Override
-	public final FasterBoard newBoard(Move move) {
-		return new FasterBoard(this, move);
+	public final SmallerBoard newBoard(Move move) {
+		return new SmallerBoard(this, move);
 	}
 
 	/**

@@ -9,7 +9,7 @@ package jgogears;
 
 public class TwoGTP {
 	/** are we spewing debugging information? */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	/** The black player. */
 	private GTPInterface black = null;
@@ -22,8 +22,6 @@ public class TwoGTP {
 	private int passes = 0;
 
 	private boolean blackNext = true;
-	
-	private RuleSet rules = new NoKoRuleSet();
 
 	/**
 	 * get the black
@@ -65,21 +63,17 @@ public class TwoGTP {
 		Move move = null;
 		if (this.blackNext) {
 			move = this.black.genMove(BoardI.VERTEX_BLACK, this.state);
-			assert move != null;
-			if (move.getPass())
-				this.passes++;
-			else
-				this.passes = 0;
-			this.blackNext = false;
 		} else {
 			move = this.white.genMove(BoardI.VERTEX_WHITE, this.state);
-			assert move != null;
-			if (move.getPass())
-				this.passes++;
-			else
-				this.passes = 0;
-			this.blackNext = true;
 		}
+		if (!RuleSet.DEFAULT.moveIsLegal(null, this.state.getBoard(), move))
+			throw new Error();
+		if (move.getPass())
+			this.passes++;
+		else
+			this.passes = 0;
+		this.blackNext = !this.blackNext;
+
 		if (DEBUG)
 			System.err.println("TwoGTP: played " + move);
 		if (DEBUG)

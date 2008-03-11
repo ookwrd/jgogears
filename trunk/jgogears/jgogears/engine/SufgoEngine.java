@@ -81,9 +81,7 @@ public class SufgoEngine extends SkeletonEngine {
 	 */
 	public Move regGenMove(int colour, GTPState state) {
 		BoardI board = state.getBoard();
-
 		Vertex vertex = new Scorer().getBestScore(this.model, board, colour == BoardI.VERTEX_WHITE);
-
 		return new Move(vertex.getRow(), vertex.getColumn(), colour);
 	}
 

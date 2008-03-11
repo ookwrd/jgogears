@@ -30,14 +30,14 @@ public class AllTests {
 		suite.addTestSuite(RankTest.class);
 		suite.addTestSuite(ZobristTest.class);
 		suite.addTestSuite(SGFNodeTest.class);
-		suite.addTestSuite(FasterBoardTest.class);
+		suite.addTestSuite(SmallerBoardTest.class);
 		suite.addTestSuite(SGFPropertyTest.class);
 		suite.addTestSuite(BoardTest.class);
 		suite.addTestSuite(BoardToASCIITest.class);
 		suite.addTestSuite(SGFParserTest.class);
 		suite.addTest(GlobalTests.suite());
 		suite.addTestSuite(MoveTest.class);
-		suite.addTestSuite(FastBoardTest.class);
+		suite.addTestSuite(SmallBoardTest.class);
 		// $JUnit-END$
 		return suite;
 	}

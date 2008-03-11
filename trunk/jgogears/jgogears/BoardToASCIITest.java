@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 public class BoardToASCIITest extends TestCase {
 
 	/** The Constant DEBUG. */
-	static final public boolean DEBUG = true;
+	static final public boolean DEBUG = false;
 
 	/**
 	 * Test empty.
@@ -22,11 +22,11 @@ public class BoardToASCIITest extends TestCase {
 		String string = BoardToASCII.Transform(board);
 		assertNotNull(board);
 		assertNotNull(string);
-		board = new FastBoard();
+		board = new SmallBoard();
 		string = BoardToASCII.Transform(board);
 		assertNotNull(board);
 		assertNotNull(string);
-		board = new FasterBoard();
+		board = new SmallerBoard();
 		string = BoardToASCII.Transform(board);
 		assertNotNull(board);
 		assertNotNull(string);

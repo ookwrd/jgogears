@@ -26,7 +26,9 @@ public class Engine {
 		Model model = new Model();
 		System.out.println("about to train model");
 
-		new Trainer().train(20,model);
+		Trainer trainer = new Trainer();
+		trainer.setModel(model);
+		trainer.train(20);
 		System.out.println("model trained");
 
 		SufgoEngine black = new SufgoEngine();
@@ -39,6 +41,8 @@ public class Engine {
 
 		two.setBlack(black);
 		two.setWhite(white);
+		
+		
 		for (int i = 0; i < 200; i++) {
 			state = two.move();
 			System.out.println(state.getBoard());

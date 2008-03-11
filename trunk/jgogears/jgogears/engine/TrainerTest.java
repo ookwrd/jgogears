@@ -71,12 +71,13 @@ public class TrainerTest extends TestCase {
 			Trainer trainer = new Trainer();
 			assertNotNull(trainer);
 			Model model = new Model();
+			trainer.setModel(model);
 			assertNotNull(model);
-			trainer.train(1, model);
+			trainer.train(1);
 			assertNotNull(trainer);
 			assertTrue(model.getGamesTrained() == 1);
 			assertTrue("" + model.getBoardsTrained(), model.getBoardsTrained() > 1);
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			fail("" + e);
 		}
 	}
@@ -86,12 +87,13 @@ public class TrainerTest extends TestCase {
 			Trainer trainer = new Trainer();
 			assertNotNull(trainer);
 			Model model = new Model();
+			trainer.setModel(model);
 			assertNotNull(model);
-			trainer.train(2, model);
+			trainer.train(2);
 			assertNotNull(trainer);
 			assertTrue(model.getGamesTrained() == 2);
 			assertTrue("" + model.getBoardsTrained(), model.getBoardsTrained() > 1);
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			fail("" + e);
 		}
 	}
@@ -101,17 +103,18 @@ public class TrainerTest extends TestCase {
 			Trainer trainer = new Trainer();
 			assertNotNull(trainer);
 			Model model = new Model();
+			trainer.setModel(model);
 			assertNotNull(model);
-			trainer.train(2, model);
+			trainer.train(2);
 			assertNotNull(model);
 			assertTrue(model.getGamesTrained() == 2);
 			assertTrue("" + model.getBoardsTrained(), model.getBoardsTrained() > 20);
-			trainer.train(2, model);
+			trainer.train(2);
 			assertNotNull(trainer);
 			assertNotNull(model);
 			assertTrue(model.getGamesTrained() == 4);
 			assertTrue("" + model.getBoardsTrained(), model.getBoardsTrained() > 100);
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			fail("" + e);
 		}
 	}

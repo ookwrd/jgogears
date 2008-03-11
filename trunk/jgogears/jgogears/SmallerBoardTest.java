@@ -7,9 +7,9 @@ import junit.framework.TestCase;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class FasterBoardTest.
+ * The Class SmallerBoardTest.
  */
-public class FasterBoardTest extends TestCase {
+public class SmallerBoardTest extends TestCase {
 
 	/**
 	 * Test all sizes.
@@ -42,7 +42,7 @@ public class FasterBoardTest extends TestCase {
 	 *            the size
 	 */
 	public void testAllVertexesN(int size) {
-		BoardI board = new FasterBoard(size);
+		BoardI board = new SmallerBoard(size);
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -141,7 +141,7 @@ public class FasterBoardTest extends TestCase {
 					if (game.getSize() == 19) {
 						Iterator<Move> i = game.getMoves();
 						Move move = null;
-						BoardI board = new FasterBoard(game.getSize());
+						BoardI board = new SmallerBoard(game.getSize());
 						// System.err.println("board size is: \"" + goGame.getSize()
 						// + "\"");
 						while (i.hasNext()) {
@@ -184,7 +184,7 @@ public class FasterBoardTest extends TestCase {
 		Game game = Game.loadFromFile(new File("sgf/testing/simpleGnuGo.sgf"));
 		Iterator<Move> i = game.getMoves();
 		Move move = null;
-		BoardI board = new FasterBoard(game.getSize());
+		BoardI board = new SmallerBoard(game.getSize());
 		while (i.hasNext()) {
 			move = i.next();
 			assertNotNull(move);
@@ -197,7 +197,7 @@ public class FasterBoardTest extends TestCase {
 	 * Test to string.
 	 */
 	public void testToString() {
-		BoardI working = new FasterBoard((short) 19);
+		BoardI working = new SmallerBoard((short) 19);
 		assertNotNull(working);
 		working = working.newBoard(new Move("B q10"));
 		System.out.println(working);
@@ -211,7 +211,7 @@ public class FasterBoardTest extends TestCase {
 			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
 				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
 
-					BoardI board1 = new FasterBoard();
+					BoardI board1 = new SmallerBoard();
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
@@ -241,7 +241,7 @@ public class FasterBoardTest extends TestCase {
 			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
 				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
 
-					BoardI board1 = new FasterBoard(true);
+					BoardI board1 = new SmallerBoard(true);
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
@@ -271,7 +271,7 @@ public class FasterBoardTest extends TestCase {
 			for (int j = 0; j < Zobrist.MAX_BOARD_SIZE; j++)
 				for (int k = 0; k < Zobrist.MAX_COLOUR; k++) {
 
-					BoardI board1 = new FasterBoard(false);
+					BoardI board1 = new SmallerBoard(false);
 					BoardI board2 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					BoardI board3 = board1.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 					// BoardI board4 = board2.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
