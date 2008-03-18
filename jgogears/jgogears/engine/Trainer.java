@@ -9,13 +9,13 @@ import java.util.*;
 import jgogears.*;
 
 /**
- * 
  * @author syeates
  */
 public class Trainer {
 	static final private boolean DEBUG = false;
 	static final private boolean PROGRESS = true;
-	private boolean onlyOneNewNodePerSymmetry = true;
+	static final private boolean freeRideForEmpty = true;
+	static final private boolean onlyOneNewNodePerSymmetry = true;
 	public final int DEFAULT_NUMBER_OF_FILES = Integer.MAX_VALUE;
 	private Model model = null;
 	final public static String LIBRARY = "sgf/2004-12";
@@ -79,7 +79,7 @@ public class Trainer {
 	 * 
 	 * @return the model
 	 */
-	public Model train()  {
+	public Model train() {
 		return train(DEFAULT_NUMBER_OF_FILES);
 	}
 
@@ -90,39 +90,50 @@ public class Trainer {
 	 *            the count
 	 * @return the model
 	 */
-	public Model train(int count)  {
+	public Model train(int count) {
 		try {
-		Collection<String> files = loadAllSGFfiles();
-		int filecount = 0;
-		int examined = 0;
-		Iterator<String> iterator = files.iterator();
-		while (iterator.hasNext() && filecount < count) {
-			String filename = iterator.next();
+			Collection<String> files = loadAllSGFfiles();
+			int filecount = 0;
+			int examined = 0;
+			Iterator<String> iterator = files.iterator();
+			while (iterator.hasNext() && filecount < count) {
+				String filename = iterator.next();
 
-			Game game = Game.loadFromFile(new File(filename));
-			examined++;
-			if (game.getSize() == 19) {
-				filecount++;
-				train( game);
-			} else {
-				if (DEBUG)
-					System.err.print("!");
+				Game game = Game.loadFromFile(new File(filename));
+				examined++;
+				if (game.getSize() == 19) {
+					filecount++;
+					train(game);
+				} else {
+					if (DEBUG)
+						System.err.print("!");
+
+				}
+				// if (PROGRESS || DEBUG)
+				// System.err.print(".");
+				if (PROGRESS)
+					System.err
+							.println(filecount
+									+ "/"
+									+ examined
+									+ "/"
+									+ files.size()
+									+ "/"
+									+ count
+									+ " "
+									+ model.getBoardsTrained()
+									+ "b "
+									+ model.size()
+									+ "n "
+									+ ((Runtime.getRuntime().totalMemory() / 1000) - (Runtime.getRuntime().freeMemory() / 1000))
+									+ "K " + Runtime.getRuntime().totalMemory() / 1000 + "K "
+									+ Runtime.getRuntime().maxMemory() / 1000 + "K");
 
 			}
-			// if (PROGRESS || DEBUG)
-			// System.err.print(".");
-			if (PROGRESS)
-				System.err.println(filecount + "/" + examined + "/" + files.size() + "/" + count + " "
-						+ model.getBoardsTrained() + "b " + model.size() + "n "
-						+ ((Runtime.getRuntime().totalMemory() / 1000) - (Runtime.getRuntime().freeMemory() / 1000))
-						+ "K " + Runtime.getRuntime().totalMemory() / 1000 + "K " + Runtime.getRuntime().maxMemory()
-						/ 1000 + "K");
 
-		}
-
-		if (DEBUG)
-			System.err.println("\nTrainer::trainNFiles loaded " + filecount + " files ");
-		}catch (IOException e) {
+			if (DEBUG)
+				System.err.println("\nTrainer::trainNFiles loaded " + filecount + " files ");
+		} catch (IOException e) {
 			System.err.println(e);
 			return null;
 		}
@@ -160,26 +171,21 @@ public class Trainer {
 			int colour = move.getColour();
 			boolean isBlack = colour == BoardI.VERTEX_BLACK;
 			// float str = (float) (isBlack ? strengthB : strengthW);
-
-			if (move != null)
-			if ( move.getPlay()){
+			if (move.getResign())
+				return;
+			else
 				for (short i = 0; i < size; i++)
 					for (short j = 0; j < size; j++)
 						for (short sym = 0; sym < 8; sym++) {
-							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
-							if (move.getRow() != i && move.getColumn() != j)
-								train( linear, true, true, 100);//TODO
-							else
-								train( linear, false, true, 100);//TODO
+							StraightVertexLineariser linear = new StraightVertexLineariser(board, i, j, sym, !isBlack);
+							if (move.getPlay())
+								if (move.getRow() != i && move.getColumn() != j)
+									train(linear, true, true, 100);// TODO
+								else
+									train(linear, false, true, 100);// TODO
+							else if (move.getPass())
+								train(linear, false, true, 100);// TODO
 						}
-			} else if ( move.getPass()) { 
-				for (short i = 0; i < size; i++)
-					for (short j = 0; j < size; j++)
-						for (short sym = 0; sym < 8; sym++) {
-							VertexLineariser linear = new VertexLineariser(board, i, j, sym, !isBlack);
-							train(linear, false, true, 100);//TODO
-						}
-			}
 		}
 	}
 
@@ -192,75 +198,76 @@ public class Trainer {
 	 *            are we expanding?
 	 * @param depth
 	 *            the depth to expand to
-	 * @param root
-	 *            the root of the model
 	 * @param playeda
 	 *            the played
 	 */
-	public void train(VertexLineariser linear, boolean playeda, boolean expand, int depth) {
+	public void train(StraightVertexLineariser linear, boolean playeda, boolean expand, int depth) {
 		Node root = model.getRoot();
-		while (root !=null && linear.hasNext()){
-		if (depth <= 0)
-			expand = false;
-		if (root.getNotPlayed() + root.getPlayed() < this.getMinBranchSize())
-			expand = false;
-		depth--;
-		if (playeda)
-			root.setPlayed(root.getPlayed() + 1);
-		else
-			root.setNotPlayed(root.getNotPlayed() + 1);
-		Short colour = linear.next();
-		boolean expandMore = !onlyOneNewNodePerSymmetry;
+		boolean freeRideUsed = false;
+		while (root != null && linear.hasNext()) {
+			if (depth <= 0)
+				expand = false;
+			if (root.getNotPlayed() + root.getPlayed() < this.getMinBranchSize())
+				expand = false;
+			depth--;
+			if (playeda)
+				root.setPlayed(root.getPlayed() + 1);
+			else
+				root.setNotPlayed(root.getNotPlayed() + 1);
+			Short colour = linear.next();
+			boolean expandMore = !onlyOneNewNodePerSymmetry;
 
-		switch (colour) {
-		case BoardI.VERTEX_BLACK:
-			if (root.getBlack() == null)
-				if (expand) {
-					root.setBlack(new Node());
+			switch (colour) {
+			case BoardI.VERTEX_BLACK:
+				freeRideUsed = true;
+				if (root.getBlack() == null)
+					if (expand) {
+						root.setBlack(new Node());
+						root = root.getBlack();
+						expand = expandMore;
+					} else
+						return;
+				else
 					root = root.getBlack();
-					expand = expandMore;
-				} else
-					return;
-			else
-				root = root.getBlack();
-			break;
-		case BoardI.VERTEX_WHITE:
-			if (root.getWhite() == null)
-				if (expand) {
-					root.setWhite(new Node());
+				break;
+			case BoardI.VERTEX_WHITE:
+				freeRideUsed = true;
+				if (root.getWhite() == null)
+					if (expand) {
+						root.setWhite(new Node());
+						root = root.getWhite();
+						expand = expandMore;
+					} else
+						return;
+				else
 					root = root.getWhite();
-					expand = expandMore;
-				} else
-					return;
-			else
-				root = root.getWhite();
-			break;
-		case BoardI.VERTEX_KO:
-		case BoardI.VERTEX_EMPTY:
-			if (root.getEmpty() == null)
-				if (expand) {
-					root.setEmpty(new Node());
-					expand = expandMore;
+				break;
+			case BoardI.VERTEX_KO:
+			case BoardI.VERTEX_EMPTY:
+				if (root.getEmpty() == null)
+					if (expand || (!freeRideUsed && freeRideForEmpty)) {
+						root.setEmpty(new Node());
+						expand = expandMore;
+						root = root.getEmpty();
+					} else
+						return;
+				else
 					root = root.getEmpty();
-				} else
-					return;
-			else
-				root = root.getEmpty();
-			break;
-		case BoardI.VERTEX_OFF_BOARD:
-			if (root.getOff() == null)
-				if (expand) {
-					root.setOff(new Node());
-					expand = expandMore;
+				break;
+			case BoardI.VERTEX_OFF_BOARD:
+				if (root.getOff() == null)
+					if (expand|| (!freeRideUsed && freeRideForEmpty)) {
+						root.setOff(new Node());
+						expand = expandMore;
+						root = root.getOff();
+					} else
+						return;
+				else
 					root = root.getOff();
-				} else
-					return;
-			else
-				root = root.getOff();
-			break;
-		default:
-			throw new Error();
-		}
+				break;
+			default:
+				throw new Error();
+			}
 		}
 	}
 
@@ -274,27 +281,17 @@ public class Trainer {
 	}
 
 	/**
-	 * set the onlyOneNewNodePerSymmetry
-	 * 
-	 * @param onlyOneNewNodePerSymmetry
-	 *            the onlyOneNewNodePerSymmetry to set
-	 */
-	public final void setOnlyOneNewNodePerSymmetry(boolean onlyOneNewNodePerSymmetry) {
-		this.onlyOneNewNodePerSymmetry = onlyOneNewNodePerSymmetry;
-	}
-
-	/**
 	 * get the minBranchSize
 	 * 
 	 * @return the minBranchSize
 	 */
 	public final double getMinBranchSize() {
-		return model.getGamesTrained()*2 + 10;
+		return model.getGamesTrained() * 3 + 20;
 	}
-
 
 	/**
 	 * get the model
+	 * 
 	 * @return the model
 	 */
 	public final Model getModel() {
@@ -303,7 +300,9 @@ public class Trainer {
 
 	/**
 	 * set the model
-	 * @param model the model to set
+	 * 
+	 * @param model
+	 *            the model to set
 	 */
 	public final void setModel(Model model) {
 		this.model = model;

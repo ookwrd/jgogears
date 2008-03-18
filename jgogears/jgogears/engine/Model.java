@@ -8,8 +8,6 @@ import java.util.*;
  */
 public final class Model {
 
-	/** A small value used as a small increment to probabilities */
-	public static float DELTA = (float) 0.0001;
 
 	/** are we being verbose? */
 	public static boolean DEBUG = false;
@@ -19,26 +17,6 @@ public final class Model {
 
 	/** The random number generator */
 	private static Random random = new Random();
-
-	/**
-	 * Gets the random.
-	 * 
-	 * @return the random
-	 */
-	static public double getRandom() {
-		double r = random.nextDouble();
-		return r;
-	}
-
-	/**
-	 * Gets the random delta.
-	 * 
-	 * @return the random delta
-	 */
-	static public double getRandomDelta() {
-		double r = random.nextDouble();
-		return r * DELTA;
-	}
 
 	/**
 	 * Max of two doubles, biased towards the first in the case of equality

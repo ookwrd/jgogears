@@ -61,13 +61,14 @@ public class TwoGTP {
 		if (this.white == null)
 			throw new Error();
 		Move move = null;
+		BoardI oldBoard = this.state.getBoard();
 		if (this.blackNext) {
 			move = this.black.genMove(BoardI.VERTEX_BLACK, this.state);
 		} else {
 			move = this.white.genMove(BoardI.VERTEX_WHITE, this.state);
 		}
-		if (!RuleSet.DEFAULT.moveIsLegal(null, this.state.getBoard(), move))
-			throw new Error();
+		if (!RuleSet.DEFAULT.moveIsLegal(null, oldBoard, move))
+			throw new Error(move + "\n" + oldBoard);
 		if (move.getPass())
 			this.passes++;
 		else

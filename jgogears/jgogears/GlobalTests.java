@@ -26,7 +26,7 @@ public class GlobalTests {
 		suite.addTestSuite(TreeIteratorTest.class);
 		suite.addTestSuite(NodeTest.class);
 		suite.addTestSuite(ModelTest.class);
-		suite.addTestSuite(VertexLineariserTest.class);
+		suite.addTestSuite(StraightVertexLineariserTest.class);
 		suite.addTestSuite(MoveTest.class);
 		suite.addTestSuite(SGFPropertyTest.class);
 		suite.addTestSuite(SGFNodeTest.class);
