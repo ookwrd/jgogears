@@ -8,8 +8,6 @@ import java.util.*;
  */
 public class RandomEngine extends SkeletonEngine implements GTPInterface {
 
-	/** The random. */
-	public Random random = new Random(0);
 
 	/*
 	 * (non-Javadoc)
@@ -60,8 +58,8 @@ public class RandomEngine extends SkeletonEngine implements GTPInterface {
 		short row;
 		short column;
 		do {
-			row = (short) this.random.nextInt(state.boardsize);
-			column = (short) this.random.nextInt(state.boardsize);
+			row = (short) Random.nextInt(state.boardsize);
+			column = (short) Random.nextInt(state.boardsize);
 		} while (state.board.getColour(row, column) == BoardI.VERTEX_EMPTY);
 		return new Move(row, column, colour);
 	}

@@ -29,14 +29,14 @@ public class Zobrist extends BitSet {
 	static private void init() {
 		if (grid == null) {
 			grid = new BitSet[MAX_BOARD_SIZE][MAX_BOARD_SIZE][MAX_COLOUR];
-			Random random = new Random(new Date().getTime());
+			
 			for (int i = 0; i < MAX_BOARD_SIZE; i++)
 				for (int j = 0; j < MAX_BOARD_SIZE; j++)
 					for (int k = 0; k < MAX_COLOUR; k++) {
 						grid[i][j][k] = new BitSet();
 						// System.err.println("" + i + " " + j + " " + k);
 						for (int l = 0; l < ZOBRIST_SIZE; l++) {
-							grid[i][j][k].set(l, random.nextBoolean());
+							grid[i][j][k].set(l, Random.nextBoolean());
 						}
 					}
 		}

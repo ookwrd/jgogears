@@ -195,23 +195,6 @@ public class ModelTest extends TestCase {
 	}
 
 	/**
-	 * Test random.
-	 */
-	public void testRandom() {
-		double a = Model.getRandom();
-		if (DEBUG)
-			System.err.println("Random data = " + a);
-	}
-
-	/**
-	 * Test random delta.
-	 */
-	public void testRandomDelta() {
-		double a = Model.getRandomDelta();
-		System.err.println("Random delta = " + a);
-	}
-
-	/**
 	 * check some stats on some files.
 	 * 
 	 * @throws IOException

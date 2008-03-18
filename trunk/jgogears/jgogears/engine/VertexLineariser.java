@@ -166,7 +166,7 @@ final public class VertexLineariser implements Iterator<Short> {
 							}
 							double d = Math.pow(row - i + row_offset, 2) + Math.pow(column - j + column_offset, 2);
 
-							ArrayList<Short> array = new ArrayList<Short>();
+							ArrayList<Short> array = new ArrayList<Short>(2);
 							array.add(new Short(i));
 							array.add(new Short(j));
 
@@ -181,8 +181,9 @@ final public class VertexLineariser implements Iterator<Short> {
 					for (int i = 0; i < SIZE * SIZE; i++) {
 						if (values.isEmpty())
 							throw new Error();
-						Short[] thisone = values.get(values.firstKey()).toArray(array);
-						values.remove(values.firstKey());
+						Double key = values.firstKey();
+						Short[] thisone = values.get(key).toArray(array);
+						values.remove(key);
 						// rowsequence[i] = thisone[0];
 						// columnsequence[i] = thisone[1];
 						cache[0][sym][row][column][i] = thisone[0];

@@ -13,6 +13,8 @@ import jgogears.*;
 public class Scorer {
 	/** are we being verbose? */
 	public static boolean DEBUG = false;
+	/** are we being verbose? */
+	public static boolean DEBUG_BRANCH = false;
 
 	/**
 	 * Which vertex is the best to play?
@@ -25,22 +27,28 @@ public class Scorer {
 	 * @return the vertex to play
 	 */
 	Vertex getBestScore(Model model, BoardI board, boolean white) {
+		if (DEBUG)
+			System.err.println("In getBestScore");
 		double[][] result = this.getScores(model, board, white);
 		double best = Double.MAX_VALUE;
-		int I = 0, J = 0;
+		int I = -1, J = -1;
 		int i, j;
 		for (i = 0; i < board.getSize(); i++)
 			for (j = 0; j < board.getSize(); j++) {
 				if (result[i][j] < best) {
 					if (RuleSet.DEFAULT.moveIsLegal(null, board, new Move(i, j, white ? BoardI.VERTEX_WHITE
 							: BoardI.VERTEX_BLACK))
-							&& best < result[i][j]) {
+							&& best > result[i][j]) {
 						best = result[i][j];
 						I = i;
 						J = j;
 					}
 				}
+				if (DEBUG)
+					System.err.print("{" + i + ","+ j + "},");
 			}
+		if (DEBUG)
+			System.err.println("exiting getBestScore");
 		return new Vertex(I, J);
 	}
 
@@ -61,7 +69,7 @@ public class Scorer {
 					result[row][column] = 0.0;
 					Node node = model.getRoot();
 					int maxdepth = 0;
-					VertexLineariser linear = new VertexLineariser(board, row, column, sym, white);
+					StraightVertexLineariser linear = new StraightVertexLineariser(board, row, column, sym, white);
 					double estimate = 0.0;
 					int depth = 0;
 					while (linear.hasNext() && node != null) {
@@ -93,11 +101,10 @@ public class Scorer {
 						if (child != null) {
 							childP = child.getPlayed();
 							childNP = child.getNotPlayed();
-							node = child;
 							estimate = estimate * 0.5 + childP / (childP + childNP) * 0.5;
 						}
-
-						if (DEBUG)
+						node = child;
+						if (DEBUG_BRANCH)
 							System.err.println("Model::getScores following a " + BoardI.colourString(colour)
 									+ " branch, estimate = " + estimate + ", childP = " + childP + ", childNP = "
 									+ childNP + ", combination = " + childP / (childP + childNP) * 0.5);
@@ -105,16 +112,19 @@ public class Scorer {
 
 					// estimate = (1 + previous.getPlayed()) / (previous.getPlayed() + previous.getNotPlayed()) * (1 -
 					// (1 /depth));
-					if (result[row][column] <= estimate) {
-						result[row][column] = estimate;
-						if (DEBUG)
-							System.err.println("Model::getScores  " + estimate);
-					}
-					if (DEBUG)
-						System.err.println("Model::getScores " + maxdepth);
+						result[row][column] = Random.getRandomBest(estimate,result[row][column]);
+					//if (DEBUG)
+					//	System.err.println("Model::getScores " + maxdepth);
 				}
 			}
 		}
+		if (DEBUG)
+				for (int i = 0; i < result.length; i++) {
+					for (int j = 0; j < result[i].length; j++)
+						System.err.print(" " + result[i][j]);
+					System.err.println();
+				}
+
 		return result;
 	}
 

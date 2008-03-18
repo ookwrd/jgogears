@@ -295,7 +295,7 @@ final public class NoKoRuleSet extends RuleSet {
 		short row = move.getRow();
 		short column = move.getColumn();
 		short colour = move.getColour();
-
+		
 		if (board.getColour(row, column) != BoardI.VERTEX_EMPTY) {
 			if (DEBUG)
 				System.err.println("illegal move, not empty");
@@ -303,7 +303,7 @@ final public class NoKoRuleSet extends RuleSet {
 		}
 
 		if (colour != BoardI.VERTEX_BLACK && colour != BoardI.VERTEX_WHITE)
-			throw new Error();
+			throw new Error("Internal error, bad colour");
 		TreeSet<Vertex> liberties = new TreeSet<Vertex>();
 
 		liberties.addAll(this.legelsfrompos(row + 1, column, colour, board));

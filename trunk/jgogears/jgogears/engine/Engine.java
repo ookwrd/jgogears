@@ -22,14 +22,16 @@ public class Engine {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		GTPState state = new GTPState();
 		Model model = new Model();
 		System.out.println("about to train model");
 
 		Trainer trainer = new Trainer();
 		trainer.setModel(model);
-		trainer.train(20);
+
+		trainer.train(200);
 		System.out.println("model trained");
+		System.out.println(model.getRoot());
+		System.out.println(model.getRoot().size());
 
 		SufgoEngine black = new SufgoEngine();
 		black.setModel(model);
@@ -37,15 +39,16 @@ public class Engine {
 		SufgoEngine white = new SufgoEngine();
 		white.setModel(model);
 
-		TwoGTP two = new TwoGTP();
+		for (int j = 0; j < 200; j++) {
+			TwoGTP two = new TwoGTP();
+			two.setBlack(black);
+			two.setWhite(white);
 
-		two.setBlack(black);
-		two.setWhite(white);
-		
-		
-		for (int i = 0; i < 200; i++) {
-			state = two.move();
-			System.out.println(state.getBoard());
+			for (int i = 0; i < 200; i++) {
+				GTPState state = new GTPState();
+				state = two.move();
+				System.out.println(state.getBoard());
+			}
 		}
 
 	}

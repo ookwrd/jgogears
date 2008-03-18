@@ -403,7 +403,7 @@ public abstract class BoardI {
 	 *            the colour to set this to
 	 */
 	protected void setColour(int row, int column, int colour) {
-		throw new Error();
+		throw new Error("concrete classes need to override this method " + row + column + colour);
 	}
 
 	/**
@@ -424,6 +424,29 @@ public abstract class BoardI {
 	@Override
 	public String toString() {
 		return BoardToASCII.Transform(this);
+	}
+	
+	public boolean isOffBoard(int row, int column){
+		if (row < 0)
+			return true;
+		if (column < 0)
+			return true;
+		if (row >= this.getSize())
+			return true;
+		if (column < this.getSize())
+			return true;
+		return false;
+	}
+	public boolean isWayOffBoard(int row, int column){
+		if (row < -1)
+			return true;
+		if (column < -1)
+			return true;
+		if (row >= this.getSize()+1)
+			return true;
+		if (column >= this.getSize()+1)
+			return true;
+		return false;
 	}
 
 }
