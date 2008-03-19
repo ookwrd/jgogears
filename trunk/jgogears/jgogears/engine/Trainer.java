@@ -12,14 +12,44 @@ import jgogears.*;
  * @author syeates
  */
 public class Trainer {
+	/** arbitrarily large integer for use in counting variables */
+	static final private int BIG_INT = Integer.MAX_VALUE;
+	/** are we being verbose ?*/
 	static final private boolean DEBUG = false;
+	/** are we showing progress ? Useful in when training on large numbers of games*/
 	static final private boolean PROGRESS = true;
+	/** are we giving a free ride to EMPTY and OFF_BOARD ?*/
 	static final private boolean freeRideForEmpty = true;
+	
+	// these are all set side open to expand the tree as much as possible
 	static final private boolean onlyOneNewNodePerSymmetry = true;
+	static final private int trainPlaysToDepth = BIG_INT;
+	static final private int trainNoPlaysToDepth = BIG_INT;
+	static final private int trainPassToDepth = BIG_INT;
+	static final private boolean expandNoPlay = true;
+	static final private boolean expandPass = true;
+	
+	/** how many games are we going to train on?*/
 	public final int DEFAULT_NUMBER_OF_FILES = Integer.MAX_VALUE;
+	/** the model we're going to train */
 	private Model model = null;
+	/** location of the small training library in svn */
 	final public static String LIBRARY = "sgf/2004-12";
 
+/**
+ * Returns the minimum number of times we have to have visited a node to expand it. 
+ * 
+ * Doesn't apply to nodes expanded with a free ride.
+ * 
+ * This is the prime method of limiting the growth of the tree size.
+ * 
+ * @return the minimum size, including both played and not-played visits.
+ */
+	public final double getMinBranchSize() {
+		return model.getGamesTrained() * 3. + 20.0;
+	}
+
+	
 	/**
 	 * Loads all the default SGF files
 	 * 
@@ -180,11 +210,11 @@ public class Trainer {
 							StraightVertexLineariser linear = new StraightVertexLineariser(board, i, j, sym, !isBlack);
 							if (move.getPlay())
 								if (move.getRow() != i && move.getColumn() != j)
-									train(linear, true, true, 100);// TODO
+									train(linear, true, true, trainPlaysToDepth);
 								else
-									train(linear, false, true, 100);// TODO
+									train(linear, false, expandNoPlay, trainNoPlaysToDepth);
 							else if (move.getPass())
-								train(linear, false, true, 100);// TODO
+								train(linear, false, expandPass, trainPassToDepth);
 						}
 		}
 	}
@@ -269,24 +299,6 @@ public class Trainer {
 				throw new Error();
 			}
 		}
-	}
-
-	/**
-	 * get the onlyOneNewNodePerSymmetry
-	 * 
-	 * @return the onlyOneNewNodePerSymmetry
-	 */
-	public final boolean isOnlyOneNewNodePerSymmetry() {
-		return onlyOneNewNodePerSymmetry;
-	}
-
-	/**
-	 * get the minBranchSize
-	 * 
-	 * @return the minBranchSize
-	 */
-	public final double getMinBranchSize() {
-		return model.getGamesTrained() * 3 + 20;
 	}
 
 	/**
