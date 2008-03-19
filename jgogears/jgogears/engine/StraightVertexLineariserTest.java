@@ -256,38 +256,21 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes13() throws Exception {
-		try {
 			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(lineariser);
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
 			board = BoardI.newBoard(13);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			fail("shouldn't be able to linearise different sizes of board");
-		} catch (IllegalArgumentException e) {
-			assertNotNull(e);
-		}
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
 	}
-
-
-	/**
-	 * test what happens when linearising boards of different sizes.
-	 * 
-	 * @throws Exception
-	 *             the exception
-	 */
-	public void testDifferenetSizes5() throws Exception {
-		try {
-			BoardI board = BoardI.newBoard(19);
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(lineariser);
-			board = BoardI.newBoard(9);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			fail("shouldn't be able to linearise different sizes of board");
-		} catch (IllegalArgumentException e) {
-			assertNotNull(e);
-		}
-	}
-
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -295,16 +278,108 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes9() throws Exception {
-		try {
-			BoardI board = BoardI.newBoard(19);
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(lineariser);
+			BoardI board = BoardI.newBoard();
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
 			board = BoardI.newBoard(9);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			fail("shouldn't be able to linearise different sizes of board");
-		} catch (IllegalArgumentException e) {
-			assertNotNull(e);
-		}
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
+	}
+	/**
+	 * test what happens when linearising boards of different sizes.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	public void testDifferenetSizes11() throws Exception {
+			BoardI board = BoardI.newBoard();
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
+			board = BoardI.newBoard(11);
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
+	}
+	/**
+	 * test what happens when linearising boards of different sizes.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	public void testDifferenetSizes10() throws Exception {
+			BoardI board = BoardI.newBoard();
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
+			board = BoardI.newBoard(10);
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
+	}
+	/**
+	 * test what happens when linearising boards of different sizes.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	public void testDifferenetSizes21() throws Exception {
+			BoardI board = BoardI.newBoard();
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
+			board = BoardI.newBoard(21);
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
+	}
+	/**
+	 * test what happens when linearising boards of different sizes.
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	public void testDifferenetSizes17() throws Exception {
+			BoardI board = BoardI.newBoard();
+			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			assertNotNull(linear);
+			board = BoardI.newBoard(17);
+			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			int count = 0;
+			while (linear.hasNext()) {
+				Short s = linear.next();
+				assertNotNull(s);
+				count++;
+			}
+			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+
+			assertTrue(count + "/" + plussize+1, count == plussize+1);
 	}
 
 	/**
