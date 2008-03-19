@@ -103,11 +103,11 @@ public class Scorer {
 							childNP = child.getNotPlayed();
 							estimate = estimate * 0.5 + childP / (childP + childNP) * 0.5;
 						}
-						node = child;
 						if (DEBUG_BRANCH)
 							System.err.println("Model::getScores following a " + BoardI.colourString(colour)
 									+ " branch, estimate = " + estimate + ", childP = " + childP + ", childNP = "
 									+ childNP + ", combination = " + childP / (childP + childNP) * 0.5);
+						node = child;
 					}
 
 					// estimate = (1 + previous.getPlayed()) / (previous.getPlayed() + previous.getNotPlayed()) * (1 -

@@ -36,8 +36,8 @@ public class VertexLineariserTest extends TestCase {
 			for (short i = 0; i < 8; i++) {
 				if (i != j) {
 					boolean differenceFound = false;
-					Iterator<Short> lineara = new StraightVertexLineariser(board, rowa, columna, j, false);
-					Iterator<Short> linearb = new StraightVertexLineariser(board, rowb, columnb, i, false);
+					Iterator<Short> lineara = new VertexLineariser(board, rowa, columna, j, false);
+					Iterator<Short> linearb = new VertexLineariser(board, rowb, columnb, i, false);
 					assertTrue(lineara != null);
 					assertTrue(linearb != null);
 					while (lineara.hasNext() && linearb.hasNext() && !differenceFound) {
@@ -83,8 +83,8 @@ public class VertexLineariserTest extends TestCase {
 				for (short j = 0; j < 8; j++)
 					for (short i = 0; i < 8; i++) {
 						if (i != j) {
-							Iterator<Short> lineara = new StraightVertexLineariser(board, row, column, j, false);
-							Iterator<Short> linearb = new StraightVertexLineariser(board, row, column, i, false);
+							Iterator<Short> lineara = new VertexLineariser(board, row, column, j, false);
+							Iterator<Short> linearb = new VertexLineariser(board, row, column, i, false);
 							assertTrue(lineara != null);
 							assertTrue(linearb != null);
 							boolean differenceFound = false;
@@ -99,8 +99,8 @@ public class VertexLineariserTest extends TestCase {
 									differenceFound = true;
 							}
 							assertTrue(i + " " + j + " " + row + " " + column + "\n"
-									+ new StraightVertexLineariser(board, row, column, j, false) + "\n"
-									+ new StraightVertexLineariser(board, row, column, i, false), differenceFound);
+									+ new VertexLineariser(board, row, column, j, false) + "\n"
+									+ new VertexLineariser(board, row, column, i, false), differenceFound);
 						}
 					}
 
@@ -118,8 +118,8 @@ public class VertexLineariserTest extends TestCase {
 		for (short j = 0; j < 8; j++)
 			for (short i = 0; i < 8; i++) {
 				if (i != j) {
-					Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 2, (short) 2, j, false);
-					Iterator<Short> linearb = new StraightVertexLineariser(board, (short) 2, (short) 2, i, false);
+					Iterator<Short> lineara = new VertexLineariser(board, (short) 2, (short) 2, j, false);
+					Iterator<Short> linearb = new VertexLineariser(board, (short) 2, (short) 2, i, false);
 					assertTrue(lineara != null);
 					assertTrue(linearb != null);
 					boolean differenceFound = false;
@@ -157,7 +157,7 @@ public class VertexLineariserTest extends TestCase {
 			for (short column = 0; column < board.getSize(); column++) {
 				if (DEBUG)
 					for (short j = 0; j < 8; j++) {
-						Iterator<Short> linear = new StraightVertexLineariser(board, row, column, j, false);
+						Iterator<Short> linear = new VertexLineariser(board, row, column, j, false);
 						assertTrue(linear != null);
 						while (linear.hasNext()) {
 							Short s = linear.next();
@@ -168,7 +168,7 @@ public class VertexLineariserTest extends TestCase {
 					}
 				if (DEBUG)
 					for (short j = 0; j < 8; j++) {
-						Iterator<Short> linear = new StraightVertexLineariser(board, column, row, j, false);
+						Iterator<Short> linear = new VertexLineariser(board, column, row, j, false);
 						assertTrue(linear != null);
 						while (linear.hasNext()) {
 							Short s = linear.next();
@@ -255,10 +255,10 @@ public class VertexLineariserTest extends TestCase {
 	public void testDifferenetSizes13() throws Exception {
 		try {
 			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			assertNotNull(lineariser);
 			board = BoardI.newBoard(13);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			fail("shouldn't be able to linearise different sizes of board");
 		} catch (IllegalArgumentException e) {
 			assertNotNull(e);
@@ -274,10 +274,10 @@ public class VertexLineariserTest extends TestCase {
 	public void testDifferenetSizes25() throws Exception {
 		try {
 			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			assertNotNull(lineariser);
 			board = BoardI.newBoard(25);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			fail("shouldn't be able to linearise different sizes of board");
 		} catch (IllegalArgumentException e) {
 			assertNotNull(e);
@@ -293,10 +293,10 @@ public class VertexLineariserTest extends TestCase {
 	public void testDifferenetSizes5() throws Exception {
 		try {
 			BoardI board = BoardI.newBoard(19);
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			assertNotNull(lineariser);
 			board = BoardI.newBoard(9);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			fail("shouldn't be able to linearise different sizes of board");
 		} catch (IllegalArgumentException e) {
 			assertNotNull(e);
@@ -312,10 +312,10 @@ public class VertexLineariserTest extends TestCase {
 	public void testDifferenetSizes9() throws Exception {
 		try {
 			BoardI board = BoardI.newBoard(19);
-			StraightVertexLineariser lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			VertexLineariser lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			assertNotNull(lineariser);
 			board = BoardI.newBoard(9);
-			lineariser = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+			lineariser = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 			fail("shouldn't be able to linearise different sizes of board");
 		} catch (IllegalArgumentException e) {
 			assertNotNull(e);
@@ -332,7 +332,7 @@ public class VertexLineariserTest extends TestCase {
 		for (short row = 0; row < board.getSize(); row++)
 			for (short column = 0; column < board.getSize(); column++) {
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new StraightVertexLineariser(board, row, column, j, false);
+					Iterator<Short> linear = new VertexLineariser(board, row, column, j, false);
 					while (linear.hasNext()) {
 						Short s = linear.next();
 						if (DEBUG)
@@ -344,7 +344,7 @@ public class VertexLineariserTest extends TestCase {
 				if (DEBUG)
 					System.err.println();
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new StraightVertexLineariser(board, (short) (board.getSize() - row - 1),
+					Iterator<Short> linear = new VertexLineariser(board, (short) (board.getSize() - row - 1),
 							(short) (board.getSize() - column - 1), j, false);
 					while (linear.hasNext()) {
 						Short s = linear.next();
@@ -393,8 +393,8 @@ public class VertexLineariserTest extends TestCase {
 
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[0][sym1][sym2] = true;
-				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) (size - 1), sym2,
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) (size - 1), (short) (size - 1), sym2,
 						false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
@@ -409,8 +409,8 @@ public class VertexLineariserTest extends TestCase {
 
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[1][sym1][sym2] = true;
-				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) 0, (short) (size - 1), sym2, false);
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) 0, (short) (size - 1), sym2, false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
 					assertTrue(linearb.hasNext());
@@ -424,8 +424,8 @@ public class VertexLineariserTest extends TestCase {
 
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[2][sym1][sym2] = true;
-				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) 0, sym2, false);
+				Iterator<Short> lineara = new VertexLineariser(board, (short) 0, (short) 0, sym1, false);
+				Iterator<Short> linearb = new VertexLineariser(board, (short) (size - 1), (short) 0, sym2, false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
 					assertTrue(linearb.hasNext());
@@ -500,7 +500,7 @@ public class VertexLineariserTest extends TestCase {
 				board = iterator.next();
 				assertTrue(board != null);
 				for (short j = 0; j < 8; j++) {
-					Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, j, false);
+					Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, j, false);
 					assertTrue(linear != null);
 					while (linear.hasNext()) {
 						Short s = linear.next();
@@ -526,7 +526,7 @@ public class VertexLineariserTest extends TestCase {
 		assertNotNull(board);
 
 		if (DEBUG)
-			System.err.print("StraightVertexLineariserTest::testFirst() Black = " + BoardI.parseColour("black"));
+			System.err.print("VertexLineariserTest::testFirst() Black = " + BoardI.parseColour("black"));
 		if (DEBUG)
 			System.err.print(" White = " + BoardI.parseColour("white"));
 		if (DEBUG)
@@ -536,7 +536,7 @@ public class VertexLineariserTest extends TestCase {
 		if (DEBUG)
 			System.err.println("");
 		for (short j = 0; j < 8; j++) {
-			Iterator<Short> linear = new StraightVertexLineariser(board, (short) 1, (short) 1, j, false);
+			Iterator<Short> linear = new VertexLineariser(board, (short) 1, (short) 1, j, false);
 			assertTrue(linear != null);
 			while (linear.hasNext()) {
 				Short s = linear.next();
@@ -550,8 +550,8 @@ public class VertexLineariserTest extends TestCase {
 
 		for (short j = 0; j < 8; j++) {
 			if (DEBUG)
-				System.err.println("StraightVertexLineariserTest::testFirst sym=" + j);
-			Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 1, (short) 1, j, true);
+				System.err.println("VertexLineariserTest::testFirst sym=" + j);
+			Iterator<Short> lineara = new VertexLineariser(board, (short) 1, (short) 1, j, true);
 			assertTrue(lineara != null);
 			Short a = lineara.next();
 			assertTrue(a != null);
@@ -572,7 +572,7 @@ public class VertexLineariserTest extends TestCase {
 		assertNotNull(board);
 
 		if (DEBUG)
-			System.err.print("StraightVertexLineariserTest::testFirst() Black = " + BoardI.parseColour("black"));
+			System.err.print("VertexLineariserTest::testFirst() Black = " + BoardI.parseColour("black"));
 		if (DEBUG)
 			System.err.print(" White = " + BoardI.parseColour("white"));
 		if (DEBUG)
@@ -585,8 +585,8 @@ public class VertexLineariserTest extends TestCase {
 			for (short column = 0; column < board.getSize(); column++)
 				for (short j = 0; j < 8; j++) {
 					if (DEBUG)
-						System.err.println("StraightVertexLineariserTest::testFirst sym=" + j);
-					Iterator<Short> lineara = new StraightVertexLineariser(board, row, column, j, true);
+						System.err.println("VertexLineariserTest::testFirst sym=" + j);
+					Iterator<Short> lineara = new VertexLineariser(board, row, column, j, true);
 					assertTrue(lineara != null);
 					Short a = lineara.next();
 					assertTrue(a != null);
@@ -604,7 +604,7 @@ public class VertexLineariserTest extends TestCase {
 		BoardI board = BoardI.newBoard();
 		assertNotNull(board);
 		int count = 0;
-		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 		while (linear.hasNext()) {
 			Short s = linear.next();
 			assertNotNull(s);
@@ -631,7 +631,7 @@ public class VertexLineariserTest extends TestCase {
 
 		assertNotNull(board);
 		if (DEBUG)
-			System.err.print("StraightVertexLineariserTest::testStraightVertexLineariser() Black = " + BoardI.parseColour("black"));
+			System.err.print("VertexLineariserTest::testVertexLineariser() Black = " + BoardI.parseColour("black"));
 		if (DEBUG)
 			System.err.print(" White = " + BoardI.parseColour("white"));
 		if (DEBUG)
@@ -641,7 +641,7 @@ public class VertexLineariserTest extends TestCase {
 		if (DEBUG)
 			System.err.println("");
 		for (short j = 0; j < 8; j++) {
-			Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, j, false);
+			Iterator<Short> linear = new VertexLineariser(board, (short) 2, (short) 2, j, false);
 			assertTrue(linear != null);
 			while (linear.hasNext()) {
 				Short s = linear.next();

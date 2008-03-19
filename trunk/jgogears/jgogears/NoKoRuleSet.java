@@ -5,18 +5,17 @@ package jgogears;
 
 import java.util.*;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class NoKoRuleSet.
+ * Really simple and fast ruleset
  * 
  * @author Stuart
  */
-final public class NoKoRuleSet extends RuleSet {
+public class NoKoRuleSet extends RuleSet {
 
-	/** The Constant DEBUG. */
+	/** Are we being verbose? */
 	final static boolean DEBUG = false;
 
-	/** The Constant EMPTY. */
+	/** an empty treeset for filling from */
 	final static TreeSet<Vertex> EMPTY = new TreeSet<Vertex>();
 
 	/*
@@ -245,23 +244,6 @@ final public class NoKoRuleSet extends RuleSet {
 	 * @return the number of liberties through this position
 	 */
 	TreeSet<Vertex> legelsfrompos(int row, int column, short colour, BoardI board) {
-		return this.legelsfrompos((short) row, (short) column, colour, board);
-	}
-
-	/**
-	 * Helper for moveIsLegal.
-	 * 
-	 * @param row
-	 *            the row of the position that is a potential liberty
-	 * @param column
-	 *            the column of the position that is a potential liberty
-	 * @param colour
-	 *            the colour of the stone we want to use these liberties for
-	 * @param board
-	 *            the board
-	 * @return the number of liberties through this position
-	 */
-	TreeSet<Vertex> legelsfrompos(short row, short column, short colour, BoardI board) {
 		TreeSet<Vertex> liberties = new TreeSet<Vertex>();
 		short acolour = board.getColour(row, column);
 		if (acolour == colour) {

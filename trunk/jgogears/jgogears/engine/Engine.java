@@ -28,7 +28,8 @@ public class Engine {
 		Trainer trainer = new Trainer();
 		trainer.setModel(model);
 
-		trainer.train(200);
+		//trainer.train(200);
+		trainer.train();
 		System.out.println("model trained");
 		System.out.println(model.getRoot());
 		System.out.println(model.getRoot().size());
@@ -47,7 +48,7 @@ public class Engine {
 			for (int i = 0; i < 200; i++) {
 				GTPState state = new GTPState();
 				state = two.move();
-				System.out.println(state.getBoard());
+				//System.out.println(state.getBoard());
 			}
 		}
 
