@@ -48,7 +48,7 @@ public class Engine {
 			for (int i = 0; i < 200; i++) {
 				GTPState state = new GTPState();
 				state = two.move();
-				//System.out.println(state.getBoard());
+				System.out.println(state.getBoard());
 			}
 		}
 

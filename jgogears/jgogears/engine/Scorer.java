@@ -30,15 +30,14 @@ public class Scorer {
 		if (DEBUG)
 			System.err.println("In getBestScore");
 		double[][] result = this.getScores(model, board, white);
-		double best = Double.MAX_VALUE;
+		double best = 1.1;
 		int I = -1, J = -1;
 		int i, j;
 		for (i = 0; i < board.getSize(); i++)
 			for (j = 0; j < board.getSize(); j++) {
-				if (result[i][j] < best) {
+				if (!Random.isLarger(result[i][j],best)) {
 					if (RuleSet.DEFAULT.moveIsLegal(null, board, new Move(i, j, white ? BoardI.VERTEX_WHITE
-							: BoardI.VERTEX_BLACK))
-							&& best > result[i][j]) {
+							: BoardI.VERTEX_BLACK))) {
 						best = result[i][j];
 						I = i;
 						J = j;
@@ -49,6 +48,8 @@ public class Scorer {
 			}
 		if (DEBUG)
 			System.err.println("exiting getBestScore");
+		if (I == -1)
+			throw new Error("Internal error in Scorer");
 		return new Vertex(I, J);
 	}
 
