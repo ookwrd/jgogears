@@ -11,7 +11,6 @@ Short Term
 * change training to only train on winning moves rather than all moves
 * decided whether to dual licence under the Apache 2 license
 * find a decent training corpus
-* make moves a little more random. They're meant to be random at the moment, but apparently aren't...
 
 SGF Support
 ===========
@@ -49,4 +48,5 @@ DONE
 * separate the Model/Node data structures from the algorithms
 * better tests of the Board implementations
 * jgogears.engine.Engine now up and running
+* make moves a little more random. They're meant to be random at the moment, but apparently aren't...
 

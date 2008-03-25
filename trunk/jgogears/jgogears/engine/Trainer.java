@@ -46,7 +46,7 @@ public class Trainer {
  * @return the minimum size, including both played and not-played visits.
  */
 	public final double getMinBranchSize() {
-		return model.getGamesTrained() * 3. + 20.0;
+		return model.getGamesTrained() * 2.0 + 20.0;
 	}
 
 	
