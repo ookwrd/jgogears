@@ -277,7 +277,7 @@ public class NoKoRuleSet extends RuleSet {
 		short row = move.getRow();
 		short column = move.getColumn();
 		short colour = move.getColour();
-		
+
 		if (board.getColour(row, column) != BoardI.VERTEX_EMPTY) {
 			if (DEBUG)
 				System.err.println("illegal move, not empty");

@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 public class GnuGoEngineTest2 extends TestCase {
 
 	/** The DEBUG. */
-	boolean DEBUG = false;
+	final static private boolean DEBUG = false;
 
 	/** The engine. */
 	GnuGoEngine engine = null;
@@ -82,8 +82,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			assertNotNull(seki);
 			engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -102,8 +104,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			}
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -121,8 +125,10 @@ public class GnuGoEngineTest2 extends TestCase {
 				System.err.println(move);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 
@@ -139,8 +145,10 @@ public class GnuGoEngineTest2 extends TestCase {
 				System.err.println(s);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG) {
+				System.err.println(t);
+				t.printStackTrace();
+			}
 			fail();
 		}
 	}
@@ -152,11 +160,14 @@ public class GnuGoEngineTest2 extends TestCase {
 		try {
 			this.engine.initialise();
 			String s = this.engine.getEngineVersion();
-			System.err.println(s);
+			if (DEBUG)
+				System.err.println(s);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -176,8 +187,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -192,8 +205,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -208,8 +223,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 
@@ -227,8 +244,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -244,13 +263,17 @@ public class GnuGoEngineTest2 extends TestCase {
 			Move move = this.engine.genMove(BoardI.VERTEX_BLACK);
 			assertNotNull(move);
 			BoardI board = this.engine.showBoard();
-			System.err.println("testLoadsgf:: the following board should have moves on it:");
-			System.err.println(board);
+			if (DEBUG)
+				System.err.println("testLoadsgf:: the following board should have moves on it:");
+			if (DEBUG)
+				System.err.println(board);
 			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -265,8 +288,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.quit();
 			// TODO
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -284,8 +309,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			assertTrue(moves.size() == 9);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -321,8 +348,10 @@ public class GnuGoEngineTest2 extends TestCase {
 				this.engine.quit();
 			}
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -338,8 +367,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.play(new Move("white c3"));
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -352,8 +383,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.initialise();
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -365,11 +398,14 @@ public class GnuGoEngineTest2 extends TestCase {
 		try {
 			this.engine.initialise();
 			Move move = this.engine.regGenMove(BoardI.VERTEX_BLACK);
-			System.err.println(move);
+			if (DEBUG)
+				System.err.println(move);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -386,8 +422,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			assertTrue(result);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -401,8 +439,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.setKomi(7.0);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -416,8 +456,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.setTimeLeft(BoardI.VERTEX_BLACK, 1.0, 1.0);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -431,8 +473,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			this.engine.setTimeSettings(1.0, 1.0, 1.0);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -448,8 +492,10 @@ public class GnuGoEngineTest2 extends TestCase {
 			// TODO
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}
@@ -464,10 +510,12 @@ public class GnuGoEngineTest2 extends TestCase {
 			assertFalse(result);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			// TODO
-			// fail(t.toString());
+			fail(t.toString());
 		}
 
 	}

@@ -38,8 +38,8 @@ public class SGFGameTree {
 			e.printStackTrace();
 		} finally {
 			try {
-			if (reader != null)
-				reader.close();
+				if (reader != null)
+					reader.close();
 			} catch (IOException e) {
 				System.err.println(e);
 				e.printStackTrace();

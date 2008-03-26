@@ -10,6 +10,8 @@ import junit.framework.TestCase;
  */
 
 public class ZobristTest extends TestCase {
+	/** Are we using verbose debugging?. */
+	public static final boolean DEBUG = false;
 
 	/**
 	 * Check that all of the hashes are different.
@@ -49,10 +51,12 @@ public class ZobristTest extends TestCase {
 					assertNotNull(z3);
 					assertNotNull(z4);
 					assertNotNull(z5);
-					System.err.println(z);
-					System.err.println(z3);
-					System.err.println(z2);
-					System.err.println(zz);
+					if (DEBUG) {
+						System.err.println(z);
+						System.err.println(z3);
+						System.err.println(z2);
+						System.err.println(zz);
+					}
 					assertTrue(z2.equals(zz));
 					assertFalse(z2.equals(z));
 					assertFalse(z4.equals(z));
@@ -82,9 +86,11 @@ public class ZobristTest extends TestCase {
 
 					assertNotNull(z);
 					assertNotNull(z2);
-					System.err.println(z);
-					System.err.println(z2);
-					System.err.println(z3);
+					if (DEBUG) {
+						System.err.println(z);
+						System.err.println(z2);
+						System.err.println(z3);
+					}
 					assertFalse(z2.equals(z));
 					assertTrue(z2.equals(z3));
 
@@ -179,9 +185,10 @@ public class ZobristTest extends TestCase {
 
 		BoardI board6 = board.newBoard(new Move((short) 2, (short) 2, BoardI.VERTEX_BLACK));
 		BoardI board7 = board6.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_WHITE));
-		System.err.println(board5.getZobrist());
-		System.err.println(board7.getZobrist());
-
+		if (DEBUG) {
+			System.err.println(board5.getZobrist());
+			System.err.println(board7.getZobrist());
+		}
 		assertTrue(board5.getZobrist().equals(board7.getZobrist()));
 
 		BoardI board8 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_WHITE));
@@ -223,9 +230,11 @@ public class ZobristTest extends TestCase {
 		BoardI board = new SmallBoard(true);
 		BoardI board2 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
 		BoardI board3 = board.newBoard(new Move((short) 1, (short) 1, BoardI.VERTEX_BLACK));
-		System.err.println(board.getZobrist());
-		System.err.println(board2.getZobrist());
-		System.err.println(board3.getZobrist());
+		if (DEBUG) {
+			System.err.println(board.getZobrist());
+			System.err.println(board2.getZobrist());
+			System.err.println(board3.getZobrist());
+		}
 		assertTrue(board2.getZobrist().equals(board3.getZobrist()));
 		assertTrue(board3.getZobrist().equals(board2.getZobrist()));
 		assertFalse(board.getZobrist().equals(board2.getZobrist()));

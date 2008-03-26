@@ -8,7 +8,6 @@ import java.util.*;
  */
 public class RandomEngine extends SkeletonEngine implements GTPInterface {
 
-
 	/*
 	 * (non-Javadoc)
 	 * 

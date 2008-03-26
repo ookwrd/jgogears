@@ -129,6 +129,24 @@ public final class Game {
 		// "\" e=\"" + this.extraTime +"\" PC=\"" + this.PC +"\"");
 	}
 
+	public boolean getBlackWin() {
+		if (score != null && score.getBlackWin())
+			return true;
+		return false;
+	}
+
+	public boolean getWhiteWin() {
+		if (score != null && score.getWhiteWin())
+			return true;
+		return false;
+	}
+
+	public boolean getNeitherWin() {
+		if (score == null || score.getDraw() || score.getVoid())
+			return true;
+		return false;
+	}
+
 	/**
 	 * get the blackPlayer.
 	 * 

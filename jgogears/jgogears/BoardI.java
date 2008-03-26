@@ -425,8 +425,8 @@ public abstract class BoardI {
 	public String toString() {
 		return BoardToASCII.Transform(this);
 	}
-	
-	public boolean isOffBoard(int row, int column){
+
+	public boolean isOffBoard(int row, int column) {
 		if (row < 0)
 			return true;
 		if (column < 0)
@@ -437,14 +437,15 @@ public abstract class BoardI {
 			return true;
 		return false;
 	}
-	public boolean isWayOffBoard(int row, int column){
+
+	public boolean isWayOffBoard(int row, int column) {
 		if (row < -1)
 			return true;
 		if (column < -1)
 			return true;
-		if (row >= this.getSize()+1)
+		if (row >= this.getSize() + 1)
 			return true;
-		if (column >= this.getSize()+1)
+		if (column >= this.getSize() + 1)
 			return true;
 		return false;
 	}

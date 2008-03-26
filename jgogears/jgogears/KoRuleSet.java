@@ -5,21 +5,25 @@ package jgogears;
 
 /**
  * TODO
+ * 
  * @author syeates
- *
  */
 public class KoRuleSet extends NoKoRuleSet {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.NoKoRuleSet#getDescription()
 	 */
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-throw new Error();
+		throw new Error();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.NoKoRuleSet#getName()
 	 */
 	@Override
@@ -29,7 +33,9 @@ throw new Error();
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see jgogears.NoKoRuleSet#moveIsLegal(jgogears.Game, jgogears.BoardI, jgogears.Move)
 	 */
 	@Override

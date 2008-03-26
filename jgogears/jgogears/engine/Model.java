@@ -2,12 +2,10 @@ package jgogears.engine;
 
 import java.util.*;
 
-
 /**
  * A probability model of Go
  */
 public final class Model {
-
 
 	/** are we being verbose? */
 	public static boolean DEBUG = false;
@@ -113,6 +111,7 @@ public final class Model {
 	public final void setGamesTrained(int gamesTrained) {
 		this.gamesTrained = gamesTrained;
 	}
+
 	/**
 	 * get the size of the model
 	 * 

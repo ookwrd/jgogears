@@ -43,9 +43,9 @@ final public class VertexLineariser implements Iterator<Short> {
 
 	/** Have the colours been inverted? */
 	boolean invert = false;
-	
+
 	/** are we being verbose */
-	final static boolean PROGRESS = true;
+	final static boolean PROGRESS = false;
 
 	/**
 	 * Instantiates a new vertex lineariser.
