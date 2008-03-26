@@ -6,7 +6,7 @@ import java.util.Iterator;
 import jgogears.*;
 import junit.framework.TestCase;
 
-// TODO: Auto-generated Javadoc
+// TODO: Auto-generated Javadocs
 /**
  * The Class VertexLineariserTest.
  */
@@ -194,7 +194,8 @@ public class VertexLineariserTest extends TestCase {
 		board = board.newBoard(new Move("black a1"));
 		board = board.newBoard(new Move("white k10"));
 		board = board.newBoard(new Move("black g18"));
-		System.err.println(board);
+		if (DEBUG)
+			System.err.println(board);
 
 		assertNotNull(board);
 		for (short row = 0; row < board.getSize(); row++)
@@ -439,11 +440,11 @@ public class VertexLineariserTest extends TestCase {
 		}
 		for (short corn = 0; corn < 3; corn++) {
 			for (short sym1 = 0; sym1 < 8; sym1++) {
-				boolean tfound= false;
-				boolean ffound= false;
+				boolean tfound = false;
+				boolean ffound = false;
 				for (short sym2 = 0; sym2 < 8; sym2++) {
-					if(DEBUG)
-					System.err.print(matches[corn][sym1][sym2] + " ");
+					if (DEBUG)
+						System.err.print(matches[corn][sym1][sym2] + " ");
 					if (matches[corn][sym1][sym2])
 						tfound = true;
 					else
@@ -451,11 +452,11 @@ public class VertexLineariserTest extends TestCase {
 				}
 				assertTrue(tfound);
 				assertTrue(ffound);
-				if(DEBUG)
-				System.err.println();
+				if (DEBUG)
+					System.err.println();
 			}
-			if(DEBUG)
-			System.err.println();
+			if (DEBUG)
+				System.err.println();
 		}
 	}
 

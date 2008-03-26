@@ -10,6 +10,8 @@ import junit.framework.TestCase;
  * The Class SmallerBoardTest.
  */
 public class SmallerBoardTest extends TestCase {
+	/** Are we using verbose debugging?. */
+	public static final boolean DEBUG = false;
 
 	/**
 	 * Test all sizes.
@@ -131,7 +133,8 @@ public class SmallerBoardTest extends TestCase {
 			String filename = files.pop();
 			File file = new File(filename);
 			count++;
-			System.err.println("examining \"" + filename + "\"");
+			if (DEBUG)
+				System.err.println("examining \"" + filename + "\"");
 			if (file.exists()) {
 				if (!file.isDirectory()) {
 					// System.err.println("\"" + filename + "\" is not a
@@ -158,7 +161,8 @@ public class SmallerBoardTest extends TestCase {
 
 					}
 				} else {
-					System.err.println("\"" + filename + "\" is a directory");
+					if (DEBUG)
+						System.err.println("\"" + filename + "\" is a directory");
 					if (!file.getName().contains(".svn")) {
 						String[] children = file.list();
 						for (int i = 0; i < children.length; i++) {
@@ -200,7 +204,8 @@ public class SmallerBoardTest extends TestCase {
 		BoardI working = new SmallerBoard((short) 19);
 		assertNotNull(working);
 		working = working.newBoard(new Move("B q10"));
-		System.out.println(working);
+		if (DEBUG)
+			System.out.println(working);
 	}
 
 	/**

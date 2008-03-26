@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class GTPParserUtilsTest extends TestCase {
 
 	/** Are we being verbose?. */
-	boolean DEBUG = false;
+	final static public boolean DEBUG = false;
 
 	/** The engine. */
 	GnuGoEngine engine = null;
@@ -56,7 +56,8 @@ public class GTPParserUtilsTest extends TestCase {
 			// System.err.println(board);
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
+			if (DEBUG)
+				System.err.println(t);
 			t.printStackTrace();
 			fail();
 		}
@@ -95,9 +96,12 @@ public class GTPParserUtilsTest extends TestCase {
 			assertTrue(result);
 			this.engine.quit();
 		} catch (GTPError e) {
-			System.err.println("testParseGnuGoBoard(" + i + ") failed");
-			// System.err.println(e);
-			// e.printStackTrace();
+			if (DEBUG)
+				System.err.println("testParseGnuGoBoard(" + i + ") failed");
+			if (DEBUG)
+				System.err.println(e);
+			if (DEBUG)
+				e.printStackTrace();
 			fail();
 		}
 	}
@@ -113,8 +117,10 @@ public class GTPParserUtilsTest extends TestCase {
 			// TODO actually test the generated board here...
 			this.engine.quit();
 		} catch (Throwable t) {
-			System.err.println(t);
-			t.printStackTrace();
+			if (DEBUG)
+				System.err.println(t);
+			if (DEBUG)
+				t.printStackTrace();
 			fail();
 		}
 	}

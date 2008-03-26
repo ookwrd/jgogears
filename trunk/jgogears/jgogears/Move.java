@@ -305,7 +305,7 @@ public final class Move {
 			rowS = "z";
 			break;
 		default:
-			throw new java.lang.InternalError("bad row="+s);
+			throw new java.lang.InternalError("bad row=" + s);
 		}
 		return rowS;
 	}

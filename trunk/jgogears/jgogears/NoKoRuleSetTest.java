@@ -647,7 +647,8 @@ public class NoKoRuleSetTest extends TestCase {
 					Game game = Game.loadFromFile(file);
 					if (game.getSize() == 19) {
 						BoardI board = BoardI.newBoard(game.getSize());
-						System.err.println(filename);
+						if (DEBUG)
+							System.err.println(filename);
 
 						Iterator<Move> i = game.getMovelist().iterator();
 						while (i.hasNext()) {

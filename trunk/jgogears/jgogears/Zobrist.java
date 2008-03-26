@@ -29,7 +29,7 @@ public class Zobrist extends BitSet {
 	static private void init() {
 		if (grid == null) {
 			grid = new BitSet[MAX_BOARD_SIZE][MAX_BOARD_SIZE][MAX_COLOUR];
-			
+
 			for (int i = 0; i < MAX_BOARD_SIZE; i++)
 				for (int j = 0; j < MAX_BOARD_SIZE; j++)
 					for (int k = 0; k < MAX_COLOUR; k++) {

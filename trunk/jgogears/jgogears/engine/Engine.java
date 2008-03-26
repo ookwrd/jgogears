@@ -28,7 +28,7 @@ public class Engine {
 		Trainer trainer = new Trainer();
 		trainer.setModel(model);
 
-		//trainer.train(200);
+		// trainer.train(200);
 		trainer.train();
 		System.out.println("model trained");
 		System.out.println(model.getRoot());

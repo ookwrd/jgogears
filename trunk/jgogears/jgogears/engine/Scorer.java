@@ -35,7 +35,7 @@ public class Scorer {
 		int i, j;
 		for (i = 0; i < board.getSize(); i++)
 			for (j = 0; j < board.getSize(); j++) {
-				if (!Random.isLarger(result[i][j],best)) {
+				if (!Random.isLarger(result[i][j], best)) {
 					if (RuleSet.DEFAULT.moveIsLegal(null, board, new Move(i, j, white ? BoardI.VERTEX_WHITE
 							: BoardI.VERTEX_BLACK))) {
 						best = result[i][j];
@@ -44,7 +44,7 @@ public class Scorer {
 					}
 				}
 				if (DEBUG)
-					System.err.print("{" + i + ","+ j + "},");
+					System.err.print("{" + i + "," + j + "},");
 			}
 		if (DEBUG)
 			System.err.println("exiting getBestScore");
@@ -66,7 +66,7 @@ public class Scorer {
 		double[][] result = new double[size][size];
 		for (short row = 0; row < size; row++) {
 			for (short column = 0; column < size; column++) {
-				for (short sym = 0; sym < 8; sym++) { 
+				for (short sym = 0; sym < 8; sym++) {
 					result[row][column] = 0.0;
 					Node node = model.getRoot();
 					int maxdepth = 0;
@@ -113,18 +113,18 @@ public class Scorer {
 
 					// estimate = (1 + previous.getPlayed()) / (previous.getPlayed() + previous.getNotPlayed()) * (1 -
 					// (1 /depth));
-						result[row][column] = Random.getRandomBest(estimate,result[row][column]);
-					//if (DEBUG)
-					//	System.err.println("Model::getScores " + maxdepth);
+					result[row][column] = Random.getRandomBest(estimate, result[row][column]);
+					// if (DEBUG)
+					// System.err.println("Model::getScores " + maxdepth);
 				}
 			}
 		}
 		if (DEBUG)
-				for (int i = 0; i < result.length; i++) {
-					for (int j = 0; j < result[i].length; j++)
-						System.err.print(" " + result[i][j]);
-					System.err.println();
-				}
+			for (int i = 0; i < result.length; i++) {
+				for (int j = 0; j < result[i].length; j++)
+					System.err.print(" " + result[i][j]);
+				System.err.println();
+			}
 
 		return result;
 	}

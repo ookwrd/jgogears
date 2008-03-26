@@ -14,7 +14,7 @@ public class StraightVertexLineariserTest extends TestCase {
 
 	/** Are we using verbose debugging?. */
 	public static final boolean DEBUG = false;
-	
+
 	/**
 	 * Identical linearisation.
 	 * 
@@ -197,7 +197,8 @@ public class StraightVertexLineariserTest extends TestCase {
 		board = board.newBoard(new Move("black a1"));
 		board = board.newBoard(new Move("white k10"));
 		board = board.newBoard(new Move("black g18"));
-		System.err.println(board);
+		if (DEBUG)
+			System.err.println(board);
 
 		assertNotNull(board);
 		for (short row = 0; row < board.getSize(); row++)
@@ -256,21 +257,22 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes13() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(13);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(13);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
+
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -278,21 +280,22 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes9() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(9);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(9);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
+
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -300,21 +303,22 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes11() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(11);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(11);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
+
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -322,21 +326,22 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes10() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(10);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(10);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
+
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -344,21 +349,22 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes21() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(21);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(21);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
+
 	/**
 	 * test what happens when linearising boards of different sizes.
 	 * 
@@ -366,20 +372,20 @@ public class StraightVertexLineariserTest extends TestCase {
 	 *             the exception
 	 */
 	public void testDifferenetSizes17() throws Exception {
-			BoardI board = BoardI.newBoard();
-			StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			assertNotNull(linear);
-			board = BoardI.newBoard(17);
-			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
-			int count = 0;
-			while (linear.hasNext()) {
-				Short s = linear.next();
-				assertNotNull(s);
-				count++;
-			}
-			int plussize = (board.getSize()+2)*(board.getSize()+2) ;
+		BoardI board = BoardI.newBoard();
+		StraightVertexLineariser linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		assertNotNull(linear);
+		board = BoardI.newBoard(17);
+		linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
+		int count = 0;
+		while (linear.hasNext()) {
+			Short s = linear.next();
+			assertNotNull(s);
+			count++;
+		}
+		int plussize = (board.getSize() + 2) * (board.getSize() + 2);
 
-			assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
 
 	/**
@@ -454,8 +460,8 @@ public class StraightVertexLineariserTest extends TestCase {
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[0][sym1][sym2] = true;
 				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) (size - 1), sym2,
-						false);
+				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) (size - 1),
+						sym2, false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
 					assertTrue(linearb.hasNext());
@@ -470,7 +476,8 @@ public class StraightVertexLineariserTest extends TestCase {
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[1][sym1][sym2] = true;
 				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) 0, (short) (size - 1), sym2, false);
+				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) 0, (short) (size - 1), sym2,
+						false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
 					assertTrue(linearb.hasNext());
@@ -485,7 +492,8 @@ public class StraightVertexLineariserTest extends TestCase {
 			for (short sym2 = 0; sym2 < 8; sym2++) {
 				matches[2][sym1][sym2] = true;
 				Iterator<Short> lineara = new StraightVertexLineariser(board, (short) 0, (short) 0, sym1, false);
-				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) 0, sym2, false);
+				Iterator<Short> linearb = new StraightVertexLineariser(board, (short) (size - 1), (short) 0, sym2,
+						false);
 				while (lineara.hasNext()) {
 					assertTrue(lineara.hasNext());
 					assertTrue(linearb.hasNext());
@@ -499,11 +507,11 @@ public class StraightVertexLineariserTest extends TestCase {
 		}
 		for (short corn = 0; corn < 3; corn++) {
 			for (short sym1 = 0; sym1 < 8; sym1++) {
-				boolean tfound= false;
-				boolean ffound= false;
+				boolean tfound = false;
+				boolean ffound = false;
 				for (short sym2 = 0; sym2 < 8; sym2++) {
-					if(DEBUG)
-					System.err.print(matches[corn][sym1][sym2] + " ");
+					if (DEBUG)
+						System.err.print(matches[corn][sym1][sym2] + " ");
 					if (matches[corn][sym1][sym2])
 						tfound = true;
 					else
@@ -511,11 +519,11 @@ public class StraightVertexLineariserTest extends TestCase {
 				}
 				assertTrue(tfound);
 				assertTrue(ffound);
-				if(DEBUG)
-				System.err.println();
+				if (DEBUG)
+					System.err.println();
 			}
-			if(DEBUG)
-			System.err.println();
+			if (DEBUG)
+				System.err.println();
 		}
 	}
 
@@ -670,9 +678,9 @@ public class StraightVertexLineariserTest extends TestCase {
 			assertNotNull(s);
 			count++;
 		}
-		int plussize = StraightVertexLineariser.SIZE *StraightVertexLineariser.SIZE;
+		int plussize = StraightVertexLineariser.SIZE * StraightVertexLineariser.SIZE;
 
-		assertTrue(count + "/" + plussize+1, count == plussize+1);
+		assertTrue(count + "/" + plussize + 1, count == plussize + 1);
 	}
 
 	/**
@@ -691,7 +699,8 @@ public class StraightVertexLineariserTest extends TestCase {
 
 		assertNotNull(board);
 		if (DEBUG)
-			System.err.print("StraightVertexLineariserTest::testVertexLineariser() Black = " + BoardI.parseColour("black"));
+			System.err.print("StraightVertexLineariserTest::testVertexLineariser() Black = "
+					+ BoardI.parseColour("black"));
 		if (DEBUG)
 			System.err.print(" White = " + BoardI.parseColour("white"));
 		if (DEBUG)
@@ -733,11 +742,12 @@ public class StraightVertexLineariserTest extends TestCase {
 			Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, j, false);
 			assertTrue(linear != null);
 			if (DEBUG)
-					System.err.println(linear);
+				System.err.println(linear);
 			linear = new StraightVertexLineariser(board, (short) 2, (short) 2, j, false);
-			}
+		}
 
 	}
+
 	/**
 	 * Test initialised master
 	 */
@@ -745,34 +755,40 @@ public class StraightVertexLineariserTest extends TestCase {
 		BoardI board = BoardI.newBoard();
 		assertNotNull(board);
 
-		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2,(short) 0, false);
+		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 		assertTrue(linear != null);
 		for (short j = 0; j < 8; j++) {
-			int totalboardsizea = board.getSize() *board.getSize();
-			int totalboardsizeb = board.getSize() *board.getSize();
-			int totalboardsizec = board.getSize() *board.getSize();
-			int totalboardsized = board.getSize() *board.getSize();
+			int totalboardsizea = board.getSize() * board.getSize();
+			int totalboardsizeb = board.getSize() * board.getSize();
+			int totalboardsizec = board.getSize() * board.getSize();
+			int totalboardsized = board.getSize() * board.getSize();
 			assertTrue(StraightVertexLineariser.master[j][0].length == StraightVertexLineariser.SEQUENCE_SIZE);
 			for (short seq = 0; seq < StraightVertexLineariser.master[j][0].length; seq++) {
 				if (DEBUG && seq < 9)
-					System.err.print("{" + StraightVertexLineariser.master[j][0][seq] + "," + StraightVertexLineariser.master[j][1][seq] + "},");
-				if (board.getColour(StraightVertexLineariser.master[j][0][seq], StraightVertexLineariser.master[j][1][seq]) == Board.VERTEX_EMPTY)
-					totalboardsizea --;
-				if (board.getColour(StraightVertexLineariser.master[j][0][seq]+18, StraightVertexLineariser.master[j][1][seq]) == Board.VERTEX_EMPTY)
-					totalboardsizeb --;
-				if (board.getColour(StraightVertexLineariser.master[j][0][seq], StraightVertexLineariser.master[j][1][seq]+18) == Board.VERTEX_EMPTY)
-					totalboardsizec --;
-				if (board.getColour(StraightVertexLineariser.master[j][0][seq]+18, StraightVertexLineariser.master[j][1][seq]+18) == Board.VERTEX_EMPTY)
-					totalboardsized --;
+					System.err.print("{" + StraightVertexLineariser.master[j][0][seq] + ","
+							+ StraightVertexLineariser.master[j][1][seq] + "},");
+				if (board.getColour(StraightVertexLineariser.master[j][0][seq],
+						StraightVertexLineariser.master[j][1][seq]) == Board.VERTEX_EMPTY)
+					totalboardsizea--;
+				if (board.getColour(StraightVertexLineariser.master[j][0][seq] + 18,
+						StraightVertexLineariser.master[j][1][seq]) == Board.VERTEX_EMPTY)
+					totalboardsizeb--;
+				if (board.getColour(StraightVertexLineariser.master[j][0][seq],
+						StraightVertexLineariser.master[j][1][seq] + 18) == Board.VERTEX_EMPTY)
+					totalboardsizec--;
+				if (board.getColour(StraightVertexLineariser.master[j][0][seq] + 18,
+						StraightVertexLineariser.master[j][1][seq] + 18) == Board.VERTEX_EMPTY)
+					totalboardsized--;
 			}
 			if (DEBUG)
-			System.err.println();
+				System.err.println();
 			assertTrue(totalboardsizea == 0);
 			assertTrue(totalboardsizeb == 0);
 			assertTrue(totalboardsizec == 0);
 			assertTrue(totalboardsized == 0);
 		}
 	}
+
 	/**
 	 * Test initialised master
 	 */
@@ -780,30 +796,34 @@ public class StraightVertexLineariserTest extends TestCase {
 		BoardI board = BoardI.newBoard();
 		assertNotNull(board);
 		// this call makes sure that the master is initialised
-		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2,(short) 0, false);
+		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 		assertTrue(linear != null);
-		
-		for (short row= 0; row < board.getSize();row++)
-			for (short column= 0; column < board.getSize();column++) 
+
+		for (short row = 0; row < board.getSize(); row++)
+			for (short column = 0; column < board.getSize(); column++)
 				for (short j = 0; j < 8; j++) {
 					boolean found = false;
-					for (short seq = 0; seq < StraightVertexLineariser.master[j][0].length&& found == false; seq++) 
-						if (StraightVertexLineariser.master[j][0][seq] == row && StraightVertexLineariser.master[j][1][seq] == column && found == false )
+					for (short seq = 0; seq < StraightVertexLineariser.master[j][0].length && found == false; seq++)
+						if (StraightVertexLineariser.master[j][0][seq] == row
+								&& StraightVertexLineariser.master[j][1][seq] == column && found == false)
 							found = true;
 					assertTrue("" + row + " " + column + " " + j, found);
 				}
 	}
+
 	/**
 	 * Test initialised master
 	 */
-	public void testContants() { 
+	public void testContants() {
 		BoardI board = BoardI.newBoard();
 		assertNotNull(board);
 		// this call makes sure that the master is initialised
-		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2,(short) 0, false);
+		Iterator<Short> linear = new StraightVertexLineariser(board, (short) 2, (short) 2, (short) 0, false);
 		assertTrue(linear != null);
-		
-System.err.println("BOARD_SIZE=" + StraightVertexLineariser.BOARD_SIZE + " SIZE=" + StraightVertexLineariser.SIZE + " SEQUENCE_SIZE=" + StraightVertexLineariser.SEQUENCE_SIZE);
-System.err.println("master[this.sym][0].length=" + StraightVertexLineariser.master[0][0].length);
+		if (DEBUG)
+			System.err.println("BOARD_SIZE=" + StraightVertexLineariser.BOARD_SIZE + " SIZE="
+					+ StraightVertexLineariser.SIZE + " SEQUENCE_SIZE=" + StraightVertexLineariser.SEQUENCE_SIZE);
+		if (DEBUG)
+			System.err.println("master[this.sym][0].length=" + StraightVertexLineariser.master[0][0].length);
 	}
 }
