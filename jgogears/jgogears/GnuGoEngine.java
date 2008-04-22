@@ -642,12 +642,17 @@ public final class GnuGoEngine implements GTPInterfaceRaw {
 	 * @see jgogears.GTPInterfaceRaw#undo()
 	 */
 	public boolean undo() {
+		try {
 		this.write(GTPConstants.UNDO + "\n\n");
 		String s = this.read();
-		if (s.contains(GTPConstants.CANNOTUNDO)) {
-			return false;
-		} else {
-			return true;
+		return true;
+		} catch (GTPError e){
+			if (e.getMessage().contains(GTPConstants.CANNOTUNDO)) {
+				//TODO find a stack of moves to replay here
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 
