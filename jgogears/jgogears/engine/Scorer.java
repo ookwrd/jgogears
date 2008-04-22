@@ -15,6 +15,8 @@ public class Scorer {
 	public static boolean DEBUG = false;
 	/** are we being verbose? */
 	public static boolean DEBUG_BRANCH = false;
+	
+	public static double VERY_SMALL_DOUBLE = 0.000000001;
 
 	/**
 	 * Which vertex is the best to play?
@@ -102,6 +104,8 @@ public class Scorer {
 						if (child != null) {
 							childP = child.getPlayed();
 							childNP = child.getNotPlayed();
+							if (childNP == 0)
+								childNP = VERY_SMALL_DOUBLE;
 							estimate = estimate * 0.5 + childP / (childP + childNP) * 0.5;
 						}
 						if (DEBUG_BRANCH)
