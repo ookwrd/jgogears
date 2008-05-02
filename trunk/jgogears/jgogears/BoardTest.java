@@ -11,6 +11,8 @@ import junit.framework.TestCase;
  * @author Stuart
  */
 public class BoardTest extends TestCase {
+	/** are we being verbose ? */
+	static final private boolean DEBUG = false;
 
 	/**
 	 * Test all sizes.
@@ -237,6 +239,7 @@ public class BoardTest extends TestCase {
 		while (files.size() > 0) {
 			String filename = files.pop();
 			File file = new File(filename);
+			if (DEBUG) 
 			System.err.println("examining \"" + filename + "\"");
 			if (file.exists()) {
 				if (!file.isDirectory()) {
@@ -263,6 +266,7 @@ public class BoardTest extends TestCase {
 						// System.err.println();
 					}
 				} else {
+					if (DEBUG) 
 					System.err.println("\"" + filename + "\" is a directory");
 					String[] children = file.list();
 					if (!file.getName().contains(".svn"))

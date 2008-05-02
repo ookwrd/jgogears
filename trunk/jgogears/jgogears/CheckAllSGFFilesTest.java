@@ -15,6 +15,9 @@ import junit.framework.TestCase;
  */
 public class CheckAllSGFFilesTest extends TestCase {
 
+	/** are we being verbose debugging. */
+	public static final boolean DEBUG = false;
+
 	/**
 	 * Loads a ton of SGF files and tests the resulting boards
 	 * 
@@ -28,6 +31,7 @@ public class CheckAllSGFFilesTest extends TestCase {
 		while (files.size() > 0) {
 			String filename = files.pop();
 			File file = new File(filename);
+			if (DEBUG)
 			System.err.println("examining \"" + filename + "\"");
 			if (file.exists()) {
 				if (!file.isDirectory()) {
@@ -48,12 +52,15 @@ public class CheckAllSGFFilesTest extends TestCase {
 							// assertTrue("" + board + "\n" +
 							// move.toString(),board.isLegalMove(move));
 							board = board.newBoard(move);
+							if (DEBUG)
 							System.err.print(".");
 						}
+						if (DEBUG)
 						System.err.println();
 					}
 
 				} else {
+					if (DEBUG)
 					System.err.println("\"" + filename + "\" is a directory");
 					String[] children = file.list();
 					if (!file.getName().contains(".svn"))
