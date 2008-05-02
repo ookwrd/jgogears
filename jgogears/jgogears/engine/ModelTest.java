@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 public class ModelTest extends TestCase {
 
 	/** are we being verbose debugging. */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	/** The model. */
 	static Model model = null;
@@ -188,10 +188,10 @@ public class ModelTest extends TestCase {
 					minMove = new Move(i, j, BoardI.VERTEX_BLACK);
 				}
 			}
-
+if (DEBUG) {
 		System.err.println("MaxScore = " + maxScore + ", " + maxMove);
 		System.err.println("MinScore = " + minScore + ", " + minMove);
-
+}
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class ModelTest extends TestCase {
 		assertNotNull(root);
 		if (DEBUG)
 			System.err.println("ModelTest tree:");
-		// this.showTreeHelper(0, root);
+//		 this.showTreeHelper(0, root);
 
 	}
 
@@ -217,12 +217,14 @@ public class ModelTest extends TestCase {
 	 */
 	public void testTrainedModel() throws IOException {
 		assertNotNull(model);
-		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
+		if (DEBUG)
+			System.err.println("ModelTest::testTrainedModel() model size =  " + model.getRoot().size());
 		Trainer trainer = new Trainer();
 		trainer.setModel(model);
 		trainer.train(this.loadTestGame());
 
-		System.err.println("ModeTest::testTrainedModel() model size =  " + model.getRoot().size());
+		if (DEBUG)
+			System.err.println("ModelTest::testTrainedModel() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		board = board.newBoard(new Move("white b2"));
 		board = board.newBoard(new Move("black k4"));
@@ -251,12 +253,15 @@ public class ModelTest extends TestCase {
 	 */
 	public void testTrainedModelEmptyBoard() throws IOException {
 		assertNotNull(model);
-		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
+	
+		if (DEBUG)
+			System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
 		Trainer trainer = new Trainer();
 		trainer.setModel(model);
 		trainer.train(this.loadTestGame());
-
-		System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
+	
+		if (DEBUG)
+			System.err.println("ModeTest::testTrainedModelEmptyBoard() model size =  " + model.getRoot().size());
 		BoardI board = BoardI.newBoard(19);
 		double[][] r = new Scorer().getScores(model, board, false);
 		assertNotNull(r);

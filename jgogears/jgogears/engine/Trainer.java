@@ -17,7 +17,7 @@ public class Trainer {
 	/** are we being verbose ? */
 	static final private boolean DEBUG = false;
 	/** are we showing progress ? Useful in when training on large numbers of games */
-	static final private boolean PROGRESS = true;
+	static public boolean PROGRESS = false;
 	/** are we giving a free ride to EMPTY and OFF_BOARD ? */
 	static final private boolean freeRideForEmpty = true;
 

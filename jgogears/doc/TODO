@@ -30,6 +30,7 @@ General
   * direct
   * cut and paste
 * Better test coverage
+* Silent test coverage
 * improve GTP support
 * SGF saving (use SGFC for validation)
 * generate and quality-check the javadoc

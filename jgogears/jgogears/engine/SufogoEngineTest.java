@@ -43,6 +43,8 @@ public class SufogoEngineTest extends TestCase {
 		two.setWhite(white);
 		for (int i = 0; i < 20; i++) {
 			state = two.move();
+			assertNotNull(state);
+			assertNotNull(state.getBoard());
 			if (DEBUG)
 				System.err.println(state.getBoard());
 		}
